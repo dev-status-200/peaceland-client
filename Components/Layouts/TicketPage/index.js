@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { useIsomorphicLayoutEffect } from '/functions/useIsomorphicEffect';
 import { Row, Col, Spinner } from 'react-bootstrap';
 import { Input, Rate } from 'antd';
 import Ticket from './Ticket';
@@ -47,7 +48,7 @@ const TicketPage = ({ticketData, bookingNo}) => {
         }).then((x)=>Router.push(`/ticketPage?id=${bookingNo}`))
     }
 
-    useLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
         let temp = ticketData.result.BookedTours;
         temp.forEach((x, i)=>{
             x.BookedToursOptions.forEach((y, j)=>{
@@ -145,35 +146,34 @@ const TicketPage = ({ticketData, bookingNo}) => {
                     </Col>
                     {size.width<400 && <Col xs={12}><hr/></Col>}
                     <Col md={4} xs={12}>
-                        <div style={size.width>400?{float:'right', height:"100%"}:{}}>
-                            <div className={`${size.width>400? "text-end":""}`}>
-                                <div className='mx-3'>{" "}</div>
-                                {
-                                y.assigned=="1"?
-                                <>
-                                <div className='mx-3 fs-12'>{y.TourOption.manual?'Not Downloadable':'Downloadable'}</div>
-                                <div className='mx-3 fs-18'>{y.TourOption.manual?<>Check your E-mail Inbox</>:"Select & Download"}</div>
-                                <img src={'/icons/ticket-available.png'} className={`${size.width>400?"":"mx-2"}`} height={50} alt="Ticket" />
-                                </>:
-                                <>
-                                <div className='mx-3 fs-12'>{y.TourOption.manual?'Not Downloadable':'Downloadable'}</div>
-                                <div className='mx-3 fs-18'>Pending</div>
-                                <img src={'/icons/ticket-pending.png'} className={`${size.width>400?"":"mx-3"}`} height={50} alt="Pending" />
-                                </>
-                                }
-                                {(y.reviewed=="1" && size.width>400) &&
-                                <div className={"mx-2"} style={{color:'green'}}>Review Sent</div>
-                                }
-                            </div>
-                            {y.assigned=="0" &&<div style={{position:'relative', top:"50%"}}>
-                            </div>}
-                        </div>
+                    <div style={size.width>400?{float:'right', height:"100%"}:{}}>
+                    <div className={`${size.width>400? "text-end":""}`}>
+                        <div className='mx-3'>{" "}</div>
+                        {
+                        y.assigned=="1"?
+                        <>
+                        <div className='mx-3 fs-12'>{y.TourOption.manual?'Not Downloadable':'Downloadable'}</div>
+                        <div className='mx-3 fs-18'>{y.TourOption.manual?<>Check your E-mail Inbox</>:"Select & Download"}</div>
+                        <img src={'/icons/ticket-available.png'} className={`${size.width>400?"":"mx-2"}`} height={50} alt="Ticket" />
+                        </>:
+                        <>
+                        <div className='mx-3 fs-12'>{y.TourOption.manual?'Not Downloadable':'Downloadable'}</div>
+                        <div className='mx-3 fs-18'>Pending</div>
+                        <img src={'/icons/ticket-pending.png'} className={`${size.width>400?"":"mx-3"}`} height={50} alt="Pending" />
+                        </>
+                        }
+                        {(y.reviewed=="1" && size.width>400) &&
+                        <div className={"mx-2"} style={{color:'green'}}>Review Sent</div>
+                        }
+                    </div>
+                    {y.assigned=="0" &&<div style={{position:'relative', top:"50%"}}>
+                    </div>}
+                    </div>
                     </Col>
                     {(y.reviewed=="0" && y.assigned=="1") &&<>
                     {moment().diff(moment(y.date)) >= 0 && 
                     <Col md={12} className='mt-3'>
-                        <div
-                        onClick={()=>{
+                        <div onClick={()=>{
                             let tempTickets = [...tickets];
                             tempTickets[i].BookedToursOptions[j].reviewCheck = true;
                             setTickets(tempTickets)

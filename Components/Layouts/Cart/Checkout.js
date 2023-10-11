@@ -24,7 +24,7 @@ export default function CheckoutForm({email, name, image}) {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: `${process.env.NEXT_PUBLIC_URL}/paySuccess?email=${email}&name=${name}&image=${image}`,
+        return_url: `${process.env.NEXT_PUBLIC_URL_PAY_SUCCESS}?email=${email}&name=${name}&image=${image}`,
         receipt_email:email
       },
     });
@@ -34,7 +34,6 @@ export default function CheckoutForm({email, name, image}) {
     } else {
       setMessage("An unexpected error occured.");
     }
-
     setIsProcessing(false);
   };
 
@@ -42,7 +41,7 @@ export default function CheckoutForm({email, name, image}) {
     <form id="payment-form" onSubmit={handleSubmit}>
       <Row>
         <Col md={12} className="text-center" >
-        <img src={'/stripe/stripe-logo.png'} height={50}  alt="Stripe"/>
+          <img src={'/stripe/stripe-logo.png'} height={50}  alt="Stripe"/>
           <p className="mb-0 pb-0 silver-2-txt">Protected Checkout<CheckCircleOutlined className="mx-2" style={{color:'green', position:'relative', top:1}} /></p>
         </Col>
       </Row>

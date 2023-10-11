@@ -16,8 +16,6 @@ const PayComp = ({price, email, name, image}) => {
                 setStripePromise(loadStripe(x.data.publishableKey))
             }
         })
-    }, []);
-    useEffect(() => {
         axios.post(process.env.NEXT_PUBLIC_CREATE_PAY_INTENT,{
             price:price
         })

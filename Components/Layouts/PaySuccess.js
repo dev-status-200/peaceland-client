@@ -4,15 +4,19 @@ import { addProduct } from '../../redux/cart/cartSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { destroyCart, retrieveCart } from '../../functions/cartFunction';
 //import { useSession } from 'next-auth/react';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 
-const PaySuccess = ({email, payment_intent_client_secret, payment_intent, name, image}) => {
+const PaySuccess = () => {
 
-  //const {data:session} = useSession();
+  const router = useRouter();
   const cart = useSelector((state) => state.cart.value);
+  const [values, setValues] = useState({})
   const dispatch = useDispatch();
+  useEffect(() => {
+    setValues(router.query)
+  }, [router])
 
   const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -20,8 +24,10 @@ const PaySuccess = ({email, payment_intent_client_secret, payment_intent, name, 
 
   useEffect(() => {
     Aos.init({duration:600});
-    afterPay();
-  }, [email])
+    if(values.email){
+      afterPay();
+    }
+  }, [values.email])
 
   const afterPay = async() => {
     await delay(2000);
@@ -32,7 +38,7 @@ const PaySuccess = ({email, payment_intent_client_secret, payment_intent, name, 
   const sendMail = async(id, no) => {
     if(id){
       await axios.post(process.env.NEXT_PUBLIC_CREATE_BOOKING,{
-        user:email, booking_id:id, booking_no:no
+        user:values.email, booking_id:id, booking_no:no
       }).then((x)=>{
       })
     }
@@ -65,11 +71,11 @@ const PaySuccess = ({email, payment_intent_client_secret, payment_intent, name, 
     reserve.promo = disc==undefined?'none':disc;
     reserve.base_price = priceCalc(cartData, disc).base_price;
     reserve.final_price = priceCalc(cartData, disc).final_price;
-    reserve.payment_intent_client_secret = payment_intent_client_secret;
-    reserve.payment_intent = payment_intent;
-    reserve.name = name;
-    reserve.email = email;
-    reserve.image = image;
+    reserve.payment_intent_client_secret = values.payment_intent_client_secret;
+    reserve.payment_intent = values.payment_intent;
+    reserve.name = values.name;
+    reserve.email = values.email;
+    reserve.image = values.image;
 
     await axios.post(process.env.NEXT_PUBLIC_CREATE_RESERVATION,{
       bookedTours:cartData,

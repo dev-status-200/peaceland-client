@@ -6,7 +6,6 @@ import { Row, Col, Container, Spinner } from 'react-bootstrap';
 import { Modal, Empty, Input, ConfigProvider } from 'antd';
 import { CloseCircleOutlined, ExclamationCircleFilled } from '@ant-design/icons';
 import { addProduct } from '../../../redux/cart/cartSlice';
-import { useSession, signIn } from 'next-auth/react';
 import Aos from 'aos';
 import Router from 'next/router';
 import Cookies from 'js-cookie';
@@ -21,7 +20,6 @@ import { IoTrashBinSharp } from "react-icons/io5"
 
 const Cart = () => {
 
-    const {data:session} = useSession();
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart.value);
     const conversion = useSelector((state) => state.currency.conversion);
@@ -29,14 +27,22 @@ const Cart = () => {
     const [promoInfo, setPromoInfo] = useState({price:0, byPercentage:false, name:""});
     const [price, setPrice] = useState(0.0);
     const [promo, setPromo] = useState("");
+    const [user, setUser] = useState({});
     const [discountPrice, setDiscountPrice] = useState(0);
     const [load, setLoad] = useState(false);
     const size = useWindowSize();
 
     const delay = ms => new Promise(res => setTimeout(res, ms));
 
-    useEffect(() => { Aos.init({duration:500}); console.log(cart) }, []);
-    useEffect(()=> { setPrice(parseFloat(getTotalPrice(cart)).toFixed(2)) }, [cart]);
+    useEffect(()=> { 
+        Aos.init({duration:500});
+        setPrice(parseFloat(getTotalPrice(cart)).toFixed(2));
+        getValues();
+    }, [cart]);
+    async function getValues(){
+        let token = await Cookies.get("token");
+        await token?setUser({...JSON.parse(token), loggedIn:true}):null;
+    }
 
     const getTotalPrice = (val) => {
         let discount = Cookies.get("promoDiscount");
@@ -92,9 +98,8 @@ const Cart = () => {
         setLoad(true);
 
         await delay(2000)
-        await axios.post(process.env.NEXT_PUBLIC_VERIFY_PROMO,{
-            code:promo
-        }).then((x)=>{
+        await axios.post(process.env.NEXT_PUBLIC_VERIFY_PROMO, { code:promo })
+        .then((x)=>{
             setLoad(false);
             if(x.data.result==null){
                 Modal.warning({ title: 'Error', content: "Promo code dosen't exists or has been disabled!" });
@@ -128,22 +133,18 @@ const Cart = () => {
             <Link className='navLink' href='/'>HOME</Link>
             <Link className='navLink' href='/search?destination=uae&city=Dubai+City'>DESTINATION</Link>
             <span className="navLink">
-            <img src={'/images/logo.png'} height={100}  alt="Logo"/>
+            <img src={'/images/logo.png'} height={70} style={{paddingLeft:20, paddingRight:5}} alt="Logo"/>
             </span>
             <div className='dropdown mx-2'>
             <span className='navLink dropbtn' onClick={()=>Router.push("/search?destination=uae&city=Dubai+City")}>ACTIVITIES</span>
-            <div className="dropdown-content">
-                <NavLinks/>
-            </div>
+            <div className="dropdown-content"><NavLinks/></div>
             </div>
             <Link className='navLink' href='/about'>ABOUT US</Link>
         </div>
         <div className='mt-2 pt-2'></div>
         </div>
         <div style={{backgroundColor:'white', paddingBottom:30}}><CircleIcons/></div>
-        </>
-        :
-        <div style={{backgroundColor:'white', paddingBottom:20}}><CircleMobileIcons/></div>
+        </>:<div style={{backgroundColor:'white', paddingBottom:20}}><CircleMobileIcons/></div>
     }
     <div className='cart-styles' style={{borderTop:'1px solid silver'}} >
     <Container className='cart-box' fluid="true">
@@ -158,19 +159,17 @@ const Cart = () => {
             return(
                 <Row key={i} className="cart-item mx-0">
                     <Col md={3} xs={12} className="py-3" >
-                        <img src={x.image} height={100} width={size.width>400? 150:"100%"} style={{borderRadius:5}}  alt="Tour"/>
+                        <img src={x.image} height={100} width={size.width>400? 150:"100%"} style={{borderRadius:5}} alt="Tour"/>
                     </Col>
                     <Col className={`${size.width>400?"px-4 my-3":"mb-2"}`} md={9} >
                     {size.width>400 &&<div style={{float:'right'}}>
                         <span className='fs-18 fw-500 grey-txt'>{conversion.currency} {showIndivPrice(x.options)}</span>
                         <CloseCircleOutlined className='close-cart-btn' 
-                            onClick={()=>showConfirm(x)}
+                          onClick={()=>showConfirm(x)}
                         />
                         <br/>
                     </div>}
-                    <div className='fw-500 cart-item-name' style={size.width<400?{fontSize:"15px"}:{fontSize:"25px"}}>
-                        {x.name}
-                    </div>
+                    <div className='fw-500 cart-item-name' style={size.width<400?{fontSize:"15px"}:{fontSize:"25px"}}>{x.name}</div>
                     {x.options.map((y, j)=>{
                     return(
                         <div key={j+i} className='fs-13 silver-2-txt'>
@@ -178,13 +177,8 @@ const Cart = () => {
                             <div className=''>
                                 Option: {y.name} {"("}{`${y.adult} Adult`}{y.child>0?`, ${y.child} Child`:""} {y.infant>0?`, Infant ${y.infant}`:""}{" )"}
                             </div>
-                            <div>
-                                Transfer Type: {y.transfer} 
-                            </div>
-                            <div>
-                                {y.transfer!="No"?`Pickup Location: ${y.address} `:""}
-                            </div>
-                            
+                            <div>Transfer Type: {y.transfer}</div>
+                            <div>{y.transfer!="No"?`Pickup Location: ${y.address} `:""}</div>
                         </div>
                     )})}
                     {size.width<400 &&
@@ -278,29 +272,26 @@ const Cart = () => {
         </Col>
         <Col md={4} className={`pay-screen ${size.width<400?"p-3":"p-5"}`} style={size.width<400?{borderLeftColor:"white"}:{}}> 
         {cart.length>0 && <>  
-            {session && 
-            <> 
-                {price>0 && <PayComp price={price} email={session?.user.email} name={session?.user.name} image={session?.user.image} />} 
-            </> 
-            }
-            {!session &&
+            {user.email &&<>{price>0 &&<PayComp price={price} email={user.email} name={user.name} image={user.picture}/>}</>}
+            {!user.email &&
             <div className='text-center'>
                 <div className={`${size.width>400?"cart-logged-in-warning":"fs-18"}`}>Sign-in is required to continue Checkout!</div>
                 <Row className='mt-4'>
                     <Col></Col>
                     <Col xs={6}><div className='btn-custom-2' 
                         onClick={()=>{
-                        // This Logic sets the redirected URL to get back to this page
-                        if(Object.keys(router.query).length>0){ 
-                            Cookies.set("redirect",`${router.pathname}?id=${router.query.id}`)  
-                        }
-                        else { Cookies.set("redirect",`${router.pathname}`)  }
-                        signIn();
-                    }}>Sign In</div></Col>
+                            // This Logic sets the redirected URL to get back to this page
+                            if(Object.keys(router.query).length>0){ 
+                                Cookies.set("redirect",`${router.pathname}?id=${router.query.id}`)  
+                            }
+                            else { 
+                                Cookies.set("redirect",`${router.pathname}`) 
+                            }
+                            router.push("/auth")
+                        }}>Sign In</div></Col>
                     <Col></Col>
                 </Row>
-            </div>
-            }
+            </div>}
         </>}
         {cart.length==0 &&<div className='cart-logged-in-warning fs-13'>Fill up cart to continue Checkout!</div>}
         </Col>

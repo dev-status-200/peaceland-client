@@ -83,17 +83,17 @@ const Product = () => {
 
   useEffect(() => {
     cart.forEach((x, i)=>{
-      if(x.tourId==tourData.id){
-          setAdded(true);
-          setCartIndex(i)
+      if(x.tourId==tour.id){
+        setAdded(true);
+        setCartIndex(i)
       }
     })
-  }, [cart])
+  }, [cart, tour])
   
   const [scrollPosition, setScrollPosition] = useState(0);
   const handleScroll = () => {
-      const position = window.pageYOffset;
-      setScrollPosition(position);
+    const position = window.pageYOffset;
+    setScrollPosition(position);
   };
 
   const BookComp = () => {

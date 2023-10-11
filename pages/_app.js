@@ -33,7 +33,7 @@ function MyApp({ Component, pageProps:{ session, ...pageProps }, }) {
         router.pathname =='/cart'        ||
         router.pathname =='/myBookings'  ||
         router.pathname =='/about'       ||
-        router.pathname =='/ticketPage'  ||
+        router.pathname =='/ticketPage/[id]'||
         router.pathname =='/search'      ||
         router.pathname =='/paySuccess'
       ) &&

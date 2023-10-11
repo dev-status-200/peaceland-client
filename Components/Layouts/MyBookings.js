@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react';
 import {Row, Col, Container} from 'react-bootstrap';
 import { AiFillCar } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
+import Cookies from 'js-cookie';
 import Link from 'next/link';
 import moment from 'moment';
 import Router from 'next/router';
@@ -16,17 +17,24 @@ import useWindowSize from '/functions/useWindowSize';
 const MyBookings = () => {
 
     const conversion = useSelector((state) => state.currency.conversion);
-    const {data:session} = useSession();
+    //const {data:session} = useSession();
     const [email, setEmail] = useState('');
     const [bookings, setBookings] = useState([]);
+    const [user, setUser] = useState({});
 
     const size = useWindowSize();
 
     useEffect(() => {
         Aos.init({duration:300});
-        //retrive("sabdullah369@gmail.com")
-        //retrive(session?.user?.email)
+        getValues()
     }, [])
+
+    async function getValues(){
+        let token = await Cookies.get("token");
+        let data = JSON.parse(token)
+        await token?setUser({...data, loggedIn:true}):null;
+        retrive(data.email);
+    }
 
     const retrive = async(data) => {
         setEmail(data)
@@ -79,14 +87,14 @@ const MyBookings = () => {
         </>
         }
         <div className={`${size.width>400?"tickets-cont":"px-3"} pb-5`}>
-        {(session && email=='') && <div>{retrive(session.user.email)}</div>}
+        {/* {(session && email=='') && <div>{retrive(session.user.email)}</div>} */}
         <h1 className='mt-4 grey-txt'>My Bookings</h1>
         <div className='mb-4'>All Your booking info will be diplayed here.</div>
         {bookings.length!=0 &&<>
         {bookings.map((y, j)=>{
             return(
             <div key={j} className='booking-row p-3'>
-            <Row className='' onClick={()=>Router.push(`/ticketPage?id=${y.id}`)}>
+            <Row className='' onClick={()=>Router.push(`/ticketPage/${y.id}`)}>
             <Col md={12} xs={12}>
             {y.BookedTours.map((x, i)=>{
             return(

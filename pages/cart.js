@@ -3,7 +3,7 @@ import Cart from '../Components/Layouts/Cart/';
 
 const cart = () => {
   return (
-    <>Cart</>
+    <><Cart/></>
   )
 }
 
