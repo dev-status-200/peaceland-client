@@ -105,7 +105,7 @@ const Product = () => {
           {" "}{(tour.prevPrice*conversion.rate).toFixed(2)} {conversion.currency}{" "}
         </s>}
         <p className={`fw-600 ${size.width>400?"fs-30":"fs-20"}`}><AiFillTags/>
-          {/* {(tour?.TourOptions[0]?.adult_price*conversion.rate).toFixed(2)} {conversion.currency}  */}
+          {(tour?.TourOptions[0]?.adult_price*conversion.rate).toFixed(2)} {conversion.currency} 
           <span className={`fw-400 ${size.width>400?"fs-18":"fs-15"} mx-2 grey-txt`}>Per Person</span>
         </p>
         <div className='my-2'>
