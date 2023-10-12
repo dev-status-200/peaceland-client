@@ -6,7 +6,7 @@ import Router, { useRouter } from 'next/router';
 import Link from 'next/link';
 import { ConfigProvider, Input } from 'antd';
 
-const Tours = ({records, size, index, pages, pagination, price, category, setIndex, searchTerm, search, setSearch}) => {
+const Tours = ({records, size, price, search, setSearch}) => {
 
   return (
     <>
@@ -28,20 +28,17 @@ const Tours = ({records, size, index, pages, pagination, price, category, setInd
             </Col>
             <hr className='p-0 mb-3 mx-0'/>
             {
-            records
-            .filter((x)=>{
-                return x.price <= price
-            })
-            .filter((x)=>{
+            records.filter((x)=>{
+                return x.TourOptions[0].adult_price <= price
+            }).filter((x)=>{
                 if(search==""){
                     return x
                 }else if(x.title.toLowerCase().includes(search.toLowerCase())){
                     return x
                 }
-            })
-            .slice(0, index*9).map((x, i)=>{
+            }).map((x, i)=>{
             return(
-            <Col md={4} xs={6} className={`px-${size.width>400?"1":"0"} search-tour-box`} key={i} onClick={()=>Router.push(`/product/${x.id}`)}>
+            <Col md={4} xs={6} className={`px-${size.width>400?"1":"0"} search-tour-box`} key={i} onClick={()=>Router.push(`/product?id=${x.id}`)}>
                 <div className={`search-box-container mx-1`}>
                 <img className='search-box-img filter-2' src={x.main_image} height={size.width>400?150:80} width={"100%"} />
                 <div className='px-2 search-bob-bottom'>
@@ -61,8 +58,8 @@ const Tours = ({records, size, index, pages, pagination, price, category, setInd
                     {x.reviews==0?'':<span className='fs-10 silver-txt'>{"("}{x.reviews} reviews{")"}</span>}  
                     {size.width>400?
                     <div className='px-2'>
-                    <div className='mt-3' style={{float:'left', fontWeight:900, fontSize:18}}>{parseFloat(x.price).toFixed(2)} AED</div>
-                    <Link href={`/product/${x.id}`} className='mt-3 search-box-btn px-3 py-2' style={{float:'right', textDecoration:'none', color:'white'}}
+                    <div className='mt-3' style={{float:'left', fontWeight:900, fontSize:18}}>{parseFloat(x.TourOptions[0].adult_price).toFixed(2)} AED</div>
+                    <Link href={`/product?id=${x.id}`} className='mt-3 search-box-btn px-3 py-2' style={{float:'right', textDecoration:'none', color:'white'}}
                         //onClick={()=>router.push(`/product/${x.id}`)}
                     >BOOK NOW</Link>
                     </div>:

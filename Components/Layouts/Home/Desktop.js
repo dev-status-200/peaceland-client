@@ -13,6 +13,7 @@ import { Widget } from "@uploadcare/react-widget";
 import CircleIcons from '/Components/Shared/CircleIcons';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
+import Router from 'next/router';
 
 const BestSelling = dynamic(() => import('./BestSelling'), {
   loading: () => <div className='text-center'> <img src='/loader.svg'  alt="About Us" /> </div>,

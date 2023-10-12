@@ -128,6 +128,7 @@ const Cart = () => {
     {
         size.width>400?
         <>
+        {/* <div>{process.env.NEXT_PUBLIC_HTML}{"<="}</div> */}
         <div className='hero pt-4'>
         <div className='navBar'>
             <Link className='navLink' href='/'>HOME</Link>

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useSession } from 'next-auth/react';
 import {Row, Col, Container} from 'react-bootstrap';
-import { AiFillCar } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
 import Link from 'next/link';
@@ -17,8 +15,6 @@ import useWindowSize from '/functions/useWindowSize';
 const MyBookings = () => {
 
     const conversion = useSelector((state) => state.currency.conversion);
-    //const {data:session} = useSession();
-    const [email, setEmail] = useState('');
     const [bookings, setBookings] = useState([]);
     const [user, setUser] = useState({});
 
@@ -37,10 +33,9 @@ const MyBookings = () => {
     }
 
     const retrive = async(data) => {
-        setEmail(data)
         await axios.post(process.env.NEXT_PUBLIC_CREATE_GET_MY_RESERVATIONS,{
             email:data
-        }).then((x)=>{
+        }).then((x) => {
             setBookings(x.data.result);
         })
     }
@@ -93,8 +88,8 @@ const MyBookings = () => {
         {bookings.length!=0 &&<>
         {bookings.map((y, j)=>{
             return(
-            <div key={j} className='booking-row p-3'>
-            <Row className='' onClick={()=>Router.push(`/ticketPage/${y.id}`)}>
+            <div key={j} className='booking-row p-3 my-1'>
+            <Row className='' onClick={()=>Router.push(`/ticketPage?id=${y.id}`)}>
             <Col md={12} xs={12}>
             {y.BookedTours.map((x, i)=>{
             return(

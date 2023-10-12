@@ -34,7 +34,7 @@ const MobileBook = ({tour, transport, category, setOpen}) => {
     const addToCart = async() => {
         let notValidAddress = false
         state.booking.forEach((x)=>{
-            if(x.transfer!="No" && x.address==""){
+            if(x.transfer!="1" && x.address==""){
                 notValidAddress = true
             }
         })

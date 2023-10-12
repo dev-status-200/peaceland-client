@@ -14,6 +14,7 @@ import Link from 'next/link';
 import Tours from './Tours';
 import aos from "aos";
 import useWindowSize from '/functions/useWindowSize';
+import axios from 'axios';
 
 const Search = ({destination, city, date, category, tourData}) => {
 
@@ -22,7 +23,7 @@ const Search = ({destination, city, date, category, tourData}) => {
   const ref = useRef();
   const inViewport = useIntersection(ref, '0px');
   const router = useRouter();
-  const [load, setLoad] = useState(false);
+  const [load, setLoad] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [records, setRecords] = useState([]);
   const [index, setIndex] = useState(1);
@@ -31,75 +32,16 @@ const Search = ({destination, city, date, category, tourData}) => {
   const [price, setPrice] = useState(3000);
 
   useEffect(() => {
-    aos.init({duration:300})
-    setRange(price, category);
-  }, [price, category])
-
-  const setRange = (gottenPrice, cat) => {
-    let tempTours = [];
-    tourData?.result?.forEach((x)=>{
-      if(parseFloat(gottenPrice) >= parseFloat(x.TourOptions[0]?.adult_price)){
-        if(cat!=''){
-          if(x.category==cat){
-            tempTours.push({...x, price:parseFloat(x.TourOptions[0].adult_price)})
-          }
-        }else{
-          tempTours.push({...x, price:parseFloat(x.TourOptions[0].adult_price)})
-        }
-      }
-    });
-
-    tempTours.forEach((x)=>{
-      x.reviews = 0;
-      x.rating = 0;
-      tourData.options.forEach((y)=>{
-        if(x.id==y.tourId){
-          x.reviews = x.reviews + y.BookedToursOptions.length;
-          y.BookedToursOptions.forEach((z)=>{
-            x.rating = x.rating + parseFloat(z.rating);
-          })
-        }
-      })
-      if(x.rating == 0){
-        x.rating = 5
-      }else{
-        x.rating = x.rating / x.reviews;
-      }
-    })
-    Object.keys(category).forEach((x)=>{
-      tempTours = tempTours.filter((y)=>{
-        return tempTours
-      })
-    })
-    setRecords(tempTours);
-    if(tempTours.length>9){
-      setPagination(true)
-      let total = tempTours.length/9;
-      if(total > parseInt(total)){
-        total= parseInt(total) + 1;
-      }
-      setPages(total);
-    }else {
-      setPagination(false)
-    }
-    setIndex(1)
-  }
+    aos.init({duration:300});
+    setRecords(tourData.result);
+    setLoad(false)
+  }, [router])
 
   const adjustCategory = (cat) => {
     router.push({
       pathname: '/search',
-      query: { destination:destination, city:city, date:date, category:cat }
+      query: { destination:destination, city:city, category:cat }
     })
-  }
-
-  useEffect(() => {
-    loadTours();
-  },[inViewport]);
-
-  async function loadTours(){
-    await delay(3000);
-    setIndex(index!=pages?index+1:pages);
-    index!=pages?null:setLoad(true);
   }
 
 return(
@@ -136,24 +78,24 @@ return(
           <Col md={3} className="" style={{paddingRight:10}}>
             <div className='tour-filters mt-1'>
                 <div>
-                  <b><CiLocationOn size={25} style={{position:'relative', bottom:2}} /> Select Location</b>
+                  <b><CiLocationOn size={25} style={{position:'relative', bottom:2}} />Select Location</b>
                 </div>
                 <Row className='tour-fltr-locate px-3 py-3 my-2'>
                     <Col md={12} className='fs-12 '>
                       <div><b>Destination</b></div>
                         <ConfigProvider
                           theme={{ token:{ colorPrimary: '#147ba1ea', borderRadius:0 } }}>
-                          <Select style={{minWidth:"100%"}} defaultValue={destination} 
+                          <Select style={{minWidth:"100%"}} value={destination} 
                             options={[{ value: 'uae', label: 'UAE', }]}
-                            onChange={(e)=> router.push({ pathname:'/search', query:{ destination:e, city:city, date:date }})}
+                            onChange={(e)=> router.push({ pathname:'/search', query:{ destination:e, city:city, category:category }})}
                           />
                         </ConfigProvider>
                     </Col>
                     <Col md={12} className='mt-3 fs-12'>
                       <div><b>City</b></div>
                         <ConfigProvider theme={{ token:{ colorPrimary: '#147ba1ea', borderRadius:0 }}}>
-                          <Select  style={{minWidth:"100%"}} defaultValue={city} 
-                            onChange={(e)=> router.push({pathname:'/search',query:{destination:destination, city:e, date:date}})}
+                          <Select  style={{minWidth:"100%"}} value={city} 
+                            onChange={(e)=> router.push({pathname:'/search', query:{destination:destination, city:e, category:category }})}
                             options={[
                               { value: 'Abu Dhabi', label: 'Abu Dhabi'  },
                               { value: 'Dubai City', label: 'Dubai City'}
@@ -188,18 +130,11 @@ return(
             </div>
           </Col>
           <Col md={9} className={`${size.width>400?"":"p-0 m-0"}`}>
-            <Tours search={search} size={size} setSearch={setSearch} records={records} index={index} pages={pages} pagination={pagination} price={price} category={category} setIndex={setIndex} searchTerm={searchTerm} />
+            {!load &&<Tours search={search} size={size} setSearch={setSearch} records={records} index={index} pages={pages} pagination={pagination} price={price} category={category} setIndex={setIndex} searchTerm={searchTerm} />}
+            {load && <div className='text-center pb-3 mt-5'><Spinner variant='dark' className='mt-5' /></div>}
           </Col>
         </Row>
       </Container>
-      <Row>
-        <Col md={3}></Col>
-        <Col md={9} ref={ref}>
-          {(!load && records.length!=0 && search=="") &&
-           <div className='text-center pb-3'><Spinner variant='dark' /></div>
-          }
-        </Col>
-      </Row>
     </div>
     <SignUp mobile={size.width>400?false:true} />
   </div>

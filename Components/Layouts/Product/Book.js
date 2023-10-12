@@ -29,12 +29,12 @@ const Book = ({tour, transport, category, setOpen}) => {
         setTour(tour, dispatchReducer, category);
     }, [])
 
-    const showMessage = (msg) =>messageApi.info(msg);
+    const showMessage = (msg) => messageApi.warning(<span style={{position:'relative', top:2}}>{msg}</span>);
 
     const addToCart = async() => {
         let notValidAddress = false
-        state.booking.forEach((x)=>{
-            if(x.transfer!="No" && x.address==""){
+        state.booking.forEach((x) => {
+            if(x.transfer!="1" && x.address==""){
                 notValidAddress = true
             }
         })
@@ -73,7 +73,6 @@ const Book = ({tour, transport, category, setOpen}) => {
         showMessage("Successfully Added To Cart!");
         setLoad(false);
         setOpen(false)
-        //console.log(cartValues);
     }
 
     const oneSelected = () => {
@@ -85,10 +84,6 @@ const Book = ({tour, transport, category, setOpen}) => {
         })
         return result
     }
-
-    useEffect(() => {
-      console.log(state.booking)
-    }, [state.booking])
     
   return (
     <>
@@ -215,7 +210,7 @@ const Book = ({tour, transport, category, setOpen}) => {
                     })   
                 }
                 </Col>}
-                {x.transfer!="No" &&
+                {x.transfer!="1" &&
                 <>
                     <Col md={12}><hr className='my-2' /></Col>
                     <Col md={12} className="mt-1 px-4">

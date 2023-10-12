@@ -37,7 +37,6 @@ const TicketPage = ({ticketData, bookingNo}) => {
                     code:x
                 })
             })
-            console.log(option);
             await setFetchedTicket(ticket);
         }
 	};
@@ -48,7 +47,7 @@ const TicketPage = ({ticketData, bookingNo}) => {
         }).then((x)=>Router.push(`/ticketPage?id=${bookingNo}`))
     }
 
-    useIsomorphicLayoutEffect(() => {
+    useEffect(() => {
         let temp = ticketData.result.BookedTours;
         temp.forEach((x, i)=>{
             x.BookedToursOptions.forEach((y, j)=>{
@@ -105,13 +104,13 @@ const TicketPage = ({ticketData, bookingNo}) => {
             <Row className='ticket-cont-wh-bg my-3' style={{padding:size.width>400?"20px 20px":"0px"}}>
             {tickets.map((x, i)=>{
             return(
-            <Col md={12} xs={12} key={i} className={`${size.width>400?"":"py-0"}`}>
+            <Col key={x.id} md={12} xs={12} className={`${size.width>400?"":"py-0"}`}>
                 {i!==0 && <hr className='my-0 py-0' />}
                 {x.BookedToursOptions.map((y, j)=>{
                 return(
                 <>
                 {j!=0 &&<hr/>}
-                <Row className={y.check?'selected-ticket-row': size.width>400?'ticket-row':"py-3 px-1"} key={"a"+j}
+                <Row key={y.id} className={y.check?'selected-ticket-row': size.width>400?'ticket-row':"py-3 px-1"} 
                     onClick={async()=>{
                         setLoad(true);
                         if(!y.TourOption.manual){
@@ -232,7 +231,7 @@ const TicketPage = ({ticketData, bookingNo}) => {
         <div ref={(response) => (inputRef = response)} >
             {fetchedTicket.map((x, i)=>{
             return(
-                <div key={i} className=''>
+                <div key={x.id} className=''>
                     <div className='my-5'></div>
                     <Ticket fetchedTicket={x} i={i} />
                 </div>
