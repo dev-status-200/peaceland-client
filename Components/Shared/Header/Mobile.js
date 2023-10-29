@@ -7,7 +7,6 @@ import { HiShoppingCart } from "react-icons/hi";
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import Cookies from "js-cookie";
-import { useSession, signIn, signOut } from 'next-auth/react';
 import { fetchCurrencyData } from '/functions/fetchCurrencyData';
 import { GrLogout } from "react-icons/gr";
 import { BsCurrencyExchange } from "react-icons/bs";

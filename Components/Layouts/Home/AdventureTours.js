@@ -21,21 +21,21 @@ const AdventureTours = () => {
     }, [])
 
   return (
-    <>
+    <div  className='home-styles'>
         <div className='desktop'>
-            <Swiper slidesPerView={3} spaceBetween={30} 
-                modules={[Navigation]}
-                navigation={true}
+            <Swiper slidesPerView={4} spaceBetween={30} 
+                modules={[Navigation, Autoplay]}
+                //navigation={true}
                 className="mySwiper"
                 autoplay={{
-                    delay: 2500,
+                    delay: 3500,
                     disableOnInteraction: false,
                 }}
             >
                 {adventures?.map((x, i)=>{
                     return(
                         <SwiperSlide className='' key={i}>
-                            <TourCardOne tour={x} height={220} info={true} font={18} />
+                            <TourCardOne tour={x} height={180} info={true} font={18} />
                         </SwiperSlide>
                     )
                 })}
@@ -61,7 +61,7 @@ const AdventureTours = () => {
             </Swiper>
             {adventures?.length==0 && <div className='text-center'> <img src='/loader.svg' alt="Loader" /> </div>}
         </div>
-    </>
+    </div>
   )
 }
 

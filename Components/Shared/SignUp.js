@@ -1,7 +1,6 @@
 import React from 'react';
 import { IoMailUnreadOutline } from 'react-icons/io5';
 import { Container, Row, Col } from 'react-bootstrap';
-import { useSession, signIn, signOut } from 'next-auth/react';
 
 const SignUp = ({mobile}) => {
   return (

@@ -2,20 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { FaPhoneAlt, FaRegEnvelopeOpen } from "react-icons/fa";
 import { SiFacebook, SiInstagram, SiTwitter } from "react-icons/si";
-import { AiOutlineUser } from "react-icons/ai";
+import { PiShoppingBagFill } from "react-icons/pi";
+import { FaUserCircle } from "react-icons/fa";
+import { FaCartShopping } from "react-icons/fa6";
 import Router, { useRouter } from 'next/router';
 import Cookies from "js-cookie";
 import { fetchCurrencyData } from '/functions/fetchCurrencyData';
 import { GrLogout } from "react-icons/gr";
 import { HiShoppingCart } from "react-icons/hi";
 import { BsCurrencyExchange } from "react-icons/bs";
-import { Dropdown, Popover, Modal } from 'antd';
+import { Dropdown, Popover, Modal, Badge } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { addCurrency, changeCurrency } from '/redux/currency/currencySlice';
 import "/node_modules/flag-icons/css/flag-icons.min.css";
-import MyOffers from "/Components/Shared/MyOffers"
+import MyOffers from "/Components/Shared/MyOffers";
+import Link from 'next/link';
 
-const Header = ({user}) => {
+const Desktop = ({user}) => {
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -45,8 +48,32 @@ const Header = ({user}) => {
   }
 
   return (
-    <div className='header-styles '>
-        <Row className='px-5 pt-1 m-0 white-bg' style={{paddingBottom:5}}>
+    <div className='header-styles' style={{backgroundColor:'white'}}>
+        <div className='container header-container py-2'>
+            <div style={{width:"20%", textAlign:'left'}}>
+                <img src='/images/logo.png' height={50} />
+            </div>
+            <div className='text-center'>
+                <Link href={"/"} className='nav-link-item'>Home</Link>
+                <Link href={{pathname:'/search',  query:{destination:"uae", city:"Dubai City", category:'Theme Parks' }}} className='nav-link-item'>Destinations</Link>
+                <Link href={{pathname:'/search',  query:{destination:"uae", city:"Dubai City", category:'Theme Parks' }}} className='nav-link-item'>Activities</Link>
+                <Link href={"/"} className='nav-link-item'>Hotels</Link>
+                <Link href={"/"} className='nav-link-item'>Visa</Link>
+                <Link href={"/about"} className='nav-link-item'>About</Link>
+                <Link href={"/"} className='nav-link-item'>Contact Us</Link>
+            </div>
+            <div style={{width:"20%", textAlign:'right' }}>
+                <FaUserCircle className='header-icons' style={{position:'relative', bottom:2}} />
+                <Badge count={0} showZero color="#faad14" size="small">
+                    <FaCartShopping className='header-icons' />
+                </Badge>
+                <span className='fs-20' style={{marginLeft:26, marginRight:18}}>|</span>
+                <SiFacebook  className='header-icons' style={{color:'#2b67b6'}} />
+                <SiInstagram className='header-icons' style={{color:'#e425b4'}} />
+                <SiTwitter   className='header-icons' style={{color:'#25a1e4'}} />
+            </div>
+        </div>
+        {/* <Row className='px-5 pt-1 m-0 white-bg' style={{paddingBottom:5}}>
             <Col md={6}>
                 <div style={{fontSize:11}}>
                     <span ><FaPhoneAlt/></span>
@@ -109,7 +136,7 @@ const Header = ({user}) => {
                     }
                 </div>
             </Col>
-        </Row>
+        </Row> */}
         {showOffers &&  <>
             <Modal title="My Offers" open={showOffers} onCancel={()=>setShowOffers(false)} footer={false} centered>
                 <hr/>
@@ -120,4 +147,4 @@ const Header = ({user}) => {
   )
 }
 
-export default Header
+export default Desktop

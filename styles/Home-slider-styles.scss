@@ -1,0 +1,60 @@
+.home-slider-styles{
+  .swiper {
+    width: 100%;
+    padding: 0px;
+    height: 100%;
+  }
+  .swiper-slide {
+    padding: 0px;
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+  }
+  .desert-safari{
+    background:linear-gradient(0deg, rgba(93, 63, 2, 0.5), rgba(132, 87, 10, 0.445)), url("../public/slider/desert-safari.jpg");
+    height: 80vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .heading {
+    color: white;
+    cursor: pointer;
+    font-size: 2em;
+    position: absolute;
+    padding-left: 20px;
+    padding-right: 20px;
+    top: 63%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-image: linear-gradient(rgba(255, 217, 0, 0.547), rgba(255, 153, 0, 0.547));
+    background-size: 100% 10px;
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+    transition: background-size .7s, background-position .5s ease-in-out;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.66);
+  }
+
+  .heading:hover {
+    transition-duration: 300ms;
+    background-size: 100% 100%;
+    background-position: 0% 100%;
+    transition: background-position .5s, background-size .3s ease-in-out;
+    border: 1px solid black;
+  }
+
+  .heading-main{
+    // position: relative;
+    // bottom: 10%;
+    color: white;
+    letter-spacing: -4px;
+    font-size: 100px;
+    text-shadow: 4px 4px 2px rgba(0,0,0,0.66);
+    font-weight: bolder;
+  }
+}

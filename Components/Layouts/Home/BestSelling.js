@@ -20,7 +20,7 @@ const BestSelling = () => {
     }, [])
     
   return (
-    <>
+    <div className='home-styles'>
     {bestSelling?.length>0 &&
     <>
         <Row className='px-3'>
@@ -53,7 +53,7 @@ const BestSelling = () => {
     </>
     }
     {bestSelling?.length==0 && <div className='text-center'> <img src='/loader.svg'  alt="Loader"/> </div>}
-    </>
+    </div>
   )
 }
 
