@@ -38,17 +38,19 @@ const Tours = ({records, size, price, search, setSearch}) => {
                 }
             }).map((x, i)=>{
             return(
-            <Col md={4} xs={6} className={`px-${size.width>400?"1":"0"} search-tour-box`} key={i} onClick={()=>Router.push(`/product?id=${x.id}`)}>
+            <Col md={4} xs={6} className={`px-${size.width>400?"1":"0"} search-tour-box`} key={i} 
+                onClick={()=>Router.push(`/product?id=${x.id}`)} 
+            >
                 <div className={`search-box-container mx-1`}>
                 <img className='search-box-img filter-2' src={x.main_image} height={size.width>400?150:80} width={"100%"} />
                 <div className='px-2 search-bob-bottom'>
                     <div className={`fs-${size.width>400?"15":"12"} py-1`} style={size.width>400?{}:{minHeight:44}}>
                         {size.width>400?
                         <>
-                        <IoLocation style={{position:'relative', bottom:3}} />
-                        <b>{x.title.slice(0,20)} ...</b>
+                        <IoLocation style={{position:'relative', bottom:2}} />{" "}
+                        <>{x.title.slice(0,27)} ...</>
                         </>:
-                        <b>{x.title.slice(0,27)} ...</b>
+                        <>{x.title.slice(0,27)} ...</>
                         }
                     </div>
                     <hr className={size.width>400?`px-5 mt-1 mb-0`:`py-0 my-0`} />
@@ -59,9 +61,8 @@ const Tours = ({records, size, price, search, setSearch}) => {
                     {size.width>400?
                     <div className='px-2'>
                     <div className='mt-3' style={{float:'left', fontWeight:900, fontSize:18}}>{parseFloat(x.TourOptions[0].adult_price).toFixed(2)} AED</div>
-                    <Link href={`/product?id=${x.id}`} className='mt-3 search-box-btn px-3 py-2' style={{float:'right', textDecoration:'none', color:'white'}}
-                        //onClick={()=>router.push(`/product/${x.id}`)}
-                    >BOOK NOW</Link>
+                    {/* <Link href={`/product?id=${x.id}`} className='mt-3 search-box-btn px-3 py-2' style={{float:'right', textDecoration:'none', color:'white'}}
+                    >BOOK NOW</Link> */}
                     </div>:
                     <div>
                     <div style={{float:'left', fontWeight:700, fontSize:12}}>

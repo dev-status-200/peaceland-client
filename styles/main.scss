@@ -54,6 +54,8 @@ body {
 
 .text-shade{
   text-shadow: 4px 4px 10px rgba(0,0,0,0.6);
+  font-weight: 800!important;
+  font-size: 70px!important;
 }
 
 .white-bg{ background-color: white; }
@@ -66,6 +68,7 @@ body {
 .silver-txt{ color: silver!important; }
 .wh-txt{ color: white!important; }
 .blue-txt{ color: rgb(8, 78, 77)!important; }
+.blue-txt-2{ color: rgb(20, 128, 85)!important; }
 .lt-blue-txt{ color: #61c7c8!important; }
 .yellow-txt{ color: #ebf13c!important; }
 
@@ -827,7 +830,6 @@ div.react-datepicker-wrapper > div > input{
 }
 .search-box-container{
   transition-duration: 200ms;
-  border-radius: 10px 10px 10px 10px;
 }
 .search-box-container:hover{
   transition-duration: 200ms;
@@ -836,7 +838,6 @@ div.react-datepicker-wrapper > div > input{
   -moz-box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.75);
 }
 .search-box-img {
-  border-radius: 10px 10px 0px 0px;
   border: 1px solid rgb(203, 203, 203);
 }
 .my-custom-paragraph{
@@ -846,7 +847,6 @@ div.react-datepicker-wrapper > div > input{
 .search-bob-bottom{
   background-color: white;
   height: 120px;
-  border-radius: 0px 0px 10px 10px;
   border: 1px solid rgb(203, 203, 203);
 }
 

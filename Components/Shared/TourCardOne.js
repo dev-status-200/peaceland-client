@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { IoStar } from 'react-icons/io5';
 import { HiArrowLongRight } from 'react-icons/hi2';
@@ -12,11 +12,7 @@ const TourCardOne = ({tour, height, info, font}) => {
 
   return (
     <div className='hover-shadow'
-        onClick={()=>{
-            if(!info){
-                router.push(`/product?id=${tour.id}`)
-            }
-        }}
+        onClick={()=>router.push(`/product?id=${tour.id}`)}
         style={{border:'1px solid grey'}}
     >
         <div style={{width:'100%' , position:'relative', left:0, top:0}}>
