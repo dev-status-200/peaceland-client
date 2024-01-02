@@ -32,9 +32,9 @@ const Book = ({tour, transport, category, setOpen}) => {
     const showMessage = (msg) => messageApi.warning(<span style={{position:'relative', top:2}}>{msg}</span>);
 
     const addToCart = async() => {
-        let notValidAddress = false
+        let notValidAddress = false;
         state.booking.forEach((x) => {
-            if(x.transfer!="1" && x.address==""){
+            if(x.check && x.transfer!="1" && x.address==""){
                 notValidAddress = true
             }
         })

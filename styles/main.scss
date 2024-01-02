@@ -11,6 +11,9 @@
 @import 'bar-styles.scss';
 @import 'my-offers.scss';
 @import 'Home-slider-styles.scss';
+@import 'contact.scss';
+@import 'visa-form.scss';
+
 *{
   font-family: 'Jost', sans-serif;
 }
@@ -67,9 +70,12 @@ body {
 .silver-3-txt{ color: rgb(130, 130, 130)!important; }
 .silver-txt{ color: silver!important; }
 .wh-txt{ color: white!important; }
-.blue-txt{ color: rgb(8, 78, 77)!important; }
-.blue-txt-2{ color: rgb(20, 128, 85)!important; }
-.lt-blue-txt{ color: #61c7c8!important; }
+
+.green-txt{ color: #499b2f!important; }
+.blue-txt{ color: #2170b9!important; }
+
+.blue-txt-2{ color: #b8d233!important; }
+.lt-blue-txt{ color: #2281c3!important; }
 .yellow-txt{ color: #ebf13c!important; }
 
 .fs-10 { font-size: 10px!important; }
@@ -118,6 +124,11 @@ body {
 .rel-btm-2{
   position: relative;
   bottom: 2px;
+}
+
+.header-bg{
+  background-color: #499b2f;
+  color: white;
 }
 
 .bg-signin{
@@ -197,7 +208,7 @@ body {
 
 .btn-custom-2{
   cursor: pointer;
-  background-color: rgb(6, 150, 172)!important;
+  background-color: rgb(6, 172, 81)!important;
   color: white;
   padding: 5px 20px 5px 20px;
   border-radius: 3px;
@@ -206,7 +217,7 @@ body {
 
 .btn-custom-2:hover{
   transition-duration: 300ms;
-  background-color: rgb(6, 121, 139)!important;
+  background-color: rgb(6, 33, 139)!important;
 }
 
 .tableFixHead thead th {
@@ -221,6 +232,23 @@ body {
 .modify-edit:hover{
   cursor: pointer;
   color: rgb(6, 150, 172)!important;
+}
+
+
+.green-btn{
+  border: none;
+  cursor: pointer;
+  background-color: #57dc5f;
+  width: 30%;
+  height: 40px;
+  font-weight: 700;
+  font-size: 18px;
+  color: white;
+  text-align: center;
+}
+.green-btn:hover{
+  transition-duration: 200ms;
+  background-color: #1c7723;
 }
 
 .card-cntnt{
@@ -654,7 +682,6 @@ body > div:nth-child(6) > div > div.ant-modal-wrap > div > div.ant-modal-content
 }
 
 .bg-02{
-  background-image: url("../public/images/tours-bg-1.png");
   overflow: hidden;
 
   /* Center and scale the image nicely */
@@ -823,13 +850,13 @@ div.react-datepicker-wrapper > div > input{
 }
 
 .search-tour-box{
-  //border: 1px solid grey;
   cursor: pointer;
   padding-bottom: 50px;
   
 }
 .search-box-container{
   transition-duration: 200ms;
+  border-radius: 20px 20px 10px 10px!important;
 }
 .search-box-container:hover{
   transition-duration: 200ms;
@@ -839,6 +866,7 @@ div.react-datepicker-wrapper > div > input{
 }
 .search-box-img {
   border: 1px solid rgb(203, 203, 203);
+  border-radius: 20px 20px 0px 0px!important;
 }
 .my-custom-paragraph{
   margin: 0px;
@@ -846,8 +874,9 @@ div.react-datepicker-wrapper > div > input{
 }
 .search-bob-bottom{
   background-color: white;
-  height: 120px;
+  min-height: 135px;
   border: 1px solid rgb(203, 203, 203);
+  border-radius: 0px 0px 10px 10px;
 }
 
 .search-page{
@@ -867,26 +896,26 @@ div.react-datepicker-wrapper > div > input{
   background-color: #094c64ea;
 }
 .search-box-btn{
-  background-color: #0d6788ea;
+  background-color: #499b2f;
   color: white;
   border-radius: 5px;
   font-size: 12px;
 }
 .search-box-btn:hover{
   transition-duration: 100ms;
-  background-color: #063a4dea;
+  background-color: #2170b9;
 }
 
 .signin-bg{
   padding-top: 60px;
   padding-bottom: 60px;
-  background-color: rgb(18, 44, 148);
+  background-color: #499b2f;
   //text-align: center;
   color: white;
 }
 .subscribe-btn{
   color: white;
-  background-color: rgb(11, 28, 95);
+  background-color: rgb(17, 104, 12);
   padding: 20px;
   font-size: 25px;
   font-weight: bolder;

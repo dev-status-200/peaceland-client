@@ -1,32 +1,43 @@
-import React, { useState } from 'react';
-import { IoLocation } from "react-icons/io5";
-import { Rate} from 'antd';
+import React, { useEffect } from 'react';
+import { Rate } from 'antd';
 import { Row, Col } from 'react-bootstrap';
-import Router, { useRouter } from 'next/router';
+import Router from 'next/router';
 import Link from 'next/link';
 import { ConfigProvider, Input } from 'antd';
+import Aos from 'aos';
 
 const Tours = ({records, size, price, search, setSearch}) => {
+
+    useEffect(() => {
+        Aos.init({duration:300})
+    }, [])
 
   return (
     <>
     {records.length>0 &&<>
-        <Row>
-            <Col md={12} className='pb-3'>
-                <h5><b>{records.filter((x)=>{
-                if(search==""){
-                    return x
-                }else if(x.title.toLowerCase().includes(search.toLowerCase())){
-                    return x
-                }
-            }).length} Activities Found</b></h5>
+        <Row data-aos='fade-up' className='search-bar pb-3 pt-5 mt-4'>
+            <Col md={size.width>400?12:12} className='' data-aos='fade-up'>
+                <div className='fs-30 wh-txt'>
+                    <b>{records.filter((x)=>{
+                        if(search==""){
+                            return x
+                        } else if (x.title.toLowerCase().includes(search.toLowerCase())){
+                            return x
+                        }
+                        }).length} Activities Found
+                    </b>
+                </div>
+            </Col>
+            {size.width>400 && <Col md={12}></Col>}
+            <Col md={12} className='' >
                 <ConfigProvider
-                    theme={{ token:{ colorPrimary: '#147ba1ea', borderRadius:0 } }}>
-                    <Input  onChange={(e)=> setSearch(e.target.value)} value={search} placeholder='Search'
-                    />
+                    theme={{ token:{ colorPrimary: '#499b2f' } }}>
+                    <Input onChange={(e)=> setSearch(e.target.value)} size='large' value={search} placeholder='Search any product' />
                 </ConfigProvider>
             </Col>
-            <hr className='p-0 mb-3 mx-0'/>
+        </Row>
+        <Row>
+            <hr className='p-0 mb-3 mt-3 mx-0'/>
             {
             records.filter((x)=>{
                 return x.TourOptions[0].adult_price <= price
@@ -44,25 +55,36 @@ const Tours = ({records, size, price, search, setSearch}) => {
                 <div className={`search-box-container mx-1`}>
                 <img className='search-box-img filter-2' src={x.main_image} height={size.width>400?150:80} width={"100%"} />
                 <div className='px-2 search-bob-bottom'>
-                    <div className={`fs-${size.width>400?"15":"12"} py-1`} style={size.width>400?{}:{minHeight:44}}>
+                    {/* Mobile */}
+                    <div className={`fw-500 fs-${size.width>400?"17":"12"} py-1`} style={size.width>400?{lineHeight:1.2}:{minHeight:44}}>
                         {size.width>400?
                         <>
-                        <IoLocation style={{position:'relative', bottom:2}} />{" "}
-                        <>{x.title.slice(0,27)} ...</>
+                        <>{x.title}</>
                         </>:
-                        <>{x.title.slice(0,27)} ...</>
+                        <>{x.title}</>
                         }
                     </div>
+
                     <hr className={size.width>400?`px-5 mt-1 mb-0`:`py-0 my-0`} />
-                    <Rate disabled defaultValue={x.rating} allowHalf 
-                        style={{color:'#f0a800', cursor:'pointer', fontSize:size.width>400?10:7}} className={`${size.width>400?"mx-2":""}`} 
-                    /> 
-                    {x.reviews==0?'':<span className='fs-10 silver-txt'>{"("}{x.reviews} reviews{")"}</span>}  
+                    {/* <Rate disabled defaultValue={x.rating} allowHalf 
+                        style={{color:'#f0a800', cursor:'pointer', fontSize:size.width>400?10:7}} 
+                        className={`${size.width>400?"mx-2":""}`} 
+                    />  */}
+                    {/* {x.reviews==0?'':<span className='fs-14 grey-txt'>{"("} {x.reviews?x.reviews:"0"} <span style={{position:'relative', bottom:1}}>reviews</span> {")"}</span>}   */}
+
+                    {/* Desktop */}
                     {size.width>400?
-                    <div className='px-2'>
-                    <div className='mt-3' style={{float:'left', fontWeight:900, fontSize:18}}>{parseFloat(x.TourOptions[0].adult_price).toFixed(2)} AED</div>
-                    {/* <Link href={`/product?id=${x.id}`} className='mt-3 search-box-btn px-3 py-2' style={{float:'right', textDecoration:'none', color:'white'}}
-                    >BOOK NOW</Link> */}
+                    <div className='px-2 pb-3 pt-3'>
+                    <div className='' style={{float:'left', fontWeight:700, fontSize:18, color:'#464646', paddingTop:20}}>
+                        {parseFloat(x.TourOptions[0].adult_price).toFixed(2)} AED
+                    </div>
+                    <Link 
+                        href={`/product?id=${x.id}`}
+                        className='mt-3 search-box-btn px-3 py-2'
+                        style={{float:'right', textDecoration:'none', color:'white', top:'100%'}}
+                    >
+                        <div>BOOK NOW</div>
+                    </Link>
                     </div>:
                     <div>
                     <div style={{float:'left', fontWeight:700, fontSize:12}}>
@@ -95,4 +117,4 @@ const Tours = ({records, size, price, search, setSearch}) => {
   )
 }
 
-export default Tours
+export default React.memo(Tours)

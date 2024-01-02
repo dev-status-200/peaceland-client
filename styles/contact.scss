@@ -1,0 +1,26 @@
+.contact-styles{
+    .bg-white{
+        background-color: white;
+    }
+    .top-tag{
+        font-size: 65px;
+        font-weight: 600;
+        line-height: 70px;
+    }
+    .contact-bg{
+        background-color:'#57dc5f';
+        border-radius:15;
+        margin:30
+    }
+    .contact-box{
+        border:3px solid #57dc5f;
+        padding:30px;
+        margin-bottom:50px;
+        margin-top:80px;
+        background-color:'white';
+        border-radius:15px;
+        box-shadow: 10px 10px 21px -7px rgba(0,0,0,0.75);
+-webkit-box-shadow: 10px 10px 21px -7px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 10px 21px -7px rgba(0,0,0,0.75);
+    }
+}

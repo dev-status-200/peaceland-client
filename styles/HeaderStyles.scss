@@ -1,4 +1,14 @@
 .header-styles{
+
+    .fixed{
+        position: fixed;
+        background-color: white;
+        width:100vw;
+        top: 0px;
+        z-index: 2;
+        border-bottom:1px solid silver;
+    }
+
     .header-container{
         display: flex;
         flex:1;
@@ -10,12 +20,20 @@
     }
 
     .nav-link-item{
+        transition-duration: 300ms;
         margin-left: 15px;
         margin-right: 15px;
-        font-size: 17px;
+        font-size: 1.2rem;
         text-decoration: none!important;
         color: rgb(75, 75, 75);
         font-weight: 500;
+        border-bottom: 2px solid white;
+    }
+
+    .nav-link-item:hover{
+        transition-duration: 300ms;
+        color: #499b2f;
+        border-bottom: 2px solid #499b2f;
     }
 
     .header-icons{

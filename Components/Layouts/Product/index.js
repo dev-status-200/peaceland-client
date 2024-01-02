@@ -1,27 +1,27 @@
-import React, { useEffect, useState } from 'react'; 
+import { IoCalendarSharp,IoFlashSharp, IoLanguageOutline, IoLocationSharp } from "react-icons/io5";
 import { Container, Row, Col } from 'react-bootstrap';
-import { AiFillTags } from "react-icons/ai";
-import { Rate, Drawer } from 'antd';
-import { IoCalendarSharp,IoFlashSharp, IoLanguageOutline } from "react-icons/io5";
-import { GiSandsOfTime } from "react-icons/gi";
-import MoreDetail from './MoreDetail';
-import { BiLocationPlus } from "react-icons/bi";
-import { RiExchangeFundsLine } from "react-icons/ri";
-import { TbPoint } from "react-icons/tb";
-import Aos from 'aos';
-import Book from './Book';
-import MobileBook from './MobileBook';
-import { useSelector } from 'react-redux';
-import Details from './Details';
-import axios from 'axios';
-import moment from 'moment';
-import Loader from '../../Shared/Loader';
 import useWindowSize from '/functions/useWindowSize';
-import Images from './Images';
-import { useRouter } from 'next/router'
+import { RiExchangeFundsLine } from "react-icons/ri";
+import React, { useEffect, useState } from 'react'; 
+import { BiLocationPlus } from "react-icons/bi";
+import { GiSandsOfTime } from "react-icons/gi";
+import { AiFillTags } from "react-icons/ai";
+import { useSelector } from 'react-redux';
+import { TbPoint } from "react-icons/tb";
+import Loader from '../../Shared/Loader';
+import Router, { useRouter } from 'next/router'
+import MoreDetail from './MoreDetail';
+import MobileBook from './MobileBook';
 import MoreImages from './MoreImages';
+import { Rate, Drawer } from 'antd';
+import Details from './Details';
+import Images from './Images';
+import moment from 'moment';
+import Book from './Book';
+import axios from 'axios';
+import Aos from 'aos';
 
-const Product = () => {
+const Product = ({id, tourData}) => {
   
   const router = useRouter();
   const cart = useSelector((state) => state.cart.value);
@@ -50,16 +50,16 @@ const Product = () => {
 }, [])
 
   useEffect(() => {
-    let tempId = router.query.id;
-    if(tempId){
-      fetchData(tempId);
+    //let tempId = router.query.id;
+    if(id){
+      fetchData();
     }
   }, [router])
 
-  const fetchData = async(id) => {
-    const tourData = await axios.get(process.env.NEXT_PUBLIC_GET_PRODUCT_BY_ID,{
-      headers:{ "id": `${id}` }
-    }).then((x)=>x.data.result)
+  const fetchData = async() => {
+    // const tourData = await axios.get(process.env.NEXT_PUBLIC_GET_PRODUCT_BY_ID,{
+    //   headers:{ "id": `${id}` }
+    // }).then((x)=>x.data.result)
     let detailData = await axios.get(process.env.NEXT_PUBLIC_GET_PRODUCT_DETAIL_BY_ID,{
       headers:{ "id": `${id}` }
     }).then((x)=>x.data.result);
@@ -101,25 +101,29 @@ const Product = () => {
     <>
     {!added &&
     <Row>
-      <Col md={5}>
-      <div className="book-btn mt-4" onClick={()=>setOpen(true)}>
-        <span>BOOK NOW</span>
-      </div>
+      <Col md={5} className={`${size.width>400?'':'text-center'}`} xs={{order: size.width>400?1:2}}>
+        <div className={`book-btn ${size.width>400?'mt-4':'mt-0'}`} onClick={()=>setOpen(true)}>
+          <span>BOOK NOW</span>
+        </div>
       </Col>
-      <Col md={6} style={{borderLeft:'2px solid grey'}}>
-        <span className='fw-400 fs-16 grey-txt'>Starting From:</span>
-        {tour.prevPrice && 
-        <s className={`fw-400 mx-2 ${size.width>400?"fs-22":"fs-15"}`} style={{color:"#af302c"}}>
-          {" "}{(tour.prevPrice*conversion.rate).toFixed(2)} {conversion.currency}{" "}
-        </s>
+      <Col md={6} xs={{order:size.width>400?2:1}} style={{borderLeft:size.width>400?'2px solid grey':'none'}}>
+        <span className='fw-400 fs-18 grey-txt'>Starting From:</span>
+        {tour.prevPrice &&
+          <s className={`fw-400 mx-2 ${size.width>400?"fs-22":"fs-20"}`} style={{color:"#af302c"}}>
+            {" "}{(tour.prevPrice*conversion.rate).toFixed(2)} {conversion.currency}{" "}
+          </s>
         }
-        <p className={`fw-600 ${size.width>400?"fs-30":"fs-20"}`}><AiFillTags/>
+        <p className={`fw-600 ${size.width>400?"fs-30":"fs-35"}`}><AiFillTags/>
           {(tour?.TourOptions[0]?.adult_price*conversion.rate).toFixed(2)} {conversion.currency}
         </p>
       </Col>
     </Row>
     }
-    {added && <>Added To Cart</>}
+    {added &&
+      <>
+        <div className="green-btn p-2" onClick={()=>Router.push("/cart")}>Go To Cart {">"}</div>
+      </>
+    }
     </>
     }
     </>
@@ -132,20 +136,31 @@ const Product = () => {
     {!book && <Loader/>}
     {book &&
     <div>
-      <Container className='' >
-        <Row className='p'>
-          <Col md={5}>
+      <Container>
+        <Row className="mt-4">
+          <Col md={5} xs={{ order: 2 }} className="pt-4">
             <Details tour={tour} detail={detail} data-aos="fade-right" />
-            <BookCompTwo />
+            {size.width>400 &&<BookCompTwo />}
           </Col>
-          <Col md={7} className='pt-4'>
+          <Col md={7} xs={{ order: 1 }} className='pt-4'>
+            {size.width<400 && <>
+              <div className={`fs-30 fw-700 blue-txt`}>{tour.title}</div>
+              <span>
+                <Rate disabled defaultValue={5} style={{fontSize:12, color:'orange'}} />
+              </span>
+              <span className ='mx-2 fs-12' style={{color:'grey'}}>
+                {"("}3 Reviews{")"}
+              </span> 
+              <IoLocationSharp size={15} style={{position:'relative', bottom:2}}/> 
+              {" "}{tour.destination?.toUpperCase()}, {tour.city}
+            </>}
             <Images mainImage={mainImage} setMainImage={setMainImage} tour={tour} detail={detail} data-aos="fade-right" />
-            <div className='images-container px-5'>
+            <div className={`images-container ${size.width>400?'px-5':''}`}>
               <MoreImages setMainImage={setMainImage} tour={tour} detail={detail} data-aos="fade-right"/>
             </div>
             {size.width<400 && <>
             <hr/>
-            <BookComp />
+            <BookCompTwo />
             </>
             }
           </Col>
@@ -178,11 +193,11 @@ const Product = () => {
             </Col>
         </Row>
       </Container>
-      <div className='mt-5'>
+      <div className='my-5'>
         <MoreDetail  detail={detail} />
       </div>
 
-      <Container  className='py-5 px-3' style={{backgroundColor:'white'}}>
+      {/* <Container  className='py-5 px-3' style={{backgroundColor:'white'}}>
         <h4 style={{color:'silver'}}>Reviews</h4>
         <hr className='my-0' />
         {reviews.length==0 && <div className='mt-3' style={{color:'grey'}}>No Review yet</div>}
@@ -207,9 +222,9 @@ const Product = () => {
           )})}
         </div>
         }
-      </Container>
+      </Container> */}
       {(scrollPosition>650 && !added ) &&
-      <div className='fixed-book' style={size.width<400?{right:"4%"}:{}}>
+      <div className='fixed-book' style={size.width<400?{right:"70%"}:{}} data-aos="slide-up">
         <button type='button'  onClick={()=>setOpen(true)} className='otherBook-btn'>
           <b>            
             <div className='my-0 py-0'>BOOK</div>

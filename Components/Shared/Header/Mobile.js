@@ -7,12 +7,12 @@ import { HiShoppingCart } from "react-icons/hi";
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import Cookies from "js-cookie";
-import { fetchCurrencyData } from '/functions/fetchCurrencyData';
-import { GrLogout } from "react-icons/gr";
-import { BsCurrencyExchange } from "react-icons/bs";
+// import { fetchCurrencyData } from '/functions/fetchCurrencyData';
+// import { GrLogout } from "react-icons/gr";
+// import { BsCurrencyExchange } from "react-icons/bs";
+// import { addCurrency, changeCurrency } from '/redux/currency/currencySlice';
 import { Dropdown, Popover, Modal } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { addCurrency, changeCurrency } from '/redux/currency/currencySlice';
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import MyOffers from "/Components/Shared/MyOffers"
 
@@ -25,38 +25,37 @@ function OffCanvasExample({ name, user, ...props }) {
   const toggleShow = () => setShow((s) => !s);
   const navStyles = {color:'white', textDecoration:'none', fontSize:30}
   
-  //const {data:session} = useSession();
   const router = useRouter();
   const cart = useSelector((state) => state.cart.value);
 
   const [showOffers, setShowOffers] = useState(false);
-  const currencyList = useSelector((state) => state.currency.value);
-  const conversion = useSelector((state) => state.currency.conversion);
+  // const currencyList = useSelector((state) => state.currency.value);
+  // const conversion = useSelector((state) => state.currency.conversion);
 
   return (
     <>
-    <Container fluid="true" style={{backgroundColor:'rgb(8, 78, 77)', color:'white'}}>
+    <Container fluid="true" className='header-bg'>
     <Row style={{fontSize:12}} className='pb-1 px-2'>
         <Col xs={6}>
         <FaPhoneAlt style={{position:'relative', top:1, fontSize:10}}/><span className='mx-1' style={{position:'relative', top:2}}>+971 55 998 6370</span>
         </Col>
         <Col xs={6} className='px-1 text-end'>
-        <FaRegEnvelopeOpen style={{fontSize:10}}/><span className='mx-1' style={{position:'relative', top:2}}>booking@ticketsvalley.com</span>
+        <FaRegEnvelopeOpen style={{fontSize:10}}/><span className='mx-1' style={{position:'relative', top:2}}>booking@peacelandtravel.com</span>
         </Col>
     </Row>
     </Container>
 
     <Container>
       <Row className='py-2'>
-        <Col xs={3} className='text-start'>
-          <CgMenuLeft onClick={toggleShow} style={{fontSize:25, color:'#21a69b', marginTop:11}}/>
+        <Col xs={3} className='text-start pt-3'>
+          <CgMenuLeft onClick={toggleShow} color='#499b2f' size={23}/>
         </Col>
         <Col xs={6} className='text-center'>
         <img src={'/images/logo.png'} height={50} style={{position:'relative', right:10}} onClick={()=>router.push("/")} alt='logo' />
         </Col>
         <Col xs={3} className='text-end'>
-          <div onClick={()=>router.push("/cart")} style={{color:'#21a69b', marginTop:11}}>
-           <span style={{fontSize:12}} >{`(${cart.length})`}</span><HiShoppingCart size={23} />
+          <div onClick={()=>router.push("/cart")} className='mt-3'>
+           <span>{`(${cart.length})`}</span><HiShoppingCart color='#499b2f' size={23} />
           </div>
           {/* <FaUser style={{fontSize:16, color:'#21a69b'}}/> */}
         </Col>
@@ -64,15 +63,15 @@ function OffCanvasExample({ name, user, ...props }) {
     </Container>
 
     <Offcanvas show={show} onHide={handleClose} {...props} >
-      <Offcanvas.Header closeButton style={{backgroundColor:'#21a69b'}}>
+      <Offcanvas.Header closeButton style={{backgroundColor:'#499b2f'}}>
         <Offcanvas.Title style={{color:'white'}}>Menu</Offcanvas.Title>
       </Offcanvas.Header>
-      <Offcanvas.Body style={{backgroundColor:'#21a69b'}}>
+      <Offcanvas.Body style={{backgroundColor:'#499b2f'}}>
         {!load &&<>
           <div className='text-center navBar'>
             <div className='mt-3'></div>
             <Link style={navStyles} href='/' >Home</Link><br/><br/>
-            <Link style={navStyles} href={{pathname:'/search',  query:{destination:"uae", city:"Dubai City", category:'Water Parks' }}} >Activities</Link><br/><br/>
+            <Link style={navStyles} href={{pathname:'/activities',  query:{destination:"uae", city:"Dubai City", category:'Water Parks' }}} >Activities</Link><br/><br/>
             <Link style={navStyles} href='/about' >About</Link><br/><br/>
               {!user.loggedIn &&
                 <span className='cur mx-2' style={navStyles}

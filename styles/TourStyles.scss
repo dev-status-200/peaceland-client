@@ -59,8 +59,8 @@
   }
   .fixed-book{
     position: fixed!important;
-    bottom: 80px!important;
-    right: 50px;
+    bottom: 30px!important;
+    right: 110px;
     border-radius: 100%;
     box-shadow: 10px 10px 29px -11px rgba(0,0,0,0.75);
     -webkit-box-shadow: 10px 10px 29px -11px rgba(0,0,0,0.75);
@@ -92,10 +92,17 @@
 .info-item{
   color: white;
   font-size: 15px;
+  margin-bottom: 15px;
 }
 .info-icon{
   color: white;
   font-size: 40px;
+}
+
+.mobile-more-images{
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
 }
 
 .policy-bar{
@@ -107,7 +114,7 @@
 // BTN CSS
 
 .otherBook-btn{
-  background-color: #18858f;
+  background-color: #499b2f;
   border: none;
   padding: 20px;
   color: white;
@@ -115,6 +122,7 @@
 }
 
 .book-btn{
+  border: none;
   cursor: pointer;
   background-color: #57dc5f;
   width: 90%;

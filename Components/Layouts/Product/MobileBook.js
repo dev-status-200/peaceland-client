@@ -34,7 +34,7 @@ const MobileBook = ({tour, transport, category, setOpen}) => {
     const addToCart = async() => {
         let notValidAddress = false
         state.booking.forEach((x)=>{
-            if(x.transfer!="1" && x.address==""){
+            if(x.check && x.transfer!="1" && x.address==""){
                 notValidAddress = true
             }
         })
@@ -50,7 +50,6 @@ const MobileBook = ({tour, transport, category, setOpen}) => {
             showMessage("Enter A Valid Full Name !");
             return
         }
-
         setLoad(true);
         await delay(500);
         let cartValues = {

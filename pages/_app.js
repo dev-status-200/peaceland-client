@@ -35,7 +35,11 @@ function MyApp({ Component, pageProps:{ session, ...pageProps }, }) {
         router.pathname =='/about'       ||
         router.pathname =='/ticketPage'  ||
         router.pathname =='/search'      ||
+        router.pathname =='/visa'        ||
+        router.pathname =='/hotels'      ||
         router.pathname =='/search/[id]' ||
+        router.pathname =='/contact'     ||
+        router.pathname =='/activities'  ||
         router.pathname =='/paySuccess'
       ) &&
       <>
@@ -57,21 +61,7 @@ function MyApp({ Component, pageProps:{ session, ...pageProps }, }) {
         }
       </>
     }
-    { (
-        router.pathname =='/portal' || 
-        router.pathname =='/productCreation'|| 
-        router.pathname =='/transport'|| 
-        router.pathname =='/bookings'|| 
-        router.pathname =='/inventory'|| 
-        router.pathname =='/customers'|| 
-        router.pathname =='/reviews'|| 
-        router.pathname =='/promos' 
-      ) &&
-        <PortalLayout>
-          { loading && <Loader/> }
-          { !loading && <Component {...pageProps} /> }
-        </PortalLayout>
-    }
+
     { (router.pathname =='/login' || router.pathname =='/auth') &&
       <GoogleOAuthProvider clientId="1018461770381-hin727pafmfajl3oq0djq27h3rnae221.apps.googleusercontent.com">
         <Component {...pageProps} />

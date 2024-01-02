@@ -53,7 +53,7 @@ export default function CheckoutForm({email, name, image}) {
             {isProcessing ? "Processing ... " : "Checkout"}
           </span>
         </button>
-        <p className="silver-2-txt mt-3">By confirming checkout, you allow Ticketsvalley to charge your card for this payment in accordance with our terms {"&"} conditions.</p>
+        <p className="silver-2-txt mt-3">By confirming checkout, you allow Peaceland Travel to charge your card for this payment in accordance with our terms {"&"} conditions.</p>
         </Col>
       </Row>
       {/* Show any error or success messages */}

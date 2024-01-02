@@ -6,14 +6,14 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/bundle";
 import SignUp from '../../Shared/SignUp';
-import CircleIcons from '/Components/Shared/CircleIcons';
-import Link from 'next/link';
+// import CircleIcons from '/Components/Shared/CircleIcons';
+// import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import Slider from './Slider';
 
-const BestSelling = dynamic(() => import('./BestSelling'), {
-  loading: () => <div className='text-center'> <img src='/loader.svg'  alt="About Us" /> </div>,
-})
+// const BestSelling = dynamic(() => import('./BestSelling'), {
+//   loading: () => <div className='text-center'> <img src='/loader.svg'  alt="About Us" /> </div>,
+// })
 const Adventures = dynamic(() => import('./AdventureTours'), {
   loading: () => <div className='text-center'> <img src='/loader.svg'  alt="About Us" /> </div>,
 })
@@ -36,19 +36,19 @@ const Desktop = () => {
         <div className="title">
           <h3>Let's go for a</h3>
           <hr/>
-          <h1 className='blue-txt-2'><b>HOLIDAY</b></h1>
+          <h1 className='green-txt'><b>HOLIDAY</b></h1>
         </div>
       </section>
       <section>
-          <div className="parallax-one">
-            <h2 className='text-shade'>ANYWHERE IN THE WORLD</h2>
-          </div>
+        <div className="parallax-one">
+          <h2 className='text-shade'>ANYWHERE IN THE WORLD</h2>
+        </div>
       </section>
       <section>
         <div className="block">
           <div className='title py-4'>
             <h3>Peaceland's Most</h3>
-            <h1 className='text-center blue-txt-2' ><b>Recommended Tours</b></h1>
+            <h1 className='text-center green-txt' ><b>Recommended Tours</b></h1>
           </div>
           <Adventures/>
           <div className='my-5'></div>
@@ -63,11 +63,14 @@ const Desktop = () => {
         <div className="block">
           <div className='title py-4'>
             <h3>Peaceland's</h3>
-            <h1 className='text-center blue-txt-2'><b>Combo Packages  </b></h1>
+            <h1 className='text-center green-txt'><b>Combo Packages  </b></h1>
           </div>
           <Combos/>
           <div className='my-5'></div>
         </div>
+      </section>
+      <section>
+        <SignUp/>
       </section>
     </div>
   </div>

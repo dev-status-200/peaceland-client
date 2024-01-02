@@ -6,7 +6,9 @@
     .cart-box{
         border: 2px solid white;
         background-color: white;
-        
+    }
+    .cart-left{
+        min-height: 68vh;
     }
     .cart-item{
         margin-bottom: 5px;
@@ -30,6 +32,6 @@
     }
 
     .cart-item-name{
-        color: rgb(16, 125, 125);
+        color: rgb(16, 125, 67);
     }
 }

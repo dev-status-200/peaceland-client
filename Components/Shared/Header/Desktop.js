@@ -16,6 +16,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addCurrency, changeCurrency } from '/redux/currency/currencySlice';
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import MyOffers from "/Components/Shared/MyOffers";
+import { FaSquareXTwitter } from "react-icons/fa6";
 import Link from 'next/link';
 
 const Desktop = ({user}) => {
@@ -49,30 +50,34 @@ const Desktop = ({user}) => {
 
   return (
     <div className='header-styles' style={{backgroundColor:'white'}}>
-        <div className='container header-container py-2'>
-            <div style={{width:"20%", textAlign:'left'}}>
-                <img src='/images/logo.png' height={50} />
-            </div>
-            <div className='text-center'>
-                <Link href={"/"} className='nav-link-item'>Home</Link>
-                <Link href={{pathname:'/search',  query:{destination:"uae", city:"Dubai City", category:'Theme Parks' }}} className='nav-link-item'>Destinations</Link>
-                <Link href={{pathname:'/search',  query:{destination:"uae", city:"Dubai City", category:'Theme Parks' }}} className='nav-link-item'>Activities</Link>
-                <Link href={"/"} className='nav-link-item'>Hotels</Link>
-                <Link href={"/"} className='nav-link-item'>Visa</Link>
-                <Link href={"/about"} className='nav-link-item'>About</Link>
-                <Link href={"/"} className='nav-link-item'>Contact Us</Link>
-            </div>
-            <div style={{width:"20%", textAlign:'right' }}>
-                <FaUserCircle className='header-icons' style={{position:'relative', bottom:2}} />
-                <Badge count={0} showZero color="#faad14" size="small">
-                    <FaCartShopping className='header-icons' />
-                </Badge>
-                <span className='fs-20' style={{marginLeft:26, marginRight:18}}>|</span>
-                <SiFacebook  className='header-icons' style={{color:'#2b67b6'}} />
-                <SiInstagram className='header-icons' style={{color:'#e425b4'}} />
-                <SiTwitter   className='header-icons' style={{color:'#25a1e4'}} />
+        <div className='fixed'>
+            <div className='container header-container py-2'>
+                <div style={{width:"20%", textAlign:'left'}} >
+                    <img src='/images/logo.png' height={80} className='cur' onClick={()=>router.push("/")} />
+                </div>
+                <div className='text-center'>
+                    <Link href={"/"} className='nav-link-item'>Home</Link>
+                    <Link href={{pathname:'/search',  query:{destination:"uae", city:"Dubai City", category:'Theme Parks' }}} className='nav-link-item'>Destinations</Link>
+                    <Link href={{pathname:'/activities',  query:{destination:"uae", city:"Dubai City", category:'Theme Parks' }}} className='nav-link-item'>Activities</Link>
+                    <Link href={"/"} className='nav-link-item'>Hotels</Link>
+                    <Link href={"/visa"} className='nav-link-item'>Visa</Link>
+                    <Link href={"/about"} className='nav-link-item'>About</Link>
+                    <Link href={"/contact"} className='nav-link-item'>Contact Us</Link>
+                </div>
+                <div style={{width:"20%", textAlign:'right' }}>
+                    <FaUserCircle className='header-icons' style={{position:'relative', bottom:2}} />
+                    <Badge count={cart.length} showZero color="#faad14" size="small">
+                        <FaCartShopping className='header-icons cur' onClick={()=>Router.push("/cart")} />
+                    </Badge>
+                    <span className='fs-20' style={{marginLeft:26, marginRight:18}}>|</span>
+                    <SiFacebook  className='header-icons' style={{color:'#2b67b6'}} />
+                    <SiInstagram className='header-icons' style={{color:'#e425b4'}} />
+                    <FaSquareXTwitter className='header-icons' style={{color:'#grey'}} size={19} />
+                </div>
             </div>
         </div>
+        <div style={{margin:62}}></div>
+        
         {/* <Row className='px-5 pt-1 m-0 white-bg' style={{paddingBottom:5}}>
             <Col md={6}>
                 <div style={{fontSize:11}}>
@@ -147,4 +152,4 @@ const Desktop = ({user}) => {
   )
 }
 
-export default Desktop
+export default React.memo(Desktop)

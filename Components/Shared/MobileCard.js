@@ -13,7 +13,7 @@ const MobileCard = ({tour, height, info, font}) => {
 
   return (
     <div className='hover-shadow' 
-        style={{backgroundColor:'#29717c'}}
+        style={{backgroundColor:'#499b2f'}}
         onClick={()=>router.push(`/product?id=${tour.id}`)}>
         <img src={tour.main_image} className="filter" style={{width:'100%', height:height}} alt='Tour' />
         <div className='p-2'>
@@ -25,12 +25,8 @@ const MobileCard = ({tour, height, info, font}) => {
         }
         {info &&
             <div className=''>
-                <div style={{fontSize:font, fontWeight:300, color:'white'}}>
-                    {info && 
-                        <FaMapMarkerAlt size={15} style={{position:'relative', bottom:2}} />
-                    }
-                    {" "}
-                    {tour.title.slice(0, 18)}...
+                <div style={{fontSize:font, fontWeight:500, color:'white', minHeight:34, lineHeight:1.2}}>
+                    {tour.title}
                 </div>
                 <div className='full-overlay-line'></div>
                 <div style={{width:'90%'}}>

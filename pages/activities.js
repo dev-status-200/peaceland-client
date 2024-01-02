@@ -2,14 +2,14 @@ import React from 'react';
 import Search from '../Components/Layouts/Search';
 import axios from 'axios';
 
-const search = ({destination, city, date, category, tourData}) => {
+const activities = ({destination, city, date, category, tourData}) => {
   return (
     <Search destination={destination} city={city} date={date} category={category} tourData={tourData} />
   )
 }
-export default search
+export default activities
 
-search.getInitialProps = async({query}) => {
+activities.getInitialProps = async({query}) => {
   let destination ='', city ='', date ='', category="";
   destination = query.destination || '';
   city = query.city || '';

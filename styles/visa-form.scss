@@ -1,0 +1,95 @@
+.visa-styles{
+    .main-container {
+        width: 100vw;
+        height: 70vh;
+        background: url('../public/images//visa_bg.jpeg');
+        background-size: cover;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+    .first-box{
+        background-color: rgba(255, 255, 255, 0.633);
+        min-height: 22px;
+        width: 50%;
+        border-radius: 5px;
+        position: relative;
+        top: 32px;
+    }
+    .second-box{
+        background-color: rgba(255, 255, 255, 0.611);
+        min-height: 30px;
+        width: 60%;
+        border-radius: 5px;
+        position: relative;
+        top: 20px;
+    }
+    .visa-box{
+        background-color: rgba(255, 255, 255, 0.959);
+        min-height: 8%;
+        padding: 30px;
+        width: 70%;
+        border-radius: 10px;
+    }
+    .visa-col{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    .visa-col-mid{
+        border-left: 1px solid silver;
+        border-right: 1px solid silver;
+        min-height: 150px;
+    }
+    .input-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    input[type=text] {
+        transition-duration: 300ms;
+        background-color: #499b2f;
+        color: white;
+        border: none;
+        padding: 10px 38px 10px 20px;
+        border-radius: 25px;
+        border: 1px solid #499b2f;
+        outline: none;
+        position: relative;
+        left: 20px;
+    }
+    input[type=text]:focus {
+        transition-duration: 300ms;
+        border: 1px solid rgb(25, 91, 25);
+        padding: 10px 70px 10px 20px;
+        outline: none;
+    }
+    input[type=text]::placeholder {
+        color: rgba(255, 255, 255, 0.764);
+    }
+    .link-icon{
+        color: #499b2f;
+        text-decoration: none;
+    }
+    .visa-btn{
+        font-size: 20px;
+        border: none;
+        width: 42px;
+        height: 42px;
+        position: relative;
+        right: 20px;
+        border-radius: 100%;
+        color: white;
+        background-color: #2170b9;
+    }
+    .visa-btn:hover{
+        transition-duration: 300ms;
+        background-color: #114372;
+    }
+    .email{
+        font-size: 20px;
+    }
+}

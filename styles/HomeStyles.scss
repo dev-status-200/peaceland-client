@@ -137,7 +137,6 @@
 
   .section-bg{
     //TOUR
-    background: url("../public/images/bg-001.png");
     /* Center and scale the image nicely */
     background-repeat: no-repeat;
     background-size: cover;
@@ -152,13 +151,16 @@
   }
 
   .tour-filters{
-    background-color: rgba(44, 170, 73, 0.73);
+    border: 2px solid #499b2f;
+    background-color: #9bde87;
     padding: 15px 30px;
     font-size: 18px;
+    border-radius: 20px;
   }
 
   .tour-fltr-locate{
     background-color: white;
+    border-radius: 20px;
   }
   
 /*========================================================= New Site Css ========================================================= */

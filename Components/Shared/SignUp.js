@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 const SignUp = ({mobile}) => {
   return (
-    <div className='signin-bg '>
+    <div className='signin-bg'>
     <Container className={`${mobile?"text-center":''}`}>
     <Row>
       <Col md={1}></Col>
@@ -20,7 +20,7 @@ const SignUp = ({mobile}) => {
         </Row>
       </Col>
       <Col md={3} className=''>
-        <div className='subscribe-btn' onClick={()=>signIn()}>SUBSCRIBE</div>
+        <div className='subscribe-btn'>SUBSCRIBE</div>
       </Col>
       <Col md={1}></Col>
     </Row>

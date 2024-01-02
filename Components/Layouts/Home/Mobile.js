@@ -7,6 +7,7 @@ import "swiper/css/pagination";
 import "swiper/css/bundle";
 import SignUp from '../../Shared/SignUp';
 import dynamic from 'next/dynamic';
+import Slider from './Slider';
 // const MobileVideo = dynamic(() => import('./MobileVideo'), {
 //   loading: () => <div className='text-center'> <img src='/loader.svg' alt="Loader" /> </div>,
 // })
@@ -20,6 +21,7 @@ const Combos = dynamic(() => import('./Combos'), {
 const Mobile = ({combos, adventures, bestSelling}) => {
   return (
     <>
+    {/* <Slider/> */}
     <div fluid="true">
       {/* <MobileVideo/> */}
       <CircleMobileIcons/>

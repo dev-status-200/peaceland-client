@@ -39,8 +39,8 @@ const Search = ({destination, city, date, category, tourData}) => {
 
   const adjustCategory = (cat) => {
     router.push({
-      pathname: '/search',
-      query: { destination:destination, city:city, category:cat }
+      pathname: '/activities',
+      query: { destination:destination, city:city, category:cat, borderRadius:15 }
     })
   }
 
@@ -62,17 +62,14 @@ return(
       </Col>
       <Col md={3} className="pt-4" style={{paddingRight:10}}>
         <div className='tour-filters mt-1'>
-          <div>
-            <span style={{color:'white'}}><CiLocationOn size={25} style={{position:'relative', bottom:2}} /> Select Location</span>
-          </div>
           <Row className='tour-fltr-locate px-3 py-3 my-2'>
             <Col md={12} className='fs-12 '>
               <div><b>Destination</b></div>
                 <ConfigProvider
-                  theme={{ token:{ colorPrimary: '#147ba1ea', borderRadius:0 } }}>
+                  theme={{ token:{ colorPrimary: '#499b2f', borderRadius:0 } }}>
                   <Select style={{minWidth:"100%"}} value={destination} 
                     options={[{ value: 'uae', label: 'UAE', }]}
-                    onChange={(e)=> router.push({ pathname:'/search', query:{ destination:e, city:city, category:category }})}
+                    onChange={(e)=> router.push({ pathname:'/activities', query:{ destination:e, city:city, category:category }})}
                   />
                 </ConfigProvider>
             </Col>
@@ -80,7 +77,7 @@ return(
               <div><b>City</b></div>
                 <ConfigProvider theme={{ token:{ colorPrimary: '#147ba1ea', borderRadius:0 }}}>
                   <Select  style={{minWidth:"100%"}} value={city} 
-                    onChange={(e)=> router.push({pathname:'/search', query:{destination:destination, city:e, category:category }})}
+                    onChange={(e)=> router.push({pathname:'/activities', query:{destination:destination, city:e, category:category }})}
                     options={[
                       { value: 'Abu Dhabi', label: 'Abu Dhabi'  },
                       { value: 'Dubai City', label: 'Dubai City'}

@@ -16,7 +16,8 @@ import NavLinks from '../../Shared/NavLinks';
 import CircleIcons from '../../Shared/CircleIcons';
 import CircleMobileIcons from "/Components/Shared/CircleMobileIcons"
 import useWindowSize from '/functions/useWindowSize';
-import { IoTrashBinSharp } from "react-icons/io5"
+import { IoTrashBinSharp } from "react-icons/io5";
+import jwtDecode from 'jwt-decode';
 
 const Cart = () => {
 
@@ -41,7 +42,7 @@ const Cart = () => {
     }, [cart]);
     async function getValues(){
         let token = await Cookies.get("token");
-        await token?setUser({...JSON.parse(token), loggedIn:true}):null;
+        await token?setUser({...jwtDecode(token), loggedIn:true}):null;
     }
 
     const getTotalPrice = (val) => {
@@ -125,32 +126,10 @@ const Cart = () => {
   return (
     <>
     <div className='tour-styles' style={{backgroundColor:'white'}} >
-    {
-        size.width>400?
-        <>
-        {/* <div>{process.env.NEXT_PUBLIC_HTML}{"<="}</div> */}
-        <div className='hero pt-4'>
-        <div className='navBar'>
-            <Link className='navLink' href='/'>HOME</Link>
-            <Link className='navLink' href='/search?destination=uae&city=Dubai+City'>DESTINATION</Link>
-            <span className="navLink">
-            <img src={'/images/logo.png'} height={70} style={{paddingLeft:20, paddingRight:5}} alt="Logo"/>
-            </span>
-            <div className='dropdown mx-2'>
-            <span className='navLink dropbtn' onClick={()=>Router.push("/search?destination=uae&city=Dubai+City")}>ACTIVITIES</span>
-            <div className="dropdown-content"><NavLinks/></div>
-            </div>
-            <Link className='navLink' href='/about'>ABOUT US</Link>
-        </div>
-        <div className='mt-2 pt-2'></div>
-        </div>
-        <div style={{backgroundColor:'white', paddingBottom:30}}><CircleIcons/></div>
-        </>:<div style={{backgroundColor:'white', paddingBottom:20}}><CircleMobileIcons/></div>
-    }
     <div className='cart-styles' style={{borderTop:'1px solid silver'}} >
-    <Container className='cart-box' fluid="true">
+    <Container className='cart-box' fluid="true" >
     <Row>
-        <Col md={8} className="pt-4">
+        <Col md={8} className="pt-4 cart-left">
         <Container className='px-5 black-txt'>
             <div className='fs-30 fw-500 black-txt my-2'>Your Cart</div>
             <p className='m-0 p-0'>{cart.length} Item Added</p>
@@ -196,15 +175,10 @@ const Cart = () => {
                     </Col>
                 </Row>
             )})}
-            <hr/>
-            <Row>
-                <Col md={4}>
-                <div className='cart-note'>
-                    <h4>Note:</h4>
-                    <hr className='mt-0 pt-0' />
-                </div>
-                </Col>
-            </Row>
+            <div className='mt-2' style={{color:'grey'}}>
+            Note: After checkout, your ticket will be provided under 24 hours
+            </div>
+            <hr className='mt-1' />
             <div style={{minHeight:90}}>
                 <div className='my-1 mb-5'>
                     <form onSubmit={ApplyPromo} className='mb-5'>
@@ -263,7 +237,7 @@ const Cart = () => {
             </>
             }
             {cart.length==0 && 
-            <div>
+            <div style={{border:'1px solid grey', margin:10}}>
                 <Container className='py-5' data-aos='fade-up'>
                     <Empty /> <h3 className='text-center fw-200 mt-5'>Cart Is Empty!</h3>
                 </Container>

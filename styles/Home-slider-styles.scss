@@ -10,6 +10,19 @@
     font-size: 18px;
     background: #fff;
   }
+
+  .search-bar-bg{
+    background-color: rgba(255, 255, 255, 0.183);
+    border: 1px solid rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+    border-radius: 15px;
+    padding: 40px;
+  }
+
   .desert-safari{
     background:linear-gradient(0deg, rgba(93, 63, 2, 0.5), rgba(132, 87, 10, 0.445)), url("../public/slider/desert-safari.jpg");
     height: 80vh;
@@ -17,12 +30,26 @@
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+  }
+  .aqua{
+    background:linear-gradient(0deg, rgba(2, 58, 93, 0.5), rgba(10, 132, 67, 0.445)), url("../public/slider/aquarium.png");
+    height: 80vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
     flex: 1;
     justify-content: center;
     align-items: center;
   }
 
   .heading {
+    margin-top: 20px;
     color: white;
     cursor: pointer;
     font-size: 2em;

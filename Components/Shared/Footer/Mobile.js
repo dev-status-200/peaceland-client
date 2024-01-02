@@ -25,7 +25,7 @@ const Mobile = () => {
         </Row>
       </div>
       <div style={{}} className='bgBt text-center py-2'>
-        <div className='wh-txt fs-12'>COPYRIGHT 2023 TICKETSVALLEY, ALL RIGHT RESERVED</div>
+        <div className='wh-txt fs-12'>COPYRIGHT 2023 PEACELAND TRAVEL, ALL RIGHT RESERVED</div>
       </div>
     </div>
   )
