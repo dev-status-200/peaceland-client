@@ -132,12 +132,12 @@ const Product = ({id, tourData}) => {
   return (
   <>
   <div className='tour-styles' style={{backgroundColor:'white'}}>
-    <hr className='my-1' />
+    {size.width>500 && <hr className='my-1' />}
     {!book && <Loader/>}
     {book &&
     <div>
       <Container>
-        <Row className="mt-5 pt-2">
+        <Row className={size.width>500?"mt-5":''}>
           <Col md={5} xs={{ order: 2 }} className="pt-2">
             <Details tour={tour} detail={detail} data-aos="fade-right" />
           </Col>
@@ -154,8 +154,8 @@ const Product = ({id, tourData}) => {
               {" "}{tour.destination?.toUpperCase()}, {tour.city}
             </>}
             <Images mainImage={mainImage} setMainImage={setMainImage} tour={tour} detail={detail} data-aos="fade-right" />
-
             {size.width<500 && <>
+            <MoreImages setMainImage={setMainImage} tour={tour} detail={detail} data-aos="fade-right"/>
             <hr/>
             <BookCompTwo />
             </>
@@ -165,7 +165,7 @@ const Product = ({id, tourData}) => {
         <Row>
           <Col md={7}>
             <div className={`images-container ${size.width>500?'px-5 mt-4':''}`}>
-              <MoreImages setMainImage={setMainImage} tour={tour} detail={detail} data-aos="fade-right"/>
+              {size.width>500 &&<MoreImages setMainImage={setMainImage} tour={tour} detail={detail} data-aos="fade-right"/>}
             </div>
           </Col>
           <Col>
