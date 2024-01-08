@@ -3,15 +3,11 @@ import '/styles/globals.css';
 import '/styles/main.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'aos/dist/aos.css';
-
 import Loader from '../Components/Shared/Loader'; 
-
 import Router, { useRouter  } from 'next/router';
-
+import Script from "next/script";
 import ClientLayout from '../Components/Shared/ClientLayout';
-import PortalLayout from '../Components/Shared/PortalLayout';
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { store } from '/redux/store';
 import { Provider } from 'react-redux';
 
@@ -19,14 +15,28 @@ function MyApp({ Component, pageProps:{ session, ...pageProps }, }) {
 
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-
   Router.events.on("routeChangeStart", () => { setLoading(true) });
   Router.events.on("routeChangeComplete", () => { setLoading(false)});
 
   return (
-        // <div className='text-center' style={{marginTop:"25%"}}> Unexpected Server Error Occured </div>
+    // <div className='text-center' style={{marginTop:"25%"}}> Unexpected Server Error Occured </div>
     <> 
-    { (
+      <Script
+        strategy="lazyOnload"
+        src={`https://www.googletagmanager.com/gtag/js?id=G-2D03SMZSES`}
+      />
+
+      <Script strategy="lazyOnload">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-2D03SMZSES', {
+          page_path: window.location.pathname,
+          });
+        `}
+      </Script>
+    {(
         router.pathname =='/'            ||
         router.pathname =='/product'     ||
         router.pathname =='/product/[id]'||
@@ -62,7 +72,7 @@ function MyApp({ Component, pageProps:{ session, ...pageProps }, }) {
       </>
     }
 
-    { (router.pathname =='/login' || router.pathname =='/auth') &&
+    {(router.pathname =='/login' || router.pathname =='/auth') &&
       <GoogleOAuthProvider clientId="1018461770381-hin727pafmfajl3oq0djq27h3rnae221.apps.googleusercontent.com">
         <Component {...pageProps} />
       </GoogleOAuthProvider>

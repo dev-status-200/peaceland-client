@@ -12,7 +12,7 @@ const Images = ({mainImage, setMainImage, tour, detail}) => {
   
   return (
   <>
-    <img className='my-3' src={mainImage} style={{borderRadius:size.width<400?10:8, width:'100%'}} alt="Tour" />
+    <img className='my-3' src={mainImage} style={{borderRadius:size.width<500?10:8, width:'100%'}} alt="Tour" />
   </>
   )
 }

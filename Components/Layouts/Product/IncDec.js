@@ -7,8 +7,8 @@ const IncDec = (props) => {
     <span>{props.type.charAt(0).toUpperCase() + props.type.slice(1)}: </span>
         <span className='text-center'>
         <b style={{
-            paddingLeft:6,
-            paddingRight:5
+            paddingLeft:4,
+            paddingRight:4
         }} className='inc-dec'
             onClick={()=>{
                 let temp = [...props.state.booking];
@@ -21,8 +21,8 @@ const IncDec = (props) => {
         ><span style={{position:'relative', bottom:1}}>+</span></b>
         <div style={{width:30, display:'inline-block'}}>{props.count}</div>
         <b style={{
-            paddingLeft:7,
-            paddingRight:7
+            paddingLeft:5,
+            paddingRight:5
         }} className='inc-dec'
             onClick={()=>{
                 let temp = [...props.state.booking];
@@ -36,7 +36,7 @@ const IncDec = (props) => {
                 :null;
                 props.dispatchReducer({type: 'field', fieldName:'booking', payload: temp});
             }}
-        ><span style={{position:'relative', bottom:1}}>--</span></b>
+        ><span style={{position:'relative', bottom:1}}>-</span></b>
         </span>
     </div>
   )

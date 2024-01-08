@@ -49,32 +49,36 @@ const Desktop = ({user}) => {
   }
 
   return (
+    <>
     <div className='header-styles' style={{backgroundColor:'white'}}>
         <div className='fixed'>
-            <div className='container header-container py-2'>
-                <div style={{width:"20%", textAlign:'left'}} >
-                    <img src='/images/logo.png' height={80} className='cur' onClick={()=>router.push("/")} />
-                </div>
-                <div className='text-center'>
-                    <Link href={"/"} className='nav-link-item'>Home</Link>
-                    <Link href={{pathname:'/search',  query:{destination:"uae", city:"Dubai City", category:'Theme Parks' }}} className='nav-link-item'>Destinations</Link>
-                    <Link href={{pathname:'/activities',  query:{destination:"uae", city:"Dubai City", category:'Theme Parks' }}} className='nav-link-item'>Activities</Link>
-                    <Link href={"/"} className='nav-link-item'>Hotels</Link>
-                    <Link href={"/visa"} className='nav-link-item'>Visa</Link>
-                    <Link href={"/about"} className='nav-link-item'>About</Link>
-                    <Link href={"/contact"} className='nav-link-item'>Contact Us</Link>
-                </div>
-                <div style={{width:"20%", textAlign:'right' }}>
-                    <FaUserCircle className='header-icons' style={{position:'relative', bottom:2}} />
-                    <Badge count={cart.length} showZero color="#faad14" size="small">
-                        <FaCartShopping className='header-icons cur' onClick={()=>Router.push("/cart")} />
-                    </Badge>
-                    <span className='fs-20' style={{marginLeft:26, marginRight:18}}>|</span>
-                    <SiFacebook  className='header-icons' style={{color:'#2b67b6'}} />
-                    <SiInstagram className='header-icons' style={{color:'#e425b4'}} />
-                    <FaSquareXTwitter className='header-icons' style={{color:'#grey'}} size={19} />
-                </div>
+        <div className='top-bar'>
+            Are you a seller? then join our B2B portal by registering at this <a href="https://b2b.peacelandtravel.com/" target='_blank' className='mx-1'> <b>link</b></a>
+        </div>
+        <div className='container header-container py-2'>
+            <div style={{width:"20%", textAlign:'left'}} >
+                <img src='/images/logo.png' height={80} className='cur' onClick={()=>router.push("/")} />
             </div>
+            <div className='text-center'>
+                <Link href={"/"} className='nav-link-item'>Home</Link>
+                <Link href={{pathname:'/search',  query:{destination:"uae", city:"Dubai City", category:'Theme Parks' }}} className='nav-link-item'>Destinations</Link>
+                <Link href={{pathname:'/activities',  query:{destination:"uae", city:"Dubai City", category:'Theme Parks' }}} className='nav-link-item'>Activities</Link>
+                <Link href={"/"} className='nav-link-item'>Hotels</Link>
+                <Link href={"/visa"} className='nav-link-item'>Visa</Link>
+                <Link href={"/about"} className='nav-link-item'>About</Link>
+                <Link href={"/contact"} className='nav-link-item'>Contact Us</Link>
+            </div>
+            <div style={{width:"20%", textAlign:'right' }}>
+                <FaUserCircle className='header-icons' style={{position:'relative', bottom:2}} />
+                <Badge count={cart.length} showZero color="#faad14" size="small">
+                    <FaCartShopping className='header-icons cur' onClick={()=>Router.push("/cart")} />
+                </Badge>
+                <span className='fs-20' style={{marginLeft:26, marginRight:18}}>|</span>
+                <SiFacebook  className='header-icons' style={{color:'#2b67b6'}} />
+                <SiInstagram className='header-icons' style={{color:'#e425b4'}} />
+                <FaSquareXTwitter className='header-icons' style={{color:'#grey'}} size={19} />
+            </div>
+        </div>
         </div>
         <div style={{margin:62}}></div>
         
@@ -149,6 +153,7 @@ const Desktop = ({user}) => {
             </Modal>
         </>}
     </div>
+    </>
   )
 }
 

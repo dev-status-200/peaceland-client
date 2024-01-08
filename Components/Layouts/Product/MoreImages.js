@@ -22,20 +22,20 @@ const Images = ({setMainImage, tour, detail}) => {
   
   return (
     <>
-      {size.width>400 && 
+      {size.width>500 && 
       <Row className="py-3">
         {images.map((x, i)=>{
           return(
-            <Col key={i} md={2} xs={2} onClick={()=>setMainImage(x)} className={`${size.width<400?"p-0 px-1":"p-2"}`}>
+            <Col key={i} md={2} xs={2} onClick={()=>setMainImage(x)} className={`${size.width<500?"p-0 px-1":"p-2"}`}>
               <img src={x} className='img-hover' 
-                style={{width:'100%', borderRadius:size.width<400?10:9, height:size.width<400?50:70}} 
+                style={{width:'100%', borderRadius:size.width<500?10:9, height:size.width<500?50:70}} 
                 alt="Tour"  
               />
             </Col>
           )})}
       </Row>
       }
-      {size.width<400&& 
+      {size.width<500&& 
       <div className="mobile-more-images">
         {images.map((x, i)=>{
           return(

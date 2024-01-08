@@ -12,8 +12,6 @@
   }
 
   .search-bar-bg{
-    background-color: rgba(255, 255, 255, 0.183);
-    border: 1px solid rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,6 +19,55 @@
     align-content: center;
     border-radius: 15px;
     padding: 40px;
+  }
+
+  .search-bar-container{
+    display: flex;
+  }
+
+  .custom-search{
+    border: 1px solid white;
+    height: 50px;
+    width: 600px;
+    padding-left: 20px;
+    transition: ease-in-out, width .20s ease-in-out;
+  }
+  .custom-search:focus{
+    width: 700px;
+    outline: none;
+  }
+
+  .search-btn{
+    // border: none;
+    width: 80px;
+    background-color: #194e9e;
+    color: white;
+    border: 1px solid white;
+  }
+  .search-btn:hover{
+    transition-duration: 300ms;
+    background-color: #0d3064;
+  }
+
+  .tour-list{
+    background-color: white;
+    width: 780px;
+    max-height: 220px;
+    overflow-y: auto;
+    position: absolute;
+    top: 475px;
+    border: 1px solid silver;
+    text-align: left;
+    z-index: 100;
+  }
+
+  .search-item{
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px 20px;
+  }
+  .search-item:hover{
+    background-color: #b8d233;
   }
 
   .desert-safari{
@@ -68,7 +115,7 @@
   }
 
   .heading:hover {
-    transition-duration: 300ms;
+    transition-duration: 200ms;
     background-size: 100% 100%;
     background-position: 0% 100%;
     transition: background-position .5s, background-size .3s ease-in-out;

@@ -64,7 +64,7 @@ const Product = ({id, tourData}) => {
       headers:{ "id": `${id}` }
     }).then((x)=>x.data.result);
     let tempDetail = detailData;
-    await setTour({...tourData, TourOptions:tempDetail?.TourOptions});
+    await setTour({...tourData.result, tour_detail:tempDetail.tour_detail, TourOptions:tempDetail?.TourOptions});
     tempDetail? delete tempDetail.TourOptions:null
     setDetail(tempDetail);
     let transportData = await axios.get(process.env.NEXT_PUBLIC_GET_TRANSPORT).then((x)=>x.data.result);
@@ -101,21 +101,21 @@ const Product = ({id, tourData}) => {
     <>
     {!added &&
     <Row>
-      <Col md={5} className={`${size.width>400?'':'text-center'}`} xs={{order: size.width>400?1:2}}>
-        <div className={`book-btn ${size.width>400?'mt-4':'mt-0'}`} onClick={()=>setOpen(true)}>
-          <span>BOOK NOW</span>
-        </div>
-      </Col>
-      <Col md={6} xs={{order:size.width>400?2:1}} style={{borderLeft:size.width>400?'2px solid grey':'none'}}>
+      <Col md={12}>
         <span className='fw-400 fs-18 grey-txt'>Starting From:</span>
         {tour.prevPrice &&
-          <s className={`fw-400 mx-2 ${size.width>400?"fs-22":"fs-20"}`} style={{color:"#af302c"}}>
+          <s className={`fw-400 mx-2 ${size.width>500?"fs-22":"fs-20"}`} style={{color:"#af302c"}}>
             {" "}{(tour.prevPrice*conversion.rate).toFixed(2)} {conversion.currency}{" "}
           </s>
         }
-        <p className={`fw-600 ${size.width>400?"fs-30":"fs-35"}`}><AiFillTags/>
+        <div className={`fw-600 ${size.width>500?"fs-30":"fs-35"}`}><AiFillTags/>
           {(tour?.TourOptions[0]?.adult_price*conversion.rate).toFixed(2)} {conversion.currency}
-        </p>
+        </div>
+      </Col>
+      <Col md={12} className={`${size.width>500?'mt-1':'text-center'}`}>
+        <div className={`book-btn ${size.width>500?'':'mt-0'}`} onClick={()=>setOpen(true)}>
+          <span>BOOK NOW</span>
+        </div>
       </Col>
     </Row>
     }
@@ -137,13 +137,12 @@ const Product = ({id, tourData}) => {
     {book &&
     <div>
       <Container>
-        <Row className="mt-4">
-          <Col md={5} xs={{ order: 2 }} className="pt-4">
+        <Row className="mt-5 pt-2">
+          <Col md={5} xs={{ order: 2 }} className="pt-2">
             <Details tour={tour} detail={detail} data-aos="fade-right" />
-            {size.width>400 &&<BookCompTwo />}
           </Col>
           <Col md={7} xs={{ order: 1 }} className='pt-4'>
-            {size.width<400 && <>
+            {size.width<500 && <>
               <div className={`fs-30 fw-700 blue-txt`}>{tour.title}</div>
               <span>
                 <Rate disabled defaultValue={5} style={{fontSize:12, color:'orange'}} />
@@ -155,14 +154,22 @@ const Product = ({id, tourData}) => {
               {" "}{tour.destination?.toUpperCase()}, {tour.city}
             </>}
             <Images mainImage={mainImage} setMainImage={setMainImage} tour={tour} detail={detail} data-aos="fade-right" />
-            <div className={`images-container ${size.width>400?'px-5':''}`}>
-              <MoreImages setMainImage={setMainImage} tour={tour} detail={detail} data-aos="fade-right"/>
-            </div>
-            {size.width<400 && <>
+
+            {size.width<500 && <>
             <hr/>
             <BookCompTwo />
             </>
             }
+          </Col>
+        </Row>
+        <Row>
+          <Col md={7}>
+            <div className={`images-container ${size.width>500?'px-5 mt-4':''}`}>
+              <MoreImages setMainImage={setMainImage} tour={tour} detail={detail} data-aos="fade-right"/>
+            </div>
+          </Col>
+          <Col>
+          {size.width>500 &&<BookCompTwo />}
           </Col>
         </Row>
         <hr/>
@@ -224,7 +231,7 @@ const Product = ({id, tourData}) => {
         }
       </Container> */}
       {(scrollPosition>650 && !added ) &&
-      <div className='fixed-book' style={size.width<400?{right:"70%"}:{}} data-aos="slide-up">
+      <div className='fixed-book' style={size.width<500?{right:"70%"}:{}} data-aos="slide-up">
         <button type='button'  onClick={()=>setOpen(true)} className='otherBook-btn'>
           <b>            
             <div className='my-0 py-0'>BOOK</div>
@@ -238,15 +245,15 @@ const Product = ({id, tourData}) => {
     {Object.keys(tour).length==0 && <div>Please wait...</div>}
   </div>
   <Drawer 
-    style={size.width>400?{padding:'', margin:0, width:550, position:'relative', right:70}:{}}
+    style={size.width>500?{padding:'', margin:0, width:550, position:'relative', right:70}:{}}
     title={`${tour.title} Options`}
     placement={"right"}
     onClose={()=>setOpen(false)}
     open={open}
-    width={size.width<400?"100%":470}
+    width={size.width<500?"100%":470}
   >
     {
-      size.width<400?
+      size.width<500?
       <MobileBook tour={tour} transport={transport} category={detail?.advCategory} setOpen={setOpen} />
       :
       <Book tour={tour} transport={transport} category={detail?.advCategory} setOpen={setOpen} />

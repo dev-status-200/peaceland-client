@@ -7,7 +7,6 @@ product.getInitialProps = async({query}) => {
       'id':`${query.id}`
     }
   }).then((x)=>x.data)
-
   return{
     id:query.id,
     tourData

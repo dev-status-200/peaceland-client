@@ -139,17 +139,17 @@ const Cart = () => {
             return(
                 <Row key={i} className="cart-item mx-0">
                     <Col md={3} xs={12} className="py-3" >
-                        <img src={x.image} height={100} width={size.width>400? 150:"100%"} style={{borderRadius:5}} alt="Tour"/>
+                        <img src={x.image} height={100} width={size.width>500? 150:"100%"} style={{borderRadius:5}} alt="Tour"/>
                     </Col>
-                    <Col className={`${size.width>400?"px-4 my-3":"mb-2"}`} md={9} >
-                    {size.width>400 &&<div style={{float:'right'}}>
+                    <Col className={`${size.width>500?"px-4 my-3":"mb-2"}`} md={9} >
+                    {size.width>500 &&<div style={{float:'right'}}>
                         <span className='fs-18 fw-500 grey-txt'>{conversion.currency} {showIndivPrice(x.options)}</span>
                         <CloseCircleOutlined className='close-cart-btn' 
                           onClick={()=>showConfirm(x)}
                         />
                         <br/>
                     </div>}
-                    <div className='fw-500 cart-item-name' style={size.width<400?{fontSize:"15px"}:{fontSize:"25px"}}>{x.name}</div>
+                    <div className='fw-500 cart-item-name' style={size.width<500?{fontSize:"15px"}:{fontSize:"25px"}}>{x.name}</div>
                     {x.options.map((y, j)=>{
                     return(
                         <div key={j+i} className='fs-13 silver-2-txt'>
@@ -161,7 +161,7 @@ const Cart = () => {
                             <div>{y.transfer!="No"?`Pickup Location: ${y.address} `:""}</div>
                         </div>
                     )})}
-                    {size.width<400 &&
+                    {size.width<500 &&
                     <>
                     <hr/>
                     <span className='fs-18 fw-500 grey-txt px-1'>
@@ -184,14 +184,14 @@ const Cart = () => {
                     <form onSubmit={ApplyPromo} className='mb-5'>
                     <Row>
                         <Col md={4} xs={12} className='' >
-                        <ConfigProvider theme={{ token: { colorPrimary:'#147ba1ea', borderRadius:3}}}>
+                        <ConfigProvider theme={{ token: { colorPrimary:'#ebf13c', borderRadius:3}}}>
                             <Input className='' placeholder="Enter Promo" required 
                                 value={promo} onChange={(e)=>setPromo(e.target.value)} 
                             />
                           </ConfigProvider>
                         </Col>
                         <Col md={2} xs={12}>
-                            <button className={`btn-custom-2 ${size.width>400?"mx-1":"mt-3"}`} 
+                            <button className={`btn-custom-2 ${size.width>500?"mx-1":"mt-3"}`} 
                                 style={{width:"100%"}}
                                 type="submit" disabled={load?true:false}
                             >{load?<Spinner size='sm' className='mx-3' />:"Apply"}
@@ -245,12 +245,12 @@ const Cart = () => {
             }
         </Container>
         </Col>
-        <Col md={4} className={`pay-screen ${size.width<400?"p-3":"p-5"}`} style={size.width<400?{borderLeftColor:"white"}:{}}> 
+        <Col md={4} className={`pay-screen ${size.width<500?"p-3":"p-5"}`} style={size.width<500?{borderLeftColor:"white"}:{}}> 
         {cart.length>0 && <>  
             {user.email &&<>{price>0 &&<PayComp price={price} email={user.email} name={user.name} image={user.picture}/>}</>}
             {!user.email &&
             <div className='text-center'>
-                <div className={`${size.width>400?"cart-logged-in-warning":"fs-18"}`}>Sign-in is required to continue Checkout!</div>
+                <div className={`${size.width>500?"cart-logged-in-warning":"fs-18"}`}>Sign-in is required to continue Checkout!</div>
                 <Row className='mt-4'>
                     <Col></Col>
                     <Col xs={6}><div className='btn-custom-2' 

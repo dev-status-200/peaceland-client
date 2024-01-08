@@ -16,7 +16,7 @@ const Visa = () => {
         setOpen(false);
     };
     const handleCancel = () => {
-        console.log('Clicked cancel button');
+        // console.log('Clicked cancel button');
         setOpen(false);
     };
 
@@ -29,22 +29,22 @@ const Visa = () => {
         <div className='second-box'></div>
         <div className='visa-box'>
           <Row>
-            <Col md={4} className='visa-col green-txt'>
+            <Col md={4} className='visa-col '>
                 <Link className='text-center cur link-icon' 
                     href="/visaForm/visa_form.pdf"
                     target="_blank" download
                 >
-                    <GrDownload size={70} />
-                    <p className='mt-3 fw-700 fs-18'>DOWNLOAD VISA FORM</p>
+                    <GrDownload size={70} className='blue-txt' />
+                    <p className='mt-3 fw-700 fs-18 blue-txt'>DOWNLOAD VISA FORM</p>
                 </Link>  
             </Col>
-            <Col md={4} className='visa-col-mid green-txt'>
+            <Col md={4} className='visa-col-mid blue-txt'>
                 <div className='text-center cur' style={{marginTop:7}} onClick={showModal}>
                 <GrDocumentUpdate size={70} />
                 <p className='mt-3 fw-700 fs-18'>SUBMIT FORM</p>
                 </div>  
             </Col>
-            <Col md={4} className='visa-col green-txt'>
+            <Col md={4} className='visa-col blue-txt'>
                 <p className='mt-3 fw-700 fs-18'>TRACK MY VISA PROGRESS</p>
                 <div className='input-container'>
                     <input placeholder='Enter Visa Form No.' className='visa-input' type='text' />

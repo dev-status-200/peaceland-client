@@ -69,7 +69,7 @@ const MoreInfo = ({state, dispatchReducer, addToCart}) => {
                     <GooglePlacesAutocomplete
                         apiKey="AIzaSyDNlNHouprfGHm_3mmfLutARQbIwuNamJk"
                         selectProps={{
-                            onChange: (res)=> {console.log(res.label); dispatchReducer({ type: 'field', fieldName: 'address', payload: res.label })},
+                            onChange: (res)=> { dispatchReducer({ type: 'field', fieldName: 'address', payload: res.label })},
                             placeholder: 'Enter Address',
                             components : {
                                 IndicatorSeparator: () => null,

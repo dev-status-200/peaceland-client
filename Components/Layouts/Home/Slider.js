@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
-import Router from 'next/router';
 import { Autoplay, Navigation, Pagination } from "swiper";
-import { Select } from 'antd';
 
 const Slider = () => {
-
+    const item = useRef(null)
     const options = [
         {
             value: '1', label: 'Desert Safari',
@@ -26,27 +24,49 @@ const Slider = () => {
             value: '6', label: 'Burj Khalifa Inside',
         },
     ]
+    const [show, setShow] = useState(false)
+    const [search, setSearch] = useState('');
+    useEffect(() => {
+      if(search.length>2 && show==false){
+        setShow(true);
+      }else if(search.length<=2 && show==true) {
+        setShow(false);
+      }
+    }, [search]);
 
   return (
     <div className='home-slider-styles'>
         <Swiper navigation={true} pagination={true} modules={[Autoplay, Navigation, Pagination]} className="mySwiper">
             <SwiperSlide>
                 <div className='desert-safari'>
-                    <h1 className='heading-main'>DESERT<span className='mx-3'></span>SAFARI</h1>
-                    <div className='search-bar-bg mt-3'>
-                        <h3 className='wh-txt mb-3'>
-                            <b>SEARCH TOURS</b>
-                        </h3>
-                        <Select showSearch style={{ width: 800 }} options={options} size='large' 
+                    <h1 className='heading-main mt-5'>DESERT<span className='mx-3'></span>SAFARI</h1>
+                    <div className='search-bar-bg'>
+                        <div className='search-bar-container'>
+                        <input className='custom-search' onBlur={()=>setShow(false)} placeholder='Search Tours' value={search} onChange={(e)=>setSearch(e.target.value)} />
+                        <button className='search-btn'>Go</button>
+                        </div>
+                        {show && <div className='tour-list'>
+                            {
+                                options.map((x, i)=>{
+                                    return(
+                                        <div key={i} className='search-item'>
+                                            {x.label}
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                        }
+                        {/* <Select showSearch style={{ width: 800 }} options={options} 
                             placeholder="Type to Search"
                             optionFilterProp="children"
                             filterOption={(input, option) => (option?.label.toLowerCase() ?? '').includes(input.toLowerCase())}
                             filterSort={(optionA, optionB) => (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())}
-                        />
+                        /> */}
                     </div>
                 </div>
             </SwiperSlide>
-            <SwiperSlide>
+            {/* <SwiperSlide>
                 <div className='aqua'>
                     <h1 className='heading-main'>AQUARIUM<span className='mx-3'></span>MALL</h1>
                     <div className='search-bar-bg mt-3'>
@@ -61,7 +81,7 @@ const Slider = () => {
                         />
                     </div>
                 </div>
-            </SwiperSlide>
+            </SwiperSlide> */}
         </Swiper>
     </div>
   )

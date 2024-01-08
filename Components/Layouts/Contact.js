@@ -11,10 +11,10 @@ const Contact = () => {
   <div className='contact-styles bg-white'>
     <Container>
     <Row className=''>
-      <Col md={7} className={`${size.width>400?'pt-5 mt-5':''}`}>
-        {size.width>400 &&<div className='my-5'></div>}
-        <div className={`mb-2 fw-700 fs-${size.width>400?"45":"30"} black-txt`} style={{lineHeight:1}}>HAVE ANY <span className='blue-txt'>QUESTIONS?</span></div>
-        <div className={`mb-5 fw-500 fs-${size.width>400?"35":"25"} black-txt`} style={{lineHeight:1}}>FEEL FREE TO REACH OUT</div>
+      <Col md={7} className={`${size.width>500?'pt-5 mt-5':''}`}>
+        {size.width>500 &&<div className='my-5'></div>}
+        <div className={`mb-2 fw-700 fs-${size.width>500?"45":"30"} black-txt`} style={{lineHeight:1}}>HAVE ANY <span className='blue-txt'>QUESTIONS?</span></div>
+        <div className={`mb-5 fw-500 fs-${size.width>500?"35":"25"} black-txt`} style={{lineHeight:1}}>FEEL FREE TO REACH OUT</div>
         <p className='grey-txt' style={{maxWidth:'75%'}}>
           Lorem Ipsum is simply dummy text of the printing and typesetting industry.
           Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
@@ -24,7 +24,7 @@ const Contact = () => {
         </p>
 
         <p className='grey-txt'>Our Contact Form is Below</p>
-        {size.width>400 && <div className='py-5'></div>}
+        {size.width>500 && <div className='py-5'></div>}
       </Col>
       <Col md={5} className='p-5 text-center'>
         <img src='images/contact.png' className='mt-4' height={450} />
@@ -33,9 +33,9 @@ const Contact = () => {
       
     </Row>
     <Row className='contact-bg'>
-    {size.width>400 &&<Col md={3}></Col>}
+    {size.width>500 &&<Col md={3}></Col>}
     <Col md={6} className='text-center contact-box'>
-        <ConfigProvider theme={{token:{ colorPrimary:'rgba(44, 170, 73, 0.73)', borderRadius:0 }}}>
+        <ConfigProvider theme={{token:{ colorPrimary:'#ebf13c', borderRadius:0 }}}>
         <form>
           <div className='text-start'>Name</div>
           <Input placeholder="Name" required className='' />

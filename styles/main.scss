@@ -15,11 +15,11 @@
 @import 'visa-form.scss';
 
 *{
-  font-family: 'Jost', sans-serif;
+  // font-family: 'Jost', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 h1, h2, h3, h4, h5, h6{
-  font-family: 'Days One', sans-serif;
-  font-family: 'Reem Kufi', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 html,
 body {
@@ -37,7 +37,7 @@ body {
 .custom-btn{
     transition-duration: 300ms;
     border: none;
-    background-color: rgb(24, 143, 187);
+    background-color: #194e9e;
     color: white;
     font-weight: 700;
     padding: 10px 30px 10px 30px;
@@ -71,11 +71,11 @@ body {
 .silver-txt{ color: silver!important; }
 .wh-txt{ color: white!important; }
 
-.green-txt{ color: #499b2f!important; }
-.blue-txt{ color: #2170b9!important; }
+.green-txt{ color: #b8d233!important; }
+.blue-txt{ color: #194e9e!important; }
 
-.blue-txt-2{ color: #b8d233!important; }
-.lt-blue-txt{ color: #2281c3!important; }
+.blue-txt-2{ color: #194e9e!important; }
+.lt-blue-txt{ color: #194e9e!important; }
 .yellow-txt{ color: #ebf13c!important; }
 
 .fs-10 { font-size: 10px!important; }
@@ -238,7 +238,7 @@ body {
 .green-btn{
   border: none;
   cursor: pointer;
-  background-color: #57dc5f;
+  background-color: #b8d233;
   width: 30%;
   height: 40px;
   font-weight: 700;
@@ -248,7 +248,7 @@ body {
 }
 .green-btn:hover{
   transition-duration: 200ms;
-  background-color: #1c7723;
+  background-color: #637312;
 }
 
 .card-cntnt{
@@ -821,7 +821,7 @@ div.react-datepicker-wrapper > div > input{
 .stock-number{
   background-color: rgb(95, 212, 95);
   color: white;
-  border: 5px solid green;
+  border: 5px solid #b8d233;
   border-radius: 200px;
   text-align: center;
   height: 33px;
@@ -895,27 +895,30 @@ div.react-datepicker-wrapper > div > input{
   transition-duration: 300ms;
   background-color: #094c64ea;
 }
+
 .search-box-btn{
-  background-color: #499b2f;
+  transition-duration: 300ms;
+  background-color: #194e9e;
   color: white;
   border-radius: 5px;
   font-size: 12px;
 }
 .search-box-btn:hover{
-  transition-duration: 100ms;
-  background-color: #2170b9;
+  transition-duration: 300ms;
+  background-color: #ebf13c;
+  color: black!important;
 }
 
 .signin-bg{
   padding-top: 60px;
   padding-bottom: 60px;
-  background-color: #499b2f;
+  background-color: #194e9e;
   //text-align: center;
   color: white;
 }
 .subscribe-btn{
   color: white;
-  background-color: rgb(17, 104, 12);
+  background-color: #b8d233;
   padding: 20px;
   font-size: 25px;
   font-weight: bolder;
@@ -993,7 +996,7 @@ div.react-datepicker-wrapper > div > input{
 }
 
 .bg-green{
-  background-color: rgba(173, 238, 173, 0.763);
+  background-color: #b8d233;
 }
 
 .row-hov:hover{

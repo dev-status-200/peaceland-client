@@ -38,9 +38,9 @@ const CustomerLogin = () => {
   <div className='bg-login'>
     {!load &&
     <div className='customer-login text-center'>
-    <div className={`${size.width>400?"cont":"pb-5 mb-5"}`}>
-      <img src={'/images/logo.png'} className={`${size.width>400?"mb-5":"my-5"}`} width={200} height={85} alt="Image" />
-      <div className={`container-custom ${size.width>400?"":"px-3"}`}>
+    <div className={`${size.width>500?"cont":"pb-5 mb-5"}`}>
+      <img src={'/images/logo.png'} className={`${size.width>500?"mb-5":"my-5"}`} width={200} height={85} alt="Image" />
+      <div className={`container-custom ${size.width>500?"":"px-3"}`}>
       <div className='login-box'>
       <h3 className='text-center mt-5 signup'>Sign-in</h3>
       <div className='mb-4 py-2'></div>

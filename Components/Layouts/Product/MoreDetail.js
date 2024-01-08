@@ -50,7 +50,7 @@ const MoreDetail = ({detail}) => {
         )})}
     </div>
     </Col>
-    <Col className={`${size.width>400?'':'mt-4'}`}>
+    <Col className={`${size.width>500?'':'mt-4'}`}>
     <div className='policy-bar px-4'>
     <h3 className='my-3 wh-txt text-center'><b>Booking Policies</b></h3>
       {detail.policies.split("//").map((x, i)=>{

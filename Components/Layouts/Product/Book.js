@@ -105,7 +105,7 @@ const Book = ({tour, transport, category, setOpen}) => {
                 >
                     <Checkbox className='' disabled={category=="Combo Tours"?true:false} checked={x.check}/>
                 </Col>
-                <Col md={7} className='cur' onClick={()=>{
+                <Col md={8} className='cur' onClick={()=>{
                     if(category!="Combo Tours"){
                         let temp = [...state.booking];
                         temp[i].check = !temp[i].check
@@ -114,7 +114,7 @@ const Book = ({tour, transport, category, setOpen}) => {
                 }}>
                     <h6>{'#'+(i+1)+' '+x.name}</h6>
                 </Col>
-                <Col md={4} className='cur'
+                <Col md={3} className='cur'
                     onClick={()=>{
                         if(category!="Combo Tours"){
                             let temp = [...state.booking];
@@ -122,7 +122,7 @@ const Book = ({tour, transport, category, setOpen}) => {
                             dispatchReducer({type: 'field', fieldName:'booking', payload: temp});
                         }
                     }}>
-                        <h6 className='text-end' style={{color:x.check?"#075ca2":"silver"}}>{x.price.toFixed(2)} AED</h6>
+                        <h6 className='text-end' style={{color:x.check?"#075ca2":"silver"}}>{x.price.toFixed(2)}<span style={{marginLeft:3}}>AED</span></h6>
                 </Col>
                 {x.check &&
                 <>
@@ -137,21 +137,11 @@ const Book = ({tour, transport, category, setOpen}) => {
                     <IncDec type={"infant"} count={x.infant} index={i} state={state} dispatchReducer={dispatchReducer} />
                 </Col>
                 <Col className='mt-3' style={{ maxWidth:230, marginLeft:4}}>
-                <span style={{marginRight:10}}>Transfer: </span>
+                <span style={{marginRight:7}}>Transfer: </span>
                 <Select defaultValue="Yes" value={x.transfer} style={{width:140}}
                     onChange={(e)=>{
                         let temp = [...state.booking];
                         temp[i].transfer = e;
-                         // <- iF e==1? means no transfer option selected
-                        // let temp = [...state.booking];
-                        // temp[i].transfer = e;
-                        // if(e=="Shared"){
-                        //     temp[i].transportPrice = x.transport?0.00:parseFloat(transport[0].price)
-                        // } else if(e=="Private"){ 
-                        //     temp[i].transportPrice = parseFloat(transport[1].price);
-                        // } else if(e=="No"){ 
-                        //     temp[i].transportPrice = 0.00; 
-                        // }
                         let tempAddress = "";
                         if(e!="1"){
                             transport.forEach((y)=>{
@@ -176,8 +166,9 @@ const Book = ({tour, transport, category, setOpen}) => {
                 </Col>
                 <Col className='text-center mt-3' >
                     <Row>
-                        <Col md={1} className='pt-1'><span>Date: </span> </Col>
+                        {/* <Col md={1} className='pt-1'><span>Date: </span> </Col> */}
                         <Col>
+                        <span style={{marginRight:7}}>Date: </span>
                         <DatePicker
                             selected={x.date}
                             onChange={(date) => {
