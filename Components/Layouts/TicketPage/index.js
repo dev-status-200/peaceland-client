@@ -5,12 +5,10 @@ import { Input, Rate } from 'antd';
 import Ticket from './Ticket';
 import moment from 'moment';
 import Link from 'next/link';
-import CircleIcons from '../../Shared/CircleIcons';
 import ReactToPrint from 'react-to-print';
 import axios from 'axios';
 import Router from 'next/router';
 import { delay } from '../../../functions/delay';
-import CircleMobileIcons from '/Components/Shared/CircleMobileIcons';
 import useWindowSize from '/functions/useWindowSize';
 const { TextArea } = Input;
 
@@ -90,11 +88,9 @@ const TicketPage = ({ticketData, bookingNo}) => {
             </div>
         </div>
         </div>
-        <CircleIcons/>
         <hr className='mb-0 mt-5' />
         </>:
         <>
-        <CircleMobileIcons/>
         <hr className='mb-0 mb-0' />
         </>
         }

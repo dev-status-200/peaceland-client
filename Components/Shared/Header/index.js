@@ -19,7 +19,9 @@ const Header = () => {
 
   async function getValues(){
     let token = await Cookies.get("token");
-    token?setUser({...jwtDecode(token), loggedIn:true}):null;
+    if(token){
+      setUser({...JSON.parse(token), loggedIn:true});
+    }
   }
 
   return (

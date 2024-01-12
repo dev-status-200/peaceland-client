@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useReducer } from 'react'
-import { Select, Checkbox, Input, message } from 'antd';
+import { Select, Checkbox, Input, message, notification } from 'antd';
 import { Row, Col, Spinner } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { addProduct } from '../../../redux/cart/cartSlice';
@@ -16,7 +16,12 @@ import { initialState, reducerFunctions, setTour, validateName, validateDate, Va
 const Book = ({tour, transport, category, setOpen}) => {
 
     const dispatch = useDispatch();
+    const [api, contextNotifyHolder] = notification.useNotification();
     const [messageApi, contextHolder] = message.useMessage();
+    const Context = React.createContext({
+        name: 'Default',
+    });
+
     const cart = useSelector((state) => state.cart.value);
     const conversion = useSelector((state) => state.currency.conversion);
     const [state, dispatchReducer] = useReducer(reducerFunctions, initialState);
@@ -27,6 +32,7 @@ const Book = ({tour, transport, category, setOpen}) => {
     useEffect(() => {
         aos.init({duration:300})
         setTour(tour, dispatchReducer, category);
+        openNotification('top')
     }, [])
 
     const showMessage = (msg) => messageApi.warning(<span style={{position:'relative', top:2}}>{msg}</span>);
@@ -84,15 +90,27 @@ const Book = ({tour, transport, category, setOpen}) => {
         })
         return result
     }
+
+    const openNotification = (placement) => {
+        api.info({
+          message: `Booking Method`,
+          description: <Context.Consumer>{({ name }) => (
+            <p className='fs-15'>Select options in the right panel to book your ticket!</p>
+          )}</Context.Consumer>,
+          placement,
+          duration:12
+        });
+    };
     
   return (
     <>
     {contextHolder}
+    {contextNotifyHolder}
     <div>
         {!load && <>
         {state.booking.map((x, i)=>{
             return(
-            <div className='tour-opt mb-2 prevent-select' key={i}>
+            <div className={`${x.check?'tour-opt-selected':'tour-opt pb-2'} mb-2 prevent-select`}>
             <Row style={{color:x.check?"black":"silver"}}>
                 <Col style={{maxWidth:30}} 
                     onClick={()=>{
@@ -112,7 +130,7 @@ const Book = ({tour, transport, category, setOpen}) => {
                         dispatchReducer({type: 'field', fieldName:'booking', payload: temp});
                     }
                 }}>
-                    <h6>{'#'+(i+1)+' '+x.name}</h6>
+                    <h6 className=''>{x.name}</h6>
                 </Col>
                 <Col md={3} className='cur'
                     onClick={()=>{
@@ -122,7 +140,15 @@ const Book = ({tour, transport, category, setOpen}) => {
                             dispatchReducer({type: 'field', fieldName:'booking', payload: temp});
                         }
                     }}>
-                        <h6 className='text-end' style={{color:x.check?"#075ca2":"silver"}}>{x.price.toFixed(2)}<span style={{marginLeft:3}}>AED</span></h6>
+                    <div className='text-end fs-16'> 
+                        <span style={{color:x.check?"#075ca2":"grey"}}>
+                            {x.price.toFixed(2)} AED
+                        </span>
+                        {(x.oldPrice && parseFloat(x.oldPrice)>0) && <>
+                            <br/>
+                            <span className='red-txt'><s> {" "}{parseFloat(x.oldPrice).toFixed(2)} AED{" "}</s></span>
+                        </>}
+                    </div>
                 </Col>
                 {x.check &&
                 <>
@@ -230,7 +256,20 @@ const Book = ({tour, transport, category, setOpen}) => {
                 }
                 </>
                 }
+                <Col md={11} className='mt-3 px-3'>
+                    <span className='show-opt-detail' onClick={()=>{
+                        let temp = [...state.booking];
+                        temp[i].show = !temp[i].show
+                        dispatchReducer({type: 'field', fieldName:'booking', payload: temp});
+                    }}>Show Package Details</span>
+                    {x.show && <div>
+                    <hr className='mb-2 mt-0' />
+                    {(x.detail!=null && x.detail.length>10) && <div style={{ whiteSpace:'pre-wrap'}}>{x.detail}</div>}
+                    {(x.detail==null || x.detail.length<10) && <div>No Detail Added</div>}
+                    </div>}
+                </Col>
             </Row>
+            
             </div>
             )
         })}

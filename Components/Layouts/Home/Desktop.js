@@ -3,9 +3,13 @@ import Aos from 'aos';
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/bundle";
-import SignUp from '../../Shared/SignUp';
 import dynamic from 'next/dynamic';
 import Slider from './Slider';
+import { Container } from 'react-bootstrap';
+
+const SignUp = dynamic(() => import('../../Shared/SignUp'), {
+  ssr:false,
+})
 
 const Adventures = dynamic(() => import('./AdventureTours'), {
   loading: () => <div className='text-center'> <img src='/loader.svg'  alt="About Us" /> </div>,
@@ -43,7 +47,9 @@ const Desktop = () => {
             <h3>Peaceland's Most</h3>
             <h1 className='text-center blue-txt' ><b className='fw-900'>Recommended Tours</b></h1>
           </div>
-          <Adventures/>
+          <div className='px-5 mx-4'>
+            <Adventures/>
+          </div>
           <div className='my-5'></div>
         </div>
       </section>
@@ -58,7 +64,9 @@ const Desktop = () => {
             <h3>Peaceland's</h3>
             <h1 className='text-center blue-txt'><b className='fw-900'>Combo Packages  </b></h1>
           </div>
-          <Combos/>
+          <div className='px-5 mx-4'>
+            <Combos/>
+          </div>
           <div className='my-5'></div>
         </div>
       </section>

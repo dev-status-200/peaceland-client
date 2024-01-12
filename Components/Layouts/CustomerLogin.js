@@ -30,7 +30,7 @@ const CustomerLogin = () => {
       }
       await Cookies.set("token", JSON.stringify(user));
       let url = await Cookies.get("redirect");
-      Router.push(url);
+      Router.push(url?url:'/')
     }
   }
   

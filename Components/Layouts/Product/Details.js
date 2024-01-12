@@ -6,7 +6,7 @@ import { Rate } from 'antd';
 
 import useWindowSize from '/functions/useWindowSize';
 
-const Details = ({tour, detail}) => {
+const Details = ({tour, detail, BookCompTwo}) => {
   
   const size = useWindowSize();
   
@@ -28,9 +28,15 @@ const Details = ({tour, detail}) => {
       {" "}{tour.destination?.toUpperCase()}, {tour.city}
     </>
     }
+    {size.width>600 && <>
+    <div className='mt-4 pr-5' >
+      {BookCompTwo}
+    </div>
+    <hr/>
+    </>}
     <h6 className='blue-txt mt-4'>Description</h6>
     <p className='fs-16 grey-txt'>
-      {tour?.tour_detail?.slice(0,900)}...
+      {tour?.tour_detail}
     </p>
     </div>
     </>

@@ -8,8 +8,6 @@ import moment from 'moment';
 import Router from 'next/router';
 import { Empty } from 'antd';
 import Aos from 'aos';
-import CircleIcons from '../Shared/CircleIcons';
-import CircleMobileIcons from '../Shared/CircleMobileIcons';
 import useWindowSize from '/functions/useWindowSize';
 
 const MyBookings = () => {
@@ -77,7 +75,6 @@ const MyBookings = () => {
         <hr className='mb-0 mt-5' />
         </>:
         <>
-        <CircleMobileIcons className="" />
         <hr className='pb-0 mb-0' />
         </>
         }

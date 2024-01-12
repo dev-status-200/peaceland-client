@@ -1,9 +1,9 @@
-.visa-styles {
+.hotel-styles{
     .main-container {
         width: 100vw;
-        height: 70vh;
-        background: url('../public/images//visa_bg.jpeg');
-        background-size: cover;
+        height: 90vh;
+        background:url("../public/images/hotel-bg.webp");
+        background-size:cover;
         justify-content: center;
         align-items: center;
         display: flex;
@@ -25,28 +25,14 @@
         position: relative;
         top: 20px;
     }
-    .visa-box{
+    .hotel-box{
         background-color: rgba(255, 255, 255, 0.959);
         min-height: 8%;
         padding: 30px;
         width: 70%;
         border-radius: 10px;
     }
-    .visa-col{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        
-    }
-    .visa-col-mid-borders{
-        border-left: 1px solid silver;
-        border-right: 1px solid silver;
-        min-height: 150px;
-    }
-    .visa-col-mid{
-        min-height: 150px;
-    }
+   
     .input-container{
         display: flex;
         justify-content: center;
@@ -54,12 +40,12 @@
     }
     input[type=text] {
         transition-duration: 300ms;
-        background-color: #b8d233;
-        color: rgb(1, 1, 1);
+        background-color: #499b2f;
+        color: white;
         border: none;
         padding: 10px 38px 10px 20px;
         border-radius: 25px;
-        border: 1px solid #b8d233;
+        border: 1px solid #499b2f;
         outline: none;
         position: relative;
         left: 20px;
@@ -71,7 +57,7 @@
         outline: none;
     }
     input[type=text]::placeholder {
-        color: rgba(61, 61, 61, 0.764);
+        color: rgba(255, 255, 255, 0.764);
     }
     .link-icon{
         color: #499b2f;

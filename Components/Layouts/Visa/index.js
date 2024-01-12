@@ -4,11 +4,12 @@ import { Row, Col } from "react-bootstrap";
 import { GrDownload, GrDocumentUpdate } from "react-icons/gr";
 import { RightOutlined } from '@ant-design/icons';
 import Link from 'next/link';
+import useWindowSize from '/functions/useWindowSize';
 
 const Visa = () => {
 
     const [open, setOpen] = useState(false);
-
+    const size = useWindowSize();
     const showModal = () => {
         setOpen(true);
     };
@@ -34,20 +35,20 @@ const Visa = () => {
                     href="/visaForm/visa_form.pdf"
                     target="_blank" download
                 >
-                    <GrDownload size={70} className='blue-txt' />
+                    <GrDownload size={size.width<600?50:70} className='blue-txt' />
                     <p className='mt-3 fw-700 fs-18 blue-txt'>DOWNLOAD VISA FORM</p>
                 </Link>  
             </Col>
-            <Col md={4} className='visa-col-mid blue-txt'>
+            <Col md={4} className={`visa-col-mid${size.width<600?'':'-borders'} blue-txt ${size.width<600?'py-4':''}`}>
                 <div className='text-center cur' style={{marginTop:7}} onClick={showModal}>
-                <GrDocumentUpdate size={70} />
+                <GrDocumentUpdate size={size.width<600?50:70} />
                 <p className='mt-3 fw-700 fs-18'>SUBMIT FORM</p>
                 </div>  
             </Col>
             <Col md={4} className='visa-col blue-txt'>
-                <p className='mt-3 fw-700 fs-18'>TRACK MY VISA PROGRESS</p>
+                <p className='mt-3 fw-700 fs-18 text-center'>TRACK MY VISA PROGRESS</p>
                 <div className='input-container'>
-                    <input placeholder='Enter Visa Form No.' className='visa-input' type='text' />
+                    <input placeholder='Enter Visa Form No.' type='text' />
                     <button className='visa-btn'><RightOutlined size={20} /></button>
                 </div>
             </Col>
@@ -55,7 +56,7 @@ const Visa = () => {
         </div>
     </div>
     </div>
-    <ConfigProvider theme={{token:{ colorPrimary:'#499b2f' }}}>
+    <ConfigProvider theme={{token:{ colorPrimary:'#b8d233' }}}>
     <Modal
         title="Visa Application Submission Process"
         open={open}

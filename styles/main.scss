@@ -1,6 +1,5 @@
 @import 'HomeStyles.scss';
 @import 'HeaderStyles.scss';
-@import 'PortanLayout.scss';
 @import 'TourStyles.scss';
 @import 'FooterStyles.scss';
 @import 'CustomerLogin.scss';
@@ -8,11 +7,11 @@
 @import 'sliderCSS.scss';
 @import 'SearchBar.scss';
 @import 'svg.scss';
-@import 'bar-styles.scss';
 @import 'my-offers.scss';
 @import 'Home-slider-styles.scss';
 @import 'contact.scss';
 @import 'visa-form.scss';
+@import 'hotel-styles.scss';
 
 *{
   // font-family: 'Jost', sans-serif;
@@ -21,6 +20,11 @@
 h1, h2, h3, h4, h5, h6{
   font-family: 'Roboto', sans-serif;
 }
+
+.pr-5{
+  padding-right: 250px;
+}
+
 html,
 body {
   overflow-x: hidden;
@@ -46,7 +50,7 @@ body {
 
 .custom-btn:hover {
     transition-duration: 300ms;
-    background-color: rgb(20, 94, 121);
+    background-color: #194e9e;
 }
 
 .shade{
@@ -65,12 +69,14 @@ body {
 
 .wh-txt{ color: white!important; }
 .grey-txt{ color: rgb(85, 85, 85)!important; }
+.grey-txt-2{ color: grey!important; }
 .black-txt{ color: rgb(63, 63, 63)!important; }
 .silver-2-txt{ color: rgb(158, 158, 158)!important; }
 .silver-3-txt{ color: rgb(130, 130, 130)!important; }
 .silver-txt{ color: silver!important; }
 .wh-txt{ color: white!important; }
 
+.red-txt{ color: rgb(141, 45, 10)!important; }
 .green-txt{ color: #b8d233!important; }
 .blue-txt{ color: #194e9e!important; }
 
@@ -118,6 +124,11 @@ body {
 .fw-800{ font-weight: 800; }
 .fw-900{ font-weight: 900; }
 
+.plt-2{
+  position: relative;
+  top: 4px;
+}
+
 .right{ float: right; }
 .error-line{ color:'red'!important }
 
@@ -132,7 +143,7 @@ body {
 }
 
 .bg-signin{
-  background-image: url("../public/loginBg.png");
+  // background-image: url("../public/loginBg.png");
   overflow: hidden;
 
   /* Full height */
@@ -208,7 +219,7 @@ body {
 
 .btn-custom-2{
   cursor: pointer;
-  background-color: rgb(6, 172, 81)!important;
+  background-color: #194e9e !important;
   color: white;
   padding: 5px 20px 5px 20px;
   border-radius: 3px;
@@ -217,7 +228,7 @@ body {
 
 .btn-custom-2:hover{
   transition-duration: 300ms;
-  background-color: rgb(6, 33, 139)!important;
+  background-color: #b8d233!important;
 }
 
 .tableFixHead thead th {
@@ -259,7 +270,7 @@ body {
 }
 
 .arabic-bg{
-  background:linear-gradient(rgb(51, 68, 113), rgba(199, 215, 245, 0.733)), url("../public/images/bg-3.png");
+  // background:linear-gradient(rgb(51, 68, 113), rgba(199, 215, 245, 0.733)), url("../public/images/bg-3.png");
   padding: 20px;
 
   /* Center and scale the image nicely */
@@ -669,9 +680,29 @@ body > div:nth-child(6) > div > div.ant-modal-wrap > div > div.ant-modal-content
 .custom-btn-mobile-02{
   width: 100%;
   margin-top: 10px;
-  background-color: rgba(255, 255, 255, 0);
-  color: rgb(255, 255, 255);
+  background-color: #b8d233;
+  color: rgb(20, 31, 161);
   border: 1px solid rgb(255, 255, 255);
+  font-weight: 500;
+  border-radius: 7px;
+}
+
+.mobile-card{
+  background-color: #194e9e;
+  border-radius: 8px;
+}
+
+.desktop-card-title{
+  color: #194e9e;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  padding: 0px 8px;
+  height: 40px;
+}
+
+.top-round{
+  border-radius: 8px 8px 0px 0px;
 }
 
 .custom-btn-02:hover{
@@ -696,15 +727,22 @@ body > div:nth-child(6) > div > div.ant-modal-wrap > div > div.ant-modal-content
 
 .tour-opt{
   border: 1px solid silver;
-  padding: 10px;
+  padding: 12px 0px 0px 8px;
   border-radius: 2px;
 }
 
+.tour-opt-selected{
+  border: 1px solid #4781d6;
+  padding: 10px;
+  border-radius: 6px;
+}
+
 .inc-dec{
-  color: #61a7c8;
+  color: #8fa717;
   cursor: pointer;
-  border: 1px solid #61a7c8;
+  border: 1px solid grey;
   text-align: center;
+  padding-top: 1px;
   border-radius: 100%;
 }
 
@@ -714,7 +752,9 @@ div.react-datepicker-wrapper > div > input{
 }
 
 .inc-dec:hover{
-  color: #3e73c8;
+  color: #1852ae;
+  background-color: #8fa717;
+  color: white;
 }
 
 .bgc-01{
@@ -919,7 +959,7 @@ div.react-datepicker-wrapper > div > input{
 .subscribe-btn{
   color: white;
   background-color: #b8d233;
-  padding: 20px;
+  padding: 15px;
   font-size: 25px;
   font-weight: bolder;
   text-align: center;

@@ -105,7 +105,6 @@ const MobileBook = ({tour, transport, category, setOpen}) => {
                 >
                 <Checkbox className='' disabled={category=="Combo Tours"?true:false} checked={x.check}/>
                 </Col>
-                <Col xs={1}>{'#'+(i+1)}</Col>
                 <Col xs={10} className='cur' onClick={()=>{
                     if(category!="Combo Tours"){
                         let temp = [...state.booking];
@@ -115,7 +114,7 @@ const MobileBook = ({tour, transport, category, setOpen}) => {
                 }}>
                     <h6>{x.name}</h6>
                 </Col>
-                <Col xs={2}></Col>
+                <Col xs={1}></Col>
                 <Col xs={10} className='cur'
                     onClick={()=>{
                         if(category!="Combo Tours"){
@@ -124,7 +123,15 @@ const MobileBook = ({tour, transport, category, setOpen}) => {
                             dispatchReducer({type: 'field', fieldName:'booking', payload: temp});
                         }
                     }}>
-                        <h6 className='' style={{color:x.check?"#075ca2":"silver"}}>{x.price.toFixed(2)} AED</h6>
+                        <div className='fs-16'> 
+                        <span style={{color:x.check?"#075ca2":"grey"}}>
+                            {x.price.toFixed(2)} AED
+                        </span>
+                        {(x.oldPrice && parseFloat(x.oldPrice)>0) && <>
+                            <br/>
+                            <span className='red-txt'><s> {" "}{parseFloat(x.oldPrice).toFixed(2)} AED{" "}</s></span>
+                        </>}
+                    </div>
                 </Col>
                 {x.check &&
                 <>
@@ -199,9 +206,9 @@ const MobileBook = ({tour, transport, category, setOpen}) => {
                     })   
                 }
                 </Col>}
-                {x.transfer!="No" && <Col md={12}><hr className='my-2' /></Col> }
-                {x.transfer!="No" &&
-                <Col md={12} className="mt-1 px-4">
+                {/* {x.transfer!="1" && <Col md={12}><hr className='my-2' /></Col> } */}
+                {x.transfer!="1" &&
+                <Col md={12} className="mt-3 px-3 mb-">
                     <GooglePlacesAutocomplete
                         apiKey="AIzaSyDNlNHouprfGHm_3mmfLutARQbIwuNamJk"
                         selectProps={{
@@ -210,7 +217,7 @@ const MobileBook = ({tour, transport, category, setOpen}) => {
                                 temp[i].address = res.label;
                                 dispatchReducer({type: 'field', fieldName:'booking', payload: temp});
                             },
-                            placeholder: 'Address Bar Powered By Google',
+                            placeholder: 'Enter Address',
                             // components : {
                             //     IndicatorSeparator: () => null,
                             //     DropdownIndicator: () => 
@@ -225,6 +232,18 @@ const MobileBook = ({tour, transport, category, setOpen}) => {
                 }
                 </>
                 }
+                <Col md={11} className='mb-2 mt-3 px-3'>
+                    <span className='show-opt-detail' onClick={()=>{
+                        let temp = [...state.booking];
+                        temp[i].show = !temp[i].show
+                        dispatchReducer({type: 'field', fieldName:'booking', payload: temp});
+                    }}>Tap to show Detail</span>
+                    {x.show && <div>
+                    <hr className='mb-2 mt-0' />
+                    {(x.detail!=null && x.detail.length>10) && <div style={{ whiteSpace:'pre-wrap'}}>{x.detail}</div>}
+                    {(x.detail==null || x.detail.length<10) && <div>No Detail Added</div>}
+                    </div>}
+                </Col>
             </Row>
             </div>
             )

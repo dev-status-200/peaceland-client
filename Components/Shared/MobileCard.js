@@ -12,10 +12,9 @@ const MobileCard = ({tour, height, info, font}) => {
     const conversion = useSelector((state) => state.currency.conversion);
 
   return (
-    <div className='hover-shadow' 
-        style={{backgroundColor:'#499b2f'}}
-        onClick={()=>router.push(`/product?id=${tour.id}`)}>
-        <img src={tour.main_image} className="filter" style={{width:'100%', height:height}} alt='Tour' />
+    <div className='hover-shadow mobile-card'
+        onClick={()=>router.push(`/product/${tour.slug}`)}>
+        <img src={tour.main_image} className="filter top-round" style={{width:'100%', height:height}} alt='Tour' />
         <div className='p-2'>
         {!info &&
         <div className='overlay-text'>
@@ -46,7 +45,7 @@ const MobileCard = ({tour, height, info, font}) => {
         }
             <Row>
                 <Col md={1}>
-                <button className='custom-btn-mobile-02' onClick={()=>router.push(`/product?id=${tour.id}`)}>
+                <button className='custom-btn-mobile-02' onClick={()=>router.push(`/product/${tour.slug}`)}>
                     BOOK NOW
                 </button>
                 </Col>

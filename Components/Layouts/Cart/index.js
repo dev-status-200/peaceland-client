@@ -12,12 +12,8 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import PayComp from './PayComp';
-import NavLinks from '../../Shared/NavLinks';
-import CircleIcons from '../../Shared/CircleIcons';
-import CircleMobileIcons from "/Components/Shared/CircleMobileIcons"
 import useWindowSize from '/functions/useWindowSize';
 import { IoTrashBinSharp } from "react-icons/io5";
-import jwtDecode from 'jwt-decode';
 
 const Cart = () => {
 
@@ -42,7 +38,7 @@ const Cart = () => {
     }, [cart]);
     async function getValues(){
         let token = await Cookies.get("token");
-        await token?setUser({...jwtDecode(token), loggedIn:true}):null;
+        await token?setUser({...(JSON.parse(token)), loggedIn:true}):null;
     }
 
     const getTotalPrice = (val) => {
@@ -127,7 +123,7 @@ const Cart = () => {
     <>
     <div className='tour-styles' style={{backgroundColor:'white'}} >
     <div className='cart-styles' style={{borderTop:'1px solid silver'}} >
-    <Container className='cart-box' fluid="true" >
+    <Container className='cart-box mt-5' fluid="true" >
     <Row>
         <Col md={8} className="pt-4 cart-left">
         <Container className='px-5 black-txt'>
@@ -138,10 +134,10 @@ const Cart = () => {
             {cart.map((x, i)=>{
             return(
                 <Row key={i} className="cart-item mx-0">
-                    <Col md={3} xs={12} className="py-3" >
-                        <img src={x.image} height={100} width={size.width>500? 150:"100%"} style={{borderRadius:5}} alt="Tour"/>
+                    <Col md={'auto'} className="py-3" xs={12}>
+                        <img src={x.image} height={100} width={size.width>500? 150:"100%"} style={{borderRadius:5, marginLeft:size.width>500?15:0}} alt="Tour"/>
                     </Col>
-                    <Col className={`${size.width>500?"px-4 my-3":"mb-2"}`} md={9} >
+                    <Col className={`${size.width>500?"px-4 my-3":"mb-2"}`} >
                     {size.width>500 &&<div style={{float:'right'}}>
                         <span className='fs-18 fw-500 grey-txt'>{conversion.currency} {showIndivPrice(x.options)}</span>
                         <CloseCircleOutlined className='close-cart-btn' 

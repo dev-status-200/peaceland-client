@@ -9,7 +9,7 @@ import Aos from 'aos';
 const Tours = ({records, size, price, search, setSearch}) => {
 
     useEffect(() => {
-        Aos.init({duration:300})
+        Aos.init({duration:300});
     }, [])
 
   return (
@@ -50,7 +50,7 @@ const Tours = ({records, size, price, search, setSearch}) => {
             }).map((x, i)=>{
             return(
             <Col md={4} xs={6} className={`px-${size.width>500?"1":"0"} search-tour-box`} key={i} 
-                onClick={()=>Router.push(`/product?id=${x.id}`)} 
+                onClick={()=>Router.push(`/product/${x.slug}`)} 
             >
                 <div className={`search-box-container mx-1`}>
                 <img className='search-box-img filter-2' src={x.main_image} height={size.width>500?150:80} width={"100%"} />
@@ -79,7 +79,7 @@ const Tours = ({records, size, price, search, setSearch}) => {
                         {parseFloat(x.TourOptions[0].adult_price).toFixed(2)} AED
                     </div>
                     <Link 
-                        href={`/product?id=${x.id}`}
+                        href={`/product/${x.slug}`}
                         className='mt-3 search-box-btn px-3 py-2'
                         style={{float:'right', textDecoration:'none', top:'100%'}}
                     >

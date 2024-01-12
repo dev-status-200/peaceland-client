@@ -10,17 +10,16 @@
     .contact-bg{
         background-color:'#194e9e';
         border-radius:15;
-        margin:30
     }
     .contact-box{
         border:3px solid #194e9e;
         padding:30px;
-        margin-bottom:50px;
-        margin-top:80px;
+        margin-bottom:80px;
+        margin-top:30px;
         background-color:'white';
         border-radius:15px;
         box-shadow: 10px 10px 21px -7px rgba(0,0,0,0.75);
--webkit-box-shadow: 10px 10px 21px -7px rgba(0,0,0,0.75);
--moz-box-shadow: 10px 10px 21px -7px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 10px 10px 21px -7px rgba(0,0,0,0.75);
+        -moz-box-shadow: 10px 10px 21px -7px rgba(0,0,0,0.75);
     }
 }

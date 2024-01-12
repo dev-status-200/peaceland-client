@@ -1,5 +1,3 @@
-
-import CircleMobileIcons from "/Components/Shared/CircleMobileIcons"
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import "swiper/css";
@@ -21,10 +19,7 @@ const Combos = dynamic(() => import('./Combos'), {
 const Mobile = ({combos, adventures, bestSelling}) => {
   return (
     <>
-    {/* <Slider/> */}
     <div fluid="true">
-      {/* <MobileVideo/> */}
-      <CircleMobileIcons/>
     </div>
     <div className=' bg-02' style={{backgroundColor:"white"}}>
       <Container className='my-5' data-aos='fade-up'>
@@ -35,7 +30,6 @@ const Mobile = ({combos, adventures, bestSelling}) => {
         <h3 className=' fw-700 text-center'>COMBO TOUR<span className='blue-txt'>  ACTIVITIES</span></h3>
         <Combos/>
       </Container>
-      <SignUp mobile={true} />
     </div>
     </>
   )

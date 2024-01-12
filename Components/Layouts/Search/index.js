@@ -1,27 +1,17 @@
 import { ConfigProvider, Slider, Select, Checkbox, Input } from 'antd';
 import { Container, Row, Col, Spinner } from 'react-bootstrap';
-import { useIntersection } from '/functions/useIntersection';
-import React, {useEffect, useRef, useState, useMemo} from 'react';
-import CircleIcons from '/Components/Shared/CircleIcons';
-import CircleMobileIcons from "/Components/Shared/CircleMobileIcons"
-import NavLinks from '/Components/Shared/NavLinks';
+import React, {useEffect, useState, useMemo} from 'react';
 import SignUp from '/Components/Shared/SignUp';
-import { CiLocationOn } from "react-icons/ci";
-import { delay } from '/functions/delay';
 import {useRouter} from 'next/router';
-import Router from 'next/router';
-import Link from 'next/link';
 import Tours from './Tours';
 import aos from "aos";
 import useWindowSize from '/functions/useWindowSize';
-import axios from 'axios';
 
 const Search = ({destination, city, date, category, tourData}) => {
 
   const size = useWindowSize();
   const [search, setSearch] = useState("");
-  const ref = useRef();
-  const inViewport = useIntersection(ref, '0px');
+  
   const router = useRouter();
   const [load, setLoad] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
@@ -40,7 +30,7 @@ const Search = ({destination, city, date, category, tourData}) => {
   const adjustCategory = (cat) => {
     router.push({
       pathname: '/activities',
-      query: { destination:destination, city:city, category:cat, borderRadius:15 }
+      query: { destination:destination, city:city, category:cat }
     })
   }
 
@@ -85,7 +75,7 @@ return(
                 </ConfigProvider>
             </Col>
             <h5 className='mt-4 mb-0 blue-txt px-1'><b>Price</b></h5>
-            <h6 className='mt-1 px-1 pb-0 mb-0'>0 - {price}</h6>
+            <h6 className='mt-1 px-1 mx-2 pb-0 mb-0'>0 - {price}</h6>
             <div className='pr-3'>
               <ConfigProvider theme={{token:{ colorPrimary:'#b8d233', borderRadius:0 }}}>
                 <Slider className='' defaultValue={price} max={3000} onChange={(e)=>setPrice(e)} />
@@ -95,19 +85,19 @@ return(
             <h5 className='mt-4 mb-2 blue-txt'><b>Duration</b></h5>
             <ConfigProvider
               theme={{ token:{ colorPrimary:'#b8d233', padding:50, height:40, borderRadius:0, size:'large' }}}>
-              <Checkbox><h6>Upto 1 hour</h6></Checkbox><br/>
-              <Checkbox><h6>1 to 4 hours</h6></Checkbox><br/>
-              <Checkbox><h6>4 hours to 1 day</h6></Checkbox><br/>
+              <Checkbox><h6 className='plt-2'>Upto 1 hour</h6></Checkbox><br/>
+              <Checkbox><h6 className='plt-2'>1 to 4 hours</h6></Checkbox><br/>
+              <Checkbox><h6 className='plt-2'>4 hours to 1 day</h6></Checkbox><br/>
             </ConfigProvider>
             </div>
             <div className='px-1 mb-5'>
             <h5 className='mt-4 mb-2 blue-txt'><b>Category</b></h5>
             <ConfigProvider theme={{token:{ colorPrimary:'#b8d233', padding:50, height:40, borderRadius:0, size:'large' }}}>
-              <Checkbox checked={category=="Theme Parks"?true:false}  onChange={()=>adjustCategory("Theme Parks")}><h6>Theme Parks</h6></Checkbox><br/>
-              <Checkbox checked={category=="City Tours"?true:false}   onChange={()=>adjustCategory("City Tours")}><h6>City Tours</h6></Checkbox><br/>
-              <Checkbox checked={category=="Luxury Tours"?true:false} onChange={()=>adjustCategory("Luxury Tours")}><h6>Luxury Tours</h6></Checkbox><br/>
-              <Checkbox checked={category=="Adventure"?true:false}    onChange={()=>adjustCategory("Adventure")}><h6>Adventure</h6></Checkbox><br/>
-              <Checkbox checked={category=="Water Parks"?true:false}  onChange={()=>adjustCategory("Water Parks")}><h6>Water Parks</h6></Checkbox><br/>
+              <Checkbox checked={category=="Theme Parks"?true:false}  onChange={()=>adjustCategory("Theme Parks")}><h6 className='plt-2'>Theme Parks</h6></Checkbox><br/>
+              <Checkbox checked={category=="City Tours"?true:false}   onChange={()=>adjustCategory("City Tours")}><h6 className='plt-2'>City Tours</h6></Checkbox><br/>
+              <Checkbox checked={category=="Luxury Tours"?true:false} onChange={()=>adjustCategory("Luxury Tours")}><h6 className='plt-2'>Luxury Tours</h6></Checkbox><br/>
+              <Checkbox checked={category=="Adventure"?true:false}    onChange={()=>adjustCategory("Adventure")}><h6 className='plt-2'>Adventure</h6></Checkbox><br/>
+              <Checkbox checked={category=="Water Parks"?true:false}  onChange={()=>adjustCategory("Water Parks")}><h6 className='plt-2'>Water Parks</h6></Checkbox><br/>
             </ConfigProvider>
             </div>
           </Row>

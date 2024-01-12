@@ -42,7 +42,7 @@
     width: 80px;
     background-color: #194e9e;
     color: white;
-    border: 1px solid white;
+    border: 1px solid #194e9e;
   }
   .search-btn:hover{
     transition-duration: 300ms;
@@ -55,7 +55,7 @@
     max-height: 220px;
     overflow-y: auto;
     position: absolute;
-    top: 475px;
+    top: 66.1%;
     border: 1px solid silver;
     text-align: left;
     z-index: 100;
@@ -83,7 +83,7 @@
     align-items: center;
   }
   .aqua{
-    background:linear-gradient(0deg, rgba(2, 58, 93, 0.5), rgba(10, 132, 67, 0.445)), url("../public/slider/aquarium.png");
+    // background:linear-gradient(0deg, rgba(2, 58, 93, 0.5), rgba(10, 132, 67, 0.445)), url("../public/slider/aquarium.png");
     height: 80vh;
     background-position: center;
     background-repeat: no-repeat;
@@ -125,10 +125,10 @@
   .heading-main{
     // position: relative;
     // bottom: 10%;
-    color: white;
-    letter-spacing: -4px;
-    font-size: 100px;
-    text-shadow: 4px 4px 2px rgba(0,0,0,0.66);
+    color: rgb(255, 255, 255);
+    // letter-spacing: -1px;
+    font-size: 70px;
+    text-shadow: 4px 4px 2px rgba(23, 73, 12, 0.66);
     font-weight: bolder;
   }
 }

@@ -87,7 +87,18 @@
 .info-bar{
   background-color: #194e9e;
   padding: 20px;
+}
+.info-bar-round{
+  background-color: #194e9e;
+  padding: 20px;
   border-radius: 9px;
+}
+
+.combo-note{
+  color: rgb(8, 83, 8);
+  font-size: 18px;
+  position: relative;
+  bottom: 10px;
 }
 
 .info-item{
@@ -101,10 +112,12 @@
   font-size: 40px;
 }
 
-.mobile-more-images{
-  display: flex;
-  justify-content: space-around;
-  padding: 10px;
+.separator-tour-icons{
+  height: 1px;
+  width: 100%;
+  background-color: white;
+  position: relative;
+  top: 15px;
 }
 
 .policy-bar{
@@ -116,11 +129,16 @@
 // BTN CSS
 
 .otherBook-btn{
-  background-color: #499b2f;
+  background-color: #6eab24;
   border: none;
   padding: 20px;
   color: white;
   border-radius: 100%;
+}
+
+.show-opt-detail{
+  color: #497711;
+  cursor: pointer;
 }
 
 .book-btn{
@@ -136,6 +154,23 @@
   text-align: center;
 }
 .book-btn:hover{
+  color: white;
+  transition-duration: 200ms;
+  background-color: #b8d233;
+}
+
+.book-btn-2{
+  border: 1px solid #607011;
+  cursor: pointer;
+  background-color: #ffffff;
+  width: 80%;
+  height: 40px;
+  font-weight: 700;
+  font-size: 18px;
+  color: #768a11;
+  text-align: center;
+}
+.book-btn-2:hover{
   color: white;
   transition-duration: 200ms;
   background-color: #b8d233;
