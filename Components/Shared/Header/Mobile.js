@@ -70,8 +70,8 @@ function OffCanvasExample({ name, user, ...props }) {
         {!load &&<>
           <div className='text-center navBar'>
             <div className='mt-3'></div>
-            <Link style={navStyles} href='/' >Home</Link><br/><br/>
-            <Link style={navStyles} href={{pathname:'/activities',  query:{destination:"uae", city:"Dubai City", category:'Water Parks' }}} >Activities</Link><br/><br/>
+            <Link style={navStyles} href='/'>Home</Link><br/><br/>
+            <Link style={navStyles} href={{pathname:'/activities'}} >Activities</Link><br/><br/>
             <Link style={navStyles} href='/about' >About</Link><br/><br/>
               {!user.loggedIn &&
                 <span className='cur mx-2' style={navStyles}

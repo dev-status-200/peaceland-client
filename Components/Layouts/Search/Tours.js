@@ -108,7 +108,7 @@ const Tours = ({records, size, price, search, setSearch}) => {
         </Row>
         </>}
         {records.length==0 && 
-        <div style={{color:'grey', border:'1px solid silver'}} className='p-5 mb-5'>
+        <div style={{color:'grey', border:'1px solid silver'}} className='p-5 mt-5 mb-5'>
             <h3>No Similar Activity Found !</h3>
             <p>Try choosing different options</p>
         </div>

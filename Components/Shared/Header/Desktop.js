@@ -18,6 +18,7 @@ import "/node_modules/flag-icons/css/flag-icons.min.css";
 import MyOffers from "/Components/Shared/MyOffers";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import Link from 'next/link';
+import Aos from 'aos';
 
 const Desktop = ({user}) => {
 
@@ -29,6 +30,9 @@ const Desktop = ({user}) => {
   const conversion = useSelector((state) => state.currency.conversion);
   
     useEffect(() => {
+        Aos.init({
+            duration:300
+        })
         if(Object.keys(currencyList).length==0){
             setCurrency();
         }
@@ -48,21 +52,38 @@ const Desktop = ({user}) => {
     dispatch(changeCurrency({currency:curr, rate:currencyList[`${curr}`]}));
   }
 
+  const [countdown, setCountdown] = useState(1);
+  const [changeTag, setChangeTag] = useState(false);
+  
+  useEffect(() => {
+    let timeout;
+    if (countdown < 1000) {
+      timeout = setTimeout(() => {
+        setCountdown(countdown + 1);
+      }, 1000);
+    }
+    countdown%10==0?setChangeTag(!changeTag):null;
+    return () => clearTimeout(timeout);
+  }, [countdown]);
+
   return (
     <>
     <div className='header-styles' style={{backgroundColor:'white'}}>
         <div className='fixed'>
-        <div className='top-bar'>
+        {changeTag && <div className='top-bar' data-aos='slide-down'>
             Are you a seller? then join our B2B portal by registering at this <a href="https://b2b.peacelandtravel.com/" target='_blank' className='mx-1'> <b>link</b></a>
-        </div>
+        </div>}
+        {!changeTag && <div className='top-bar' data-aos='slide-down'>
+            Become a Member to receive discounts!, sign-up here<a href="https://b2b.peacelandtravel.com/" target='_blank' className='mx-1'> <b>link</b></a>
+        </div>}
         <div className=' header-container py-2'>
             <div style={{width:"20%", textAlign:'left'}} >
                 <img src='/images/logo.png' height={80} className='cur' onClick={()=>router.push("/")} />
             </div>
             <div className='text-center'>
                 <Link href={"/"} className='nav-link-item'>Home</Link>
-                <Link href={{pathname:'/search',  query:{destination:"uae", city:"Dubai City", category:'Theme Parks' }}} className='nav-link-item'>Destinations</Link>
-                <Link href={{pathname:'/activities',  query:{destination:"uae", city:"Dubai City", category:'Theme Parks' }}} className='nav-link-item'>Activities</Link>
+                <Link href={{pathname:'/search'}} className='nav-link-item'>Destinations</Link>
+                <Link href={{pathname:'/activities'}} className='nav-link-item'>Activities</Link>
                 <Link href={"/hotels"} className='nav-link-item'>Hotels</Link>
                 <Link href={"/visa"} className='nav-link-item'>Visa</Link>
                 <Link href={"/about"} className='nav-link-item'>About</Link>

@@ -117,7 +117,7 @@ const Product = ({id, tourData}) => {
     {added &&
       <>
         {/* <hr/> */}
-        <div className="mt-4">This Tour is already present in your cart <Link href='/activities?destination=uae&city=Dubai+City&category=Theme+Parks'>Browse More</Link>, or</div>
+        <div className="mt-4">This Tour is already present in your cart <Link href='/activities'>Browse More</Link>, or</div>
         <hr/>
         <div className="book-btn" onClick={()=>Router.push("/cart")}>Go To Cart <LuShoppingCart/></div>
       </>

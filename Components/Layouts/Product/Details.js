@@ -36,7 +36,7 @@ const Details = ({tour, detail, BookCompTwo}) => {
     </>}
     <h6 className='blue-txt mt-4'>Description</h6>
     <p className='fs-16 grey-txt'>
-      {tour?.tour_detail}
+      {tour?.tour_detail.slice(0,940)} ...
     </p>
     </div>
     </>

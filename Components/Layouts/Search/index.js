@@ -23,7 +23,8 @@ const Search = ({destination, city, date, category, tourData}) => {
 
   useEffect(() => {
     aos.init({duration:500});
-    setRecords(tourData.result);
+    console.log(tourData.result); 
+    setRecords(tourData.result); 
     setLoad(false)
   }, [router])
 
@@ -37,9 +38,9 @@ const Search = ({destination, city, date, category, tourData}) => {
 return(
   <div className='home-styles'>
   <div className='white-bg mt-3' data-aos="fade-in">
-  <Container className={`px-${size.width>500?"1":"5"} pt-5`}>
+  <Container className='pt-5'>
     <Row>
-      <Col md={9} className={`${size.width>500?"px-5":"p-0 m-0"}`}>
+      <Col md={9} className={`${size.width>500?"px-5":"p-0 m-0 px-3"}`}>
         {!load &&
           <Tours 
             search={search} size={size} 
@@ -50,7 +51,7 @@ return(
         }
         {load && <div className='text-center pb-3 mt-5'><Spinner variant='dark' className='mt-5' /></div>}
       </Col>
-      <Col md={3} className="pt-4" style={{paddingRight:10}}>
+      <Col md={3} className="pt-4 mb-5" style={{paddingRight:10}}>
         <div className='tour-filters mt-1'>
           <Row className='tour-fltr-locate px-3 py-3 my-2'>
             <Col md={12} className='fs-12 '>

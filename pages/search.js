@@ -1,10 +1,17 @@
 import React from 'react';
 import Search from '../Components/Layouts/Search';
 import axios from 'axios';
+import Head from 'next/head';
 
 const search = ({destination, city, date, category, tourData}) => {
   return (
-    <Search destination={destination} city={city} date={date} category={category} tourData={tourData} />
+    <>
+      <Head>
+        <title>Top Tourist Places in Dubai & Abu Dhabi | Must-Visit Destinations</title>
+        <meta name='description' content='Discover the best tourist places in Dubai & Abu Dhabi with Peaceland Travel. Plan a trip to iconic destinations & best places in Dubai & Abu Dhabi.' key="desc" />
+      </Head>
+      <Search destination={destination} city={city} date={date} category={category} tourData={tourData} />
+    </>
   )
 }
 export default search
