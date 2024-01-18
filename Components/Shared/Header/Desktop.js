@@ -11,7 +11,7 @@ import { fetchCurrencyData } from '/functions/fetchCurrencyData';
 import { GrLogout } from "react-icons/gr";
 import { HiShoppingCart } from "react-icons/hi";
 import { BsCurrencyExchange } from "react-icons/bs";
-import { Dropdown, Popover, Modal, Badge } from 'antd';
+import { Dropdown, Popover, Modal, Badge, } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { addCurrency, changeCurrency } from '/redux/currency/currencySlice';
 import "/node_modules/flag-icons/css/flag-icons.min.css";
@@ -19,9 +19,11 @@ import MyOffers from "/Components/Shared/MyOffers";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import Link from 'next/link';
 import Aos from 'aos';
+import useWindowSize from '/functions/useWindowSize';
 
 const Desktop = ({user}) => {
 
+  const size = useWindowSize();
   const router = useRouter();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.value);
@@ -44,8 +46,12 @@ const Desktop = ({user}) => {
     }
 
   const items = [
-    { label: <div className='text-center px-3' onClick={()=>router.push('/myBookings')}>My Bookings</div>, key: '0' },
-    { label: <div className='text-center px-3' onClick={()=>setShowOffers(true)}>My Offers</div>, key: '1' }
+      { label: <div className='' onClick={()=>router.push('/activities?destination=&city=&category=Adventure')}>Adventure Tours</div>, key: '1' },
+    { label: <div className='' onClick={()=>router.push('/activities?destination=&city=&category=Water+Parks')}>Water Parks</div>, key: '2' },
+    { label: <div className='' onClick={()=>router.push('/activities?destination=&city=&category=Family+Fun')}>Family Fun</div>, key: '3' },
+    { label: <div className='' onClick={()=>router.push('/activities?destination=&city=&category=Theme+Parks')}>Theme Parks</div>, key: '4' },
+    { label: <div className='' onClick={()=>router.push('/activities?destination=&city=&category=City+Tours')}>City Tours</div>, key: '5' },
+    { label: <div className='' onClick={()=>router.push('/activities?destination=&city=&category=Luxury+Tours')}>Luxury Tours</div>, key: '6' }
   ];
 
   const adjustCurrency = (curr) => {
@@ -70,104 +76,59 @@ const Desktop = ({user}) => {
     <>
     <div className='header-styles' style={{backgroundColor:'white'}}>
         <div className='fixed'>
-        {changeTag && <div className='top-bar' data-aos='slide-down'>
-            Are you a seller? then join our B2B portal by registering at this <a href="https://b2b.peacelandtravel.com/" target='_blank' className='mx-1'> <b>link</b></a>
-        </div>}
-        {!changeTag && <div className='top-bar' data-aos='slide-down'>
-            Become a Member to receive discounts!, sign-up here<a href="https://b2b.peacelandtravel.com/" target='_blank' className='mx-1'> <b>link</b></a>
-        </div>}
-        <div className=' header-container py-2'>
+        <>
+            <div className='top-bar'>
+                {changeTag && <div data-aos='slide-down'>
+                   Are you a seller? then join our B2B portal by registering at this <a href="https://b2b.peacelandtravel.com/" target='_blank' className='mx-1'> <b>link</b></a>
+                </div>}
+                {!changeTag && <div data-aos='slide-down'>
+                   Are you a seller? then join our B2B portal by registering at this <a href="https://b2b.peacelandtravel.com/" target='_blank' className='mx-1'> <b>link</b></a>
+                </div>}
+            </div>
+        </>
+        <div className='header-container py-2'>
             <div style={{width:"20%", textAlign:'left'}} >
-                <img src='/images/logo.png' height={80} className='cur' onClick={()=>router.push("/")} />
+                <img src='/images/logo.png' height={size.width>1200?80:50} className='cur' onClick={()=>router.push("/")} />
             </div>
             <div className='text-center'>
                 <Link href={"/"} className='nav-link-item'>Home</Link>
                 <Link href={{pathname:'/search'}} className='nav-link-item'>Destinations</Link>
-                <Link href={{pathname:'/activities'}} className='nav-link-item'>Activities</Link>
+                <Dropdown
+                    menu={{
+                        items,
+                    }}
+                >
+                    <Link href={{pathname:'/activities'}} className='nav-link-item'>Activities</Link>
+                </Dropdown>
+                
                 <Link href={"/hotels"} className='nav-link-item'>Hotels</Link>
                 <Link href={"/visa"} className='nav-link-item'>Visa</Link>
                 <Link href={"/about"} className='nav-link-item'>About</Link>
                 <Link href={"/contact"} className='nav-link-item'>Contact</Link>
             </div>
             <div style={{width:"21%", textAlign:'right'}}>
-                <FaUserCircle className='header-icons' size={18} style={{position:'relative', bottom:2}} />
-                <Badge count={cart.length} showZero color="#faad14" size="small">
-                    <FaCartShopping className='header-icons cur' onClick={()=>Router.push("/cart")} />
-                </Badge>
-                <span className='fs-20' style={{marginLeft:16, marginRight:10}}>|</span>
-                <Link href={'https://www.facebook.com/peacelandtraveltourism.official/'} target='_blank'><SiFacebook  className='header-icons' style={{color:'#2b67b6'}} size={17} /></Link>
-                <Link href="https://www.instagram.com/peacelandtravelandtourism/?fbclid=IwAR0Ol2E3QiKOWgGxlBu0vvIvYvwbKERTs_yo_-lnzLRY-5LOvbjykfR_7Nc" target='_blank'><img src='/icons/insta.jpeg' height={17} width={17} className='header-icons' /></Link>
-                <Link href={'https://twitter.com/peacelandgroup'} target='_blank'><FaSquareXTwitter  style={{color:'#424242'}} size={19} /></Link>
-                <Link href="https://www.linkedin.com/company/peaceland-travels-and-tourism/" target='_blank'><img src='/icons/linkedin.png' height={17} width={17} className='header-icons' /></Link>
+                {size.width>1200 && <>
+                    <FaUserCircle className='header-icons' size={18} style={{position:'relative', bottom:2}} />
+                    <Badge count={cart.length} showZero color="#faad14" size="small">
+                        <FaCartShopping className='header-icons cur' onClick={()=>Router.push("/cart")} />
+                    </Badge>
+                    <span className='fs-20' style={{marginLeft:16, marginRight:10}}>|</span>
+                    <Link href={'https://www.facebook.com/peacelandtraveltourism.official/'} target='_blank'><SiFacebook  className='header-icons' style={{color:'#2b67b6'}} size={17} /></Link>
+                    <Link href="https://www.instagram.com/peacelandtravelandtourism/?fbclid=IwAR0Ol2E3QiKOWgGxlBu0vvIvYvwbKERTs_yo_-lnzLRY-5LOvbjykfR_7Nc" target='_blank'><img src='/icons/insta.jpeg' height={17} width={17} className='header-icons' /></Link>
+                    <Link href={'https://twitter.com/peacelandgroup'} target='_blank'><FaSquareXTwitter  style={{color:'#424242'}} size={19} /></Link>
+                    <Link href="https://www.linkedin.com/company/peaceland-travels-and-tourism/" target='_blank'><img src='/icons/linkedin.png' height={17} width={17} className='header-icons' /></Link>
+                </>}
+                {size.width<1200 && <>
+                    <FaUserCircle className='header-icons' size={18} style={{position:'relative', bottom:2}} />
+                    <Badge count={cart.length} showZero color="#faad14" size="small">
+                        <FaCartShopping className='header-icons cur' onClick={()=>Router.push("/cart")} />
+                    </Badge>
+                </>}
             </div>
         </div>
         </div>
         <div style={{margin:62}}></div>
         
-        {/* <Row className='px-5 pt-1 m-0 white-bg' style={{paddingBottom:5}}>
-            <Col md={6}>
-                <div style={{fontSize:11}}>
-                    <span ><FaPhoneAlt/></span>
-                    <span className='mx-2' style={{position:'relative', top:2}}>+971 55 998 6370</span>
-                    <span style={{marginLeft:1, marginRight:10, position:'relative', top:1}}>|</span>
-                    <span style={{position:'relative', bottom:0}}><FaRegEnvelopeOpen/></span>
-                    <span className=' mx-2' style={{position:'relative', top:2}}>info@peacelandtravel.com</span>
-                </div>
-            </Col>
-            <Col md={6}>
-                <div style={{float:'right', fontSize:11}}>
-                    <Popover placement="bottom" content={
-                        <div className='text-center' style={{minHeight:60}}>
-                            <div>Select Currency</div>
-                            <span className='cur mx-1 flag-hov' onClick={()=>adjustCurrency('AED')}><span className="fi fi-ae"></span></span>
-                            <span className='cur mx-1 flag-hov' onClick={()=>adjustCurrency('USD')}><span className="fi fi-um"></span></span>
-                            <span className='cur mx-1 flag-hov' onClick={()=>adjustCurrency('AUD')}><span className="fi fi-au"></span></span>
-                            <span className='cur mx-1 flag-hov' onClick={()=>adjustCurrency('GBP')}><span className="fi fi-gb"></span></span>
-                            <span className='cur mx-1 flag-hov' onClick={()=>adjustCurrency('PKR')}><span className="fi fi-pk"></span></span>
-                            <span className='cur mx-1 flag-hov' onClick={()=>adjustCurrency('INR')}><span className="fi fi-in"></span></span>
-                        </div>
-                    } trigger="click">
-                        <span className='cur mx-2'>Change Currency <BsCurrencyExchange size={15} className='blue-txt' /></span>
-                    </Popover>
-                    <span className='cur mx-1'onClick={()=>router.push("/cart")}>{"("} {cart.length} {")"} <HiShoppingCart size={15} className='blue-txt' /></span>
-                    <span className='mx-2'> | </span>
-                    <span className='cur mx-1' style={{color:'#2b67b6'}}><SiFacebook/></span>
-                    <span className='cur mx-1' style={{color:'#e425b4'}}><SiInstagram/></span>
-                    <span className='cur mx-1' style={{color:'#25a1e4'}}><SiTwitter/></span>
-                    {!user.loggedIn &&
-                    <span className='cur mx-2' style={{position:'relative', top:2}}
-                        onClick={()=>{
-                            // This Logic sets the redirected URL to get back to this page
-                            if(Object.keys(router.query).length>0){ 
-                                Cookies.set("redirect",`${router.pathname}?id=${router.query.id}`)  
-                            }
-                            else { 
-                                Cookies.set("redirect",`${router.pathname}`) 
-                            }
-                            router.push("/auth")
-                        }}
-                    >My Login</span>
-                    }
-                    {user.loggedIn &&
-                    <>
-                    <span className='cur mx-2' style={{position:'relative', top:2, }}>
-                    <Dropdown menu={{ items }}>
-                        <span onClick={(e) => e.preventDefault()}>
-                            <span className='' style={{fontSize:13, marginLeft:10, position:'relative', bottom:2, marginRight:4}}><AiOutlineUser/></span>
-                            {user.name}
-                        </span>
-                    </Dropdown>
-                    </span>
-                    <span className='cur  mx-2'  style={{position:'relative', top:2}} 
-                        onClick={()=>{Cookies.remove("token"); Router.reload("/")}}
-                    >
-                        <GrLogout className='mx-1' style={{position:'relative', bottom:2, fontSize:13}}  />Logout
-                    </span>
-                    </>
-                    }
-                </div>
-            </Col>
-        </Row> */}
         {showOffers &&  <>
             <Modal title="My Offers" open={showOffers} onCancel={()=>setShowOffers(false)} footer={false} centered>
                 <hr/>

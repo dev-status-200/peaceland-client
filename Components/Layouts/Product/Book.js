@@ -130,7 +130,7 @@ const Book = ({tour, transport, category, setOpen}) => {
                         dispatchReducer({type: 'field', fieldName:'booking', payload: temp});
                     }
                 }}>
-                    <h6 className=''>{x.name}</h6>
+                    <h6 className='black-txt'>{x.name}</h6>
                 </Col>
                 <Col md={3} className='cur'
                     onClick={()=>{
@@ -256,17 +256,23 @@ const Book = ({tour, transport, category, setOpen}) => {
                 }
                 </>
                 }
-                <Col md={11} className='mt-3 px-3'>
+                <Col md={11} className={`${x.check?'mt-3':''} px-3`}>
                     <span className='show-opt-detail' onClick={()=>{
                         let temp = [...state.booking];
                         temp[i].show = !temp[i].show
                         dispatchReducer({type: 'field', fieldName:'booking', payload: temp});
                     }}>Show Package Details</span>
-                    {x.show && <div>
-                    <hr className='mb-2 mt-0' />
-                    {(x.detail!=null && x.detail.length>10) && <div style={{ whiteSpace:'pre-wrap'}}>{x.detail}</div>}
-                    {(x.detail==null || x.detail.length<10) && <div>No Detail Added</div>}
-                    </div>}
+                    {x.show && 
+                    <div>
+                        <hr className='mb-2 mt-0' />
+                        {(x.detail!=null && x.detail.length>10) && 
+                            <div style={{ whiteSpace:'pre-wrap', color:'grey'}}>
+                                {x.detail}
+                            </div>
+                        }
+                        {(x.detail==null || x.detail.length<10) && <div>No Detail Added</div>}
+                    </div>
+                    }
                 </Col>
             </Row>
             

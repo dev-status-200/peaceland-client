@@ -14,15 +14,15 @@ const TourCardOne = ({tour, height, info, font}) => {
         style={{border:'1px solid grey', borderRadius:8}}
     >
         <div style={{width:'100%' , position:'relative', left:0, top:0}}>
-        <img src={tour.main_image} className="filter" style={{width:'100%', height:height, borderRadius:'8px 8px 0px 0px'}} alt='Tour' />
+        <img src={tour.main_image} className="filter" style={{width:'100%', height:140, borderRadius:'8px 8px 0px 0px'}} alt='Tour' />
         {info &&
         <>
         <div className='my-2'>
             <div className='desktop-card-title'>
                 {tour.title}
             </div>
-            <div className='grey-txt-2 px-2' style={{lineHeight:1}}>
-                <ImLocation2 style={{position:'relative', bottom:2}} size={12} /> {tour.city}
+            <div className='grey-txt-2 px-2' style={{lineHeight:1, fontSize:'85%'}}>
+                <ImLocation2 style={{position:'relative', bottom:2}} /> {tour.city}
             </div>
             <div className='full-overlay-line'></div>
             <div style={{width:'120%'}}>

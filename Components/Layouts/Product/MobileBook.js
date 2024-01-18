@@ -112,10 +112,10 @@ const MobileBook = ({tour, transport, category, setOpen}) => {
                         dispatchReducer({type: 'field', fieldName:'booking', payload: temp});
                     }
                 }}>
-                    <h6>{x.name}</h6>
+                    <h6 className='black-txt'>{x.name}</h6>
                 </Col>
-                <Col xs={1}></Col>
-                <Col xs={10} className='cur'
+                {/* <Col xs={1}></Col> */}
+                <Col xs={12} className='cur'
                     onClick={()=>{
                         if(category!="Combo Tours"){
                             let temp = [...state.booking];
@@ -123,14 +123,13 @@ const MobileBook = ({tour, transport, category, setOpen}) => {
                             dispatchReducer({type: 'field', fieldName:'booking', payload: temp});
                         }
                     }}>
-                        <div className='fs-16'> 
-                        <span style={{color:x.check?"#075ca2":"grey"}}>
-                            {x.price.toFixed(2)} AED
-                        </span>
+                        <div className='mx-3 text-end'> 
                         {(x.oldPrice && parseFloat(x.oldPrice)>0) && <>
-                            <br/>
                             <span className='red-txt'><s> {" "}{parseFloat(x.oldPrice).toFixed(2)} AED{" "}</s></span>
                         </>}
+                        <div style={{color:x.check?"#075ca2":"grey"}} className='fs-16 '>
+                            {x.price.toFixed(2)} AED
+                        </div>
                     </div>
                 </Col>
                 {x.check &&
@@ -232,7 +231,7 @@ const MobileBook = ({tour, transport, category, setOpen}) => {
                 }
                 </>
                 }
-                <Col md={11} className='mb-2 mt-3 px-3'>
+                <Col md={11} className={`mb-2 ${x.check?'mt-3':''} px-3`}>
                     <span className='show-opt-detail' onClick={()=>{
                         let temp = [...state.booking];
                         temp[i].show = !temp[i].show

@@ -233,9 +233,9 @@ const Cart = () => {
             </>
             }
             {cart.length==0 && 
-            <div style={{border:'1px solid grey', margin:10}}>
+            <div style={{border:'1px solid silver', margin:10, marginBottom:30}}>
                 <Container className='py-5' data-aos='fade-up'>
-                    <Empty /> <h3 className='text-center fw-200 mt-5'>Cart Is Empty!</h3>
+                    <Empty /> <h5 className='text-center fw-200 mt-5'>Cart Is Empty!</h5>
                 </Container>
             </div>
             }

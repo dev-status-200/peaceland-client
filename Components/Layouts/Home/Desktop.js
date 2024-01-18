@@ -47,7 +47,7 @@ const Desktop = () => {
             <h3>Peaceland's Most</h3>
             <h1 className='text-center blue-txt' ><b className='fw-900'>Recommended Tours</b></h1>
           </div>
-          <div className='px-5 mx-4'>
+          <div className='px-2 mx-4'>
             <Adventures/>
           </div>
           <div className='my-5'></div>
@@ -64,7 +64,7 @@ const Desktop = () => {
             <h3>Peaceland's</h3>
             <h1 className='text-center blue-txt'><b className='fw-900'>Combo Packages  </b></h1>
           </div>
-          <div className='px-5 mx-4'>
+          <div className='px-2 mx-4'>
             <Combos/>
           </div>
           <div className='my-5'></div>
