@@ -14,12 +14,12 @@ const Profile = () => {
   return (
   <>
     <Dropdown
-        overlayStyle={{colorBgElevated:'green'}}
-        menu={{
-            items,
-        }}
+      overlayStyle={{colorBgElevated:'green'}}
+      menu={{
+        items,
+      }}
     >
-        <FaUserCircle className='header-icons' size={18} style={{position:'relative', bottom:2}} />
+      <FaUserCircle className='header-icons' size={18} style={{position:'relative', bottom:2}} />
     </Dropdown>
   </>
   )
