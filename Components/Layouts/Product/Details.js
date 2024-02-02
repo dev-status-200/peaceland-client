@@ -29,7 +29,7 @@ const Details = ({tour, detail, BookCompTwo}) => {
     </>
     }
     {size.width>600 && <>
-    <div className='mt-4 pr-5' >
+    <div className='mt-4' >
       {BookCompTwo}
     </div>
     <hr/>

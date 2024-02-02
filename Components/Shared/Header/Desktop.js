@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Row, Col } from 'react-bootstrap';
-import { FaPhoneAlt, FaRegEnvelopeOpen } from "react-icons/fa";
-import { SiFacebook, SiInstagram, SiTwitter } from "react-icons/si";
-import { PiShoppingBagFill } from "react-icons/pi";
+import { SiFacebook } from "react-icons/si";
 import { FaUserCircle } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import Router, { useRouter } from 'next/router';
-import Cookies from "js-cookie";
 import { fetchCurrencyData } from '/functions/fetchCurrencyData';
-import { GrLogout } from "react-icons/gr";
-import { HiShoppingCart } from "react-icons/hi";
-import { BsCurrencyExchange } from "react-icons/bs";
-import { Dropdown, Popover, Modal, Badge, } from 'antd';
+import { Dropdown, Modal, Badge, } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { addCurrency, changeCurrency } from '/redux/currency/currencySlice';
 import "/node_modules/flag-icons/css/flag-icons.min.css";
@@ -31,14 +24,14 @@ const Desktop = ({user}) => {
   const currencyList = useSelector((state) => state.currency.value);
   const conversion = useSelector((state) => state.currency.conversion);
   
-    useEffect(() => {
-        Aos.init({
-            duration:300
-        })
-        if(Object.keys(currencyList).length==0){
-            setCurrency();
-        }
-    }, [])
+  useEffect(() => {
+    Aos.init({
+      duration:300
+    })
+    if(Object.keys(currencyList).length==0){
+      setCurrency();
+    }
+  }, [])
 
     const setCurrency = async() => {
         let items = await fetchCurrencyData();
@@ -46,7 +39,7 @@ const Desktop = ({user}) => {
     }
 
   const items = [
-      { label: <div className='' onClick={()=>router.push('/activities?destination=&city=&category=Adventure')}>Adventure Tours</div>, key: '1' },
+    { label: <div className='' onClick={()=>router.push('/activities?destination=&city=&category=Adventure')}>Adventure Tours</div>, key: '1' },
     { label: <div className='' onClick={()=>router.push('/activities?destination=&city=&category=Water+Parks')}>Water Parks</div>, key: '2' },
     { label: <div className='' onClick={()=>router.push('/activities?destination=&city=&category=Family+Fun')}>Family Fun</div>, key: '3' },
     { label: <div className='' onClick={()=>router.push('/activities?destination=&city=&category=Theme+Parks')}>Theme Parks</div>, key: '4' },
@@ -73,24 +66,24 @@ const Desktop = ({user}) => {
   }, [countdown]);
 
   return (
-    <>
+  <>
     <div className='header-styles' style={{backgroundColor:'white'}}>
-        <div className='fixed'>
+      <div className='fixed'>
         <>
-            <div className='top-bar'>
-                {changeTag && <div data-aos='slide-down'>
-                   Are you a seller? then join our B2B portal by registering at this <a href="https://b2b.peacelandtravel.com/" target='_blank' className='mx-1'> <b>link</b></a>
-                </div>}
-                {!changeTag && <div data-aos='slide-down'>
-                   Are you a seller? then join our B2B portal by registering at this <a href="https://b2b.peacelandtravel.com/" target='_blank' className='mx-1'> <b>link</b></a>
-                </div>}
-            </div>
+          <div className='top-bar fs-10'>
+            {changeTag && <div data-aos='slide-down'>
+                Are you a seller? then join our B2B portal by registering at this <a href="https://b2b.peacelandtravel.com/" target='_blank' className='mx-1'> <b>link</b></a>
+            </div>}
+            {!changeTag && <div data-aos='slide-down'>
+                Are you a seller? then join our B2B portal by registering at this <a href="https://b2b.peacelandtravel.com/" target='_blank' className='mx-1'> <b>link</b></a>
+            </div>}
+          </div>
         </>
         <div className='header-container py-2'>
-            <div style={{width:"20%", textAlign:'left'}} >
-                <img src='/images/logo.png' height={size.width>1200?80:50} className='cur' onClick={()=>router.push("/")} />
-            </div>
-            <div className='text-center'>
+          <div style={{width:"20%", textAlign:'left'}} >
+            <img src='/images/logo.png' height={size.width>1200?80:50} className='cur' onClick={()=>router.push("/")} />
+          </div>
+          <div className='text-center'>
                 <Link href={"/"} className='nav-link-item'>Home</Link>
                 <Link href={{pathname:'/search'}} className='nav-link-item'>Destinations</Link>
                 <Dropdown
@@ -105,8 +98,8 @@ const Desktop = ({user}) => {
                 <Link href={"/visa"} className='nav-link-item'>Visa</Link>
                 <Link href={"/about"} className='nav-link-item'>About</Link>
                 <Link href={"/contact"} className='nav-link-item'>Contact</Link>
-            </div>
-            <div style={{width:"21%", textAlign:'right'}}>
+          </div>
+          <div style={{width:"21%", textAlign:'right'}}>
                 {size.width>1200 && <>
                     <FaUserCircle className='header-icons' size={18} style={{position:'relative', bottom:2}} />
                     <Badge count={cart.length} showZero color="#faad14" size="small">
@@ -124,19 +117,19 @@ const Desktop = ({user}) => {
                         <FaCartShopping className='header-icons cur' onClick={()=>Router.push("/cart")} />
                     </Badge>
                 </>}
-            </div>
+          </div>
         </div>
-        </div>
-        <div style={{margin:62}}></div>
+      </div>
+      <div style={{margin:62}}></div>
         
-        {showOffers &&  <>
-            <Modal title="My Offers" open={showOffers} onCancel={()=>setShowOffers(false)} footer={false} centered>
-                <hr/>
-                <MyOffers selectable={false} email={user.email} />
-            </Modal>
-        </>}
+      {showOffers &&  <>
+        <Modal title="My Offers" open={showOffers} onCancel={()=>setShowOffers(false)} footer={false} centered>
+          <hr/>
+          <MyOffers selectable={false} email={user.email} />
+        </Modal>
+      </>}
     </div>
-    </>
+  </>
   )
 }
 

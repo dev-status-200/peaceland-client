@@ -1,14 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
-import { ConfigProvider, Slider, Select, Checkbox, Input } from 'antd';
+import { ConfigProvider, notification, Input } from 'antd';
 import useWindowSize from '/functions/useWindowSize';
+import axios from 'axios';
 
 const Contact = () => {
 
   const size = useWindowSize();
+  const [ form, setForm ] = useState({});
+  const [api, contextHolder] = notification.useNotification();
+  const openNotificationWithIcon = (type) => {
+    api[type]({
+      message: 'Success',
+      description:
+        'Your message has been submitted.',
+    });
+  };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(form);
+    axios.post(process.env.NEXT_PUBLIC_POST_CONTACT_US_MESSAGE,form)
+    .then((x)=>{
+      console.log(x.data);
+      setForm({
+        name:'',
+        msg:'',
+        email:''
+      });
+      openNotificationWithIcon('success')
+    })
+  }
   return (
   <div className='contact-styles bg-white'>
+    {contextHolder}
     <Container>
     <Row className=''>
       <Col md={7} className={`${size.width>500?'pt-5 mt-5':''}`}>
@@ -34,14 +59,13 @@ const Contact = () => {
     {size.width>500 &&<Col md={3}></Col>}
       <Col md={6} className='text-center contact-box'>
         <ConfigProvider theme={{token:{ colorPrimary:'#ebf13c', borderRadius:0 }}}>
-          <form className='fs-18'>
+          <form className='fs-18' onSubmit={handleSubmit}>
             <div className='text-start'>Name</div>
-            <Input placeholder="Name" required className='' />
+            <Input placeholder="Name" required className='' value={form.name} onChange={(e)=>setForm((x)=>{ return{...x, name:e.target.value} })} />
             <div className='text-start mt-3'>E-mail</div>
-            <Input placeholder="Email" type='email' required className='mb-3' />
+            <Input placeholder="Email" type='email' required className='mb-3' value={form.email} onChange={(e)=>setForm((x)=>{ return{...x, email:e.target.value} })} />
             <div className='text-start'>Message</div>
-            <Input.TextArea placeholder="Your Message" required className='mb-4' rows={6} />
-
+            <Input.TextArea placeholder="Your Message" required className='mb-4' rows={6} value={form.msg} onChange={(e)=>setForm((x)=>{ return{...x, msg:e.target.value} })}  />
             <button className='green-btn mb-4'>Submit</button>
           </form>
         </ConfigProvider>
@@ -52,4 +76,4 @@ const Contact = () => {
   )
 }
 
-export default Contact
+export default React.memo(Contact)

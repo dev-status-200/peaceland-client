@@ -108,7 +108,7 @@ const Product = ({id, tourData}) => {
         </div>
       </Col>
       <Col md={12} className={`${size.width>500?'mt-1':'text-center'}`}>
-        <div className={`book-btn ${size.width>500?'':'mt-0'}`} onClick={()=>setOpen(true)}>
+        <div className={`book-btn mt-3 ${size.width>500?'':'mt-0'}`} onClick={()=>setOpen(true)}>
           <span>BOOK NOW</span>
         </div>
       </Col>
@@ -116,10 +116,9 @@ const Product = ({id, tourData}) => {
     }
     {added &&
       <>
-        {/* <hr/> */}
         <div className="mt-4">This Tour is already present in your cart <Link href='/activities'>Browse More</Link>, or</div>
         <hr/>
-        <div className="book-btn" onClick={()=>Router.push("/cart")}>Go To Cart <LuShoppingCart/></div>
+        <div className="book-btn" onClick={()=>Router.push("/cart")}>Go To Cart <LuShoppingCart style={{position:'relative', bottom:2}} /></div>
       </>
     }
     </>
@@ -267,4 +266,4 @@ const Product = ({id, tourData}) => {
   </>
   )
 }
-export default Product
+export default React.memo(Product)

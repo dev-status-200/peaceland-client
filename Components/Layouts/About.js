@@ -46,7 +46,7 @@ const About = () => {
                 {size.width>500 && 
                 <Col md={6} className='py-1'>
                     <div className=''>
-                        <img src={'images/Asset 2-8.png'} style={{width:'33vw'}} alt="About Us" />
+                        <img src={'images/uae-about-us.png'} style={{width:'33vw'}} alt="About Us" />
                     </div>
                 </Col>}
                 <Col className='grey-txt' md={6}>
@@ -68,12 +68,12 @@ const About = () => {
         </Container>
         </div>
 
-        <div className='py-5' style={{backgroundColor:"white"}}>
-        <Container className='my-5 py-3'>
+        <div className='' style={{backgroundColor:"white"}}>
+        <Container className=''>
             <div>
             <Row  data-aos='fade-up'>
                 <Col className='grey-txt my-5 px-5' md={6} style={{borderRight:'1px solid black', textAlign:size.width>500?'right':'center'}}>
-                <div className='blue-txt mb-3 fw-700' style={{letterSpacing:7}}>OUR MISSION</div>
+                <div className='blue-txt mb-3 fw-700 fs-20' style={{letterSpacing:7}}>OUR MISSION</div>
                     <span className='fs-20 black-txt fw-500'>
                         <p>
                         Our mission is to provide our customers with access to the most exciting events and thrilling experiences
@@ -83,7 +83,7 @@ const About = () => {
                     </span>
                 </Col>
                 <Col className='grey-txt my-5 px-5' md={6}>
-                <div className='blue-txt mb-3 fw-700' style={size.width>500?{letterSpacing:7}:{textAlign:'center'}} >OUR VISION</div>
+                <div className='blue-txt mb-3 fw-700  fs-20' style={size.width>500?{letterSpacing:7}:{textAlign:'center'}} >OUR VISION</div>
                     <span className='fs-20 black-txt fw-500' style={size.width>500?{}:{textAlign:'center'}}>
                         <p>
                         Our vision is to become the leading ticketing company in the UAE, known for our exceptional customer service, competitive pricing, and wide range of ticket choices. We aim to be the go-to destination for anyone looking to purchase tickets to explore UAE, and to constantly innovating our services for customers.
@@ -96,7 +96,7 @@ const About = () => {
         </div>
 
         <div className='py-5'>
-        <Container className='my-5 py-3'>
+        <Container className='my-5'>
             <div>
             <Row  data-aos='fade-up'>
                 <Col className='grey-txt my-5' md={6}>

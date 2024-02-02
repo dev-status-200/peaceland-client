@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useStripe, useElements } from "@stripe/react-stripe-js";
 import { Row, Col } from "react-bootstrap";
 import { CheckCircleOutlined } from "@ant-design/icons";
+import useWindowSize from '/functions/useWindowSize';
 
 export default function CheckoutForm({email, name, image}) {
   const stripe = useStripe();
@@ -10,6 +11,7 @@ export default function CheckoutForm({email, name, image}) {
 
   const [message, setMessage] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const size = useWindowSize();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,12 +43,13 @@ export default function CheckoutForm({email, name, image}) {
     <form id="payment-form" onSubmit={handleSubmit}>
       <Row>
         <Col md={12} className="text-center" >
+          { size.width<600 && <hr/>}
           <img src={'/stripe/stripe-logo.png'} height={50}  alt="Stripe"/>
           <p className="mb-0 pb-0 silver-2-txt">Protected Checkout<CheckCircleOutlined className="mx-2" style={{color:'green', position:'relative', top:1}} /></p>
         </Col>
       </Row>
-      <PaymentElement id="payment-element" className="my-4" />
-      <Row>
+      <PaymentElement id="payment-element" className="my-4 mx-3" />
+      <Row className="mx-1">
         <Col md={12}>
         <button className="btn-custom-2" style={{width:'100%'}} disabled={isProcessing || !stripe || !elements} id="submit">
           <span id="button-text">

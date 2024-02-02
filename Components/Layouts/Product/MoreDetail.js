@@ -77,4 +77,4 @@ const MoreDetail = ({detail}) => {
   )
 }
 
-export default MoreDetail
+export default React.memo(MoreDetail)

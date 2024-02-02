@@ -16,4 +16,4 @@ const Images = ({mainImage, setMainImage, tour, detail}) => {
   </>
   )
 }
-export default Images
+export default React.memo(Images)

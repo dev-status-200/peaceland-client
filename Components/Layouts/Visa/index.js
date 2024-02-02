@@ -67,7 +67,7 @@ const Visa = () => {
         <hr/>
         <p>Please follow all the steps & guidlenes.</p>
         <p>
-            Submit all the required documents include the visa form to the below E-mail. Once the documents are proveded, under 24 hours, we{"'"}ll send you confirmation with a visa form no. to track your application process
+            Submit all the required documents include the visa form to the below E-mail. Once the documents are provided, under 24 hours, we{"'"}ll send you confirmation with a visa form no. to track your application process
         </p>
         <p>Email: <a className=''> visa@peacelandtravel.com</a></p>
     </div>

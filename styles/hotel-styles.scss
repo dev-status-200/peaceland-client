@@ -1,7 +1,7 @@
 .hotel-styles{
     .main-container {
         width: 100vw;
-        height: 90vh;
+        min-height: 90vh;
         background:url("../public/images/hotel-bg.webp");
         background-size:cover;
         justify-content: center;

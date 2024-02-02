@@ -38,6 +38,7 @@ const Book = ({tour, transport, category, setOpen}) => {
     const showMessage = (msg) => messageApi.warning(<span style={{position:'relative', top:2}}>{msg}</span>);
 
     const addToCart = async() => {
+        // console.log(tour)
         let notValidAddress = false;
         state.booking.forEach((x) => {
             if(x.check && x.transfer!="1" && x.address==""){
@@ -61,7 +62,9 @@ const Book = ({tour, transport, category, setOpen}) => {
         await delay(500);
         let cartValues = {
             tourId:tour.id, image:tour.main_image, name:tour.title,
-            customerTitle:state.title, customerName:state.name, customerContact:state.contact, customerEmail:state.email,
+            customerTitle:state.title, customerName:state.name, 
+            customerContact:state.contact, 
+            customerEmail:state.email,
             options:[]
         }
         state.booking.forEach((x, i)=>{
@@ -78,7 +81,7 @@ const Book = ({tour, transport, category, setOpen}) => {
         dispatchReducer({ type: 'close' })
         showMessage("Successfully Added To Cart!");
         setLoad(false);
-        setOpen(false)
+        setOpen(false);
     }
 
     const oneSelected = () => {
@@ -110,17 +113,17 @@ const Book = ({tour, transport, category, setOpen}) => {
         {!load && <>
         {state.booking.map((x, i)=>{
             return(
-            <div className={`${x.check?'tour-opt-selected':'tour-opt pb-2'} mb-2 prevent-select`}>
+            <div className={`${x.check?'tour-opt-selected':'tour-opt pb-2'} mb-2 prevent-select`} key={i}>
             <Row style={{color:x.check?"black":"silver"}}>
-                <Col style={{maxWidth:30}} 
-                    onClick={()=>{
-                        if(category!="Combo Tours"){
-                            let temp = [...state.booking];
-                            temp[i].check = !temp[i].check
-                            dispatchReducer({type: 'field', fieldName:'booking', payload: temp});
-                        }
-                    }}
-                >
+              <Col style={{maxWidth:30}} 
+                onClick={()=>{
+                  if(category!="Combo Tours"){
+                    let temp = [...state.booking];
+                    temp[i].check = !temp[i].check
+                    dispatchReducer({type: 'field', fieldName:'booking', payload: temp});
+                  }
+                }}
+              >
                     <Checkbox className='' disabled={category=="Combo Tours"?true:false} checked={x.check}/>
                 </Col>
                 <Col md={8} className='cur' onClick={()=>{
@@ -187,7 +190,7 @@ const Book = ({tour, transport, category, setOpen}) => {
                         temp[i].price = temp[i].adult*temp[i].adult_price + temp[i].child*temp[i].child_price + temp[i].transportPrice;
                         dispatchReducer({type: 'set', payload:{booking:temp, address:tempAddress}});
                     }}
-                    options={[{value:"1", label:"No", disabled:x.transport},...transport.filter((y)=>{if(y.status=="1"){return x}}).map((y)=>{  return { value:y.id, label:y.name } }) ]}
+                  options={[{value:"1", label:"No", disabled:x.transport},...transport.filter((y)=>{if(y.status=="1"){return x}}).map((y)=>{  return { value:y.id, label:y.name } }) ]}
                 />
                 </Col>
                 <Col className='text-center mt-3' >
@@ -229,8 +232,8 @@ const Book = ({tour, transport, category, setOpen}) => {
                 </Col>}
                 {x.transfer!="1" &&
                 <>
-                    <Col md={12}><hr className='my-2' /></Col>
-                    <Col md={12} className="mt-1 px-4">
+                  <Col md={12}><hr className='my-2' /></Col>
+                  <Col md={12} className="mt-1 px-4">
                         <GooglePlacesAutocomplete
                             apiKey="AIzaSyDNlNHouprfGHm_3mmfLutARQbIwuNamJk"
                             selectProps={{
@@ -251,26 +254,26 @@ const Book = ({tour, transport, category, setOpen}) => {
                                 },
                             }}
                         />
-                    </Col>
+                  </Col>
                 </>
                 }
                 </>
                 }
                 <Col md={11} className={`${x.check?'mt-3':''} px-3`}>
-                    <span className='show-opt-detail' onClick={()=>{
+                  <span className='show-opt-detail' onClick={()=>{
                         let temp = [...state.booking];
                         temp[i].show = !temp[i].show
                         dispatchReducer({type: 'field', fieldName:'booking', payload: temp});
-                    }}>Show Package Details</span>
-                    {x.show && 
-                    <div>
-                        <hr className='mb-2 mt-0' />
-                        {(x.detail!=null && x.detail.length>10) && 
-                            <div style={{ whiteSpace:'pre-wrap', color:'grey'}}>
-                                {x.detail}
-                            </div>
-                        }
-                        {(x.detail==null || x.detail.length<10) && <div>No Detail Added</div>}
+                  }}>Show Package Details</span>
+                  {x.show && 
+                  <div>
+                    <hr className='mb-2 mt-0' />
+                    {(x.detail!=null && x.detail.length>10) && 
+                    <div style={{ whiteSpace:'pre-wrap', color:'grey'}}>
+                      {x.detail}
+                    </div>
+                    }
+                    {(x.detail==null || x.detail.length<10) && <div>No Detail Added</div>}
                     </div>
                     }
                 </Col>
@@ -327,7 +330,14 @@ const Book = ({tour, transport, category, setOpen}) => {
                 <Col md={12}><hr className='mt-4 mb-1'/></Col>
             </Row>
             <Row>
-                <Col md={12}>{(state.booking.length>0 && oneSelected()) && <button className='cart-btn mt-3' onClick={addToCart}>Add To Cart</button>}</Col>
+              <Col md={12}>
+                {
+                  (state.booking.length>0 && oneSelected()) && 
+                  <button className='cart-btn mt-3' onClick={addToCart}>
+                    Add To Cart
+                  </button>
+                }
+              </Col>
             </Row>
         </div>
         </>
@@ -337,4 +347,4 @@ const Book = ({tour, transport, category, setOpen}) => {
     </>
   )
 }
-export default Book
+export default React.memo(Book)

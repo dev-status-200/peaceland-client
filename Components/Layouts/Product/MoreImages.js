@@ -4,7 +4,7 @@ import { IoLocationSharp } from "react-icons/io5";
 import { Rate } from 'antd';
 import useWindowSize from '/functions/useWindowSize';
 
-const Images = ({setMainImage, tour, detail}) => {
+const MoreImages = ({setMainImage, tour, detail}) => {
 
   const [images, setImages] = useState([]);
 
@@ -50,4 +50,4 @@ const Images = ({setMainImage, tour, detail}) => {
     </>
   )
 }
-export default Images
+export default React.memo(MoreImages)

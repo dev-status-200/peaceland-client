@@ -1012,22 +1012,7 @@ div.react-datepicker-wrapper > div > input{
   object-position: 25% 25%;
   border-radius: 25px; 
 } 
-.left-ticket-box {
-  background-color:rgb(16, 195, 195); 
-  border-radius:25px;
-  height:430px;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 20px;
-}
-.tictet-field{
-  color: rgb(14, 83, 9);
-}
-.tictet-icon{
-  color: rgb(14, 83, 9)!important;
-  position: relative;
-  bottom: 1px;
-}
+
 .ticket-line{
   background-color: white;
   width: 100%;
@@ -1052,4 +1037,28 @@ div.react-datepicker-wrapper > div > input{
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 20px;
+}
+
+.ticket-bg{
+  background: url("../public/ticket/peaceland_ticket.png"); 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.left-ticket-box {
+  background-color:#599742; 
+  border-radius:25px;
+  height:430px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+}
+.tictet-field{
+  color: rgb(219, 209, 29)!important;
+}
+.tictet-icon{
+  color: rgb(219, 209, 29)!important;
+  position: relative;
+  bottom: 1px;
 }

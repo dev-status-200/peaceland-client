@@ -4,7 +4,6 @@ import { Row, Col, Spinner } from 'react-bootstrap';
 import { Input, Rate } from 'antd';
 import Ticket from './Ticket';
 import moment from 'moment';
-import Link from 'next/link';
 import ReactToPrint from 'react-to-print';
 import axios from 'axios';
 import Router from 'next/router';
@@ -19,11 +18,13 @@ const TicketPage = ({ticketData, bookingNo}) => {
     const [load, setLoad] = useState(false);
     const [tickets, setTickets] = useState([]);
     const [fetchedTicket, setFetchedTicket] = useState({});
+    const [transportList, setTransportList] = useState([]);
 
     const selectTour = async(tour, option) => {
         if(option.assigned=="1"){
             let count = option.codes.split(", ")
             let ticket = [];
+            console.log(tour)
             count.forEach((x)=>{
                 ticket.push({
                     image:tour.image,
@@ -46,55 +47,28 @@ const TicketPage = ({ticketData, bookingNo}) => {
     }
 
     useEffect(() => {
+        getData();
+    }, []);
+
+    async function getData(){
         let temp = ticketData.result.BookedTours;
+        await axios.get(process.env.NEXT_PUBLIC_GET_TRANSPORT)
+        .then((x)=>{
+          setTransportList(x.data.result)
+        })
         temp.forEach((x, i)=>{
-            x.BookedToursOptions.forEach((y, j)=>{
+            x?.BookedToursOptions?.forEach((y, j)=>{
                 y.check = false;
                 y.reviewCheck = false;
                 y.rating = y.rating==null?0:parseInt(y.rating) ;
             })
         })
         setTickets(temp);
-    }, []);
+    }
 
   return (
-    <div style={{minHeight:'50vh', backgroundColor:"white"}}>
-        {size.width>500?<>
-        <div className='home-styles'>
-        <div className='theme py-4'>
-            <div className='navBar'>
-            <Link className='navLink' href='/'>HOME</Link>
-            <div className='dropdown'>
-            <div className='navLink dropbtn' onClick={()=>Router.push("/search?destination=uae&city=Dubai+City")}>DESTINATION</div>
-            <div className="dropdown-content">
-                <a className='menu-drop-links pb-2' onClick={()=>Router.push("/search?destination=uae&city=Dubai+City")}>Dubai</a>
-                <a className='menu-drop-links pb-2' onClick={()=>Router.push("/search?destination=uae&city=Abu+Dhabi")}>Abu Dhabi</a>
-            </div>
-            </div>
-            <span className="navLink">
-                <img src={'/images/logo.png'} height={100} alt="Logo" />
-            </span>
-            <div className='dropdown  mx-2'>
-                <span className='navLink dropbtn' onClick={()=>Router.push("/search?destination=uae&city=Dubai+City")}>ACTIVITIES</span>
-                <div className="dropdown-content">
-                    <Link className='menu-drop-links mx-3'      href={{pathname:'/search',  query:{destination:"uae", city:"Dubai City", category:'Theme Parks' }}}  >Theme Parks</Link>
-                    <Link className='menu-drop-links mx-3'      href={{pathname:'/search',  query:{destination:"uae", city:"Dubai City", category:'Water Parks' }}}  >Water Parks</Link>
-                    <Link className='menu-drop-links mx-3'      href={{pathname:'/search',  query:{destination:"uae", city:"Dubai City", category:'City Tours'  }}}  >City Tours</Link>
-                    <Link className='menu-drop-links mx-3'      href={{pathname:'/search',  query:{destination:"uae", city:"Dubai City", category:'Luxury Tours'}}}>Luxury Tours</Link>
-                    <Link className='menu-drop-links mx-3 pb-2' href={{pathname:'/search',  query:{destination:"uae", city:"Dubai City", category:'Adventure'   }}}  >Adventure</Link>
-                </div>
-            </div>
-            <Link className='navLink' href='/about'>ABOUT US</Link>
-            </div>
-        </div>
-        </div>
-        <hr className='mb-0 mt-5' />
-        </>:
-        <>
-        <hr className='mb-0 mb-0' />
-        </>
-        }
-        <div className={`${size.width>500?"tickets-cont pb-5":"pb-3 px-5"}`}>
+    <>
+        <div className={`bg-white ${size.width>600?"tickets-cont pb-5 mt-5":"pb-3 px-5"}`}>
             <h3 className='mt-4 grey-txt'>Booking #{ticketData?.result?.booking_no} Tickets</h3>
             <span className='grey-txt'> Please select the ticket to interact</span>
             <Row className='ticket-cont-wh-bg my-3' style={{padding:size.width>500?"20px 20px":"0px"}}>
@@ -104,8 +78,6 @@ const TicketPage = ({ticketData, bookingNo}) => {
                 {i!==0 && <hr className='my-0 py-0' />}
                 {x.BookedToursOptions.map((y, j)=>{
                 return(
-                <>
-                {j!=0 &&<hr/>}
                 <Row key={y.id} className={y.check?'selected-ticket-row': size.width>500?'ticket-row':"py-3 px-1"} 
                     onClick={async()=>{
                         setLoad(true);
@@ -204,8 +176,8 @@ const TicketPage = ({ticketData, bookingNo}) => {
                     {(y.reviewed=="1" && size.width<500) &&
                     <div className={"mx-2"} style={{color:'green'}}>Review Sent</div>
                     }
+                    <Col md={12}>{j!=0 &&<hr/>}</Col>
                 </Row>
-                </>
                 )
                 })}
             </Col>
@@ -223,18 +195,20 @@ const TicketPage = ({ticketData, bookingNo}) => {
         </div>
 
         {fetchedTicket.length>0 &&
-        <div style={{display:"none"}}>
+        <div 
+            style={{display:"none"}}
+        >
         <div ref={(response) => (inputRef = response)} >
             {fetchedTicket.map((x, i)=>{
             return(
-                <div key={x.id} className=''>
+                <div key={i} className=''>
                     <div className='my-5'></div>
-                    <Ticket fetchedTicket={x} i={i} />
+                    <Ticket fetchedTicket={x} i={i} transportList={transportList} />
                 </div>
             )})}
         </div>
         </div>}
-    </div>
+    </>
   )
 }
 

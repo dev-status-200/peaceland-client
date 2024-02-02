@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import Aos from 'aos';
 import { addProduct } from '../../redux/cart/cartSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { destroyCart, retrieveCart } from '../../functions/cartFunction';
-//import { useSession } from 'next-auth/react';
 import Router, { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import Aos from 'aos';
 
 const PaySuccess = () => {
 
@@ -30,7 +29,7 @@ const PaySuccess = () => {
   }, [values.email])
 
   const afterPay = async() => {
-    await delay(2000);
+    await delay(4000);
     let {id, no} = await createReservation();
     await sendMail(id,no);
   }
@@ -90,15 +89,16 @@ const PaySuccess = () => {
   return (
     <div style={{backgroundColor:"white", padding:100}}>
       <div className='text-center' data-aos="fade-in">
-          <img src={"/other-assets/payment_done.png"} height={200}  alt="Success"/>
-          <h1 style={{color:"#20bf55", fontWeight:700}} className="my-3">Thank You!</h1>
-          <p style={{color:"grey"}}>Payment done successfully</p>
-          <p style={{color:"silver"}}>
-            A confirmation E-mail will be sent in a moment, and you'll be directed towards the home page shortly!
-          </p>
+        <img src={"/other-assets/payment_done.png"} height={200}  alt="Success"/>
+        <h1 style={{color:"#20bf55", fontWeight:700}} className="my-3">Thank You!</h1>
+        <p style={{color:"grey"}}>Payment done successfully</p>
+        <p style={{color:"silver"}}>
+          A confirmation E-mail will be sent in a moment, and you'll be directed towards the home page shortly!
+        </p>
+        <h3 style={{color:"grey"}}>Please Do Not Refresh this page!</h3>
       </div>
     </div>
   )
 }
 
-export default PaySuccess
+export default React.memo(PaySuccess)
