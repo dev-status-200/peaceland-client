@@ -25,9 +25,11 @@ const MyBookings = () => {
 
     async function getValues(){
         let token = await Cookies.get("token");
-        let data = JSON.parse(token)
-        await token?setUser({...data, loggedIn:true}):null;
-        retrive(data.email);
+        if(token){
+            let data = JSON.parse(token)
+            await token?setUser({...data, loggedIn:true}):null;
+            retrive(data.email);
+        }
     }
 
     const retrive = async(data) => {

@@ -4,7 +4,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import Router, { useRouter } from 'next/router';
 import { fetchCurrencyData } from '/functions/fetchCurrencyData';
-import { Dropdown, Modal, Badge, } from 'antd';
+import { Dropdown, Modal, Badge, ConfigProvider } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { addCurrency, changeCurrency } from '/redux/currency/currencySlice';
 import "/node_modules/flag-icons/css/flag-icons.min.css";
@@ -13,6 +13,7 @@ import { FaSquareXTwitter } from "react-icons/fa6";
 import Link from 'next/link';
 import Aos from 'aos';
 import useWindowSize from '/functions/useWindowSize';
+import Profile from './Profile';
 
 const Desktop = ({user}) => {
 
@@ -84,39 +85,41 @@ const Desktop = ({user}) => {
             <img src='/images/logo.png' height={size.width>1200?80:50} className='cur' onClick={()=>router.push("/")} />
           </div>
           <div className='text-center'>
-                <Link href={"/"} className='nav-link-item'>Home</Link>
-                <Link href={{pathname:'/search'}} className='nav-link-item'>Destinations</Link>
-                <Dropdown
-                    menu={{
-                        items,
-                    }}
-                >
-                    <Link href={{pathname:'/activities'}} className='nav-link-item'>Activities</Link>
-                </Dropdown>
-                
-                <Link href={"/hotels"} className='nav-link-item'>Hotels</Link>
-                <Link href={"/visa"} className='nav-link-item'>Visa</Link>
-                <Link href={"/about"} className='nav-link-item'>About</Link>
-                <Link href={"/contact"} className='nav-link-item'>Contact</Link>
+            <Link href={"/"} className='nav-link-item'>Home</Link>
+            <Link href={{pathname:'/search'}} className='nav-link-item'>Destinations</Link>
+            <ConfigProvider theme={{token:{ colorBgElevated:'#194e9e', colorText:'white', controlItemBgHover:'#0a0f57' }}}>
+              <Dropdown
+                overlayStyle={{colorBgElevated:'green'}}
+                menu={{
+                  items,
+                }}
+              >
+                <Link href={{pathname:'/activities'}} className='nav-link-item'>Activities</Link>
+              </Dropdown>
+            </ConfigProvider>
+            <Link href={"/hotels"} className='nav-link-item'>Hotels</Link>
+            <Link href={"/visa"} className='nav-link-item'>Visa</Link>
+            <Link href={"/about"} className='nav-link-item'>About</Link>
+            <Link href={"/contact"} className='nav-link-item'>Contact</Link>
           </div>
           <div style={{width:"21%", textAlign:'right'}}>
-                {size.width>1200 && <>
-                    <FaUserCircle className='header-icons' size={18} style={{position:'relative', bottom:2}} />
-                    <Badge count={cart.length} showZero color="#faad14" size="small">
-                        <FaCartShopping className='header-icons cur' onClick={()=>Router.push("/cart")} />
-                    </Badge>
-                    <span className='fs-20' style={{marginLeft:16, marginRight:10}}>|</span>
-                    <Link href={'https://www.facebook.com/peacelandtraveltourism.official/'} target='_blank'><SiFacebook  className='header-icons' style={{color:'#2b67b6'}} size={17} /></Link>
-                    <Link href="https://www.instagram.com/peacelandtravelandtourism/?fbclid=IwAR0Ol2E3QiKOWgGxlBu0vvIvYvwbKERTs_yo_-lnzLRY-5LOvbjykfR_7Nc" target='_blank'><img src='/icons/insta.jpeg' height={17} width={17} className='header-icons' /></Link>
-                    <Link href={'https://twitter.com/peacelandgroup'} target='_blank'><FaSquareXTwitter  style={{color:'#424242'}} size={19} /></Link>
-                    <Link href="https://www.linkedin.com/company/peaceland-travels-and-tourism/" target='_blank'><img src='/icons/linkedin.png' height={17} width={17} className='header-icons' /></Link>
-                </>}
-                {size.width<1200 && <>
-                    <FaUserCircle className='header-icons' size={18} style={{position:'relative', bottom:2}} />
-                    <Badge count={cart.length} showZero color="#faad14" size="small">
-                        <FaCartShopping className='header-icons cur' onClick={()=>Router.push("/cart")} />
-                    </Badge>
-                </>}
+            {size.width>1200 && <>
+                <Profile/>
+                <Badge count={cart.length} showZero color="#faad14" size="small">
+                  <FaCartShopping className='header-icons cur' onClick={()=>Router.push("/cart")} />
+                </Badge>
+                <span className='fs-20' style={{marginLeft:16, marginRight:10}}>|</span>
+                <Link href={'https://www.facebook.com/peacelandtraveltourism.official/'} target='_blank'><SiFacebook  className='header-icons' style={{color:'#2b67b6'}} size={17} /></Link>
+                <Link href="https://www.instagram.com/peacelandtravelandtourism/?fbclid=IwAR0Ol2E3QiKOWgGxlBu0vvIvYvwbKERTs_yo_-lnzLRY-5LOvbjykfR_7Nc" target='_blank'><img src='/icons/insta.jpeg' height={17} width={17} className='header-icons' /></Link>
+                <Link href={'https://twitter.com/peacelandgroup'} target='_blank'><FaSquareXTwitter  style={{color:'#424242'}} size={19} /></Link>
+                <Link href="https://www.linkedin.com/company/peaceland-travels-and-tourism/" target='_blank'><img src='/icons/linkedin.png' height={17} width={17} className='header-icons' /></Link>
+            </>}
+            {size.width<1200 && <>
+                <FaUserCircle className='header-icons' size={18} style={{position:'relative', bottom:2}} />
+                <Badge count={cart.length} showZero color="#faad14" size="small">
+                    <FaCartShopping className='header-icons cur' onClick={()=>Router.push("/cart")} />
+                </Badge>
+            </>}
           </div>
         </div>
       </div>

@@ -38,7 +38,7 @@ const Desktop = () => {
       </section>
       <section>
         <div className="parallax-one">
-          <h2 className='text-shade'>ANYWHERE IN THE WORLD</h2>
+          <h2 className='text-shade'>BOOK YOUR VACATION NOW</h2>
         </div>
       </section>
       <section>
