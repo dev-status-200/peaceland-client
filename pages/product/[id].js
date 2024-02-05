@@ -30,3 +30,22 @@ export async function getStaticPaths() {
     }));
     return { paths, fallback: false }
 }
+
+// import Product from '/Components/Layouts/Product';
+// import axios from 'axios';
+
+// export default function product({ id, tourData }) {
+//   return (<Product id={id} tourData={tourData} />)
+// }
+
+// product.getInitialProps = async({query}) => {
+//   const tourData = await axios.get(process.env.NEXT_PUBLIC_GET_PRODUCT_BY_ID,{
+//     headers:{
+//       'id':`${query.id}`
+//     }
+//   }).then((x)=>x.data)
+//   return{
+//     id:query.id,
+//     tourData
+//   }
+// }

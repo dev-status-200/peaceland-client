@@ -936,7 +936,7 @@ div.react-datepicker-wrapper > div > input{
   transition-duration: 300ms;
   background-color: #094c64ea;
 }
-
+//
 .search-box-btn{
   transition-duration: 300ms;
   background-color: #194e9e;
@@ -946,7 +946,7 @@ div.react-datepicker-wrapper > div > input{
 }
 .search-box-btn:hover{
   transition-duration: 300ms;
-  background-color: #ebf13c;
+  background-color: #b8d233;
   color: black!important;
 }
 
@@ -1062,3 +1062,55 @@ div.react-datepicker-wrapper > div > input{
   position: relative;
   bottom: 1px;
 }
+
+.btn-green{
+  background-color: rgb(219, 209, 29)!important;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+}
+.btn-whatsapp{
+  background-color: rgb(85, 205, 83)!important;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: 600!important;
+}
+.btn-whatsapp:hover{
+  transition-duration: 300ms;
+  background-color: rgb(44, 112, 42)!important;
+}
+
+.btn-blue{
+  background-color: #194e9e!important;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: 600!important;
+}
+.btn-blue:hover{
+  transition-duration: 300ms;
+  background-color: #0a2a59!important;
+}
+
+.search-btn{
+  // border: none;
+  width: 80px;
+  height: 55px;
+  background-color: #194e9e;
+  color: white;
+  border: 1px solid #194e9e;
+}
+.search-btn:hover{
+  transition-duration: 300ms;
+  background-color: #0d3064;
+}
+
+.search-container{
+  border: 2px solid #b8d233;
+  width: 750px;
+  margin: auto;
+  padding: 10px;
+  background-color: rgba(53, 106, 144, 0.412);
+}
+// style={{border:'2px solid #b8d233', width:750, margin:'auto', padding:10}}

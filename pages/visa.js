@@ -1,5 +1,5 @@
 import React from 'react';
-import Visa from '/Components/Layouts/Visa';
+import Visa from '/Components/Layouts/Visa/Products';
 import Head from 'next/head';
 
 const visa = () => {

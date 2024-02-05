@@ -29,7 +29,7 @@ const PaySuccess = () => {
   }, [values.email])
 
   const afterPay = async() => {
-    await delay(4000);
+    await delay(8000);
     let {id, no} = await createReservation();
     await sendMail(id,no);
   }

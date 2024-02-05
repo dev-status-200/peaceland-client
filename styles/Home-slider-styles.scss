@@ -22,31 +22,9 @@
   }
 
   .search-bar-container{
-  }
-
-  .custom-search{
-    border: 1px solid white;
-    height: 50px;
-    width: 600px;
-    padding-left: 20px;
-    transition: ease-in-out, width .20s ease-in-out;
-  }
-  .custom-search:focus{
-    width: 700px;
-    outline: none;
-  }
-
-  .search-btn{
-    // border: none;
-    width: 80px;
-    height: 40px;
-    background-color: #194e9e;
-    color: white;
-    border: 1px solid #194e9e;
-  }
-  .search-btn:hover{
-    transition-duration: 300ms;
-    background-color: #0d3064;
+    border: 1px solid green;
+    padding: 20px;
+    width: 80%;
   }
 
   .tour-list{
@@ -71,7 +49,6 @@
   }
 
   .desert-safari{
-    background:linear-gradient(0deg, rgba(93, 63, 2, 0.5), rgba(132, 87, 10, 0.445)), url("../public/slider/desert-safari.jpg");
     height: 80vh;
     background-position: center;
     background-repeat: no-repeat;
@@ -124,8 +101,8 @@
 
   .heading-main{
     color: rgb(255, 255, 255);
-    font-size: 60px;
-    text-shadow: 4px 4px 2px rgba(23, 73, 12, 0.66);
-    font-weight: bolder;
+    font-size: 70px;
+    text-shadow: 4px 4px 2px rgba(10, 38, 3, 0.66);
+    font-weight: 900!important;
   }
 }

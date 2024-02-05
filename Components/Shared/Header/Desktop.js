@@ -14,6 +14,7 @@ import Link from 'next/link';
 import Aos from 'aos';
 import useWindowSize from '/functions/useWindowSize';
 import Profile from './Profile';
+import Destinations from './Destinations';
 
 const Desktop = ({user}) => {
 
@@ -40,12 +41,12 @@ const Desktop = ({user}) => {
     }
 
   const items = [
-    { label: <div className='' onClick={()=>router.push('/activities?destination=&city=&category=Adventure')}>Adventure Tours</div>, key: '1' },
-    { label: <div className='' onClick={()=>router.push('/activities?destination=&city=&category=Water+Parks')}>Water Parks</div>, key: '2' },
-    { label: <div className='' onClick={()=>router.push('/activities?destination=&city=&category=Family+Fun')}>Family Fun</div>, key: '3' },
-    { label: <div className='' onClick={()=>router.push('/activities?destination=&city=&category=Theme+Parks')}>Theme Parks</div>, key: '4' },
-    { label: <div className='' onClick={()=>router.push('/activities?destination=&city=&category=City+Tours')}>City Tours</div>, key: '5' },
-    { label: <div className='' onClick={()=>router.push('/activities?destination=&city=&category=Luxury+Tours')}>Luxury Tours</div>, key: '6' }
+    { label: <div className='mx-2 p-1 fw-500' onClick={()=>router.push('/activities?destination=&city=&category=Adventure')}>Adventure Tours</div>, key: '1' },
+    { label: <div className='mx-2 p-1 fw-500' onClick={()=>router.push('/activities?destination=&city=&category=Water+Parks')}>Water Parks</div>, key: '2' },
+    { label: <div className='mx-2 p-1 fw-500' onClick={()=>router.push('/activities?destination=&city=&category=Family+Fun')}>Family Fun</div>, key: '3' },
+    { label: <div className='mx-2 p-1 fw-500' onClick={()=>router.push('/activities?destination=&city=&category=Theme+Parks')}>Theme Parks</div>, key: '4' },
+    { label: <div className='mx-2 p-1 fw-500' onClick={()=>router.push('/activities?destination=&city=&category=City+Tours')}>City Tours</div>, key: '5' },
+    { label: <div className='mx-2 p-1 fw-500' onClick={()=>router.push('/activities?destination=&city=&category=Luxury+Tours')}>Luxury Tours</div>, key: '6' }
   ];
 
   const adjustCurrency = (curr) => {
@@ -71,7 +72,7 @@ const Desktop = ({user}) => {
     <div className='header-styles' style={{backgroundColor:'white'}}>
       <div className='fixed'>
         <>
-          <div className='top-bar fs-10'>
+          <div className='top-bar fs-13'>
             {changeTag && <div data-aos='slide-down'>
                 Are you a seller? then join our B2B portal by registering at this <a href="https://b2b.peacelandtravel.com/" target='_blank' className='mx-1'> <b>link</b></a>
             </div>}
@@ -86,10 +87,10 @@ const Desktop = ({user}) => {
           </div>
           <div className='text-center'>
             <Link href={"/"} className='nav-link-item'>Home</Link>
-            <Link href={{pathname:'/search'}} className='nav-link-item'>Destinations</Link>
+            {/* <Link href={{pathname:'/search'}} className='nav-link-item'>Destinations</Link> */}
+            <Destinations/>
             <ConfigProvider theme={{token:{ colorBgElevated:'#194e9e', colorText:'white', controlItemBgHover:'#0a0f57' }}}>
               <Dropdown
-                overlayStyle={{colorBgElevated:'green'}}
                 menu={{
                   items,
                 }}

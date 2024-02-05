@@ -83,7 +83,7 @@ const Tours = ({records, size, price, search, setSearch}) => {
                         className='mt-3 search-box-btn px-3 py-2'
                         style={{float:'right', textDecoration:'none', top:'100%'}}
                     >
-                        <div>BOOK NOW</div>
+                        <b>BOOK NOW</b>
                     </Link>
                     </div>:
                     <div>

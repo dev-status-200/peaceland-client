@@ -1,13 +1,18 @@
 .visa-styles {
     .main-container {
         width: 100vw;
-        height: 70vh;
-        background: url('../public/images/visa.jpeg');
+        background: url('../public/images/Flight-over-Dubai.jpg');
         background-size: cover;
         justify-content: center;
         align-items: center;
         display: flex;
         flex-direction: column;
+    }
+    .white-box{
+        background-color: rgba(241, 246, 252, 0.78);
+        border-radius: 15px;
+        margin: 50px 30px;
+        padding: 50px;
     }
     .first-box{
         background-color: rgba(255, 255, 255, 0.633);

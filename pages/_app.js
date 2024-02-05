@@ -19,13 +19,8 @@ function MyApp({ Component, pageProps:{ session, ...pageProps }, }) {
   Router.events.on("routeChangeComplete", () => { setLoading(false)});
 
   return (
-    // <div className='text-center' style={{marginTop:"25%"}}> Unexpected Server Error Occured </div>
     <> 
-      <Script
-        strategy="lazyOnload"
-        src={`https://www.googletagmanager.com/gtag/js?id=G-2D03SMZSES`}
-      />
-
+      <Script strategy="lazyOnload" src={`https://www.googletagmanager.com/gtag/js?id=G-2D03SMZSES`} />
       <Script strategy="lazyOnload">
         {`
           window.dataLayer = window.dataLayer || [];
@@ -37,30 +32,31 @@ function MyApp({ Component, pageProps:{ session, ...pageProps }, }) {
         `}
       </Script>
     {(
-        router.pathname =='/'            ||
-        router.pathname =='/product'     ||
-        router.pathname =='/product/[id]'||
-        router.pathname =='/cart'        ||
-        router.pathname =='/myBookings'  ||
-        router.pathname =='/about'       ||
-        router.pathname =='/ticketPage'  ||
-        router.pathname =='/search'      ||
-        router.pathname =='/visa'        ||
-        router.pathname =='/hotels'      ||
-        router.pathname =='/search/[id]' ||
-        router.pathname =='/contact'     ||
-        router.pathname =='/activities'  ||
-        router.pathname =='/paySuccess'
+      router.pathname =='/'            ||
+      router.pathname =='/product'     ||
+      router.pathname =='/product/[id]'||
+      router.pathname =='/cart'        ||
+      router.pathname =='/myBookings'  ||
+      router.pathname =='/about'       ||
+      router.pathname =='/ticketPage'  ||
+      router.pathname =='/search'      ||
+      router.pathname =='/visa'        ||
+      router.pathname =='/hotels'      ||
+      router.pathname =='/search/[id]' ||
+      router.pathname =='/visaForm' ||
+      router.pathname =='/contact'     ||
+      router.pathname =='/activities'  ||
+      router.pathname =='/paySuccess'
       ) &&
       <>
-        { loading && 
+        {loading && 
           <GoogleOAuthProvider clientId="1018461770381-hin727pafmfajl3oq0djq27h3rnae221.apps.googleusercontent.com">
             <Provider store={store}>
               <Loader/> 
             </Provider>
           </GoogleOAuthProvider>
         }
-        { !loading &&
+        {!loading &&
           <GoogleOAuthProvider clientId="1018461770381-hin727pafmfajl3oq0djq27h3rnae221.apps.googleusercontent.com">
             <Provider store={store}>
               <ClientLayout>
@@ -71,7 +67,6 @@ function MyApp({ Component, pageProps:{ session, ...pageProps }, }) {
         }
       </>
     }
-
     {(router.pathname =='/login' || router.pathname =='/auth') &&
       <GoogleOAuthProvider clientId="1018461770381-hin727pafmfajl3oq0djq27h3rnae221.apps.googleusercontent.com">
         <Component {...pageProps} />

@@ -10,7 +10,7 @@
         flex-direction: column;
     }
     .first-box{
-        background-color: rgba(255, 255, 255, 0.633);
+        background-color: rgba(240, 244, 249, 0.633);
         min-height: 22px;
         width: 50%;
         border-radius: 5px;
@@ -18,7 +18,7 @@
         top: 32px;
     }
     .second-box{
-        background-color: rgba(255, 255, 255, 0.611);
+        background-color: rgba(238, 244, 253, 0.611);
         min-height: 30px;
         width: 60%;
         border-radius: 5px;
@@ -26,38 +26,11 @@
         top: 20px;
     }
     .hotel-box{
-        background-color: rgba(255, 255, 255, 0.959);
+        background-color: rgba(242, 244, 253, 0.89);
         min-height: 8%;
         padding: 30px;
         width: 70%;
         border-radius: 10px;
-    }
-   
-    .input-container{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    input[type=text] {
-        transition-duration: 300ms;
-        background-color: #499b2f;
-        color: white;
-        border: none;
-        padding: 10px 38px 10px 20px;
-        border-radius: 25px;
-        border: 1px solid #499b2f;
-        outline: none;
-        position: relative;
-        left: 20px;
-    }
-    input[type=text]:focus {
-        transition-duration: 300ms;
-        border: 1px solid rgb(25, 91, 25);
-        padding: 10px 70px 10px 20px;
-        outline: none;
-    }
-    input[type=text]::placeholder {
-        color: rgba(255, 255, 255, 0.764);
     }
     .link-icon{
         color: #499b2f;
