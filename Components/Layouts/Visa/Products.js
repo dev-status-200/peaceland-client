@@ -1,36 +1,60 @@
 import React, { useState, useEffect } from 'react';
-import { EditOutlined, EllipsisOutlined, LoadingOutlined } from '@ant-design/icons';
-import { Avatar, Card, Flex, ConfigProvider, Modal, Row, Col, Select, Input, DatePicker, Button } from 'antd';
+import { Card, Flex, ConfigProvider, Modal, Row, Col, Select, Input, DatePicker, Checkbox } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 import codes from "/JSONData/codes.json";
+import { delay } from "/functions/delay";
 import dayjs from 'dayjs';
 import axios from 'axios';
-import { delay } from "/functions/delay"
+import Cookies from 'js-cookie';
+import Link from 'next/link';
+import { Container } from 'react-bootstrap';
 
 const { Meta } = Card;
 
 const VisaProducts = () => {
 
+  const [agree, setAgree] = useState(false); 
   const [load, setLoad] = useState(false); 
   const [isModalOpen, setIsModalOpen] = useState(false); 
   const [success, setSuccess] = useState(false); 
   const [form, setForm] = useState([ ]);
+  const [user, setUser] = useState({});
+
+  const info = () => {
+    Modal.info({
+      title: 'Visa Application requires Login!',
+      content: (
+        <div>
+          <p>In order to fill the form you must be loggin in!</p>
+          <Link href={'/auth'}>Sign-in with google</Link>
+        </div>
+      ),
+      onOk(){
+
+      }
+    });
+  };
+
   const showModal = (x) => {
-    console.log(x.id)
-    setIsModalOpen(true);
-    let tempForm = [...form];
-    tempForm[0].entryType = x.id
-    setForm(tempForm)
+    if(user.email){
+      setIsModalOpen(true);
+      let tempForm = [...form];
+      tempForm[0].entryType = x.id
+      setForm(tempForm)
+    } else {
+      info()
+    }
   };
   const cardStyle = { width: 320, margin:20 };
   const cardsOne = [
-    {id:'1', title:'14 Days', desc:'Single Entry Application + Insurance', extra:'', api:"https://api.whatsapp.com/send/?phone=917501086003&text=Single Entry Application with Insurance"},
-    {id:'2', title:'30 Days', desc:'Single Entry Application + Insurance', extra:'', api:"https://api.whatsapp.com/send/?phone=917501086003&text=Single Entry Application with Insurance"},
-    {id:'3', title:'60 Days', desc:'Single Entry Application + Insurance', extra:'', api:"https://api.whatsapp.com/send/?phone=917501086003&text=Single Entry Application with Insurance"},
+    {id:'1', title:'14 Days', desc:'Single Entry Application + Insurance', extra:'', api:"https://api.whatsapp.com/send/?phone=971503374890&text=14 Days Single Entry Application with Insurance"},
+    {id:'2', title:'30 Days', desc:'Single Entry Application + Insurance', extra:'', api:"https://api.whatsapp.com/send/?phone=971503374890&text=30 Days Single Entry Application with Insurance"},
+    {id:'3', title:'60 Days', desc:'Single Entry Application + Insurance', extra:'', api:"https://api.whatsapp.com/send/?phone=971503374890&text=60 Days Single Entry Application with Insurance"},
   ];
   const cardsTwo = [
-    {id:'4', title:'14 Days', desc:'Multiple Entry Application + Insurance', extra:'2 Working Days*', api:"https://api.whatsapp.com/send/?phone=917501086003&text=Multiple Entry Application with Insurance"},
-    {id:'5', title:'30 Days', desc:'Multiple Entry Application + Insurance', extra:'2 Working Days*', api:"https://api.whatsapp.com/send/?phone=917501086003&text=Multiple Entry Application with Insurance"},
-    {id:'6', title:'60 Days', desc:'Application Extension/A2A Application Change', extra:' ', api:"https://api.whatsapp.com/send/?phone=917501086003&text=Application Extension/A2A Application Change"},
+    {id:'4', title:'14 Days', desc:'Multiple Entry Application + Insurance', extra:'2 Working Days*', api:"https://api.whatsapp.com/send/?phone=971503374890&text=14 Days Multiple Entry Application with Insurance"},
+    {id:'5', title:'30 Days', desc:'Multiple Entry Application + Insurance', extra:'2 Working Days*', api:"https://api.whatsapp.com/send/?phone=971503374890&text=30 Days Multiple Entry Application with Insurance"},
+    {id:'6', title:'60 Days', desc:'Application Extension/A2A Application Change', extra:' ',         api:"https://api.whatsapp.com/send/?phone=971503374890&text=60 Days Application Extension/A2A Application Change"},
   ];
   const options = [
     {value:'1', label:'14 Days Single Entry Application + Insurance'},
@@ -66,6 +90,7 @@ const VisaProducts = () => {
   
   useEffect(() => {
     setForm([personDetail]);
+    getAuth()
   }, [])
   
   const appendPerson = () => {
@@ -92,9 +117,41 @@ const VisaProducts = () => {
     setSuccess(false)
   }
 
+  async function getAuth(){
+    let token = await Cookies.get("token");
+    await token?setUser({...(JSON.parse(token)), loggedIn:true}):null;
+  }
+
+  const OkInfo = ({para, head}) => {
+    return(
+      <div>
+      <h5 className='blue-txt mt-5' style={{fontSize:head}}>Ok To Board Information</h5>
+      <hr/>
+      <p className='grey-txt-2' style={{fontSize:para}}>Visitors from India, Nepal, Pakistan, Bangladesh and other Asian countries have to get an Ok to Board Status before travelling to UAE. In short, having a valid Application is not enough to travel to the UAE. On the other hand, you would have electronically update your Application and get an Ok to Board from your airline. If you fail to do so, you would not be allowed to board your flight from your home country itself.</p>
+      <h5 className='blue-txt mt-5' style={{fontSize:head}}>Special Notes</h5>
+      <hr/>
+      <Row>
+        <Col span={12} className='grey-txt-2' style={{fontSize:para}}>
+        <ul>
+          <li>Your passport should have minimum 6 months validity.</li>
+          <li>The passport should be a printed one and not handwritten.</li>
+          <li>The documents should be scanned properly. Blurred copies would not be accepted.</li>
+        </ul>
+        </Col>
+        <Col span={12} className='grey-txt-2' style={{fontSize:para}}>
+          <ul>
+            <li>If you do not book hotel or air ticket with Rayna Tours, you would be charged around AED 50 to AED 100 {"("}as per the type of application{")"} for the application process.</li>
+            <li>Note: You can provide us as the required documents on WhatsApp at <b className='blue-txt'>+971 50 337 4890</b> OR Email at <b className='blue-txt'>info@peacelandtravel.com</b></li>
+          </ul>
+        </Col>
+      </Row>
+      </div>
+    )
+  }
+
   return (
     <div>
-    <Modal open={isModalOpen} width={'80%'} onCancel={closeModal} okButtonProps={{hidden:true}} cancelButtonProps={{hidden:true}}>
+    <Modal open={isModalOpen} width={'80%'} onCancel={closeModal} okButtonProps={{hidden:true}} centered cancelButtonProps={{hidden:true}}>
       {!success &&
       <div className='p-2'>
         <form onSubmit={handleSubmit}>
@@ -347,11 +404,17 @@ const VisaProducts = () => {
             <Col span={1}></Col>
           </Row>
         )})}
-        <div className='px-2 mt-4'>
-          <button className='custom-btn' disabled={load?true:false} type='submit'>{!load?"Submit":<LoadingOutlined />}</button>
+        <div className='mt-3 px-3 cur'  onClick={()=>setAgree(!agree)}>
+          By Clicking this checkbox you agree to our Visa application process Terms & Conditions <Checkbox className='mx-1' checked={agree} />
+        </div>
+        <div className='px-2 mt-3'>
+          <button className='custom-btn' disabled={(load || !agree)?true:false} type='submit'>{!load?"Submit":<LoadingOutlined />}</button>
           <button className='custom-btn mx-2' type='button' onClick={appendPerson}>Add more person</button>
         </div>
         </form>
+        <div className='px-3'>
+          <OkInfo para={14} head={18} />
+        </div>
       </div>
       }
       {success &&
@@ -367,7 +430,7 @@ const VisaProducts = () => {
     <div className='visa-styles pt-4'>
       <div className='main-container pt-4'>
         <div className='white-box'>
-          <h2 className='text-center blue-txt mb-4 fw-700'>Dubai Visa Applications</h2>
+          <h1 className='text-center blue-txt mb-4 fw-700'>Dubai Visa Applications</h1>
           <hr/>
           <ConfigProvider theme={{token:{ colorPrimary:'red' }}}>
           <Flex justify={"center"} align={"center"} gap={"large"}>
@@ -381,7 +444,10 @@ const VisaProducts = () => {
                 <p className='text-center grey-txt' style={{height:20}}>{x.extra}</p>
                 <hr/>
                 <Flex justify={"center"} align={"center"} gap={"large"} className='mt-3'>
-                  <span className='btn-blue' onClick={()=>showModal(x)}>Apply Online</span>
+                  <span className='btn-blue' 
+                    onClick={()=>showModal(x)}>
+                    Apply Online
+                  </span>
                   <a className='btn-whatsapp' href={`${x.api}`} target='_blank'>On Whatsapp</a>
                 </Flex>
               </Card>
@@ -401,7 +467,7 @@ const VisaProducts = () => {
                 <hr/>
                 <Flex justify={"center"} align={"center"} gap={"large"} className='mt-3'>
                   <span className='btn-blue' onClick={()=>showModal(x)}>Apply Online</span>
-                  <span className='btn-whatsapp'>On Whatsapp</span>
+                  <a className='btn-whatsapp' href={`${x.api}`} target='_blank'>On Whatsapp</a>
                 </Flex>
               </Card>
               )
@@ -410,6 +476,59 @@ const VisaProducts = () => {
           </ConfigProvider>
         </div>
       </div>
+    </div>
+    <div className='bg-white p-5'>
+      <Container>
+      <h5 className='fs-30 blue-txt'>Documents Required for UAE Application</h5>
+      <hr/>
+      <p className='grey-txt-2 fs-20 mt-5 fw-600 blue-txt'>Visitor's Document:</p>
+      <b className='fs-18'>Here is the list of scanned documents that you need to send along with your application:</b>
+      <ul className='fs-18 grey-txt-2'>
+        <li>Front and last pages of passport.</li>
+        <li>Passport size photograph.</li>
+        <li>If you have visited Dubai or UAE before, you would have scan the page with the exit stamp.</li>
+        <li>Confirmed return flight tickets.</li>
+        <li>Front and back of national id card.</li>
+      </ul>
+      <p className='grey-txt-2 fs-20 mt-5 fw-600 blue-txt'>Guarantor's Document:</p>
+      <b className='fs-18'>Here are the documents that you need to submit if you have a guarantor in the UAE:</b>
+      <ul className='fs-18 grey-txt-2'>
+        <li>Copy of guarantor's passport and resident Application, with 3 months validity for both</li>
+        <li>A security cheque of AED 5500 for every Application; this cheque would not be used unless the visitor absconds.</li>
+        <li>Bank statement of last month from the same bank account as the cheque, for proof.Here are the documents that you need to submit if you do not have a guarantor in the UAE</li>
+        <li>Visitors {"("}except families{")"} have to put in a security deposit of AED 5500 with us. This deposit is fully refundable and would be returned to you once you send a scanned copy of your passport page that has the UAE exit stamp.</li>
+        <li>Family visitors do not have to provide a deposit. On the other hand, they can make airline, tour or hotel booking with us.</li>
+      </ul>
+      <b className='fs-18'>Documents for Visitors with NO Guarantor in UAE.</b>
+      <ul className='fs-18 grey-txt-2'>
+        <li>Family visitors may not need to put any deposit instead, they can make the Hotel / Airline / Tour booking with us with best-guaranteed prices.</li>
+        <li>Certain visitors (except for families) are required to pay an amount of AED 5500 towards the Security Deposit. Though this amount is fully refundable, please inform Al that we will reimburse you the money only after you send us the scanned copy of your passport page with the UAE Exit stamp. This step is vital to make sure that you’re not overstaying and already left the country.</li>
+      </ul>
+
+      <h5 className='fs-30 blue-txt mt-5'>How to apply for UAE Application?  </h5>
+      <hr/>
+      <div className='fs-18 grey-txt-2'>
+        <p>Make your UAE Application process easy and simple by following these points. </p>
+        <p>First and foremost, check the following -</p>
+        <ul>
+          <li>Your passport should be valid for at least 6 more months after you arrive in the UAE.</li>
+          <li>Select a Application type according to your travel plan.</li>
+          <li>Be sure you have the resources necessary to pay for your stay in Dubai.</li>
+          <li>Get in touch with a person who can act as your sponsor for a Application to the UAE.</li>
+        </ul>
+        <p>Once you have these sorted, next step would be to apply for UAE Application online. Fill up a simple Application form correctly and completely and submit it with the Application fees. Next,  gather the documents supporting your UAE application. These include:</p>
+        <ul>
+          <li>Passport copies </li>
+          <li>Colour passport size photographs</li>
+          <li>Bank statements and salary slips</li>
+          <li>Confirmed flight tickets</li>
+          <li>Travel and health insurance. </li>
+        </ul>
+        <p>Your UAE sponsor will complete the rest of the process on your behalf after receiving these documents.</p>
+        <p>Confused about how to obtain a sponsor for your UAE Application or which Application to apply for? Get in touch with us to apply for your UAE Application. You will receive all-around assistance from our team of professionals with years of experience. We can assist you with the application process, submit the paperwork on your behalf, and expeditiously complete the entire procedure. All you need to do is get in touch with us, and we will walk you through each stage of the UAE application procedure.</p>
+      </div>
+      <OkInfo para={18} head={20} />
+      </Container>
     </div>
     </div>
   )

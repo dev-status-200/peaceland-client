@@ -40,7 +40,7 @@ const Tours = ({records, size, price, search, setSearch}) => {
             <hr className='p-0 mb-3 mt-3 mx-0'/>
             {
             records.filter((x)=>{
-                return x.TourOptions[0].adult_price <= price
+                return x.TourOptions[0]?.adult_price <= price
             }).filter((x)=>{
                 if(search==""){
                     return x

@@ -56,21 +56,20 @@ const Hotels = () => {
 
     async function submission(e){
         e.preventDefault();  
-        // if(user.email){
+        if(user.email){
             setLoading(true);
-            await delay(7000);
             setSuccess(true)
             setOpen(true);
             await axios.post(process.env.NEXT_PUBLIC_POST_BOOK_HOTEL,{...form})
-            .then((x)=>{
+            .then(async(x)=>{
                 Cookies.remove("hotelForm")
-                setLoading(false);
+                await delay(7000);
                 Router.push("/")
             })
-        // } else {
-        //     await Cookies.set("redirect",`${router.pathname}`) 
-        //     setOpen(true);
-        // }
+        } else {
+            await Cookies.set("redirect",`${router.pathname}`) 
+            setOpen(true);
+        }
     }
 
     useEffect(() => {
@@ -272,25 +271,6 @@ const Hotels = () => {
             </Col>
             <Col md={1}></Col>
             <Col md={1}></Col>
-            <Col md={3}>
-                <div className='mt-3 fw-700 fs-18 blue-txt'>Currency</div>
-                <Select
-                    required
-                    defaultValue={"AED"}
-                    style={{width:'100%'}}
-                    placeholder="Please select Currency"
-                    value={form.currency}
-                    onChange={(e)=>setForm((x)=>{return {...x, currency:e}})}
-                >
-                    <option value={'AED'}> AED </option>
-                    <option value={'USD'}> USD </option>
-                    <option value={'GBP'}> GBP </option>
-                    <option value={'EUR'}> EUR </option>
-                    <option value={'CAD'}> CAD </option>
-                    <option value={'CAD'}> AUD </option>
-                    <option value={'INR'}> INR </option>
-                </Select>
-            </Col>
         </Row>
         <Row>
             <Col md={4}></Col>

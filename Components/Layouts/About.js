@@ -16,7 +16,7 @@ const About = () => {
         <Container className='mb-5 pb-3 pt-5'>
             <Row  data-aos='fade-up'>
                 <Col className='grey-txt' md={7}>
-                    <p className={`mb-2 fw-700 green-txt`}>WHY CHOOSE US?</p>
+                    <p className={`mb-2 fw-700 green-txt fs-22`}>WHY CHOOSE US?</p>
                     <div className={`mb-5 fw-700 fs-${size.width>500?"55":"30"} black-txt`} style={{lineHeight:1}}>DISCOVER THE <span className='blue-txt'>WORLD</span> WITH OUR GUIDE</div>
                     <span className={`${size.width>500?"fs-20":"fs-15"} black-txt fw-500`}>
                         <p>
@@ -100,7 +100,7 @@ const About = () => {
             <div>
             <Row  data-aos='fade-up'>
                 <Col className='grey-txt my-5' md={6}>
-                <div className='green-txt fw-600' style={{letterSpacing:7}}>OUR HISTORY</div>
+                <div className='green-txt fw-600 fs-22' style={{}}>OUR HISTORY</div>
                     <div className={`mb-3 fw-400 fs-${size.width>500?"55":"30"} blue-txt`} style={{lineHeight:1}}>FOUNDED IN 2000</div>
                     <span className={`${size.width>500?"fs-20":"fs-15"} black-txt fw-500`}>
                         <p>
@@ -127,37 +127,6 @@ const About = () => {
         </Container>
         </div>
 
-
-
-        {/* <div className=''>
-            <Container className='my-5 py-3'>
-                <div>
-                <Row  data-aos='fade-up'>
-                    <Col className='grey-txt my-5' md={6}>
-                        <div className='mb-4 fw-700 fs-25 blue-txt' style={{lineHeight:1}}>“DISCOVER UAE WITH OUR HASSLE-FREE TICKETING SERVICE” <span className='blue-txt'></span></div>
-                        <span className='fs-20 black-txt fw-500'>
-                            <p>
-                            We're committed to providing you with the most convenient ticketing experience. Whether you're a resident of the UAE or a tourist looking to discover the amazing attractions the country has to offer, we invite you to choose us for all your ticketing needs.
-                            INSTANT BOOKING: With our instant booking option, you can secure tickets in just a few clicks, without any hassle or delay.
-                            SECURE PAYMENT GATEWAY: We ensure that your transactions are processed securely with our secure payment gateway.
-                            24/7 CUSTOMER SUPPORT: Our friendly and professional team is always available to assist you whenever you need it.
-                            </p>
-                            <p>
-                            We offer tickets to all adventures, activities and attractions in the UAE.
-                            We are constantly updating to ensure that our customers have access to the latest and greatest experiences. 
-                            </p>
-                        </span>
-                    </Col>
-                    {size.width>500 &&
-                     <Col md={6} className='py-1'>
-                        <div style={{float:'right'}}>
-                            <img src={'images/uae-about-us.PNG'} style={{width:'32vw'}}  alt="About Us" />
-                        </div>
-                    </Col>}
-                </Row>
-                </div>
-            </Container>
-        </div> */}
         <div className='py-4'></div>
     </div>
   )

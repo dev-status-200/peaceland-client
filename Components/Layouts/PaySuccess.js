@@ -18,7 +18,6 @@ const PaySuccess = () => {
   }, [router])
 
   const delay = ms => new Promise(res => setTimeout(res, ms));
-
   const [count, setCount] = useState(0);
 
   useEffect(() => {

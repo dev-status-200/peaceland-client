@@ -39,18 +39,22 @@ body {
 }
 
 .custom-btn{
-    transition-duration: 300ms;
-    border: none;
-    background-color: #194e9e;
-    color: white;
-    font-weight: 700;
-    padding: 10px 30px 10px 30px;
-    border-radius: 25px;
+  transition-duration: 300ms;
+  border: none;
+  background-color: #194e9e;
+  color: white;
+  font-weight: 700;
+  padding: 10px 30px 10px 30px;
+  border-radius: 25px;
 }
 
 .custom-btn:hover {
-    transition-duration: 300ms;
-    background-color: #194e9e;
+  transition-duration: 300ms;
+  background-color: #194e9e;
+}
+
+.custom-btn:disabled{
+  background-color: grey;
 }
 
 .shade{

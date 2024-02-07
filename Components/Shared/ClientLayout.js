@@ -34,7 +34,7 @@ const MainLayout = ({children}) => {
       {children}
     <Footer/>
     <FloatingWhatsApp
-      phoneNumber="917501086003"
+      phoneNumber="971503374890"
       accountName="Peaceland"
       allowEsc
       avatar={'/images/peaceland.png'}
