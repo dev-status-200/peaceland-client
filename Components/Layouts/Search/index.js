@@ -1,11 +1,12 @@
 import { ConfigProvider, Slider, Select, Checkbox, Input } from 'antd';
 import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import React, {useEffect, useState, useMemo} from 'react';
-import SignUp from '/Components/Shared/SignUp';
-import {useRouter} from 'next/router';
-import Tours from './Tours';
-import aos from "aos";
 import useWindowSize from '/functions/useWindowSize';
+import SignUp from '/Components/Shared/SignUp';
+import { useRouter } from 'next/router';
+import Tours from './Tours';
+import axios from 'axios';
+import aos from "aos";
 
 const Search = ({destination, city, date, category, tourData}) => {
 
@@ -21,11 +22,25 @@ const Search = ({destination, city, date, category, tourData}) => {
   const [pagination, setPagination] = useState(false);
   const [price, setPrice] = useState(3000);
 
+  const [list, setList] = useState([]);
+
   useEffect(() => {
     aos.init({duration:500});
-    console.log(tourData.result); 
-    setRecords(tourData.result); 
-    setLoad(false)
+    setRecords(tourData.result);
+    setLoad(false);
+
+    axios.get(process.env.NEXT_PUBLIC_GET_ALL_CITIES)
+    .then((x)=>{
+      let tempList = [];
+      tempList = x.data.result.map((y, i)=>{
+        return {
+          value:y.name,
+          label:y.name
+        }
+      });
+      setList(tempList)
+    })
+
   }, [router])
 
   const adjustCategory = (cat) => {
@@ -58,7 +73,7 @@ return(
               <div><b>Destination</b></div>
                 <ConfigProvider
                   theme={{ token:{ colorPrimary: '#b8d233', borderRadius:0 } }}>
-                  <Select style={{minWidth:"100%"}} value={destination} 
+                  <Select style={{minWidth:"100%"}} value={"uae"} 
                     options={[{ value: 'uae', label: 'UAE', }]}
                     onChange={(e)=> router.push({ pathname:'/activities', query:{ destination:e, city:city, category:category }})}
                   />
@@ -69,10 +84,7 @@ return(
                 <ConfigProvider theme={{ token:{ colorPrimary: '#b8d233', borderRadius:0 }}}>
                   <Select  style={{minWidth:"100%"}} value={city} 
                     onChange={(e)=> router.push({pathname:'/activities', query:{destination:destination, city:e, category:category }})}
-                    options={[
-                      { value: 'Abu Dhabi', label: 'Abu Dhabi'  },
-                      { value: 'Dubai City', label: 'Dubai City'}
-                    ]} />
+                    options={list||[]} />
                 </ConfigProvider>
             </Col>
             <h5 className='mt-4 mb-0 blue-txt px-1'><b>Price</b></h5>

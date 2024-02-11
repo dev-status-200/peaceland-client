@@ -22,7 +22,7 @@ search.getInitialProps = async({query}) => {
   city = query.city || '';
   date = query.date || '';
   category = query.category || '';
-
+  console.log(query)
   const tourData = await axios.get(process.env.NEXT_PUBLIC_GET_SEARCH_PRODUCT_PEACELAND,{
     headers:{
       'destination':`${destination}`,

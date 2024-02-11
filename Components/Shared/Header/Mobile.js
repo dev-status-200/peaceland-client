@@ -35,14 +35,14 @@ function OffCanvasExample({ name, user, ...props }) {
   return (
     <>
     <Container fluid="true" className='header-bg'>
-    <Row style={{fontSize:12}} className='pb-1 px-2'>
+      <Row style={{fontSize:12}} className='pb-1 px-2'>
         <Col xs={6}>
         <FaPhoneAlt style={{position:'relative', top:1, fontSize:10}}/><span className='mx-1' style={{position:'relative', top:2}}>+971 55 998 6370</span>
         </Col>
         <Col xs={6} className='px-1 text-end'>
         <FaRegEnvelopeOpen style={{fontSize:10}}/><span className='mx-1' style={{position:'relative', top:2}}>booking@peacelandtravel.com</span>
         </Col>
-    </Row>
+      </Row>
     </Container>
 
     <Container>
@@ -72,6 +72,8 @@ function OffCanvasExample({ name, user, ...props }) {
             <div className='mt-3'></div>
             <Link style={navStyles} href='/'>Home</Link><br/><br/>
             <Link style={navStyles} href={{pathname:'/activities'}} >Activities</Link><br/><br/>
+            <Link style={navStyles} href='/hotels' >Hotels</Link><br/><br/>
+            <Link style={navStyles} href='/visa' >Visa</Link><br/><br/>
             <Link style={navStyles} href='/about' >About</Link><br/><br/>
               {!user.loggedIn &&
                 <span className='cur mx-2' style={navStyles}
@@ -112,14 +114,17 @@ function OffCanvasExample({ name, user, ...props }) {
 
     <hr className='p-0 m-0' />
     {showOffers &&  <>
-      <Modal title="My Offers" 
-      scroll={false} 
-      backdrop={true} 
-      open={showOffers} 
-      centered 
-      onCancel={()=>setShowOffers(false)} footer={false}>
-          <hr/>
-          <MyOffers selectable={false} email={session?.user.email} />
+      <Modal 
+        title="My Offers" 
+        centered 
+        scroll={false} 
+        backdrop={true} 
+        open={showOffers} 
+        footer={false}
+        onCancel={()=>setShowOffers(false)}
+      >
+        <hr/>
+        <MyOffers selectable={false} email={user.email} />
       </Modal>
     </>}
     </>

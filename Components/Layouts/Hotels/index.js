@@ -15,7 +15,7 @@ const Hotels = () => {
 
     const router = useRouter()
     const size = useWindowSize();
-    const [form, setForm] = useState({
+    const details = {
         name:"",
         email:"",
         nationality:"AE",
@@ -26,7 +26,8 @@ const Hotels = () => {
         checkin:dayjs().format("YYYY-MMM-DD"),
         checkout:dayjs().format("YYYY-MMM-DD"),
         rating:'3'
-    });
+    }
+    const [form, setForm] = useState(details);
     const [roomInfo, setRoomInfo] = useState("");
     const [count, setCount] = useState(0);
     const [user, setUser] = useState({});
@@ -58,16 +59,18 @@ const Hotels = () => {
         e.preventDefault();  
         if(user.email){
             setLoading(true);
+            await delay(3000);
             setSuccess(true)
             setOpen(true);
             await axios.post(process.env.NEXT_PUBLIC_POST_BOOK_HOTEL,{...form})
             .then(async(x)=>{
-                Cookies.remove("hotelForm")
-                await delay(7000);
-                Router.push("/")
+                Cookies.remove("hotelForm");
+                setLoading(false);
+                setForm(details);
+                await delay(5000);
             })
         } else {
-            await Cookies.set("redirect",`${router.pathname}`) 
+            await Cookies.set("redirect",`${router.pathname}`);
             setOpen(true);
         }
     }

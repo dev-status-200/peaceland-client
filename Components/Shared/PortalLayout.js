@@ -81,14 +81,14 @@ const PortalLayout = ({children}) => {
       <Layout className="site-layout">
         <Header style={{ padding: 0, background: colorBgContainer }}>
           <span style={{marginLeft:12, cursor:'pointer'}} onClick={() => setCollapsed(!collapsed)}>
-            {collapsed ? <MenuUnfoldOutlined/> : <MenuFoldOutlined/>}
+            {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           </span>
           <span className='mx-4' style={{float:'right', cursor:'pointer'}}
             onClick={()=>{
-                Cookies.remove('token');
-                Cookies.remove('username');
-                Cookies.remove('loginId');
-                Router.push('/portal');
+              Cookies.remove('token');
+              Cookies.remove('username');
+              Cookies.remove('loginId');
+              Router.push('/portal');
             }}
           >Logout</span>
         </Header>

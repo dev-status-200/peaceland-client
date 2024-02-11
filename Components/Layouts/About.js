@@ -103,18 +103,17 @@ const About = () => {
                 <div className='green-txt fw-600 fs-22' style={{}}>OUR HISTORY</div>
                     <div className={`mb-3 fw-400 fs-${size.width>500?"55":"30"} blue-txt`} style={{lineHeight:1}}>FOUNDED IN 2000</div>
                     <span className={`${size.width>500?"fs-20":"fs-15"} black-txt fw-500`}>
-                        <p>
-                        Tickets Valley is a one-stop shop for all your ticketing needs.
+                    <p>
+                        Peaceland is a one-stop shop for all your ticketing needs.
                         The company is based in the United Arab Emirates.
                         We specialize in providing a wide range of tickets for events and experiences throughout the UAE.
                         Our team consists of professional travel experts who have deep knowledge and understanding of different destinations around the world. 
-                        With Tickets Valley, customers can browse our extensive selection of tickets and pick the ones that fit their budget and preferences best.
-
-                        </p>
-                        <p>
+                        With Peaceland, customers can browse our extensive selection of tickets and pick the ones that fit their budget and preferences best.
+                    </p>
+                    <p>
                         We offer tickets to all adventures, activities and attractions in the UAE.
                         We are constantly updating to ensure that our customers have access to the latest and greatest experiences. 
-                        </p>
+                    </p>
                     </span>
                 </Col>
                 <Col md={6} xs={12} className='py-1'>
@@ -126,7 +125,6 @@ const About = () => {
             </div>
         </Container>
         </div>
-
         <div className='py-4'></div>
     </div>
   )

@@ -10,6 +10,7 @@ const Tours = ({records, size, price, search, setSearch}) => {
 
     useEffect(() => {
         Aos.init({duration:300});
+        console.log(records)
     }, [])
 
   return (
@@ -19,6 +20,8 @@ const Tours = ({records, size, price, search, setSearch}) => {
             <Col md={size.width>500?12:12} className='' data-aos='fade-up'>
                 <div className='fs-30 wh-txt'>
                     <b>{records.filter((x)=>{
+                            return x.TourOptions[0]?.adult_price <= price
+                        }).filter((x)=>{
                         if(search==""){
                             return x
                         } else if (x.title.toLowerCase().includes(search.toLowerCase())){

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Flex, ConfigProvider, Modal, Row, Col, Select, Input, DatePicker, Checkbox } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
+import { LoadingOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import codes from "/JSONData/codes.json";
 import { delay } from "/functions/delay";
 import dayjs from 'dayjs';
@@ -140,7 +140,7 @@ const VisaProducts = () => {
         </Col>
         <Col span={12} className='grey-txt-2' style={{fontSize:para}}>
           <ul>
-            <li>If you do not book hotel or air ticket with Rayna Tours, you would be charged around AED 50 to AED 100 {"("}as per the type of application{")"} for the application process.</li>
+            <li>If you do not book hotel or air ticket with Tours, you would be charged around AED 50 to AED 100 {"("}as per the type of application{")"} for the application process.</li>
             <li>Note: You can provide us as the required documents on WhatsApp at <b className='blue-txt'>+971 50 337 4890</b> OR Email at <b className='blue-txt'>info@peacelandtravel.com</b></li>
           </ul>
         </Col>
@@ -158,8 +158,21 @@ const VisaProducts = () => {
         {form.map((x, i)=>{
           return(
           <Row key={i}>
-            <Col span={24}>
-              <h5 className='mt-2'>Person {i+1}</h5>
+            <Col span={21}>
+              <h5 className='mt-2'>
+                <span>Person {i+1}</span>
+              </h5>
+            </Col>
+            <Col span={3}>
+            { i>0 && <b className='cross-icon mx-2'
+              onClick={()=>{
+                let tempState = [...form];
+                tempState = tempState.filter((y, j)=>{
+                  return j!=i
+                });
+                setForm(tempState)
+              }}
+            >Remove<CloseCircleOutlined className='mx-2' /></b>}
             </Col>
             <Col span={6} className='px-4 py-2'>
               <b>Nationality</b>
@@ -270,6 +283,13 @@ const VisaProducts = () => {
                   tempForm[i] = {...x, WAcountryCode:e}
                   setForm(tempForm);
                 }} 
+                showSearch
+                optionFilterProp="children"
+                filterOption={(input, option) =>
+                  ((option?.value) ?? '').toLowerCase().includes(input.toLowerCase())||
+                  ((option?.label) ?? '').toLowerCase().includes(input.toLowerCase())||
+                  ((option?.code) ?? '').toLowerCase().includes(input.toLowerCase())
+                }
                 options={codes.map((x)=>{
                   return { ...x, label:`${x.label} (${x.code})` }
                 })}
@@ -404,17 +424,22 @@ const VisaProducts = () => {
             <Col span={1}></Col>
           </Row>
         )})}
-        <div className='mt-3 px-3 cur'  onClick={()=>setAgree(!agree)}>
-          By Clicking this checkbox you agree to our Visa application process Terms & Conditions <Checkbox className='mx-1' checked={agree} />
+        <div className='mt-3 px-3 grey-txt-2'  onClick={()=>setAgree(!agree)}>
+          <b>Note:</b> You can provide us as the required documents on WhatsApp at <b>+971 50 337 4890</b> or Email them at <b>info@peacelandtravel.com</b>
+          <br/>
+          {/* By Clicking this checkbox you agree to our Visa application process Terms & Conditions <Checkbox className='mx-1' checked={agree} /> */}
         </div>
         <div className='px-2 mt-3'>
-          <button className='custom-btn' disabled={(load || !agree)?true:false} type='submit'>{!load?"Submit":<LoadingOutlined />}</button>
+          <button className='custom-btn' 
+            // disabled={(load || !agree)?true:false} 
+            disabled={load?true:false} 
+            type='submit'
+          >
+              {!load?"Submit":<LoadingOutlined />}
+          </button>
           <button className='custom-btn mx-2' type='button' onClick={appendPerson}>Add more person</button>
         </div>
         </form>
-        <div className='px-3'>
-          <OkInfo para={14} head={18} />
-        </div>
       </div>
       }
       {success &&
