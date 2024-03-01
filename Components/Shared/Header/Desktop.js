@@ -42,10 +42,10 @@ const Desktop = ({user}) => {
 
   const items = [
     { label: <div className='mx-2 p-1 fw-500' onClick={()=>router.push('/activities?destination=&city=&category=Adventure')}>Adventure Tours</div>, key: '1' },
-    { label: <div className='mx-2 p-1 fw-500' onClick={()=>router.push('/activities?destination=&city=&category=Water+Parks')}>Water Parks</div>, key: '2' },
-    { label: <div className='mx-2 p-1 fw-500' onClick={()=>router.push('/activities?destination=&city=&category=Family+Fun')}>Family Fun</div>, key: '3' },
-    { label: <div className='mx-2 p-1 fw-500' onClick={()=>router.push('/activities?destination=&city=&category=Theme+Parks')}>Theme Parks</div>, key: '4' },
-    { label: <div className='mx-2 p-1 fw-500' onClick={()=>router.push('/activities?destination=&city=&category=City+Tours')}>City Tours</div>, key: '5' },
+    { label: <div className='mx-2 p-1 fw-500' onClick={()=>router.push('/activities?destination=&city=&category=Water+Parks')}>Water Parks  </div>, key: '2' },
+    { label: <div className='mx-2 p-1 fw-500' onClick={()=>router.push('/activities?destination=&city=&category=Family+Fun')}>Family Fun    </div>, key: '3' },
+    { label: <div className='mx-2 p-1 fw-500' onClick={()=>router.push('/activities?destination=&city=&category=Theme+Parks')}>Theme Parks  </div>, key: '4' },
+    { label: <div className='mx-2 p-1 fw-500' onClick={()=>router.push('/activities?destination=&city=&category=City+Tours')}>City Tours    </div>, key: '5' },
     { label: <div className='mx-2 p-1 fw-500' onClick={()=>router.push('/activities?destination=&city=&category=Luxury+Tours')}>Luxury Tours</div>, key: '6' }
   ];
 
@@ -66,6 +66,10 @@ const Desktop = ({user}) => {
     countdown%10==0?setChangeTag(!changeTag):null;
     return () => clearTimeout(timeout);
   }, [countdown]);
+
+  useEffect(() => {
+    // console.log(cart)
+  }, [cart]);
 
   return (
   <>
@@ -105,7 +109,7 @@ const Desktop = ({user}) => {
           </div>
           <div style={{width:"21%", textAlign:'right'}}>
             {size.width>1200 && <>
-                <Profile/>
+              <Profile user={user} />
                 <Badge count={cart.length} showZero color="#faad14" size="small">
                   <FaCartShopping className='header-icons cur' onClick={()=>Router.push("/cart")} />
                 </Badge>
@@ -116,10 +120,10 @@ const Desktop = ({user}) => {
                 <Link href="https://www.linkedin.com/company/peaceland-travels-and-tourism/" target='_blank'><img src='/icons/linkedin.png' height={17} width={17} className='header-icons' /></Link>
             </>}
             {size.width<1200 && <>
-                <FaUserCircle className='header-icons' size={18} style={{position:'relative', bottom:2}} />
-                <Badge count={cart.length} showZero color="#faad14" size="small">
-                    <FaCartShopping className='header-icons cur' onClick={()=>Router.push("/cart")} />
-                </Badge>
+              <Profile user={user} />
+              <Badge count={cart.length} showZero color="#faad14" size="small">
+                  <FaCartShopping className='header-icons cur' onClick={()=>Router.push("/cart")} />
+              </Badge>
             </>}
           </div>
         </div>

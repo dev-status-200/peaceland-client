@@ -19,10 +19,10 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
+    // console.log(form);
     axios.post(process.env.NEXT_PUBLIC_POST_CONTACT_US_MESSAGE,form)
     .then((x)=>{
-      console.log(x.data);
+      // console.log(x.data);
       setForm({
         name:'',
         msg:'',
@@ -36,27 +36,27 @@ const Contact = () => {
     {contextHolder}
     <Container>
     <Row className=''>
-      <Col md={7} className={`${size.width>500?'pt-5 mt-5':''}`}>
-        {size.width>500 &&<div className='my-5'></div>}
-        <div className={`mb-2 fw-700 fs-${size.width>500?"45":"30"} black-txt`} style={{lineHeight:1}}>HAVE ANY <span className='blue-txt'>QUESTIONS?</span></div>
-        <div className={`mb-5 fw-500 fs-${size.width>500?"35":"25"} black-txt`} style={{lineHeight:1}}>FEEL FREE TO REACH OUT</div>
+      <Col md={7} className={`${size.width>600?'pt-5 mt-5':'pt-5'}`}>
+        {size.width>600 &&<div className='my-5'></div>}
+        <div className={`mb-2 fw-700 fs-${size.width>600?"45":"30"} black-txt`} style={{lineHeight:1}}>HAVE ANY <span className='blue-txt'>QUESTIONS?</span></div>
+        <div className={`mb-5 fw-600 fs-${size.width>600?"35":"25"} black-txt`} style={{lineHeight:1}}>FEEL FREE TO REACH OUT</div>
         <p className='grey-txt fs-18' style={{maxWidth:'75%'}}>
           Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+          Lorem Ipsum has been the industry's standard dummy text ever since the 1600s,
           when an unknown printer took a galley of type and scrambled it to make a type specimen book.
           It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
           It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
         </p>
         <p className='grey-txt fs-18'>Our Contact Form is Below</p>
-        {size.width>500 && <div className='pt-5'></div>}
+        {size.width>600 && <div className='pt-5'></div>}
       </Col>
       <Col md={5} className='p-5 text-center'>
-        <img src='images/contact.png' className='mt-4' height={450} />
+        {size.width>600 && <img src='images/contact.png' className='mt-4' height={450} />}
       </Col>
     </Row>
     <hr className='pt-0 mt-0' />
-    <Row className='contact-bg'>
-    {size.width>500 &&<Col md={3}></Col>}
+    <Row className='contact-bg mx-2'>
+    {size.width>600 &&<Col md={3}></Col>}
       <Col md={6} className='text-center contact-box'>
         <ConfigProvider theme={{token:{ colorPrimary:'#ebf13c', borderRadius:0 }}}>
           <form className='fs-18' onSubmit={handleSubmit}>

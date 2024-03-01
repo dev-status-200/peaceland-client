@@ -24,7 +24,7 @@ const MobileCard = ({tour, height, info, font}) => {
         }
         {info &&
             <div className=''>
-                <div style={{fontSize:font, fontWeight:500, color:'white', minHeight:34, lineHeight:1.2}}>
+                <div style={{fontSize:font, fontWeight:500, minHeight:34, lineHeight:1.2}}>
                     {tour.title}
                 </div>
                 <div className='full-overlay-line'></div>
@@ -34,13 +34,13 @@ const MobileCard = ({tour, height, info, font}) => {
                     <IoStar color='gold' style={{marginRight:'1%', fontSize:'60%'}} />
                     <IoStar color='gold' style={{marginRight:'1%', fontSize:'60%'}} />
                     <IoStar color='gold' style={{marginRight:'1%', fontSize:'60%'}} />
-                    <span className='mx-1' style={{fontSize:10, fontWeight:300, whiteSpace:'nowrap', color:'white'}}>{"("}4 Reviews{")"}</span>
+                    <span className='mx-1' style={{fontSize:10, fontWeight:300, whiteSpace:'nowrap'}}>{"("}4 Reviews{")"}</span>
                 </div>
             </div>
         }
         {info &&
         <div style={{minHeight:20}} className="mt-2">    
-            <div style={{color:'white'}}>{(tour.TourOptions[0].adult_price*conversion.rate).toFixed(2)} {conversion.currency}</div>
+            <b >{(tour.TourOptions[0].adult_price*conversion.rate).toFixed(2)} {conversion.currency}</b>
         </div>
         }
             <Row>

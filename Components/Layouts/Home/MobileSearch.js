@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { DatePicker, ConfigProvider, Select } from "antd";
 import Router from 'next/router';
+import { delay } from "../../../functions/delay"
 
-const Slider = () => {
+const MobileSearch = () => {
 
     const [options, setOptions] = useState([])
     const [search, setSearch] = useState('');
+    const [show, setShow] = useState(false);
 
     const handleSearch = (e) => {
         // e.length>0?
@@ -18,25 +20,30 @@ const Slider = () => {
             })//:null
         }
     }
+
     const handleChange = (e) => {
         setSearch(e)
     }
 
+    useEffect(() => {
+      showHero()
+    }, [])
+    async function showHero(){
+        await delay(500);
+        setShow(true)
+    }
+    
   return (
     <div className='home-slider-styles'>
-        <div>
-            <video autoPlay loop muted style={{width:'100vw'}}>
-                <source src="/video/video.mp4"  />
-            </video>
-        </div>
-    <div style={{position:'absolute', top:"30%", width:'100%', textAlign:'center'}}>
-        <h3 style={{fontFamily:'monospace'}} className='heading-main mt-5 pt-5'>PEACELAND<span className='mx-3'></span>TRAVEL & TOURISM</h3>
-        <div className='mt-5' >
-            <div className='search-container'>
+        <h3 style={{fontFamily:'monospace'}} className='heading-main-mobile'>
+            PEACELAND<span className='mx-2'></span>TRAVEL & TOURISM
+        </h3>
+        {show && <div className=''>
+            <div className='search-container-mobile'>
                 <ConfigProvider theme={{token:{ colorPrimary:'green', borderRadius:0 }}}>
-                    <Select
+                    <Select style={{width:'65%', height:30, textAlign:'left'}}
                         showSearch
-                        style={{width:'70%', height:55, textAlign:'left'}}
+                        size='small'
                         value={search}
                         placeholder={"Search Tours"}
                         onSearch={handleSearch}
@@ -56,14 +63,13 @@ const Slider = () => {
                     />
                 </ConfigProvider>
                 <ConfigProvider theme={{token:{ colorPrimary:'green', borderRadius:0 }}}>
-                    <DatePicker style={{ height:55, textAlign:'left', width:'20%'}} />
+                    <DatePicker style={{ height:30, textAlign:'left', width:'20%'}} />
                 </ConfigProvider>
-                <button className='search-btn' style={{width:'10%'}} onClick={()=>search?Router.push(`/product/${search}`):null}>{"Go"}</button>
+                <button className='search-btn-mobile' style={{width:'15%'}} onClick={()=>search?Router.push(`/product/${search}`):null}>{"Go"}</button>
             </div>
-        </div>
-    </div>
+        </div>}
     </div>
   )
 }
 
-export default React.memo(Slider)
+export default React.memo(MobileSearch)

@@ -185,6 +185,7 @@
 /* Section - Title */
 /**************************/
 #parallax-world-of-ugg .title {background: white; padding: 60px; margin:0 auto; text-align:center;}
+#parallax-world-of-ugg .title-mobile {background: white; padding: 35px; margin:0 auto; text-align:center;}
 #parallax-world-of-ugg .title h1 {font-size:35px; letter-spacing:8px;}
 
 /* Section - Block */
@@ -198,6 +199,22 @@
 #parallax-world-of-ugg .parallax-one {
   padding-top: 200px;
   padding-bottom: 200px;
+  overflow: hidden; 
+  position: relative; 
+  width: 100%; 
+  background-image: url(https://images.unsplash.com/photo-1440778303588-435521a205bc?auto=format&fit=crop&q=80&w=1000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D); 
+  filter: contrast(120%) brightness(85%);
+  background-attachment: fixed; 
+  background-size: cover; 
+  -moz-background-size: cover; 
+  -webkit-background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position: top center;
+}
+
+#parallax-world-of-ugg .parallax-one-mobile {
+  padding-top: 50px;
+  padding-bottom: 50px;
   overflow: hidden; 
   position: relative; 
   width: 100%; 

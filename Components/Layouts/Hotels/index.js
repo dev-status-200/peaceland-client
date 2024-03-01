@@ -90,45 +90,42 @@ const Hotels = () => {
     const content = (
     <div>
         <p className='red-txt mx-2'>Children cannot be above age 17 *</p>
-        <div className='px-3'>
-            {form.rooms.map((x, i)=>{
-                return(
-                    <Row key={x.pid} className='mt-1'>
-                        <Col md={1} className='px-1 pt-4'><b> {i+1}.</b></Col>
-                        <Col md={5} className='px-1'>
-                            Adults<br/>
-                            <InputNumber min={1} value={x.adult} onChange={(e)=>{
-                                let tempState = {...form};
-                                tempState.rooms[i].adult = e;
-                                setForm(tempState)
-                            }} />
-                        </Col>
-                        <Col md={5} className='px-1'>
-                            Children <br/>
-                            <InputNumber min={0} value={x.child} onChange={(e)=>{
-                                let tempState = {...form};
-                                tempState.rooms[i].child = e;
-                                setForm(tempState)
-                            }}  />
-                        </Col>
-                        <Col md={1} className='py-1 px-1'>
-                            <br/>
-                            <CloseCircleOutlined className='fs-17' onClick={()=>{
-                                let tempForm = {...form};
-                                let rooms = tempForm.rooms;
-                                rooms = rooms.filter((y, j)=>{
-                                    if(y.pid !=x.pid){
-                                        return y
-                                    }
-                                });
-                                tempForm.rooms = rooms;
-                                setForm(tempForm);
-                            }} /> 
-                        </Col>
-                    </Row>
-                )
-            })}
-        </div>
+        {form.rooms.map((x, i)=>{
+            return(
+                <Row key={x.pid} className='mt-1'>
+                    <Col md={1} xs={1} className='px-2 pt-4'><b> {i+1}.</b></Col>
+                    <Col md={5} xs={5} className='px-1'>
+                        Adults<br/>
+                        <InputNumber min={1} value={x.adult} onChange={(e)=>{
+                            let tempState = {...form};
+                            tempState.rooms[i].adult = e;
+                            setForm(tempState)
+                        }} />
+                    </Col>
+                    <Col md={5} xs={5} className='px-1'>
+                        Children <br/>
+                        <InputNumber min={0} value={x.child} onChange={(e)=>{
+                            let tempState = {...form};
+                            tempState.rooms[i].child = e;
+                            setForm(tempState)
+                        }}  />
+                    </Col>
+                    <Col md={1} xs={1} className='py-1 px-0'>
+                        <br/>
+                        <CloseCircleOutlined className='fs-17' onClick={()=>{
+                            let tempForm = {...form};
+                            let rooms = tempForm.rooms;
+                            rooms = rooms.filter((y, j)=>{
+                                if(y.pid !=x.pid){
+                                    return y
+                                }
+                            });
+                            tempForm.rooms = rooms;
+                            setForm(tempForm);
+                        }} /> 
+                    </Col>
+                </Row>
+        )})}
         <button className='custom-btn mx-2 mt-3 mb-1' onClick={()=>{
             let tempState = {...form};
             tempState.rooms.push({adult:'1', child:'0', age:'1', pid:count});
@@ -148,7 +145,7 @@ const Hotels = () => {
         <div className='hotel-box'>
         <form onSubmit={submission}>
         <Row className=''>
-            <Col md={12} className='text-center px-5'>
+            <Col md={12} className={`text-center ${size.width>600?'px-5':''}`}>
                 <h2 className='blue-txt fw-600'>Hotel Booking Form</h2>
                 <div className='px-5 mx-5'>
                     <hr/>
@@ -266,7 +263,7 @@ const Hotels = () => {
             <Col md={4}>
                 <div className=' fw-700 fs-18 blue-txt'>Room Info</div>
                 <div style={{display:'flex'}}>
-                    <Popover content={content} trigger="click">
+                    <Popover content={content} trigger="click" placement='right'>
                         <Button><EditOutlined style={{position:'relative', bottom:2}} /></Button>
                     </Popover>
                     <Input style={{marginLeft:5}} value={roomInfo} />

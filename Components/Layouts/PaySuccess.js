@@ -40,10 +40,10 @@ const PaySuccess = () => {
       }).then((x)=>{
       })
     }
-    await dispatch(addProduct([]));
+    dispatch(await addProduct([]));
     await destroyCart();
     await Cookies.remove("promoDiscount", { path: '' });
-    Router.push("/");
+    router.push("/")
   }
 
   const priceCalc = (cartData, disc) => {

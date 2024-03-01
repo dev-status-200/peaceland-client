@@ -24,7 +24,7 @@ const TicketPage = ({ticketData, bookingNo}) => {
         if(option.assigned=="1"){
             let count = option.codes.split(", ")
             let ticket = [];
-            console.log(tour)
+            // console.log(tour)
             count.forEach((x)=>{
                 ticket.push({
                     image:tour.image,

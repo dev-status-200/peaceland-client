@@ -47,7 +47,7 @@ const Carasoul = (props) => {
       {images.map((x, i)=>{
         return(
         <SwiperSlide key={i}>
-          <img src={x} alt="Tour Gallery" width={750} style={{borderRadius:15}} />
+          <img src={x} alt="Tour Gallery" width={'100%'} style={{borderRadius:15}} />
         </SwiperSlide>
         )
       })}

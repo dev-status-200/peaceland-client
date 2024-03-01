@@ -11,14 +11,16 @@ import Loader from '../../Shared/Loader';
 import Router, { useRouter } from 'next/router'
 import MoreDetail from './MoreDetail';
 import MobileBook from './MobileBook';
-import MoreImages from './MoreImages';
 import { Rate, Drawer } from 'antd';
 import Details from './Details';
-import Images from './Images';
 import { LuShoppingCart } from "react-icons/lu";
 import Book from './Book';
 import axios from 'axios';
 import Aos from 'aos';
+import dynamic from 'next/dynamic';
+
+const Images = dynamic(() => import('./Images'), { ssr:false });
+const MoreImages = dynamic(() => import('./MoreImages'), { ssr:false });
 
 const Product = ({id, tourData}) => {
   
@@ -158,20 +160,26 @@ const Product = ({id, tourData}) => {
               <IoLocationSharp size={15} style={{position:'relative', bottom:2}}/> 
               {" "}{tour.destination?.toUpperCase()}, {tour.city}
             </>}
-            <Images mainImage={mainImage} setMainImage={setMainImage} tour={tour} detail={detail} data-aos="fade-right" />
-            {size.width>500 && <div className={`images-container ${size.width>500?'px-5 mt-4':''}`}>
+            <div data-aos="fade-right">
+              <Images mainImage={mainImage} setMainImage={setMainImage} tour={tour} detail={detail} size={size} />
+            </div>
+            {size.width>500 && 
+              <div className={`images-container px-5 mt-4`}>
+                <MoreImages setMainImage={setMainImage} tour={tour} detail={detail} data-aos="fade-right"/>
+              </div>
+            }
+            {size.width<500 && 
+            <>
               <MoreImages setMainImage={setMainImage} tour={tour} detail={detail} data-aos="fade-right"/>
-            </div>}
-            {size.width<500 && <>
-            <MoreImages setMainImage={setMainImage} tour={tour} detail={detail} data-aos="fade-right"/>
-            <hr/>
-            <BookCompTwo />
+              <hr/>
+              <BookCompTwo />
             </>
             }
           </Col>
         </Row>
         <hr/>
-        <Row className={size.width>600?'info-bar-round':'info-bar'}>
+        {size.width>600 &&
+        <Row className={size.width>600?'info-bar-round':'info-bar'} >
           <Col md={2} className='text-center info-item'>
             <IoCalendarSharp className='info-icon' />
             <div className='mt-2'>Availability<br/>{tour.availability}</div>
@@ -202,6 +210,7 @@ const Product = ({id, tourData}) => {
               <div className='mt-2'>Confirmation<br/>{tour.confirmation}</div>
             </Col>
         </Row>
+        }
       </Container>
       <div className='my-5'>
         <MoreDetail  detail={detail} />

@@ -14,10 +14,6 @@ const Ticket = ({fetchedTicket, i, transportList}) => {
         });
         return name
     }
-
-    useEffect(() => {
-      console.log(transportList)
-    }, [])
     
   return (
     <>

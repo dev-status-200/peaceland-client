@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Cookies from "js-cookie";
 import Router from 'next/router';
 import useWindowSize from '/functions/useWindowSize';
-import { GoogleLogin } from '@react-oauth/google';
+// import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from 'jwt-decode';
 import Loader from "../Shared/Loader";
+import GoogleLogin from '@dump-work/react-google-login';
 
 const CustomerLogin = () => {
 
@@ -20,8 +21,9 @@ const CustomerLogin = () => {
     token?Router.push("/"):setLoad(false);
   }
 
-  const responseGoogle = async(response) => {
-    let token = jwt_decode(response.credential);
+  const responseGoogle = async(res) => {
+    let token = jwt_decode(res.tokenObj.id_token);
+    console.log(token)
     if(token.email_verified) {
       let user = {
         picture:token.picture,
@@ -33,7 +35,7 @@ const CustomerLogin = () => {
       Router.push(url?url:'/')
     }
   }
-  
+
   return (
   <div className='bg-login'>
     {!load &&
@@ -43,12 +45,16 @@ const CustomerLogin = () => {
       <div className={`container-custom ${size.width>500?"":"px-3"}`}>
       <div className={`login-box ${size.width>500?"mt-4":"mt-5"}`}>
       <img src={'/images/logo.png'} className={`${size.width>500?"mt-5":"mt-5"}`} width={200} height={85} alt="Image" />
-      {/* <hr/> */}
-      {/* <p className='text-center signup'>Sign-in with your google account below to start booking</p> */}
       <div className='mb-4 py-2'></div>
-        <GoogleLogin
+        {/* <GoogleLogin
           clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
           buttonText="Login" onSuccess={responseGoogle} onFailure={()=>alert("failed")}
+        /> */}
+        <GoogleLogin
+          clientId="1018461770381-hin727pafmfajl3oq0djq27h3rnae221.apps.googleusercontent.com"
+          buttonText="Login With Google"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
         />
         <p className='text-center mb-3 mt-5 privacy-text'>Privacy Protected Login</p>
       </div>

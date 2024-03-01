@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useReducer } from 'react'
-import { Select, Checkbox, Input, message } from 'antd';
+import { Select, Checkbox, Input, message, notification } from 'antd';
 import { Row, Col, Spinner } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { addProduct } from '../../../redux/cart/cartSlice';
@@ -16,7 +16,13 @@ import { initialState, reducerFunctions, setTour, validateName, validateDate, Va
 const MobileBook = ({tour, transport, category, setOpen}) => {
 
     const dispatch = useDispatch();
+    const [api, contextNotifyHolder] = notification.useNotification();
     const [messageApi, contextHolder] = message.useMessage();
+    const Context = React.createContext({
+        name: 'Default',
+    });
+
+
     const cart = useSelector((state) => state.cart.value);
     const conversion = useSelector((state) => state.currency.conversion);
     const [state, dispatchReducer] = useReducer(reducerFunctions, initialState);
@@ -27,6 +33,7 @@ const MobileBook = ({tour, transport, category, setOpen}) => {
     useEffect(() => {
         aos.init({duration:300})
         setTour(tour, dispatchReducer, category);
+        openNotification('bottom')
     }, [])
 
     const showMessage = (msg) =>messageApi.info(msg);
@@ -85,9 +92,21 @@ const MobileBook = ({tour, transport, category, setOpen}) => {
         return result
     }
 
+    const openNotification = (placement) => {
+        api.info({
+          message: `Booking Method`,
+          description: <Context.Consumer>{({ name }) => (
+            <p className='fs-15'>Select options in the above panel to book your ticket!</p>
+          )}</Context.Consumer>,
+          placement,
+          duration:4
+        });
+    };
+
   return (
     <>
     {contextHolder}
+    {contextNotifyHolder}
     <div>
         {!load && <>
         {state.booking.map((x, i)=>{

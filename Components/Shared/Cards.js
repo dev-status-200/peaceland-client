@@ -4,10 +4,6 @@ import { useRouter } from 'next/router';
 
 const Cards = (props) => {
   const router = useRouter();
-
-  useEffect(() => {
-    console.log(props)
-  }, [])
   
   return (
     <Card

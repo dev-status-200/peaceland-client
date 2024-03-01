@@ -14,7 +14,7 @@ const Destinations = () => {
     axios.get(process.env.NEXT_PUBLIC_GET_ALL_CITIES)
     .then((x)=>{
       let tempList = [];
-      tempList = x.data.result.map((y, i)=>{
+      tempList = x.data?.result?.map((y, i)=>{
         return {
           label: <div className='mx-2 p-1 fw-500' onClick={()=>router.push(`/activities?destination=uae&city=${y.name}&category=`)}>{y.name}</div>, key: `${i+1}`
         }

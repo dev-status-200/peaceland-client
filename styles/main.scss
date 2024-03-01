@@ -68,6 +68,11 @@ body {
   font-weight: 800!important;
   font-size: 70px!important;
 }
+.text-shade-mobile{
+  text-shadow: 4px 4px 10px rgba(0,0,0,0.6);
+  font-weight: 900!important;
+  font-size: 30px!important;
+}
 
 .white-bg{ background-color: white; }
 
@@ -692,7 +697,8 @@ body > div:nth-child(6) > div > div.ant-modal-wrap > div > div.ant-modal-content
 }
 
 .mobile-card{
-  background-color: #194e9e;
+  // background-color: #194e9e;
+  border: 1px solid silver;
   border-radius: 8px;
 }
 
@@ -911,7 +917,7 @@ div.react-datepicker-wrapper > div > input{
 }
 .search-box-img {
   border: 1px solid rgb(203, 203, 203);
-  border-radius: 20px 20px 0px 0px!important;
+  border-radius: 10px 10px 0px 0px!important;
 }
 .my-custom-paragraph{
   margin: 0px;
@@ -1110,6 +1116,15 @@ div.react-datepicker-wrapper > div > input{
   background-color: #0d3064;
 }
 
+.search-btn-mobile{
+  // border: none;
+  width: 80px;
+  height: 30px;
+  background-color: #194e9e;
+  color: white;
+  border: 1px solid #194e9e;
+}
+
 .search-container{
   border: 2px solid #b8d233;
   width: 750px;
@@ -1117,4 +1132,28 @@ div.react-datepicker-wrapper > div > input{
   padding: 10px;
   background-color: rgba(53, 106, 144, 0.412);
 }
+.search-container-mobile{
+  border: 2px solid #b8d233;
+  width: 90vw;
+  margin: auto;
+  padding: 10px;
+  background-color: rgba(53, 106, 144, 0.412);
+}
 // style={{border:'2px solid #b8d233', width:750, margin:'auto', padding:10}}
+.link-dropdown-btn {
+  display: inline-block;
+  background-color: #194e9e;
+  border: none;
+  border-radius: 100%;
+}
+
+.mobile-hero {
+  width: 100vw;
+  min-height: 40vh;
+  background:url("../public/images/mobile-hero.jpg");
+  background-size:cover;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}

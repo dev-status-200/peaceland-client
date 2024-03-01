@@ -52,8 +52,8 @@ const Search = ({destination, city, date, category, tourData}) => {
 
 return(
   <div className='home-styles'>
-  <div className='white-bg mt-3' data-aos="fade-in">
-  <Container className='pt-5'>
+  <div className={` white-bg ${size.width>500?'pt-5':''} `} data-aos="fade-in">
+  <Container className={`${size.width>500?'pt-5':''}`}>
     <Row>
       <Col md={9} className={`${size.width>500?"px-5":"p-0 m-0 px-3"}`}>
         {!load &&

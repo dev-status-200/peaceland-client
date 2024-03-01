@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Flex, ConfigProvider, Modal, Row, Col, Select, Input, DatePicker, Checkbox } from 'antd';
+import { Card, Flex, ConfigProvider, Modal, Select, Input, DatePicker, Checkbox } from 'antd';
 import { LoadingOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import codes from "/JSONData/codes.json";
 import { delay } from "/functions/delay";
@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import Link from 'next/link';
-import { Container } from 'react-bootstrap';
+import { Container, Row, Col, } from 'react-bootstrap';
 
 const { Meta } = Card;
 
@@ -131,18 +131,13 @@ const VisaProducts = () => {
       <h5 className='blue-txt mt-5' style={{fontSize:head}}>Special Notes</h5>
       <hr/>
       <Row>
-        <Col span={12} className='grey-txt-2' style={{fontSize:para}}>
+        <Col span={24} className='grey-txt-2' style={{fontSize:para}}>
         <ul>
           <li>Your passport should have minimum 6 months validity.</li>
           <li>The passport should be a printed one and not handwritten.</li>
           <li>The documents should be scanned properly. Blurred copies would not be accepted.</li>
+          <li>Note: You can provide us as the required documents on WhatsApp at <b className='blue-txt'>+971 50 337 4890</b> OR Email at <b className='blue-txt'>info@peacelandtravel.com</b></li>
         </ul>
-        </Col>
-        <Col span={12} className='grey-txt-2' style={{fontSize:para}}>
-          <ul>
-            <li>If you do not book hotel or air ticket with Tours, you would be charged around AED 50 to AED 100 {"("}as per the type of application{")"} for the application process.</li>
-            <li>Note: You can provide us as the required documents on WhatsApp at <b className='blue-txt'>+971 50 337 4890</b> OR Email at <b className='blue-txt'>info@peacelandtravel.com</b></li>
-          </ul>
         </Col>
       </Row>
       </div>
@@ -151,30 +146,52 @@ const VisaProducts = () => {
 
   return (
     <div>
-    <Modal open={isModalOpen} width={'80%'} onCancel={closeModal} okButtonProps={{hidden:true}} centered cancelButtonProps={{hidden:true}}>
+    <Modal open={isModalOpen} width={'100%'} onCancel={closeModal} okButtonProps={{hidden:true}} centered cancelButtonProps={{hidden:true}}>
       {!success &&
       <div className='p-2'>
         <form onSubmit={handleSubmit}>
         {form.map((x, i)=>{
           return(
           <Row key={i}>
-            <Col span={21}>
+            <Col xs={6}>
               <h5 className='mt-2'>
                 <span>Person {i+1}</span>
               </h5>
             </Col>
-            <Col span={3}>
-            { i>0 && <b className='cross-icon mx-2'
-              onClick={()=>{
-                let tempState = [...form];
-                tempState = tempState.filter((y, j)=>{
-                  return j!=i
-                });
-                setForm(tempState)
-              }}
-            >Remove<CloseCircleOutlined className='mx-2' /></b>}
+            <Col xs={6}>
+              <div style={{position:'relative', top:6, textAlign:'end'}}>
+              {i>0 && <b className='cross-icon red-txt'
+                onClick={()=>{
+                  let tempState = [...form];
+                  tempState = tempState.filter((y, j)=>{
+                    return j!=i
+                  });
+                  setForm(tempState)
+                }}
+              >Remove<CloseCircleOutlined className='mx-2' /></b>}
+              </div>
             </Col>
-            <Col span={6} className='px-4 py-2'>
+            <Col xs={12} className='py-2'>
+              <b>First Name</b>
+              <Input required value={x.firstName}
+                onChange={(e)=>{
+                  let tempForm  = [...form];
+                  tempForm[i] = {...x, firstName:e.target.value}
+                  setForm(tempForm);
+                }} 
+              />
+            </Col>
+            <Col xs={12} className='py-2'>
+              <b>Last Name</b>
+              <Input required
+                onChange={(e)=>{
+                  let tempForm  = [...form];
+                  tempForm[i] = {...x, lastName:e.target.value}
+                  setForm(tempForm);
+                }} 
+              />
+            </Col>
+            <Col xs={12} className='py-2'>
               <b>Nationality</b>
               <Select  defaultValue="United Arab Emirates"
                 style={{width:"100%"}}
@@ -193,7 +210,7 @@ const VisaProducts = () => {
                 options={codes}
               />
             </Col>
-            <Col span={6} className='px-4 py-2'>
+            <Col xs={12} className='py-2'>
               <b>Entry Type</b>
               <Select style={{width:"100%"}} disabled
                 value={x.entryType}
@@ -205,27 +222,7 @@ const VisaProducts = () => {
                 options={options} 
                 />
             </Col>
-            <Col span={6} className='px-4 py-2'>
-              <b>First Name</b>
-              <Input required value={x.firstName}
-                onChange={(e)=>{
-                  let tempForm  = [...form];
-                  tempForm[i] = {...x, firstName:e.target.value}
-                  setForm(tempForm);
-                }} 
-              />
-            </Col>
-            <Col span={6} className='px-4 py-2'>
-              <b>Last Name</b>
-              <Input required
-                onChange={(e)=>{
-                  let tempForm  = [...form];
-                  tempForm[i] = {...x, lastName:e.target.value}
-                  setForm(tempForm);
-                }} 
-              />
-            </Col>
-            <Col span={6} className='px-4 py-2'>
+            <Col xs={6} className='py-2'>
               <b>City</b>
               <Input required
                 onChange={(e)=>{
@@ -235,7 +232,7 @@ const VisaProducts = () => {
                 }} 
               />
             </Col>
-            <Col span={6} className='px-4 py-2'>
+            <Col xs={6} className='py-2'>
               <b>State</b>
               <Input required
                 onChange={(e)=>{
@@ -245,7 +242,7 @@ const VisaProducts = () => {
                 }} 
               />
             </Col>
-            <Col span={6} className='px-4 py-2'>
+            <Col xs={12} className='py-2'>
               <b>Country Code</b>
               <Select style={{width:'100%'}} value={x.countryCode}
                 onChange={(e)=>{
@@ -265,7 +262,7 @@ const VisaProducts = () => {
                 })}
               />
             </Col>
-            <Col span={6} className='px-4 py-2'>
+            <Col xs={12} className='py-2'>
               <b>Contact No.</b>
               <Input required
                 onChange={(e)=>{
@@ -275,7 +272,7 @@ const VisaProducts = () => {
                 }} 
               />
             </Col>
-            <Col span={6} className='px-4 py-2'>
+            <Col xs={12} className='py-2'>
               <b>WhatsApp Country Code</b>
               <Select style={{width:'100%'}} value={x.WAcountryCode} 
                 onChange={(e)=>{
@@ -295,7 +292,7 @@ const VisaProducts = () => {
                 })}
               />
             </Col>
-            <Col span={6} className='px-4 py-2'>
+            <Col xs={12} className='py-2'>
               <b>WhatsApp Contact No.</b>
               <Input required
                 onChange={(e)=>{
@@ -305,7 +302,7 @@ const VisaProducts = () => {
                 }} 
               />
             </Col>
-            <Col span={6} className='px-4 py-2'>
+            <Col xs={6} className='py-2'>
               <b>Date of Birth</b>
               <DatePicker style={{width:'100%'}}
                 onChange={(e)=>{
@@ -315,7 +312,7 @@ const VisaProducts = () => {
                 }} 
               />
             </Col>
-            <Col span={6} className='px-4 py-2'>
+            <Col xs={12} className='py-2'>
               <b>Email Address</b>
               <Input type='email' required
                 onChange={(e)=>{
@@ -325,12 +322,10 @@ const VisaProducts = () => {
                 }} 
               />
             </Col>
-            <Col span={1}></Col>
-            <Col span={22}>
+            <Col xs={12}>
               <hr className='mt-4' />
             </Col>
-            <Col span={1}></Col>
-            <Col span={8} className='px-4 py-2'>
+            <Col xs={12} className='px-4 py-2'>
               <b>Passport Number</b>
               <Input required
                 onChange={(e)=>{
@@ -340,7 +335,7 @@ const VisaProducts = () => {
                 }} 
               />
             </Col>
-            <Col span={8} className='px-4 py-2'>
+            <Col xs={12} className='px-4 py-2'>
               <b>Passport Expiry Date</b>
               <div>
                 <span className=''>
@@ -378,7 +373,7 @@ const VisaProducts = () => {
                 </span>
               </div>
             </Col>
-            <Col span={8} className='px-4 py-2'>
+            <Col xs={12} className='px-4 py-2'>
               <b>Arrival Date</b>
               <div>
                 <span className=''>
@@ -416,23 +411,32 @@ const VisaProducts = () => {
                 </span>
               </div>
             </Col>
-            <Col span={24}></Col>
-            <Col span={1}></Col>
-            <Col span={22}>
+            <Col xs={12}>
               {form.length-1!=i && <hr />}
             </Col>
-            <Col span={1}></Col>
           </Row>
         )})}
-        <div className='mt-3 px-3 grey-txt-2'  onClick={()=>setAgree(!agree)}>
+        <hr/>
+        {/* <p className='grey-txt-2 fs-18 fw-600 blue-txt'>Documents:</p> */}
+        <b className='fs-16 blue-txt'>Here is the list of scanned documents that you need to send along with your application:</b>
+        <ul className='fs-14 grey-txt-2'>
+          <li>Front and last pages of passport.</li>
+          <li>Passport size photograph.</li>
+          <li>If you have visited Dubai or UAE before, you would have scan the page with the exit stamp.</li>
+          <li>Confirmed return flight tickets.</li>
+          <li>Front and back of national id card.</li>
+        </ul>
+        <div className='mt-2 cur'>
           <b>Note:</b> You can provide us as the required documents on WhatsApp at <b>+971 50 337 4890</b> or Email them at <b>info@peacelandtravel.com</b>
+          <hr/>
+          <span onClick={()=>setAgree(!agree)}>Agree to our terms {"&"} conditions</span><Checkbox className='mx-1' checked={agree} /> <span className='red-txt fs-20'>*</span>
           <br/>
           {/* By Clicking this checkbox you agree to our Visa application process Terms & Conditions <Checkbox className='mx-1' checked={agree} /> */}
         </div>
-        <div className='px-2 mt-3'>
+        <div className='mt-3 mb-5'>
           <button className='custom-btn' 
-            // disabled={(load || !agree)?true:false} 
-            disabled={load?true:false} 
+            disabled={(load || !agree)?true:false} 
+            // disabled={load?true:false} 
             type='submit'
           >
               {!load?"Submit":<LoadingOutlined />}
@@ -443,9 +447,9 @@ const VisaProducts = () => {
       </div>
       }
       {success &&
-        <div style={{backgroundColor:"white", padding:100}}>
+        <div style={{backgroundColor:"white", padding:0}}>
         <div className='text-center' data-aos="fade-in">
-          <img src={"/other-assets/payment_done.png"} height={200}  alt="Success"/>
+          <img src={"/other-assets/payment_done.png"} height={100}  alt="Success"/>
           <h1 style={{color:"#20bf55", fontWeight:700}} className="my-3">Form Submitted successfully</h1>
           <p style={{color:"grey"}}>A confirmation E-mail will be sent to you in 24 hours</p>
         </div>
@@ -455,54 +459,49 @@ const VisaProducts = () => {
     <div className='visa-styles pt-4'>
       <div className='main-container pt-4'>
         <div className='white-box'>
-          <h1 className='text-center blue-txt mb-4 fw-700'>Dubai Visa Applications</h1>
-          <hr/>
-          <ConfigProvider theme={{token:{ colorPrimary:'red' }}}>
-          <div>
+          <h1 className='text-center'>Dubai Visa Applications</h1>
+          <Row>
             {cardsOne.map((x, i)=>{
               return(
-              <Card key={i} hoverable style={cardStyle} >
+                <Col md={6}>
+                <Card key={i} hoverable style={cardStyle} cover={ <img alt="example" src="visaForm/visa.jpg" height={150} /> } >
                 <Meta 
                   title={<h3 className='text-center blue-txt'>{x.title}</h3>}
                   description={<h6 className='text-center  grey-txt'>{x.desc}</h6>} 
                 />
-                <p className='text-center grey-txt' style={{height:20}}>{x.extra}</p>
-                <hr/>
-                <Flex justify={"center"} align={"center"} gap={"large"} className='mt-3'>
-                  <span className='btn-blue' 
-                    onClick={()=>showModal(x)}>
-                    Apply Online
-                  </span>
-                  <a className='btn-whatsapp' href={`${x.api}`} target='_blank'>On Whatsapp</a>
-                </Flex>
-              </Card>
-              )
-            })}
-          </div>
-          <Flex justify={"center"} align={"center"} gap={"large"}>
-            {cardsTwo.map((x, i)=>{
-              return(
-              <Card key={i} hoverable style={cardStyle} cover={ <img alt="example" src="visaForm/visa.jpg" height={150} /> } >
-                <Meta 
-                  title={<h3 className='text-center blue-txt'>{x.title}</h3>}
-                  description={<h6 className='text-center  grey-txt'>{x.desc}</h6>} 
-                />
-                <div className='text-center mt-1'>Express</div>
-                <p className='text-center grey-txt' style={{height:20}}>{x.extra}</p>
                 <hr/>
                 <Flex justify={"center"} align={"center"} gap={"large"} className='mt-3'>
                   <span className='btn-blue' onClick={()=>showModal(x)}>Apply Online</span>
                   <a className='btn-whatsapp' href={`${x.api}`} target='_blank'>On Whatsapp</a>
                 </Flex>
               </Card>
+                </Col>
               )
             })}
-          </Flex>
-          </ConfigProvider>
+          </Row>
+          <Row>
+            {cardsTwo.map((x, i)=>{
+              return(
+                <Col md={6}>
+                <Card key={i} hoverable style={cardStyle} cover={ <img alt="example" src="visaForm/visa.jpg" height={150} /> } >
+                <Meta 
+                  title={<h3 className='text-center blue-txt'>{x.title}</h3>}
+                  description={<h6 className='text-center  grey-txt'>{x.desc}</h6>} 
+                />
+                <hr/>
+                <Flex justify={"center"} align={"center"} gap={"large"} className='mt-3'>
+                  <span className='btn-blue' onClick={()=>showModal(x)}>Apply Online</span>
+                  <a className='btn-whatsapp' href={`${x.api}`} target='_blank'>On Whatsapp</a>
+                </Flex>
+              </Card>
+                </Col>
+              )
+            })}
+          </Row>
         </div>
       </div>
     </div>
-    <div className='bg-white p-5'>
+    <div className='bg-white py-5'>
       <Container>
       <h5 className='fs-30 blue-txt'>Documents Required for UAE Application</h5>
       <hr/>

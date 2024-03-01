@@ -10,15 +10,15 @@ const Tours = ({records, size, price, search, setSearch}) => {
 
     useEffect(() => {
         Aos.init({duration:300});
-        console.log(records)
+        // console.log(records)
     }, [])
 
   return (
     <>
     {records.length>0 &&<>
         <Row data-aos='fade-up' className='search-bar pb-3 pt-5 mt-4'>
-            <Col md={size.width>500?12:12} className='' data-aos='fade-up'>
-                <div className='fs-30 wh-txt'>
+            <Col md={size.width>500?12:12} data-aos='fade-up'>
+                <div className={`${size.width>500?'fs-30':'fs-25'} wh-txt`}>
                     <b>{records.filter((x)=>{
                             return x.TourOptions[0]?.adult_price <= price
                         }).filter((x)=>{
@@ -59,12 +59,12 @@ const Tours = ({records, size, price, search, setSearch}) => {
                 <img className='search-box-img filter-2' src={x.main_image} height={size.width>500?150:80} width={"100%"} />
                 <div className='px-2 search-bob-bottom'>
                     {/* Mobile */}
-                    <div className={`fw-500 fs-${size.width>500?"17":"12"} py-1`} style={size.width>500?{lineHeight:1.2}:{minHeight:44}}>
+                    <div className={`fw-500 fs-${size.width>500?"17":"12"} py-1`} style={{height:50}}>
                         {size.width>500?
                         <>
-                        <>{x.title}</>
+                            <>{x.title}</>
                         </>:
-                        <>{x.title}</>
+                            <>{x.title}</>
                         }
                     </div>
 
@@ -90,11 +90,11 @@ const Tours = ({records, size, price, search, setSearch}) => {
                     </Link>
                     </div>:
                     <div>
-                    <div style={{float:'left', fontWeight:700, fontSize:12}}>
-                        {parseFloat(x.price).toFixed(2)} AED
+                    <div className='grey-txt-2 mt-1' style={{float:'left', fontWeight:700, fontSize:17}}>
+                        {parseFloat(x.TourOptions[0].adult_price).toFixed(2)} AED
                     </div>
                     <br/>
-                    <div className='text-center'>
+                    <div className='text-center' style={{marginTop:20}}>
                     <div 
                         className='search-box-btn py-1' 
                         style={{textDecoration:'none', color:'white', paddingLeft:"22%", paddingRight:"22%"}}
