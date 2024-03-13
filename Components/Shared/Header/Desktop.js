@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { SiFacebook } from "react-icons/si";
-import { FaUserCircle } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import Router, { useRouter } from 'next/router';
 import { fetchCurrencyData } from '/functions/fetchCurrencyData';
@@ -9,12 +7,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addCurrency, changeCurrency } from '/redux/currency/currencySlice';
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import MyOffers from "/Components/Shared/MyOffers";
-import { FaSquareXTwitter } from "react-icons/fa6";
 import Link from 'next/link';
 import Aos from 'aos';
 import useWindowSize from '/functions/useWindowSize';
 import Profile from './Profile';
 import Destinations from './Destinations';
+import SearchBar from './SearchBar';
 
 const Desktop = ({user}) => {
 
@@ -67,77 +65,59 @@ const Desktop = ({user}) => {
     return () => clearTimeout(timeout);
   }, [countdown]);
 
-  useEffect(() => {
-    // console.log(cart)
-  }, [cart]);
-
   return (
-  <>
-    <div className='header-styles' style={{backgroundColor:'white'}}>
-      <div className='fixed'>
-        <>
-          <div className='top-bar fs-13'>
-            {changeTag && <div data-aos='slide-down'>
-                Are you a seller? then join our B2B portal by registering at this <a href="https://b2b.peacelandtravel.com/" target='_blank' className='mx-1'> <b>link</b></a>
-            </div>}
-            {!changeTag && <div data-aos='slide-down'>
-                Are you a seller? then join our B2B portal by registering at this <a href="https://b2b.peacelandtravel.com/" target='_blank' className='mx-1'> <b>link</b></a>
-            </div>}
-          </div>
-        </>
-        <div className='header-container py-2'>
-          <div style={{width:"20%", textAlign:'left'}} >
-            <img src='/images/logo.png' height={size.width>1200?80:50} className='cur' onClick={()=>router.push("/")} />
-          </div>
-          <div className='text-center'>
-            <Link href={"/"} className='nav-link-item'>Home</Link>
-            {/* <Link href={{pathname:'/search'}} className='nav-link-item'>Destinations</Link> */}
-            <Destinations/>
-            <ConfigProvider theme={{token:{ colorBgElevated:'#194e9e', colorText:'white', controlItemBgHover:'#0a0f57' }}}>
-              <Dropdown
-                menu={{
-                  items,
-                }}
-              >
-                <Link href={{pathname:'/activities'}} className='nav-link-item'>Activities</Link>
-              </Dropdown>
-            </ConfigProvider>
-            <Link href={"/hotels"} className='nav-link-item'>Hotels</Link>
-            <Link href={"/visa"} className='nav-link-item'>Visa</Link>
-            <Link href={"/about"} className='nav-link-item'>About</Link>
-            <Link href={"/contact"} className='nav-link-item'>Contact</Link>
-          </div>
-          <div style={{width:"21%", textAlign:'right'}}>
-            {size.width>1200 && <>
-              <Profile user={user} />
-                <Badge count={cart.length} showZero color="#faad14" size="small">
-                  <FaCartShopping className='header-icons cur' onClick={()=>Router.push("/cart")} />
-                </Badge>
-                <span className='fs-20' style={{marginLeft:16, marginRight:10}}>|</span>
-                <Link href={'https://www.facebook.com/peacelandtraveltourism.official/'} target='_blank'><SiFacebook  className='header-icons' style={{color:'#2b67b6'}} size={17} /></Link>
-                <Link href="https://www.instagram.com/peacelandtravelandtourism/?fbclid=IwAR0Ol2E3QiKOWgGxlBu0vvIvYvwbKERTs_yo_-lnzLRY-5LOvbjykfR_7Nc" target='_blank'><img src='/icons/insta.jpeg' height={17} width={17} className='header-icons' /></Link>
-                <Link href={'https://twitter.com/peacelandgroup'} target='_blank'><FaSquareXTwitter  style={{color:'#424242'}} size={19} /></Link>
-                <Link href="https://www.linkedin.com/company/peaceland-travels-and-tourism/" target='_blank'><img src='/icons/linkedin.png' height={17} width={17} className='header-icons' /></Link>
-            </>}
-            {size.width<1200 && <>
-              <Profile user={user} />
-              <Badge count={cart.length} showZero color="#faad14" size="small">
-                  <FaCartShopping className='header-icons cur' onClick={()=>Router.push("/cart")} />
-              </Badge>
-            </>}
+  <div className='header-styles' style={{backgroundColor:'white'}}>
+    <div className='fixed'>
+      <div className='top-bar wh-txt fs-13 fw-300'>
+        {changeTag && <div data-aos='slide-down'>
+          Are you a seller? then join our B2B portal by registering at this <a href="https://b2b.peacelandtravel.com/" target='_blank' className='wh-txt'> <b>link</b></a>
+        </div>}
+        {!changeTag && <div data-aos='slide-down'>
+          Are you a seller? then join our B2B portal by registering at this <a href="https://b2b.peacelandtravel.com/" target='_blank' className='wh-txt'> <b>link</b></a>
+        </div>}
+      </div>
+      <div className='header-container py-2'>
+        <div style={{width:"20%", textAlign:'left'}} >
+          <img src='/images/logo.png' height={size.width>1200?80:50} className='cur' onClick={()=>router.push("/")} />
+        </div>
+        <div className='text-center'>
+          <Link href={"/"} className='nav-link-item'>Home</Link>
+          <Destinations/>
+          <ConfigProvider theme={{token:{ colorBgElevated:'#194e9e', colorText:'white', controlItemBgHover:'#0a0f57' }}}>
+            <Dropdown
+              menu={{
+                items,
+              }}
+            >
+              <Link href={{pathname:'/activities'}} className='nav-link-item'>Activities</Link>
+            </Dropdown>
+          </ConfigProvider>
+          <Link href={"/hotels"} className='nav-link-item'>Hotels</Link>
+          <Link href={"/visa"} className='nav-link-item'>Visa</Link>
+          <Link href={"/about"} className='nav-link-item'>About</Link>
+          <Link href={"/contact"} className='nav-link-item'>Contact</Link>
+        </div>
+        <div style={{width:"21%", textAlign:'flex-end'}}>
+          <div style={{display:'flex', justifyContent:'center'}}>
+            <Badge count={cart.length} showZero color="#faad14" size="small">
+              <FaCartShopping className='header-icons cur green-txt' onClick={()=>Router.push("/cart")} />
+            </Badge>
+            <div className='fs-20' style={{marginLeft:16, marginRight:10, backgroundColor:'black', height:20, width:2}}></div>
+            <Profile user={user} />
           </div>
         </div>
       </div>
-      <div style={{margin:62}}></div>
-        
-      {showOffers &&  <>
-        <Modal title="My Offers" open={showOffers} onCancel={()=>setShowOffers(false)} footer={false} centered>
-          <hr/>
-          <MyOffers selectable={false} email={user.email} />
-        </Modal>
-      </>}
+      <div style={{borderBottom:'2px solid #b8d233'}}></div>
+      <SearchBar/>
     </div>
-  </>
+    <div style={{marginTop:110}}></div>
+    {showOffers &&
+      <Modal title="My Offers" open={showOffers} onCancel={()=>setShowOffers(false)} footer={false} centered>
+        <hr/>
+        <MyOffers selectable={false} email={user.email} />
+      </Modal>
+    }
+  </div>
   )
 }
 

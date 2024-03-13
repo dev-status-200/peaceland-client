@@ -7,7 +7,6 @@ import Loader from '../Components/Shared/Loader';
 import Router, { useRouter  } from 'next/router';
 import Script from "next/script";
 import ClientLayout from '../Components/Shared/ClientLayout';
-import { GoogleOAuthProvider } from '@react-oauth/google';
 import { store } from '/redux/store';
 import { Provider } from 'react-redux';
 
@@ -50,27 +49,21 @@ function MyApp({ Component, pageProps:{ session, ...pageProps }, }) {
       ) &&
       <>
         {loading && 
-          <GoogleOAuthProvider clientId="1018461770381-hin727pafmfajl3oq0djq27h3rnae221.apps.googleusercontent.com">
-            <Provider store={store}>
+           <Provider store={store}>
               <Loader/> 
             </Provider>
-          </GoogleOAuthProvider>
         }
         {!loading &&
-          <GoogleOAuthProvider clientId="1018461770381-hin727pafmfajl3oq0djq27h3rnae221.apps.googleusercontent.com">
             <Provider store={store}>
               <ClientLayout>
                 <Component {...pageProps} /> 
               </ClientLayout>
             </Provider>
-          </GoogleOAuthProvider>
         }
       </>
     }
     {(router.pathname =='/login' || router.pathname =='/auth') &&
-      <GoogleOAuthProvider clientId="1018461770381-hin727pafmfajl3oq0djq27h3rnae221.apps.googleusercontent.com">
         <Component {...pageProps} />
-      </GoogleOAuthProvider>
     }
     </>
   )

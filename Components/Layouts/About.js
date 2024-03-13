@@ -33,7 +33,7 @@ const About = () => {
                 </Col>
                 <Col md={5} className='py-1' xs={12}>
                     <div style={{float:'right'}}>
-                        <img src={'images/whyusnew.png'} style={{width:size.width>500?'32vw':320}} alt="Why Us" />
+                        <img src={'/images/whyusnew.png'} style={{width:size.width>500?'32vw':320}} alt="Why Us" />
                     </div>
                 </Col>
             </Row>
@@ -46,7 +46,7 @@ const About = () => {
                 {size.width>500 && 
                 <Col md={6} className='py-1'>
                     <div className=''>
-                        <img src={'images/uae-about-us.png'} style={{width:'33vw'}} alt="About Us" />
+                        <img src={'/images/uae-about-us.png'} style={{width:'33vw'}} alt="About Us" />
                     </div>
                 </Col>}
                 <Col className='grey-txt' md={6}>
@@ -118,7 +118,7 @@ const About = () => {
                 </Col>
                 <Col md={6} xs={12} className='py-1'>
                     <div style={{float:'right'}}>
-                        <img src={'images/about-us-image.png'} style={{width:size.width>500? '32vw':320}}  alt="About Us" />
+                        <img src={'/images/about-us-image.png'} style={{width:size.width>500? '32vw':320}}  alt="About Us" />
                     </div>
                 </Col>
             </Row>
@@ -130,4 +130,4 @@ const About = () => {
   )
 }
 
-export default About
+export default React.memo(About)

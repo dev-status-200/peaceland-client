@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Cookies from "js-cookie";
 import Router from 'next/router';
 import useWindowSize from '/functions/useWindowSize';
-// import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from 'jwt-decode';
 import Loader from "../Shared/Loader";
 import GoogleLogin from '@dump-work/react-google-login';
@@ -41,15 +40,10 @@ const CustomerLogin = () => {
     {!load &&
     <div className='customer-login text-center'>
     <div className={`${size.width>500?"cont":"pb-5 mb-5 pt-5"}`}>
-      
       <div className={`container-custom ${size.width>500?"":"px-3"}`}>
       <div className={`login-box ${size.width>500?"mt-4":"mt-5"}`}>
       <img src={'/images/logo.png'} className={`${size.width>500?"mt-5":"mt-5"}`} width={200} height={85} alt="Image" />
       <div className='mb-4 py-2'></div>
-        {/* <GoogleLogin
-          clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
-          buttonText="Login" onSuccess={responseGoogle} onFailure={()=>alert("failed")}
-        /> */}
         <GoogleLogin
           clientId="1018461770381-hin727pafmfajl3oq0djq27h3rnae221.apps.googleusercontent.com"
           buttonText="Login With Google"
@@ -72,4 +66,4 @@ const CustomerLogin = () => {
   )
 }
 
-export default CustomerLogin
+export default React.memo(CustomerLogin)

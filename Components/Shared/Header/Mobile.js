@@ -64,7 +64,7 @@ function OffCanvasExample({ name, user, ...props }) {
     axios.get(process.env.NEXT_PUBLIC_GET_ALL_CITIES)
     .then((x)=>{
       let tempList = [];
-      tempList = x.data.result.map((y, i)=>{
+      tempList = x?.data?.result?.map((y, i)=>{
         return {
           name:y.name,
           url:`/activities?destination=uae&city=${y.name}&category=`
@@ -87,6 +87,12 @@ function OffCanvasExample({ name, user, ...props }) {
     countdown%10==0?setChangeTag(!changeTag):null;
     return () => clearTimeout(timeout);
   }, [countdown]);
+
+  const logout = ()=>{
+    setLoad(true); 
+    Cookies.remove("token"); 
+    Router.reload("/")
+  }
 
   return (
     <>
@@ -143,7 +149,7 @@ function OffCanvasExample({ name, user, ...props }) {
             eventKey="0" 
           >
             <div className='wh-txt'>
-              {list.map((x, i)=>{
+              {list?.length>0 && list?.map((x, i)=>{
                 return(
                   <div key={i} className='mx-2 p-1 fw-500 fs-20' onClick={()=>router.push(x.url)}>- {x.name}</div>
                 )
@@ -195,11 +201,7 @@ function OffCanvasExample({ name, user, ...props }) {
           <div style={navStyles} onClick={async()=>{ await handleClose(); setShowOffers(true)}}>
             My Offers
           </div>
-          <div style={navStyles} onClick={()=>{
-            setLoad(true); 
-            Cookies.remove("token"); 
-            Router.reload("/")
-            }}>
+          <div style={navStyles} onClick={logout}>
             Logout
           </div>
           </>}

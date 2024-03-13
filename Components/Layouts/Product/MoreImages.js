@@ -54,7 +54,7 @@ const MoreImages = ({setMainImage, tour, detail}) => {
       okButtonProps={{hidden:true}} cancelButtonProps={{hidden:true}}
       width={size.width<500?'100%':'75vw'}
       centered
-      >   
+    >
       <div className='text-center bg-black m-2' style={{borderRadius:15}}>
         <img src={image} style={{height:size.width<500?'100%':'90vh'}} />
       </div>

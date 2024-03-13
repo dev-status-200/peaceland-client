@@ -8,10 +8,10 @@ import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
 import { saveCart } from '../../../functions/cartFunction';
 import IncDec from './IncDec';
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
-import { MdPlace } from "react-icons/md";
 import codes from "../../../JSONData/codes.json"
 import { initialState, reducerFunctions, setTour, validateName, validateDate, ValidateEmail } from './states';
+import GooglePlaceSearch from './GooglePlaceSearch';
+
 
 const Book = ({tour, transport, category, setOpen}) => {
 
@@ -234,26 +234,7 @@ const Book = ({tour, transport, category, setOpen}) => {
                 <>
                   <Col md={12}><hr className='my-2' /></Col>
                   <Col md={12} className="mt-1 px-4">
-                        <GooglePlacesAutocomplete
-                            apiKey="AIzaSyDNlNHouprfGHm_3mmfLutARQbIwuNamJk"
-                            selectProps={{
-                                onChange: (res)=> {
-                                    let temp = [...state.booking];
-                                    temp[i].address = res.label;
-                                    //console.log(temp[i].address)
-                                    dispatchReducer({type: 'field', fieldName:'booking', payload: temp});
-                                },
-                                placeholder: 'Pick up Address',
-                                components : {
-                                    IndicatorSeparator: () => null,
-                                    DropdownIndicator: () => 
-                                    <>
-                                        <span className='mx-2' style={{color:'silver'}}>Powered By Google </span>
-                                        <MdPlace style={{fontSize:20, position:'relative', bottom:0, right:5, color:'#4a9fe8'}} />
-                                    </>
-                                },
-                            }}
-                        />
+                    <GooglePlaceSearch dispatchReducer={dispatchReducer} state={state} index={i} />
                   </Col>
                 </>
                 }
@@ -278,7 +259,6 @@ const Book = ({tour, transport, category, setOpen}) => {
                     }
                 </Col>
             </Row>
-            
             </div>
             )
         })}
