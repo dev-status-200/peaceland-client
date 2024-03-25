@@ -103,7 +103,7 @@ const Desktop = ({user}) => {
               <FaCartShopping className='header-icons cur green-txt' onClick={()=>Router.push("/cart")} />
             </Badge>
             <div className='fs-20' style={{marginLeft:16, marginRight:10, backgroundColor:'black', height:20, width:2}}></div>
-            <Profile user={user} />
+             <Profile user={user} />
           </div>
         </div>
       </div>

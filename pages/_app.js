@@ -34,6 +34,8 @@ function MyApp({ Component, pageProps:{ session, ...pageProps }, }) {
       router.pathname =='/'            ||
       router.pathname =='/product'     ||
       router.pathname =='/product/[id]'||
+      router.pathname =='/package'     ||
+      router.pathname =='/package/[id]'||
       router.pathname =='/cart'        ||
       router.pathname =='/myBookings'  ||
       router.pathname =='/about'       ||
@@ -42,28 +44,29 @@ function MyApp({ Component, pageProps:{ session, ...pageProps }, }) {
       router.pathname =='/visa'        ||
       router.pathname =='/hotels'      ||
       router.pathname =='/search/[id]' ||
-      router.pathname =='/visaForm' ||
+      router.pathname =='/visaForm'    ||
+      router.pathname =='/destinations'||
       router.pathname =='/contact'     ||
       router.pathname =='/activities'  ||
       router.pathname =='/paySuccess'
-      ) &&
+    ) &&
       <>
         {loading && 
-           <Provider store={store}>
-              <Loader/> 
-            </Provider>
+          <Provider store={store}>
+            <Loader/> 
+          </Provider>
         }
         {!loading &&
-            <Provider store={store}>
-              <ClientLayout>
-                <Component {...pageProps} /> 
-              </ClientLayout>
-            </Provider>
+          <Provider store={store}>
+            <ClientLayout>
+              <Component {...pageProps} /> 
+            </ClientLayout>
+          </Provider>
         }
       </>
     }
     {(router.pathname =='/login' || router.pathname =='/auth') &&
-        <Component {...pageProps} />
+      <Component {...pageProps} />
     }
     </>
   )

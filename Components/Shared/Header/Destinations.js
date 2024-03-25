@@ -31,14 +31,15 @@ const Destinations = () => {
   return (
   <>
   <ConfigProvider theme={{token:{ colorBgElevated:'#194e9e', colorText:'white', controlItemBgHover:'#0a0f57' }}}>
-    { items?.length>0 && <Dropdown
+    {/* { items?.length>0 && <Dropdown
       overlayStyle={{colorBgElevated:'green'}}
       menu={{
         items,
       }}
-    >
-      <Link href={{pathname:'/activities'}} className='nav-link-item'>Destinations</Link>
-    </Dropdown>}
+    > */}
+      <Link href={{pathname:'/destinations'}} className='nav-link-item'>Destinations</Link>
+    {/* </Dropdown>
+    } */}
   </ConfigProvider>
   </>
   )

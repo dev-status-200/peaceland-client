@@ -6,11 +6,10 @@ import Link from 'next/link';
 import { ConfigProvider, Input } from 'antd';
 import Aos from 'aos';
 
-const Tours = ({records, size, price, search, setSearch}) => {
+const Tours = ({records, size, price, search, setSearch, duration}) => {
 
     useEffect(() => {
         Aos.init({duration:300});
-        // console.log(records)
     }, [])
 
   return (
@@ -50,6 +49,18 @@ const Tours = ({records, size, price, search, setSearch}) => {
                 }else if(x.title.toLowerCase().includes(search.toLowerCase())){
                     return x
                 }
+            }).filter((x)=>{
+                let temp = {};
+                if(duration.uptoOne){
+                    temp = x.duration=='Upto 1 hour'?x:null
+                }
+                if(duration.oneToFour){
+                    temp = x.duration=='1 to 4 hours'?x:null
+                }
+                if(duration.fourToDat){
+                    temp = x.duration=='4 hours to 1 day'?x:null
+                }
+                return temp
             }).map((x, i)=>{
             return(
             <Col md={4} xs={6} className={`px-${size.width>500?"1":"0"} search-tour-box`} key={i} 

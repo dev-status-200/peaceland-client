@@ -141,7 +141,7 @@ function OffCanvasExample({ name, user, ...props }) {
         <Link style={navStyles} href='/'>Home</Link><br/>
         {/* <Link style={navStyles} href={{pathname:'/activities'}} >Activities</Link><br/><br/> */}
         <Accordion defaultActiveKey="3">
-          <Link style={navStyles} href={{pathname:'/activities'}}>Destination</Link>
+          <Link style={navStyles} href={{pathname:'/destinations'}}>Destination</Link>
           <ContextAwareToggle eventKey="0">
             <DownCircleOutlined style={{color:'white', position:'relative', bottom:2, fontSize:20}} />
           </ContextAwareToggle>

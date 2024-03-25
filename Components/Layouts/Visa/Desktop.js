@@ -47,14 +47,17 @@ const VisaProducts = () => {
   };
   const cardStyle = { width: 320, margin:20 };
   const cardsOne = [
-    {id:'1', title:'14 Days', desc:'Single Entry Application + Insurance', extra:'', api:"https://api.whatsapp.com/send/?phone=971503374890&text=14 Days Single Entry Application with Insurance"},
-    {id:'2', title:'30 Days', desc:'Single Entry Application + Insurance', extra:'', api:"https://api.whatsapp.com/send/?phone=971503374890&text=30 Days Single Entry Application with Insurance"},
-    {id:'3', title:'60 Days', desc:'Single Entry Application + Insurance', extra:'', api:"https://api.whatsapp.com/send/?phone=971503374890&text=60 Days Single Entry Application with Insurance"},
+    {id:'1', title:'48 Hours', price:'110 AED', api:"https://api.whatsapp.com/send/?phone=971503374890&text=48 Hours - Visa Query"},
+    {id:'2', title:'96 Hours', price:'220 AED', api:"https://api.whatsapp.com/send/?phone=971503374890&text=96 Hours - Visa Query"},
+    {id:'3', title:'30 Days',  price:'350 AED', api:"https://api.whatsapp.com/send/?phone=971503374890&text=30 Days - Visa Query"},
   ];
   const cardsTwo = [
-    {id:'4', title:'14 Days', desc:'Multiple Entry Application + Insurance', extra:'2 Working Days*', api:"https://api.whatsapp.com/send/?phone=971503374890&text=14 Days Multiple Entry Application with Insurance"},
-    {id:'5', title:'30 Days', desc:'Multiple Entry Application + Insurance', extra:'2 Working Days*', api:"https://api.whatsapp.com/send/?phone=971503374890&text=30 Days Multiple Entry Application with Insurance"},
-    {id:'6', title:'60 Days', desc:'Application Extension/A2A Application Change', extra:' ',         api:"https://api.whatsapp.com/send/?phone=971503374890&text=60 Days Application Extension/A2A Application Change"},
+    {id:'4', title:'60 Days', price:'600 AED', api:"https://api.whatsapp.com/send/?phone=971503374890&text=60 Days - Visa Query"},
+    {id:'5', title:'30 Days Multi Entry',  price:'600 AED', api:"https://api.whatsapp.com/send/?phone=971503374890&text=30 Days Multi Entry - Visa Query"},
+    {id:'6', title:'60 Days Multi Entry', price:'850 AED',  api:"https://api.whatsapp.com/send/?phone=971503374890&text=60 Days Multi Entry - Visa Query"},
+  ];
+  const cardsThree = [
+    {id:'7', title:'60 Extension A2A', price:'1550 AED', api:"https://api.whatsapp.com/send/?phone=971503374890&text=60 Extension A2A - Visa Query"},
   ];
   const options = [
     {value:'1', label:'14 Days Single Entry Application + Insurance'},
@@ -466,12 +469,12 @@ const VisaProducts = () => {
           <Flex justify={"center"} align={"center"} gap={"large"}>
             {cardsOne.map((x, i)=>{
               return(
-              <Card key={i} hoverable style={cardStyle} cover={ <img alt="example" src="visaForm/visa.jpg" height={150} /> } >
+              <Card key={i} hoverable style={cardStyle} className=''>
                 <Meta 
-                  title={<h3 className='text-center blue-txt'>{x.title}</h3>}
-                  description={<h6 className='text-center  grey-txt'>{x.desc}</h6>} 
+                  title={<h4 className='text-center blue-txt'>{x.title}</h4>}
+                  description={<h6 className='text-center  grey-txt'>{x.price}</h6>} 
                 />
-                <p className='text-center grey-txt' style={{height:20}}>{x.extra}</p>
+                {/* <p className='text-center grey-txt' style={{height:20}}>{x.extra}</p> */}
                 <hr/>
                 <Flex justify={"center"} align={"center"} gap={"large"} className='mt-3'>
                   <span className='btn-blue' 
@@ -487,10 +490,29 @@ const VisaProducts = () => {
           <Flex justify={"center"} align={"center"} gap={"large"}>
             {cardsTwo.map((x, i)=>{
               return(
-              <Card key={i} hoverable style={cardStyle} cover={ <img alt="example" src="visaForm/visa.jpg" height={150} /> } >
+              <Card key={i} hoverable style={cardStyle} className='pt-3'>
                 <Meta 
-                  title={<h3 className='text-center blue-txt'>{x.title}</h3>}
-                  description={<h6 className='text-center  grey-txt'>{x.desc}</h6>} 
+                  title={<h4 className='text-center blue-txt'>{x.title}</h4>}
+                  description={<h6 className='text-center  grey-txt'>{x.price}</h6>} 
+                />
+                {/* <div className='text-center mt-1'>Express</div>
+                <p className='text-center grey-txt' style={{height:20}}>{x.extra}</p> */}
+                <hr/>
+                <Flex justify={"center"} align={"center"} gap={"large"} className='mt-3'>
+                  <span className='btn-blue' onClick={()=>showModal(x)}>Apply Online</span>
+                  <a className='btn-whatsapp' href={`${x.api}`} target='_blank'>On Whatsapp</a>
+                </Flex>
+              </Card>
+              )
+            })}
+          </Flex>
+          <Flex justify={"center"} align={"center"} gap={"large"}>
+            {cardsThree.map((x, i)=>{
+              return(
+              <Card key={i} hoverable style={cardStyle} className='pt-3'>
+                <Meta 
+                  title={<h4 className='text-center blue-txt'>{x.title}</h4>}
+                  description={<h6 className='text-center  grey-txt'>{x.price}</h6>} 
                 />
                 {/* <div className='text-center mt-1'>Express</div>
                 <p className='text-center grey-txt' style={{height:20}}>{x.extra}</p> */}

@@ -56,7 +56,7 @@ const Product = ({id, tourData}) => {
   
   const fetchData = async(id) => {
     let detailData = await axios.get(process.env.NEXT_PUBLIC_GET_PRODUCT_DETAIL_BY_ID,{
-      headers:{ "id": `${id}` }
+      headers:{ "id": `${id}`, type:'product' }
     }).then((x)=>x.data.result);
     await setTour({
       ...tourData.result,

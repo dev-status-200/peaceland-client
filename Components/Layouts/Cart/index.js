@@ -34,8 +34,11 @@ const Cart = () => {
   useEffect(()=> { 
     Aos.init({duration:500});
     setPrice(parseFloat(getTotalPrice(cart)).toFixed(2));
-    getValues();
   }, [cart]);
+
+  useEffect(()=> {
+    getValues();
+  }, []);
 
   async function getValues(){
     let token = await Cookies.get("token");

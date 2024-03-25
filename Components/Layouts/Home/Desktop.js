@@ -11,7 +11,11 @@ const Slider = dynamic(() => import('./Slider'), {
 
 const SignUp = dynamic(() => import('../../Shared/SignUp'), {
   ssr:false,
-})
+});
+
+const PromoSection = dynamic(() => import('../../Shared/PromoSection'), {
+  ssr:false,
+});
 
 const Adventures = dynamic(() => import('./AdventureTours'), {
   loading: () => <div className='text-center'> <img src='/loader.svg'  alt="About Us" /> </div>,
@@ -29,6 +33,7 @@ const Desktop = () => {
   return (
   <>
     <Slider/>
+    <PromoSection mobile={false} />
     <div className='home-styles'>
       <div id="parallax-world-of-ugg">
         <section>

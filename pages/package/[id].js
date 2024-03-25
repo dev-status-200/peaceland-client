@@ -1,8 +1,8 @@
-import ProductPage from '/Components/Layouts/Product';
+import Package from '/Components/Layouts/Package';
 
 export default function product({ id, tourData }) {
     return (
-        <ProductPage id={id} tourData={tourData} />
+        <Package id={id} tourData={tourData} />
     )
 }
 
@@ -23,7 +23,7 @@ export async function getStaticProps(ctx) {
 
 export async function getStaticPaths() {
     const res = await fetch(process.env.NEXT_PUBLIC_GET_PRODUCT_SLUGS, {
-        headers:{type:'product'}
+        headers:{type:'package'}
     })
     const posts = await res.json();
 
