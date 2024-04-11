@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap';
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/bundle";
+import ActivityIcons from '../../Shared/ActivityIcons';
 import dynamic from 'next/dynamic';
 
 const MobileSearch = dynamic(() => import('./MobileSearch'), {
@@ -27,6 +28,7 @@ const Mobile = ({combos, adventures, bestSelling}) => {
       <div className='mobile-hero'>
         <MobileSearch />
       </div>
+      <ActivityIcons/>
       <PromoSection mobile={true} />
       <div className='home-styles'>
       <div id="parallax-world-of-ugg">

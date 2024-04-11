@@ -16,35 +16,35 @@ const MoreDetail = ({detail, tour}) => {
     <Col md={8} className=''>
         <Row>
           <h3 className='blue-txt'><b>Inclusions</b></h3>
-          {tour.packageIncludes.potography==1?
+          {tour?.packageIncludes?.potography==1?
             <Col md={'auto'} xs={12} className="text-center my-3">
               <img src={'/package-icons/photography@2x.png'} height={80} className='package-include-icon mx-3' />
               <div>Photography</div>
             </Col>:
             <></>
           }
-          {tour.packageIncludes.transport==1?
+          {tour?.packageIncludes?.transport==1?
             <Col md={'auto'} xs={12} className="text-center my-3">
               <img src={'/package-icons/transport@2x.png'} height={80} className='package-include-icon mx-3' />
               <div>Transport</div>
             </Col>:
             <></>
           }
-          {tour.packageIncludes.food==1?
+          {tour?.packageIncludes?.food==1?
             <Col md={'auto'} xs={12} className="text-center my-3">
               <img src={'/package-icons/lunch@2x.png'} height={80} className='package-include-icon mx-3' />
               <div>Food</div>
             </Col>:
             <></>
           }
-          {tour.packageIncludes.hotel==1?
+          {tour?.packageIncludes?.hotel==1?
             <Col md={'auto'} xs={12} className="text-center my-3">
               <img src={'/package-icons/hotel@2x.png'} height={80} className='package-include-icon mx-3' />
               <div>Hotel</div>
             </Col>:
             <></>
           }
-          {tour.packageIncludes.plane==1?
+          {tour?.packageIncludes?.plane==1?
             <Col md={'auto'} xs={12} className="text-center my-3">
               <img src={'/package-icons/plane@2x.png'} height={80} className='package-include-icon mx-3' />
               <div>Flight</div>
@@ -55,7 +55,7 @@ const MoreDetail = ({detail, tour}) => {
     <hr/>
         <h3 className='blue-txt mb-4'><b>Activities Per Day</b></h3>
         <div className='px-2'>
-          <Timeline items={ detail.travelDetail.split("//").map((x)=>{
+          <Timeline items={detail?.travelDetail?.split("//").map((x)=>{
             return {
                 children: <div className='my-4'>{x}</div>,
                 dot: <><FaRegCalendarCheck size={25} className='green-txt' /></>

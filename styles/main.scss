@@ -17,6 +17,11 @@
   // font-family: 'Jost', sans-serif;
   font-family: 'Roboto', sans-serif;
 }
+
+img{
+  object-fit: cover;
+}
+
 h1, h2, h3, h4, h5, h6{
   font-family: 'Roboto', sans-serif;
 }
@@ -1087,9 +1092,9 @@ div.react-datepicker-wrapper > div > input{
 .btn-whatsapp{
   background-color: rgb(85, 205, 83)!important;
   color: white;
-  padding: 10px 20px;
+  padding: 7px 15px;
   border-radius: 20px;
-  font-weight: 600!important;
+  text-decoration: none;
 }
 .btn-whatsapp:hover{
   transition-duration: 300ms;
@@ -1099,9 +1104,8 @@ div.react-datepicker-wrapper > div > input{
 .btn-blue{
   background-color: #194e9e!important;
   color: white;
-  padding: 10px 20px;
+  padding: 7px 15px;
   border-radius: 20px;
-  font-weight: 600!important;
 }
 .btn-blue:hover{
   transition-duration: 300ms;
@@ -1164,7 +1168,34 @@ div.react-datepicker-wrapper > div > input{
   flex-direction: column;
 }
 
+.activity-container{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.activity-icon{
+  transition-duration: 300ms;
+  font-size: 30px;
+  margin-bottom: 10px;
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 15px;
+  padding: 15px 30px;
+  background-color: white;
+  width: 160px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.activity-icon:hover{
+  transition-duration: 300ms;
+  box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.16);
+  -webkit-box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.16);
+  -moz-box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.16);
+}
 
+.activity-icon > p {
+  font-size: 15px;
+  color: black;
+}
 
 //Promo Section
 
@@ -1213,23 +1244,33 @@ div.react-datepicker-wrapper > div > input{
   font-weight: 700;
 }
 
-
 // Package Section
 
 .package-styles{
-   margin: 40px 10px;
+  margin: 40px 10px;
+}
+.package-styles-sm{
+  margin: 10px 20px;
 }
 
 .package-box{
+  display: flex;
   border-radius: 7px;
-
   background-color: white;
+  box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.16);
+  -webkit-box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.16);
+  -moz-box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.16);
+}
 
+.package-box-sm{
+  display: flex;
+  flex-direction: column;
+  border-radius: 7px;
+  background-color: white;
   box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.16);
   -webkit-box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.16);
   -moz-box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.16);
 
-  display: flex;
 }
 
 .package-info-top{
@@ -1247,13 +1288,22 @@ div.react-datepicker-wrapper > div > input{
 }
 
 .package-include-icon{
-  border: 1px solid #194e9e;
+  border: 1px solid #d5be3a;
   border-radius: 50px;
 }
 
 .package-pricing{
   width: 25%;
   padding: 15px;
+  background-color: #b8d23357;
+  border-radius: 0px 7px 7px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.package-pricing-sm{
+  padding: 18px;
+  margin-top: 10px;
   background-color: #b8d23357;
   border-radius: 0px 7px 7px 0px;
   display: flex;

@@ -3,6 +3,7 @@ import Aos from 'aos';
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/bundle";
+import ActivityIcons from '../../Shared/ActivityIcons';
 import dynamic from 'next/dynamic';
 
 const Slider = dynamic(() => import('./Slider'), {
@@ -33,6 +34,7 @@ const Desktop = () => {
   return (
   <>
     <Slider/>
+    <ActivityIcons/>
     <PromoSection mobile={false} />
     <div className='home-styles'>
       <div id="parallax-world-of-ugg">

@@ -12,7 +12,11 @@ import Aos from 'aos';
 import useWindowSize from '/functions/useWindowSize';
 import Profile from './Profile';
 import Destinations from './Destinations';
-import SearchBar from './SearchBar';
+import dynamic from 'next/dynamic';
+
+const SearchBar = dynamic(() => import('./SearchBar'), {
+  ssr:false,
+});
 
 const Desktop = ({user}) => {
 
@@ -34,8 +38,8 @@ const Desktop = ({user}) => {
   }, [])
 
     const setCurrency = async() => {
-        let items = await fetchCurrencyData();
-        dispatch(addCurrency(items));
+      let items = await fetchCurrencyData();
+      dispatch(addCurrency(items));
     }
 
   const items = [

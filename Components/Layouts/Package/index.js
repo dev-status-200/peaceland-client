@@ -5,23 +5,22 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Loader from '../../Shared/Loader';
 import Router, { useRouter } from 'next/router'
-import MoreDetail from './MoreDetail';
-import MobileBook from './MobileBook';
 import { Rate, Drawer } from 'antd';
-import Details from './Details';
-import Book from './Book';
 import axios from 'axios';
 import Aos from 'aos';
 import dynamic from 'next/dynamic';
 import { GiKnifeFork } from "react-icons/gi";
 import { CiLocationOn } from "react-icons/ci";
 
+const Details = dynamic(() => import('./Details'), { ssr:false });
+const Book = dynamic(() => import('./Book'), { ssr:false });
+const MoreDetail = dynamic(() => import('./MoreDetail'), { ssr:false });
+const MobileBook = dynamic(() => import('./MobileBook'), { ssr:false });
 const Images = dynamic(() => import('./Images'), { ssr:false });
 const MoreImages = dynamic(() => import('./MoreImages'), { ssr:false });
 
 const Product = ({id, tourData}) => {
-  
-  const router = useRouter();
+
   const conversion = useSelector((state) => state.currency.conversion);
 
   const [tour, setTour] = React.useState({
@@ -30,7 +29,6 @@ const Product = ({id, tourData}) => {
   });
 
   const [detail, setDetail] = React.useState({});
-  const [transport, setTransport] = React.useState([]);
   const [open, setOpen] = useState(false);
 
   const [mainImage, setMainImage] = useState('');
@@ -58,11 +56,8 @@ const Product = ({id, tourData}) => {
       packageIncludes:JSON.parse(detailData.packageIncludes),
     }
     await setTour(tempData);
-    console.log(tempData)
     // detailData? delete detailData.TourOptions:null
     setDetail(detailData);
-    let transportData = await axios.get(process.env.NEXT_PUBLIC_GET_TRANSPORT).then((x)=>x.data.result);
-    setTransport(transportData);
     setBook(true);
     // axios.get(process.env.NEXT_PUBLIC_GET_REVIEWS,{
     //   headers:{'id':`${id}`}
@@ -99,7 +94,15 @@ const Product = ({id, tourData}) => {
       </Row>
     }
     </>
-  )}
+  )};
+
+  const createBooking = (data) => {
+    axios.post(process.env.NEXT_PUBLIC_POST_CREATE_PACKAGE_BOOKING,{
+      ...data
+    }).then((x)=>{
+      console.log(x.data)
+    })
+  }
 
   const Separator = () =>  <> {size.width<600 && <div className="separator-tour-icons"></div>} </>
   
@@ -175,9 +178,9 @@ const Product = ({id, tourData}) => {
     {detail.advCategory=="Combo Tours" && <div className='combo-note'> In combo products all variation are included!</div>}
     {
       size.width<500?
-      <MobileBook tour={tour} transport={transport} category={detail?.advCategory} setOpen={setOpen} />
+      <MobileBook tour={tour} category={detail?.advCategory} setOpen={setOpen} createBooking={createBooking} />
       :
-      <Book tour={tour} transport={transport} category={detail?.advCategory} setOpen={setOpen} />
+      <Book tour={tour} category={detail?.advCategory} setOpen={setOpen} createBooking={createBooking} />
     }
   </Drawer>
   </>

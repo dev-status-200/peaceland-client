@@ -115,7 +115,7 @@ return(
                 <div className='px-1'>
                 <h5 className='mt-4 mb-2 blue-txt'><b>Duration</b></h5>
                 <ConfigProvider
-                  theme={{ token:{ colorPrimary:'#b8d233', padding:50, height:40, borderRadius:0, size:'large' }}}
+                  theme={{ token:{ colorPrimary:'#b8d233', padding:50, height:40, borderRadius:50, size:'large' }}}
                 >
                   <Checkbox checked={duration.uptoOne}   onChange={(e)=>adjustDuration(e,'uptoOne')}><h6>Upto 1 hour</h6></Checkbox><br/>
                   <Checkbox checked={duration.oneToFour} onChange={(e)=>adjustDuration(e,'oneToFour')}><h6>1 to 4 hours</h6></Checkbox><br/>
@@ -124,7 +124,7 @@ return(
                 </div>
                 <div className='px-1 mb-5'>
                 <h5 className='mt-4 mb-2 blue-txt'><b>Category</b></h5>
-                <ConfigProvider theme={{token:{ colorPrimary:'#b8d233', padding:50, height:40, borderRadius:0, size:'large' }}}>
+                <ConfigProvider theme={{token:{ colorPrimary:'#b8d233', padding:50, height:40, borderRadius:50, size:'large' }}}>
                   <Checkbox checked={category=="Theme Parks"?true:false}  onChange={(e)=>adjustCategory("Theme Parks",e)}><h6 className='plt-2'>Theme Parks</h6></Checkbox><br/>
                   <Checkbox checked={category=="City Tours"?true:false}   onChange={(e)=>adjustCategory("City Tours",e)}><h6 className='plt-2'>City Tours</h6></Checkbox><br/>
                   <Checkbox checked={category=="Luxury Tours"?true:false} onChange={(e)=>adjustCategory("Luxury Tours",e)}><h6 className='plt-2'>Luxury Tours</h6></Checkbox><br/>

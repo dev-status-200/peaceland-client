@@ -88,50 +88,75 @@ const Hotels = () => {
     }, [form])
 
     const content = (
-    <div>
-        <p className='red-txt mx-2'>Children cannot be above age 17 *</p>
-        {form.rooms.map((x, i)=>{
-            return(
-                <Row key={x.pid} className='mt-1'>
-                    <Col md={1} xs={1} className='px-2 pt-4'><b> {i+1}.</b></Col>
-                    <Col md={5} xs={5} className='px-1'>
-                        Adults<br/>
-                        <InputNumber min={1} value={x.adult} onChange={(e)=>{
-                            let tempState = {...form};
-                            tempState.rooms[i].adult = e;
-                            setForm(tempState)
-                        }} />
-                    </Col>
-                    <Col md={5} xs={5} className='px-1'>
-                        Children <br/>
-                        <InputNumber min={0} value={x.child} onChange={(e)=>{
-                            let tempState = {...form};
-                            tempState.rooms[i].child = e;
-                            setForm(tempState)
-                        }}  />
-                    </Col>
-                    <Col md={1} xs={1} className='py-1 px-0'>
-                        <br/>
-                        <CloseCircleOutlined className='fs-17' onClick={()=>{
-                            let tempForm = {...form};
-                            let rooms = tempForm.rooms;
-                            rooms = rooms.filter((y, j)=>{
-                                if(y.pid !=x.pid){
-                                    return y
-                                }
-                            });
-                            tempForm.rooms = rooms;
-                            setForm(tempForm);
-                        }} /> 
-                    </Col>
-                </Row>
-        )})}
-        <button className='custom-btn mx-2 mt-3 mb-1' onClick={()=>{
-            let tempState = {...form};
-            tempState.rooms.push({adult:'1', child:'0', age:'1', pid:count});
-            setCount(count + 1);
-            setForm(tempState)
-        }}>Add</button>
+    <div style={{width:380}}>
+    <p className='red-txt mx-2'>Children cannot be above age 17 *</p>
+    {form.rooms.map((x, i)=>{
+    return(
+        <Row key={x.pid} className='mt-1'>
+            <Col md={1} xs={1} className=' pt-4'><b> {i+1}.</b></Col>
+            <Col md={'auto'} xs={5} className='px-1'>
+                Adults<br/>
+                <InputNumber min={1} value={x.adult} size='small'
+                  style={{width:70}}
+                  onChange={(e)=>{
+                    let tempState = {...form};
+                    tempState.rooms[i].adult = e;
+                    setForm(tempState)
+                }} />
+            </Col>
+            <Col md={'auto'} xs={5} className='px-1 mx-1'>
+                Children <br/>
+                <InputNumber min={0} value={x.child} size='small'
+                  style={{width:70}}
+                  onChange={(e)=>{
+                    let tempState = {...form};
+                    tempState.rooms[i].child = e;
+                    setForm(tempState)
+                  }}
+                />
+            </Col>
+            <Col md={'auto'} xs={5} className='px-1'>
+                Room
+                <br/>
+                <Select 
+                    value={x.roomType}
+                    size='small'
+                    style={{width:130}}
+                    onChange={(e)=>{
+                        let tempState = {...form};
+                        tempState.rooms[i].roomType = e;
+                        setForm(tempState)
+                      }}
+                    options={[
+                        {value:'Room Only', label:'Room Only'},
+                        {value:'With Breakfast', label:'With Breakfast'},
+                        {value:'Half-Board', label:'Half-Board'},
+                        {value:'Full-Board', label:'Full-Board'},
+                    ]}
+                />
+            </Col>
+            <Col md={'auto'} xs={1} className='py-1'>
+                <br/>
+                <CloseCircleOutlined className='fs-17' onClick={()=>{
+                    let tempForm = {...form};
+                    let rooms = tempForm.rooms;
+                    rooms = rooms.filter((y, j)=>{
+                        if(y.pid !=x.pid){
+                            return y
+                        }
+                    });
+                    tempForm.rooms = rooms;
+                    setForm(tempForm);
+                }} /> 
+            </Col>
+        </Row>
+    )})}
+    <button className='custom-btn mx-2 mt-3 mb-1' onClick={()=>{
+        let tempState = {...form};
+        tempState.rooms.push({adult:'1', child:'0', age:'1', pid:count});
+        setCount(count + 1);
+        setForm(tempState)
+    }}>Add</button>
     </div>
     );
 
