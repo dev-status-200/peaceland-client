@@ -72,79 +72,80 @@ const Book = ({ tour, category, setOpen, createBooking }) => {
 
   return (
     <>
-      {contextHolder}
-      {contextNotifyHolder}
-      <div>
-        {!load && <>
-          <Row className="px-1">
-            <Col md={12} className='my-2 fs-16'><b>Your Information</b></Col>
-            <Col md={3}>
-              <Select style={{ width: "100%" }} value={state.title}
-                onChange={(e) => dispatchReducer({ type: 'field', fieldName: 'title', payload: e })}
-                options={[{ value: "Mr.", label: "Mr." }, { value: "Ms.", label: "Ms." }, { value: "Mrs.", label: "Mrs." }]}
-              />
-            </Col>
-            <Col md={9}>
-              <Input placeholder='Full Name' value={state.name}
-                onChange={(e) => dispatchReducer({ type: 'field', fieldName: 'name', payload: e.target.value })}
-              />
-            </Col>
-            <Col md={5} className='mt-3'>
-              <Select defaultValue="United Arab Emirates"
-                style={{ width: "100%" }}
-                onChange={(e) => {
-                  let tempContact = ""
-                  codes.forEach((x) => {
-                    if (x.value == e) {
-                      tempContact = x.code + " "
-                      return
-                    }
-                  })
-                  dispatchReducer({ type: 'set', payload: { code: e, contact: tempContact } })
-                }}
-                showSearch
-                optionFilterProp="children"
-                filterOption={(input, option) =>
-                  ((option?.value) ?? '').toLowerCase().includes(input.toLowerCase()) ||
-                  ((option?.label) ?? '').toLowerCase().includes(input.toLowerCase()) ||
-                  ((option?.code) ?? '').toLowerCase().includes(input.toLowerCase())
+    {contextHolder}
+    {contextNotifyHolder}
+    <div>
+    {!load && 
+    <>
+      <Row className="px-1">
+        <Col md={12} className='my-2 fs-16'><b>Your Information</b></Col>
+        <Col md={3}>
+          <Select style={{ width: "100%" }} value={state.title}
+            onChange={(e) => dispatchReducer({ type: 'field', fieldName: 'title', payload: e })}
+            options={[{ value: "Mr.", label: "Mr." }, { value: "Ms.", label: "Ms." }, { value: "Mrs.", label: "Mrs." }]}
+          />
+        </Col>
+        <Col md={9}>
+          <Input placeholder='Full Name' value={state.name}
+            onChange={(e) => dispatchReducer({ type: 'field', fieldName: 'name', payload: e.target.value })}
+          />
+        </Col>
+        <Col md={5} className='mt-3'>
+          <Select defaultValue="United Arab Emirates"
+            style={{ width: "100%" }}
+            onChange={(e) => {
+              let tempContact = ""
+              codes.forEach((x) => {
+                if (x.value == e) {
+                  tempContact = x.code + " "
+                  return
                 }
-                options={codes}
-              />
-            </Col>
-            <Col md={1} className=' flag-box'>
-              <span className={`fi fi-${state.code.toLowerCase()}`}></span>
-            </Col>
-            <Col md={6} className='mt-3'>
-              <Input placeholder='Contact No' value={state.contact}
-                onChange={(e) => dispatchReducer({ type: 'field', fieldName: 'contact', payload: e.target.value })}
-              />
-            </Col>
-            <Col md={12}><hr className='mt-4 mb-1' /></Col>
-          </Row>
-          <Row>
-            <Col md={12}>
-              {user.email &&
-                <button className='cart-btn mt-3' onClick={addToCart}>
-                  Fill out Form
-                </button>
-              }
-              {!user.email &&
-                <button className='cart-btn mt-3' onClick={() => Router.push("/auth")}>
-                  Sign In is required to fill form
-                </button>
-              }
-            </Col>
-          </Row>
-        </>
-        }
-        {load && 
-          <div className='text-center py-5'>
-            <Spinner className='mt-5' />
-            <p className='mb-5'>Please wait...</p>
-          </div>
-        }
-      </div>
+              })
+              dispatchReducer({ type: 'set', payload: { code: e, contact: tempContact } })
+            }}
+            showSearch
+            optionFilterProp="children"
+            filterOption={(input, option) =>
+              ((option?.value) ?? '').toLowerCase().includes(input.toLowerCase()) ||
+              ((option?.label) ?? '').toLowerCase().includes(input.toLowerCase()) ||
+              ((option?.code) ?? '').toLowerCase().includes(input.toLowerCase())
+            }
+            options={codes}
+          />
+        </Col>
+        <Col md={1} className=' flag-box'>
+          <span className={`fi fi-${state.code.toLowerCase()}`}></span>
+        </Col>
+        <Col md={6} className='mt-3'>
+          <Input placeholder='Contact No' value={state.contact}
+            onChange={(e) => dispatchReducer({ type: 'field', fieldName: 'contact', payload: e.target.value })}
+          />
+        </Col>
+        <Col md={12}><hr className='mt-4 mb-1' /></Col>
+      </Row>
+      <Row>
+        <Col md={12}>
+          {user.email &&
+            <button className='cart-btn mt-3' onClick={addToCart}>
+              Fill out Form
+            </button>
+          }
+          {!user.email &&
+            <button className='cart-btn mt-3' onClick={() => Router.push("/auth")}>
+              Sign In is required to fill form
+            </button>
+          }
+        </Col>
+      </Row>
+    </>
+    }
+    {load && 
+    <div className='text-center py-5'>
+      <Spinner className='mt-5' />
+      <p className='mb-5'>Please wait...</p>
+    </div>
+    }
+    </div>
     </>
   )
 }

@@ -1,15 +1,17 @@
 import React, { useEffect, useState, useRef } from 'react';
-import Header from './Header/';
-import Footer from './Footer/';
 import { Layout } from 'antd';
 import { useDispatch } from 'react-redux';
-import { addProduct } from '../../redux/cart/cartSlice';
-import { retrieveCart } from '../../functions/cartFunction';
-import { WhatsAppOutlined } from '@ant-design/icons';
-import { Popover } from 'antd';
+import { addProduct } from '/redux/cart/cartSlice';
+import { retrieveCart } from '/functions/cartFunction';
 import { delay } from "../../functions/delay";
 import { useRouter } from 'next/router';
-import { FloatingWhatsApp } from 'react-floating-whatsapp'
+import { FloatingWhatsApp } from 'react-floating-whatsapp';
+import dynamic from 'next/dynamic';
+import Header from './Header/';
+
+const Footer = dynamic(() => import('./Footer/'), {
+  ssr:false,
+});
 
 const MainLayout = ({children}) => {
 

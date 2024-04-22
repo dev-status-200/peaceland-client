@@ -70,8 +70,8 @@ body {
 
 .text-shade{
   text-shadow: 4px 4px 10px rgba(0,0,0,0.6);
-  font-weight: 800!important;
-  font-size: 70px!important;
+  font-weight: 900!important;
+  font-size: 90px!important;
 }
 .text-shade-mobile{
   text-shadow: 4px 4px 10px rgba(0,0,0,0.6);
@@ -1136,6 +1136,7 @@ div.react-datepicker-wrapper > div > input{
   background-color: #194e9e;
   color: white;
   border: 1px solid #194e9e;
+  border-radius: 0px 30px 30px 0px;
 }
 
 .search-container{
@@ -1146,7 +1147,8 @@ div.react-datepicker-wrapper > div > input{
   border: 2px solid #b8d233;
   width: 90vw;
   margin: auto;
-  padding: 10px;
+  border-radius: 25px;
+  padding: 5px;
   background-color: rgba(53, 106, 144, 0.412);
 }
 // style={{border:'2px solid #b8d233', width:750, margin:'auto', padding:10}}
@@ -1157,9 +1159,13 @@ div.react-datepicker-wrapper > div > input{
   border-radius: 100%;
 }
 
+.bg-white{
+  background-color: white!important;
+}
+
 .mobile-hero {
   width: 100vw;
-  min-height: 40vh;
+  min-height: 20vh;
   background:url("../public/images/mobile-hero.jpg");
   background-size:cover;
   justify-content: center;
@@ -1176,13 +1182,11 @@ div.react-datepicker-wrapper > div > input{
 .activity-icon{
   transition-duration: 300ms;
   font-size: 30px;
-  margin-bottom: 10px;
   border: 1px solid rgb(204, 204, 204);
   border-radius: 15px;
   padding: 15px 30px;
   background-color: white;
-  width: 160px;
-  margin-top: 15px;
+  width: 150px;
   margin-bottom: 15px;
 }
 .activity-icon:hover{
@@ -1288,14 +1292,30 @@ div.react-datepicker-wrapper > div > input{
 }
 
 .package-include-icon{
-  border: 1px solid #d5be3a;
-  border-radius: 50px;
+  border: 1px solid #1a842a;
+  height: 60px;
+  width: 60px!important;
+  border-radius: 100px;
+  padding: 3px;
+  margin: 0px;
+  display: inline-block;
+  text-align: center;
+  padding-top: 9px;
+  margin-bottom: 10px;
+}
+
+.package-include-icon-2{
+  border: 1px solid #1a842a;
+  padding: 10px;
+  border-radius: 100px;
+  margin-right: 10px;
+  text-align: center;
 }
 
 .package-pricing{
   width: 25%;
   padding: 15px;
-  background-color: #b8d23357;
+  background-color: #3aaabe57;
   border-radius: 0px 7px 7px 0px;
   display: flex;
   flex-direction: column;
@@ -1304,7 +1324,7 @@ div.react-datepicker-wrapper > div > input{
 .package-pricing-sm{
   padding: 18px;
   margin-top: 10px;
-  background-color: #b8d23357;
+  background-color: #3aaabe57;
   border-radius: 0px 7px 7px 0px;
   display: flex;
   flex-direction: column;

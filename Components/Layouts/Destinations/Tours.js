@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
-import { Rate } from 'antd';
+import { Input, Button, Popover } from 'antd';
 import { Row, Col } from 'react-bootstrap';
 import Router from 'next/router';
-import Link from 'next/link';
-import { ConfigProvider, Input } from 'antd';
+import { SearchOutlined, FilterOutlined } from '@ant-design/icons';
 import { CiLocationOn } from "react-icons/ci";
 import Aos from 'aos';
 import { IoChevronDownSharp, IoChevronUpSharp, IoPricetagsOutline } from "react-icons/io5";
 
-const Tours = ({records, size, price, search, setSearch, setRecords, duration}) => {
+const Tours = ({records, size, price, search, setSearch, setRecords, duration, Filter}) => {
 
   useEffect(() => {
     Aos.init({duration:300});
@@ -26,9 +25,9 @@ const Tours = ({records, size, price, search, setSearch, setRecords, duration}) 
   <>
     {records.length>0 &&
     <>
-    <Row data-aos='fade-up' className='search-bar pb-3 pt-5 mt-4'>
-      <Col md={size.width>500?12:12} data-aos='fade-up'>
-        <div className={`${size.width>500?'fs-30':'fs-25'} wh-txt`}>
+    <Row data-aos='fade-up' className=' pb-3 pt- mt-4'>
+      <Col md={size.width>600?12:12} data-aos='fade-up'>
+        <div className={`${size.width>600?'fs-30':'fs-25'} blue-txt`}>
           <b>{records.filter((x)=>{
             if(search==""){
               return x
@@ -39,16 +38,39 @@ const Tours = ({records, size, price, search, setSearch, setRecords, duration}) 
           </b>
         </div>
       </Col>
-      {size.width>500 && <Col md={12}></Col>}
-      <Col md={12} className='' >
-        <ConfigProvider theme={{ token:{ colorPrimary: '#499b2f' } }}>
-          <Input onChange={(e)=> setSearch(e.target.value)} size='large' value={search} placeholder='Search any product' />
-        </ConfigProvider>
+      {size.width>600 && <Col md={12}></Col>}
+      <Col md={12} xs={10}>
+        <div className='search-bar'>
+          <Input  
+            value={search} 
+            placeholder='Search any product' 
+            onChange={(e)=> setSearch(e.target.value)} 
+            prefix={<SearchOutlined style={{ color: 'green', fontSize:20, marginRight:10 }} />}
+          />
+        </div>
       </Col>
+      {size.width<500 &&
+          <Col xs={2} className='px-0 mx-0'>
+          <Popover 
+            placement="topLeft"
+            content={
+              <div style={{border:'1px solid #194e9e77'}}>
+                <div className='px-3'>
+                  <Filter/>
+                </div>
+              </div>
+            }
+          >
+            <Button>
+              <FilterOutlined/>
+            </Button>
+          </Popover>  
+          </Col>
+        }
     </Row>
     {size.width>600 &&
       <Row className='package-styles'>
-        <hr className='p-0 mb-3 mt-3 mx-0'/>
+        <hr className='p-0 mb-3 mt-1 mx-0'/>
         {records.filter((x)=>{
           return x.prevPrice <= price
           }).filter((x)=>{
@@ -81,7 +103,7 @@ const Tours = ({records, size, price, search, setSearch, setRecords, duration}) 
         return(
         <Col 
           md={4} xs={6} 
-          className={`px-${size.width>500?"1":"0"} mb-4`} 
+          className={`px-${size.width>600?"1":"0"} mb-4`} 
           style={{width:'100%'}} key={i} 
         >
           <div className={`package-box`}>
@@ -89,28 +111,44 @@ const Tours = ({records, size, price, search, setSearch, setRecords, duration}) 
             <div className='package-info'>
               <img src={x.main_image} height={150} width={200} className='package-img' />
               <div className='package-info-desc px-3'>
-                <div style={{opacity:0.8}}>
-                  <h3>{x.title}</h3>
+                <div>
+                <div className='fs-30 fw-500'>{x.title}</div>
+                <div className='flex'>
                   {x?.includes?.potography==1?
-                    <img src={'package-icons/photography@2x.png'} height={35} className='package-include-icon mx-1' />:
+                  <div className='package-include-icon-2'>
+                    <img src={'package-icons/photo-camera-svgrepo-com.svg'} height={20}  />
+                  </div>:
                     <></>
                   }
                   {x?.includes?.transport==1?
-                    <img src={'package-icons/transport@2x.png'} height={35} className='package-include-icon mx-1' />:
+                    <div className='package-include-icon-2'>
+                      <img src={'package-icons/travel-bus-svgrepo-com.svg'} height={20} />
+                    </div>
+                    :
                     <></>
                   }
                   {x?.includes?.food==1?
-                    <img src={'package-icons/lunch@2x.png'} height={35} className='package-include-icon mx-1' />:
+                    <div className='package-include-icon-2'>
+                      <img src={'package-icons/food-dish-svgrepo-com.svg'} height={20} />
+                    </div>
+                    :
                     <></>
                   }
                   {x?.includes?.hotel==1?
-                    <img src={'package-icons/hotel@2x.png'} height={35} className='package-include-icon mx-1' />:
+                    <div className='package-include-icon-2'>
+                      <img src={'package-icons/hotel-building-svgrepo-com.svg'} height={20} />
+                    </div>
+                    :
                     <></>
                   }
                   {x?.includes?.plane==1?
-                    <img src={'package-icons/plane@2x.png'} height={35} className='package-include-icon mx-1' />:
+                    <div className='package-include-icon-2'>
+                      <img src={'package-icons/plane-svgrepo-com.svg'} height={20} />
+                    </div>
+                    :
                     <></>
                   }
+                </div>
                 </div>
                 <div className='grey-txt-2'>
                   <CiLocationOn size={20} style={{position:'relative', bottom:2}} />{" "}
@@ -155,7 +193,7 @@ const Tours = ({records, size, price, search, setSearch, setRecords, duration}) 
     }
     {size.width<=600 &&
       <Row className='package-styles-sm p-2'>
-        <hr className='p-0 mb-3 mt-3 mx-0'/>
+        <hr className='p-0 mb-3  mx-0'/>
         {records.filter((x)=>{
             return x.prevPrice <= price
           }).filter((x)=>{
@@ -167,7 +205,7 @@ const Tours = ({records, size, price, search, setSearch, setRecords, duration}) 
         return(
         <Col 
           md={4} xs={12} 
-          className={`px-${size.width>500?"1":"0"}`} 
+          className={`px-${size.width>600?"1":"0"}`} 
           style={{width:'100%'}} key={i} 
         >
           <div className={`package-box-sm`}>
@@ -178,26 +216,56 @@ const Tours = ({records, size, price, search, setSearch, setRecords, duration}) 
               </div>
               <div className='package-info-desc px-3'>
                 <div>
-                  <h3>{x.title}</h3>
+                  <h2>{x.title}</h2>
                   <>
                     {x.includes.potography==1?
-                      <img src={'package-icons/photography@2x.png'} height={35} className='package-include-icon mx-1' />:
+                    <div className='package-include-icon mx-1'>
+                      <img 
+                        src={'/package-icons/photo-camera-svgrepo-com.svg'} 
+                        height={40} 
+                      />
+                    </div>
+                      :
                       <></>
                     }
                     {x.includes.transport==1?
-                      <img src={'package-icons/transport@2x.png'} height={35} className='package-include-icon mx-1' />:
-                      <></>
+                    <div className='package-include-icon mx-1'>
+                      <img 
+                        src={'/package-icons/travel-bus-svgrepo-com.svg'} 
+                        height={40} 
+                      />
+                    </div>
+                    :
+                    <></>
                     }
                     {x.includes.food==1?
-                      <img src={'package-icons/lunch@2x.png'} height={35} className='package-include-icon mx-1' />:
+                    <div className='package-include-icon mx-1'>
+                      <img 
+                        src={'/package-icons/food-dish-svgrepo-com.svg'} 
+                        height={40}
+                      />
+                    </div>
+                      :
                       <></>
                     }
                     {x.includes.hotel==1?
-                      <img src={'package-icons/hotel@2x.png'} height={35} className='package-include-icon mx-1' />:
+                    <div className='package-include-icon mx-1'>
+                      <img 
+                        src={'/package-icons/hotel-building-svgrepo-com.svg'} 
+                        height={40}
+                      />
+                    </div>
+                      :
                       <></>
                     }
                     {x.includes.plane==1?
-                      <img src={'package-icons/plane@2x.png'} height={35} className='package-include-icon mx-1' />:
+                    <div className='package-include-icon mx-1'>
+                      <img 
+                        src={'/package-icons/plane-svgrepo-com.svg'} 
+                        height={40} 
+                      />
+                    </div>
+                      :
                       <></>
                     }
                   </>

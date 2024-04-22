@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Flex, ConfigProvider, Modal, Row, Col, Select, Input, DatePicker, Checkbox } from 'antd';
-import { LoadingOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { LoadingOutlined, CloseCircleOutlined, TagsOutlined } from '@ant-design/icons';
 import codes from "/JSONData/codes.json";
 import { delay } from "/functions/delay";
 import dayjs from 'dayjs';
@@ -148,7 +148,7 @@ const VisaProducts = () => {
   }
 
   return (
-    <div>
+  <>
     <Modal open={isModalOpen} width={'80%'} onCancel={closeModal} okButtonProps={{hidden:true}} centered cancelButtonProps={{hidden:true}}>
       {!success &&
       <div className='p-2'>
@@ -460,7 +460,7 @@ const VisaProducts = () => {
         </div>
       }
     </Modal>
-    <div className='visa-styles pt-4'>
+    <div className='visa-styles pt-'>
       <div className='main-container pt-4'>
         <div className='white-box'>
           <h1 className='text-center blue-txt mb-4 fw-700'>Dubai Visa Applications</h1>
@@ -469,10 +469,14 @@ const VisaProducts = () => {
           <Flex justify={"center"} align={"center"} gap={"large"}>
             {cardsOne.map((x, i)=>{
               return(
-              <Card key={i} hoverable style={cardStyle} className=''>
+              <Card key={i} hoverable style={cardStyle} className='pt-3 pb-2'>
                 <Meta 
-                  title={<h4 className='text-center blue-txt'>{x.title}</h4>}
-                  description={<h6 className='text-center  grey-txt'>{x.price}</h6>} 
+                  title={<h3 className='text-center blue-txt fw-700'>{x.title}</h3>}
+                  description={
+                    <h5 className='text-center grey-txt'>
+                      <TagsOutlined /><span className='mx-2'>{x.price}</span>
+                    </h5>
+                  }
                 />
                 {/* <p className='text-center grey-txt' style={{height:20}}>{x.extra}</p> */}
                 <hr/>
@@ -492,8 +496,12 @@ const VisaProducts = () => {
               return(
               <Card key={i} hoverable style={cardStyle} className='pt-3'>
                 <Meta 
-                  title={<h4 className='text-center blue-txt'>{x.title}</h4>}
-                  description={<h6 className='text-center  grey-txt'>{x.price}</h6>} 
+                  title={<h3 className='text-center blue-txt fw-700'>{x.title}</h3>}
+                  description={
+                    <h5 className='text-center grey-txt'>
+                      <TagsOutlined /><span className='mx-2'>{x.price}</span>
+                    </h5>
+                  }
                 />
                 {/* <div className='text-center mt-1'>Express</div>
                 <p className='text-center grey-txt' style={{height:20}}>{x.extra}</p> */}
@@ -511,8 +519,12 @@ const VisaProducts = () => {
               return(
               <Card key={i} hoverable style={cardStyle} className='pt-3'>
                 <Meta 
-                  title={<h4 className='text-center blue-txt'>{x.title}</h4>}
-                  description={<h6 className='text-center  grey-txt'>{x.price}</h6>} 
+                  title={<h3 className='text-center blue-txt fw-700'>{x.title}</h3>}
+                  description={
+                    <h5 className='text-center grey-txt'>
+                      <TagsOutlined /><span className='mx-2'>{x.price}</span>
+                    </h5>
+                  }
                 />
                 {/* <div className='text-center mt-1'>Express</div>
                 <p className='text-center grey-txt' style={{height:20}}>{x.extra}</p> */}
@@ -582,7 +594,7 @@ const VisaProducts = () => {
       <OkInfo para={18} head={20} />
       </Container>
     </div>
-    </div>
+  </>
   )
 }
 

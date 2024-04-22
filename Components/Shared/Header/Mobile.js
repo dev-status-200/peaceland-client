@@ -198,9 +198,9 @@ function OffCanvasExample({ name, user, ...props }) {
           <div style={navStyles} onClick={()=>router.push('/myBookings')}>
             My Bookings
           </div>
-          <div style={navStyles} onClick={async()=>{ await handleClose(); setShowOffers(true)}}>
+          {/* <div style={navStyles} onClick={async()=>{ await handleClose(); setShowOffers(true)}}>
             My Offers
-          </div>
+          </div> */}
           <div style={navStyles} onClick={logout}>
             Logout
           </div>

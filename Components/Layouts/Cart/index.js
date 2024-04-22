@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart } from '/functions/cartFunction';
 import { Row, Col, Container, Spinner } from 'react-bootstrap';
-import { CloseCircleOutlined, ExclamationCircleFilled } from '@ant-design/icons';
+import { CloseCircleOutlined, ExclamationCircleFilled, CheckCircleOutlined } from '@ant-design/icons';
 import { addProduct } from '/redux/cart/cartSlice';
 import { Modal, Empty, Input, ConfigProvider } from 'antd';
 import useWindowSize from '/functions/useWindowSize';
@@ -103,45 +103,61 @@ const Cart = () => {
     setLoad(true);
 
     await delay(2000)
-    await axios.post(process.env.NEXT_PUBLIC_VERIFY_PROMO, { code:promo })
-    .then((x)=>{
-          setLoad(false);
-          if(x.data.result==null){
-              Modal.warning({ title: 'Error', content: "Promo code dosen't exists or has been disabled!" });
-          }else if(x.data.result.stock==0){
-              Modal.warning({ title: 'Error', content: "Oops, this code cannot be used anymore!" });
-          }else if(x.data.result.stock>0){
-              Modal.success({ title:'Success', content:(
-                  <div>
-                    <p>Congratulations! You've recieved a discount of <br/>
-                      <strong>{x.data.result.amount} {x.data.result.byPercentage=="1"?"%":"AED"}</strong>!
-                    </p>
-                  </div>
-                ),
-                onOk(){
-                  Cookies.set("promoDiscount", JSON.stringify(({price:parseFloat(x.data.result.amount), byPercentage:x.data.result.byPercentage=="0"?false:true, name:x.data.result.code})))
-                  setPromoInfo({price:parseFloat(x.data.result.amount), byPercentage:x.data.result.byPercentage=="0"?false:true, name:x.data.result.code})
-                  Router.push("/cart")
-                }, 
-              });
-          }
+    await axios.post(process.env.NEXT_PUBLIC_VERIFY_PROMO,{
+      code:promo
+    }).then((x)=>{
+      setLoad(false);
+      let minimum = parseFloat(x.data.result.minimum)<parseFloat(price)
+      if(x.data.result==null){
+        Modal.warning({ title: 'Error', content: "Promo code dosen't exists or has been disabled!" });
+      } else if(minimum==false){
+        Modal.warning({ title: 'Error', content: "Please add more items to your cart to utilize this offer" });
+      } else if(x.data.result.stock==0 && minimum){
+        Modal.warning({ title: 'Error', content: "Oops, this code cannot be used anymore!" });
+      } else if(x.data.result.stock>0 && minimum){
+        Modal.success({ title:'Success', content:(
+          <div>
+            <p>Congratulations! You've recieved a discount of <br/>
+              <strong>{x.data.result.amount} {x.data.result.byPercentage=="1"?"%":"AED"}</strong>!
+            </p>
+          </div>
+          ),
+          onOk(){
+            Cookies.set("promoDiscount", 
+              JSON.stringify(({
+                price:parseFloat(x.data.result.amount), 
+                byPercentage:x.data.result.byPercentage=="0"?false:true, 
+                name:x.data.result.code, 
+                id:x.data.result.id
+              }))
+            )
+            setPromoInfo({price:parseFloat(x.data.result.amount), byPercentage:x.data.result.byPercentage=="0"?false:true, name:x.data.result.code})
+            Router.push("/cart")
+          }, 
+        });
+      }
     })
   };
 
   const getTransportName = (id) => {
     let name = "";
-    transportList.map((x)=>{
+    transportList && transportList.map((x)=>{
       if(x.id==id){
         name = x.name
       }
     });
     return name
-  }
+  };
+
+  const removePromo = () => {
+    Cookies.remove("promoDiscount");
+    Router.reload("/cart")
+  };
 
   return (
   <div className='tour-styles' style={{backgroundColor:'white'}} >
     <div className='cart-styles' style={{borderTop:'1px solid silver'}} >
-    <Container className='cart-box mt-5' fluid="true" >
+    <Container className='cart-box mt-' fluid="true" >
     <Row>
       <Col md={8} className="pt-4 cart-left">
         <Container className='px-5 black-txt'>
@@ -151,7 +167,7 @@ const Cart = () => {
           <>
             {cart.map((x, i)=>{
             return(
-              <Row key={i} className="cart-item mx-0">
+              <Row key={i} className="cart-item mx-0 mb-3">
                 <Col md={'auto'} className="py-3" xs={12}>
                   <img src={x.image} height={100} width={size.width>500? 150:"100%"} style={{borderRadius:5, marginLeft:size.width>500?15:0}} alt="Tour"/>
                 </Col>
@@ -214,36 +230,47 @@ const Cart = () => {
                 </Row>
                 </form>
                 {discountPrice>0 && 
-                <h6>
-                    <Row>
-                        <Col md={6} xs={6} style={{fontWeight:400}}>Promo Code: </Col>
-                        <Col md={6} xs={6} className='text-end' style={{fontWeight:400, color:"grey"}}>{promoInfo.name}</Col><br/>
-                    </Row>
-                </h6>
+                  <Row className='promo-section'>
+                  <Col md={6} xs={6} style={{fontWeight:400}} className='pt-3'>Promo Code: </Col>
+                  {size.width>600 && <Col md={3}></Col>}
+                  <Col md={3} xs={6} className='text-end '>
+                    <div className='fs-18 fw-600'>
+                      <span>
+                        {promoInfo.name}
+                      </span>
+                      <CheckCircleOutlined style={{color:'green', marginLeft:10, fontSize:20}} />
+                    </div>
+                    <div className='remove-promo mt-1' onClick={removePromo}>
+                      <CloseCircleOutlined className='mx-1 fs-12 curr' />
+                      <span>Remove Promo</span>
+                    </div>
+                  </Col>
+                </Row>
                 }
+                {discountPrice>0 && <hr className='mt-2' />}
                 <h6>
                 <Row className='mt-2'>
-                    <Col md={6} xs={6} style={{fontWeight:400}}>Total Discount: </Col>
-                    <Col md={6} xs={6} className='text-end' style={{color:'#dd9613'}}>
-                        {(discountPrice*conversion.rate).toFixed(2)} {conversion.currency}
-                        {/* <s> {(discountPrice*conversion.rate).toFixed(2)}</s> {conversion.currency} */}
-                    </Col>
+                  <Col md={6} xs={6} style={{fontWeight:400}}>Total Discount: </Col>
+                  <Col md={6} xs={6} className='text-end' style={{color:'#dd9613'}}>
+                    {(discountPrice*conversion.rate).toFixed(2)} {conversion.currency}
+                    {/* <s> {(discountPrice*conversion.rate).toFixed(2)}</s> {conversion.currency} */}
+                  </Col>
                 </Row>
                 <Row className='mt-2'>
-                    <Col md={6} xs={6} style={{fontWeight:400}}>Sub Total: </Col>
-                    <Col md={6} xs={6} className='text-end' style={{fontWeight:400, color:"grey"}}>
-                        {(parseFloat(price*conversion.rate) + parseFloat(discountPrice*conversion.rate)).toFixed(2)}
-                        <span> {conversion.currency} </span>
-                    </Col>
+                  <Col md={6} xs={6} style={{fontWeight:400}}>Sub Total: </Col>
+                  <Col md={6} xs={6} className='text-end' style={{fontWeight:400, color:"grey"}}>
+                    {(parseFloat(price*conversion.rate) + parseFloat(discountPrice*conversion.rate)).toFixed(2)}
+                    <span> {conversion.currency} </span>
+                  </Col>
                 </Row>
                 <hr/>
                 <Row className='mt-3'>
-                    <Col md={6} xs={6} style={{fontWeight:300}}><b>Grand Total</b> </Col>
-                    <Col md={6} xs={6} className='text-end'>
+                  <Col md={6} xs={6} style={{fontWeight:300}}><b>Grand Total</b> </Col>
+                  <Col md={6} xs={6} className='text-end'>
                     <div className='text-end'>
-                        <b>{(price*conversion.rate).toFixed(2)} {conversion.currency}</b>
+                      <b>{(price*conversion.rate).toFixed(2)} {conversion.currency}</b>
                     </div>
-                    </Col>
+                  </Col>
                 </Row>
                 </h6>
               </div>

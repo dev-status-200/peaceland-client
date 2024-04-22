@@ -1,4 +1,5 @@
 .cart-styles{
+
     .cont{
         background-color: rgb(237, 244, 254);
         min-height: 50vh;
@@ -33,5 +34,12 @@
 
     .cart-item-name{
         color: rgb(16, 125, 67);
+    }
+    .remove-promo{
+        cursor: pointer;
+        color: red;
+    }
+    .remove-promo:hover{
+        text-decoration: underline;
     }
 }

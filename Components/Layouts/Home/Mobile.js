@@ -1,12 +1,13 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/bundle";
 import ActivityIcons from '../../Shared/ActivityIcons';
 import dynamic from 'next/dynamic';
 
 const MobileSearch = dynamic(() => import('./MobileSearch'), {
+  loading: () => <div className='text-center'> <img src='/loader.svg' alt="Loader" /> </div>,
+});
+
+const MobileSlieder = dynamic(() => import('./MobileSlieder'), {
   loading: () => <div className='text-center'> <img src='/loader.svg' alt="Loader" /> </div>,
 });
 
@@ -22,13 +23,12 @@ const PromoSection = dynamic(() => import('../../Shared/PromoSection'), {
   ssr:false,
 });
 
-const Mobile = ({combos, adventures, bestSelling}) => {
+const Mobile = () => {
   return (
-    <>
-      <div className='mobile-hero'>
-        <MobileSearch />
-      </div>
-      <ActivityIcons/>
+    <div className='bg-white py-2'>
+      <MobileSearch />
+      <MobileSlieder />
+      <ActivityIcons/> 
       <PromoSection mobile={true} />
       <div className='home-styles'>
       <div id="parallax-world-of-ugg">
@@ -56,7 +56,7 @@ const Mobile = ({combos, adventures, bestSelling}) => {
           <Combos/>
         </Container>
       </div>
-    </>
+    </div>
   )
 }
 

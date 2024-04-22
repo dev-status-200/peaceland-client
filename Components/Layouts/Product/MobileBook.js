@@ -2,16 +2,16 @@ import React, { useEffect, useState, useReducer } from 'react'
 import { Select, Checkbox, Input, message, notification } from 'antd';
 import { Row, Col, Spinner } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { addProduct } from '../../../redux/cart/cartSlice';
+import { addProduct } from '/redux/cart/cartSlice';
 import aos from "aos";
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
-import { saveCart } from '../../../functions/cartFunction';
+import { saveCart } from '/functions/cartFunction';
 import IncDec from './IncDec';
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
-import { MdPlace } from "react-icons/md";
-import codes from "../../../JSONData/codes.json"
-import { initialState, reducerFunctions, setTour, validateName, validateDate, ValidateEmail } from './states';
+import codes from "/JSONData/codes.json"
+import { initialState, reducerFunctions, setTour, validateName, validateDate, setDate } from './states';
+import GooglePlaceSearch from './GooglePlaceSearch';
+import { FaClockRotateLeft } from "react-icons/fa6";
 
 const MobileBook = ({tour, transport, category, setOpen}) => {
 
@@ -19,21 +19,19 @@ const MobileBook = ({tour, transport, category, setOpen}) => {
     const [api, contextNotifyHolder] = notification.useNotification();
     const [messageApi, contextHolder] = message.useMessage();
     const Context = React.createContext({
-        name: 'Default',
+      name: 'Default',
     });
-
 
     const cart = useSelector((state) => state.cart.value);
     const conversion = useSelector((state) => state.currency.conversion);
     const [state, dispatchReducer] = useReducer(reducerFunctions, initialState);
-
     const [load, setLoad] = useState(false);
     const delay = ms => new Promise(res => setTimeout(res, ms));
 
     useEffect(() => {
-        aos.init({duration:300})
-        setTour(tour, dispatchReducer, category);
-        openNotification('bottom')
+      aos.init({duration:300})
+      setTour(tour, dispatchReducer, category);
+      openNotification('bottom')
     }, [])
 
     const showMessage = (msg) =>messageApi.info(msg);
@@ -103,13 +101,23 @@ const MobileBook = ({tour, transport, category, setOpen}) => {
         });
     };
 
+    const checkAvailability = () => {
+        let tempAvailability = true
+        state.booking.forEach((x)=>{
+          if(x.available==false){
+            tempAvailability = false
+          }
+        })
+        return !tempAvailability
+      }
+
   return (
-    <>
+  <>
     {contextHolder}
     {contextNotifyHolder}
     <div>
-        {!load && <>
-        {state.booking.map((x, i)=>{
+      {!load && <>
+      {state.booking.map((x, i)=>{
             return(
             <div className='tour-opt mb-2 prevent-select' key={i}>
             <Row style={{color:x.check?"black":"silver"}}>
@@ -199,7 +207,7 @@ const MobileBook = ({tour, transport, category, setOpen}) => {
                         selected={x.date}
                         onChange={(date) => {
                             let temp = [...state.booking];
-                            temp[i].date = date;
+                            let tempResult = setDate(temp, i, date, tour)
                             dispatchReducer({type: 'field', fieldName:'booking', payload: temp});
                         }}
                         minDate={new Date()}
@@ -227,30 +235,13 @@ const MobileBook = ({tour, transport, category, setOpen}) => {
                 {/* {x.transfer!="1" && <Col md={12}><hr className='my-2' /></Col> } */}
                 {x.transfer!="1" &&
                 <Col md={12} className="mt-3 px-3 mb-">
-                    <GooglePlacesAutocomplete
-                        apiKey="AIzaSyDNlNHouprfGHm_3mmfLutARQbIwuNamJk"
-                        selectProps={{
-                            onChange: (res)=> {
-                                let temp = [...state.booking];
-                                temp[i].address = res.label;
-                                dispatchReducer({type: 'field', fieldName:'booking', payload: temp});
-                            },
-                            placeholder: 'Enter Address',
-                            // components : {
-                            //     IndicatorSeparator: () => null,
-                            //     DropdownIndicator: () => 
-                            //     <>
-                            //         <span className='mx-2' style={{color:'silver'}}></span>
-                            //         <MdPlace style={{fontSize:20, position:'relative', bottom:0, right:5, color:'#4a9fe8'}} />
-                            //     </>
-                            // },
-                        }}
-                    />
+                    <GooglePlaceSearch dispatchReducer={dispatchReducer} state={state} index={i} />
                 </Col>
                 }
                 </>
                 }
-                <Col md={11} className={`mb-2 ${x.check?'mt-3':''} px-3`}>
+                {(x.detail!=null && x.detail.length>10) &&
+                    <Col md={11} className={`mb-2 ${x.check?'mt-3':''} px-3`}>
                     <span className='show-opt-detail' onClick={()=>{
                         let temp = [...state.booking];
                         temp[i].show = !temp[i].show
@@ -259,70 +250,92 @@ const MobileBook = ({tour, transport, category, setOpen}) => {
                     {x.show && <div>
                     <hr className='mb-2 mt-0' />
                     {(x.detail!=null && x.detail.length>10) && <div style={{ whiteSpace:'pre-wrap'}}>{x.detail}</div>}
-                    {(x.detail==null || x.detail.length<10) && <div>No Detail Added</div>}
-                    </div>}
-                </Col>
+                    </div>
+                    }
+                </Col>}
+                {(x.detail==null || x?.detail?.length<10) &&<div className='pb-3'></div> }
             </Row>
             </div>
             )
-        })}
-        <div>
-            <Row className="px-1">
-                <Col md={12} className='my-2 fs-16'><b>Lead Passenger Details</b></Col>
-                <Col xs={4}>
-                    <Select style={{width:"100%"}} value={state.title}
-                        onChange={(e)=>dispatchReducer({ type: 'field', fieldName:'title', payload: e })}
-                        options={[{value:"Mr.", label:"Mr."}, {value:"Ms.", label:"Ms."}, {value:"Mrs.", label:"Mrs."}]}
-                    />
-                </Col>
-                <Col xs={8}>
-                    <Input placeholder='Full Name' value={state.name}
-                        onChange={(e)=>dispatchReducer({ type: 'field', fieldName:'name', payload: e.target.value })} 
-                    />
-                </Col>
-                <Col xs={12} className='mt-3'>
-                <Select  defaultValue="Select Country"
-                    style={{width:"100%"}}
-                    onChange={(e)=>{
-                        let tempContact = ""
-                        codes.forEach((x)=>{
-                            if(x.value==e){
-                                tempContact = x.code+" "
-                                //dispatchReducer({ type: 'field', fieldName:'contact', payload: x.code+" " });
-                                return
-                            }
-                        })
-                        dispatchReducer({ type:'set', payload:{ code:e, contact:tempContact }})
-                    }}
-                    showSearch
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                        ((option?.value) ?? '').toLowerCase().includes(input.toLowerCase())||
-                        ((option?.label) ?? '').toLowerCase().includes(input.toLowerCase())||
-                        ((option?.code) ?? '').toLowerCase().includes(input.toLowerCase())
-                    }
-                    options={codes}
-                />
-                </Col>
-                <Col xs={2} className='flag-box' style={{marginLeft:15}}>
-                <span className={`fi fi-${state.code.toLowerCase()}`}></span>
-                </Col>
-                <Col xs={9} className='mt-3'>
-                    <Input placeholder='Contact No' value={state.contact}
-                        onChange={(e)=>dispatchReducer({ type: 'field', fieldName:'contact', payload: e.target.value })} 
-                    />
-                </Col>
-                <Col md={12}><hr className='mt-4 mb-1'/></Col>
-            </Row>
-            <Row>
-                <Col md={12}>{(state.booking.length>0 && oneSelected()) && <button className='cart-btn mt-3' onClick={addToCart}>Add To Cart</button>}</Col>
-            </Row>
-        </div>
-        </>
-        }
-        {load && <div className='text-center py-5'> <Spinner className='mt-5' /><p className='mb-5'>Please wait...</p> </div>}
+      })}
+      <div>
+          <Row className="px-1">
+            <Col md={12} className='my-2 fs-16'><b>Lead Passenger Details</b></Col>
+            <Col xs={4}>
+              <Select style={{width:"100%"}} value={state.title}
+                onChange={(e)=>dispatchReducer({ type: 'field', fieldName:'title', payload: e })}
+                options={[{value:"Mr.", label:"Mr."}, {value:"Ms.", label:"Ms."}, {value:"Mrs.", label:"Mrs."}]}
+              />
+            </Col>
+            <Col xs={8}>
+              <Input placeholder='Full Name' value={state.name}
+                onChange={(e)=>dispatchReducer({ type: 'field', fieldName:'name', payload: e.target.value })} 
+              />
+            </Col>
+            <Col xs={12} className='mt-3'>
+              <Select  defaultValue="Select Country"
+                style={{width:"100%"}}
+                onChange={(e)=>{
+                let tempContact = ""
+                codes.forEach((x)=>{
+                  if(x.value==e){
+                    tempContact = x.code+" "
+                    //dispatchReducer({ type: 'field', fieldName:'contact', payload: x.code+" " });
+                    return
+                  }
+                })
+                dispatchReducer({ type:'set', payload:{ code:e, contact:tempContact }})
+                }}
+                showSearch
+                optionFilterProp="children"
+                filterOption={(input, option) =>
+                  ((option?.value) ?? '').toLowerCase().includes(input.toLowerCase())||
+                  ((option?.label) ?? '').toLowerCase().includes(input.toLowerCase())||
+                  ((option?.code) ?? '').toLowerCase().includes(input.toLowerCase())
+                }
+                options={codes}
+              />
+            </Col>
+            <Col xs={2} className='flag-box' style={{marginLeft:15}}>
+              <span className={`fi fi-${state.code.toLowerCase()}`}></span>
+            </Col>
+            <Col xs={9} className='mt-3'>
+              <Input 
+                placeholder='Contact No' 
+                value={state.contact}
+                onChange={(e)=>dispatchReducer({ type: 'field', fieldName:'contact', payload: e.target.value })} 
+              />
+            </Col>
+            <Col md={12}><hr className='mt-4 mb-1'/></Col>
+          </Row>
+          <Row>
+            <Col md={12}>
+              {checkAvailability() && 
+              <div>
+                <h6 className='mt-2'>
+                  <FaClockRotateLeft style={{color:'orange'}} />
+                  <span className='mx-1'>Tour Cut-off time for today is over.</span>
+                </h6>
+                <span className='grey-txt-2'>Please Select another date.</span>
+              </div>
+              }
+              {(state.booking.length>0 && oneSelected()) && 
+                <button 
+                  disabled={checkAvailability()}
+                  className='cart-btn mt-3' 
+                  onClick={addToCart}
+                >
+                  Add To Cart
+                </button>
+              }
+            </Col>
+          </Row>
+      </div>
+      </>
+      }
+      {load && <div className='text-center py-5'> <Spinner className='mt-5' /><p className='mb-5'>Please wait...</p> </div>}
     </div>
-    </>
+  </>
   )
 }
 export default React.memo(MobileBook)

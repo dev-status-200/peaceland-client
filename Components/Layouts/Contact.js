@@ -19,14 +19,16 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(form);
-    axios.post(process.env.NEXT_PUBLIC_POST_CONTACT_US_MESSAGE,form)
+    console.log(form);
+    let tempForm = {...form, email:form.email +', '+ form.phone}
+    axios.post(process.env.NEXT_PUBLIC_POST_CONTACT_US_MESSAGE,tempForm)
     .then((x)=>{
       // console.log(x.data);
       setForm({
         name:'',
         msg:'',
-        email:''
+        email:'',
+        phone:'',
       });
       openNotificationWithIcon('success')
     })
@@ -36,7 +38,7 @@ const Contact = () => {
     {contextHolder}
     <Container>
     <Row className=''>
-      <Col md={7} className={`${size.width>600?'pt-5 mt-5':'pt-5'}`}>
+      <Col md={7} className={`${size.width>600?'pt-5 ':'pt-5'}`}>
         {size.width>600 &&<div className='my-5'></div>}
         <div className={`mb-2 fw-700 fs-${size.width>600?"45":"30"} black-txt`} style={{lineHeight:1}}>HAVE ANY <span className='blue-txt'>QUESTIONS?</span></div>
         <div className={`mb-5 fw-600 fs-${size.width>600?"35":"25"} black-txt`} style={{lineHeight:1}}>FEEL FREE TO REACH OUT</div>
@@ -61,11 +63,13 @@ const Contact = () => {
         <ConfigProvider theme={{token:{ colorPrimary:'#ebf13c', borderRadius:0 }}}>
           <form className='fs-18' onSubmit={handleSubmit}>
             <div className='text-start'>Name</div>
-            <Input placeholder="Name" required className='' value={form.name} onChange={(e)=>setForm((x)=>{ return{...x, name:e.target.value} })} />
+            <Input placeholder="Enter Your Name" required className='' value={form.name} onChange={(e)=>setForm((x)=>{ return{...x, name:e.target.value} })} />
             <div className='text-start mt-3'>E-mail</div>
-            <Input placeholder="Email" type='email' required className='mb-3' value={form.email} onChange={(e)=>setForm((x)=>{ return{...x, email:e.target.value} })} />
+            <Input placeholder="Enter Email" type='email' required className='' value={form.email} onChange={(e)=>setForm((x)=>{ return{...x, email:e.target.value} })} />
+            <div className='text-start mt-3'>Phone</div>
+            <Input placeholder="Enter Contact No." type='text' required className='mb-3' value={form.phone} onChange={(e)=>setForm((x)=>{ return{...x, phone:e.target.value} })} />
             <div className='text-start'>Message</div>
-            <Input.TextArea placeholder="Your Message" required className='mb-4' rows={6} value={form.msg} onChange={(e)=>setForm((x)=>{ return{...x, msg:e.target.value} })}  />
+            <Input.TextArea placeholder="Type Your Message" required className='mb-4' rows={6} value={form.msg} onChange={(e)=>setForm((x)=>{ return{...x, msg:e.target.value} })}  />
             <button className='green-btn mb-4'>Submit</button>
           </form>
         </ConfigProvider>

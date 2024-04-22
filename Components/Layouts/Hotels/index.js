@@ -88,12 +88,12 @@ const Hotels = () => {
     }, [form])
 
     const content = (
-    <div style={{width:380}}>
+    <div style={{width:400}}>
     <p className='red-txt mx-2'>Children cannot be above age 17 *</p>
     {form.rooms.map((x, i)=>{
     return(
         <Row key={x.pid} className='mt-1'>
-            <Col md={1} xs={1} className=' pt-4'><b> {i+1}.</b></Col>
+            <Col md={'auto'} xs={1} className='pt-3'><b style={{position:'relative', top:8}}>Room {i+1}.</b></Col>
             <Col md={'auto'} xs={5} className='px-1'>
                 Adults<br/>
                 <InputNumber min={1} value={x.adult} size='small'

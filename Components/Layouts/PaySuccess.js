@@ -36,7 +36,7 @@ const PaySuccess = () => {
   const sendMail = async(id, no) => {
     if(id){
       await axios.post(process.env.NEXT_PUBLIC_CREATE_BOOKING,{
-        user:values.email, booking_id:id, booking_no:no
+        user:values.email, booking_id:id, booking_no:no, site:"peaceland"
       }).then((x)=>{
       })
     }

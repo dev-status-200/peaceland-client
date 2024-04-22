@@ -150,17 +150,11 @@
     border-radius: 25px;
   }
 
-  .tour-filters{
-    // border: 2px solid #ebf13c;
-    background-color: #194e9e;
-    padding: 15px 30px;
-    font-size: 18px;
-    border-radius: 20px;
-  }
-
   .tour-fltr-locate{
+    border: 2px solid #194e9e77;
     background-color: white;
-    border-radius: 20px;
+    border-radius: 10px;
+    margin: 0px 10px;
   }
   
 /*========================================================= New Site Css ========================================================= */
@@ -198,11 +192,13 @@
 /**************************/
 #parallax-world-of-ugg .parallax-one {
   padding-top: 200px;
-  padding-bottom: 200px;
+  padding-bottom: 100px;
   overflow: hidden; 
   position: relative; 
   width: 100%; 
-  background-image: url('../public/parallex/book-your-vacation.png'); 
+  padding-left: 100px;
+  padding-right: 100px;
+  background-image: linear-gradient(0deg, rgba(4, 60, 50, 0.254), rgba(33, 48, 116, 0.263)), url('../public/parallex/book-your-vacation.png'); 
   filter: contrast(120%) brightness(85%);
   background-attachment: fixed; 
   background-size: cover; 
@@ -218,7 +214,7 @@
   overflow: hidden; 
   position: relative; 
   width: 100%; 
-  background-image: url('../public/parallex/book-your-vacation.png'); 
+  background-image: linear-gradient(0deg, rgba(11, 94, 79, 0.254), rgba(33, 48, 116, 0.263)), url('../public/parallex/book-your-vacation.png'); 
   filter: contrast(120%) brightness(85%);
   background-attachment: fixed; 
   background-size: cover; 
@@ -233,7 +229,7 @@
   overflow: hidden; 
   position: relative; 
   width: 100%; 
-  background-image: url("../public/parallex/parallex-2.PNG");
+  background-image: linear-gradient(0deg, rgba(11, 94, 79, 0.254), rgba(33, 48, 116, 0.263)),url("../public/parallex/parallex-2.PNG");
   filter: contrast(110%) brightness(85%);
   background-attachment: fixed; 
   background-size: cover; 

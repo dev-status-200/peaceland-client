@@ -6,15 +6,21 @@ import { Dropdown, Modal, Badge, ConfigProvider } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { addCurrency, changeCurrency } from '/redux/currency/currencySlice';
 import "/node_modules/flag-icons/css/flag-icons.min.css";
-import MyOffers from "/Components/Shared/MyOffers";
 import Link from 'next/link';
 import Aos from 'aos';
 import useWindowSize from '/functions/useWindowSize';
-import Profile from './Profile';
-import Destinations from './Destinations';
 import dynamic from 'next/dynamic';
 
 const SearchBar = dynamic(() => import('./SearchBar'), {
+  ssr:false,
+});
+const MyOffers = dynamic(() => import('/Components/Shared/MyOffers'), {
+  ssr:false,
+});
+const Destinations = dynamic(() => import('./Destinations'), {
+  ssr:false,
+});
+const Profile = dynamic(() => import('./Profile'), {
   ssr:false,
 });
 
@@ -27,20 +33,18 @@ const Desktop = ({user}) => {
   const [showOffers, setShowOffers] = useState(false);
   const currencyList = useSelector((state) => state.currency.value);
   const conversion = useSelector((state) => state.currency.conversion);
-  
+
   useEffect(() => {
-    Aos.init({
-      duration:300
-    })
+    Aos.init({ duration:300 });
     if(Object.keys(currencyList).length==0){
-      setCurrency();
+      // setCurrency();
     }
   }, [])
 
-    const setCurrency = async() => {
-      let items = await fetchCurrencyData();
-      dispatch(addCurrency(items));
-    }
+  const setCurrency = async() => {
+    let items = await fetchCurrencyData();
+    dispatch(addCurrency(items));
+  }
 
   const items = [
     { label: <div className='mx-2 p-1 fw-500' onClick={()=>router.push('/activities?destination=&city=&category=Adventure')}>Adventure Tours</div>, key: '1' },
@@ -57,7 +61,7 @@ const Desktop = ({user}) => {
 
   const [countdown, setCountdown] = useState(1);
   const [changeTag, setChangeTag] = useState(false);
-  
+
   useEffect(() => {
     let timeout;
     if (countdown < 1000) {
@@ -88,11 +92,7 @@ const Desktop = ({user}) => {
           <Link href={"/"} className='nav-link-item'>Home</Link>
           <Destinations/>
           <ConfigProvider theme={{token:{ colorBgElevated:'#194e9e', colorText:'white', controlItemBgHover:'#0a0f57' }}}>
-            <Dropdown
-              menu={{
-                items,
-              }}
-            >
+            <Dropdown menu={{ items }} >
               <Link href={{pathname:'/activities'}} className='nav-link-item'>Activities</Link>
             </Dropdown>
           </ConfigProvider>
@@ -112,7 +112,7 @@ const Desktop = ({user}) => {
         </div>
       </div>
       <div style={{borderBottom:'2px solid #b8d233'}}></div>
-      <SearchBar/>
+      {(router.asPath=="/#first-section"||router.asPath=="/") && <SearchBar/>}
     </div>
     <div style={{marginTop:110}}></div>
     {showOffers &&

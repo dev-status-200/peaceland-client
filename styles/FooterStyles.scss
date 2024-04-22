@@ -12,7 +12,7 @@
     .white-links{
         font-size: 20px;
         text-decoration: none;
-        font-weight: 300;
+        font-weight: 400;
         color: white;
     }
     .white-links:hover{
@@ -45,8 +45,24 @@
     }
     .social-links-container{
         display: flex;
-        justify-content: space-between;
-        // gap: 5px;
-        width: 70%;
+        gap: 7px;
+        width: 245px;
+        background-color: white;
+        padding: 2px 10px;
+        border-radius: 15px;
     }
+    .social-links-mobile{
+        display: flex;
+        justify-content: center;
+    }
+    .social-links-mobile > .social-white{
+        background-color: white;
+        width: 55%;
+        padding: 5px;
+        display: flex;
+        gap: 2px;
+        justify-content: center;
+        border-radius: 20px;
+    }
+    
 }

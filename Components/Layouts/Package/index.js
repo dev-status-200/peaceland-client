@@ -103,8 +103,6 @@ const Product = ({id, tourData}) => {
       console.log(x.data)
     })
   }
-
-  const Separator = () =>  <> {size.width<600 && <div className="separator-tour-icons"></div>} </>
   
   return (
   <>
@@ -114,7 +112,7 @@ const Product = ({id, tourData}) => {
     {book &&
     <div>
       <Container>
-        <Row className={size.width>500?"mt-5":''}>
+        <Row className={size.width>500?"mt-2":''}>
           <Col md={5} xs={{ order: 2 }} className="pt-2">
             <Details tour={tour} detail={detail} data-aos="fade-right" BookCompTwo={<BookCompTwo />} />
           </Col>

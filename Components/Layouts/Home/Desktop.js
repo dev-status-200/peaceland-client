@@ -6,6 +6,7 @@ import "swiper/css/bundle";
 import ActivityIcons from '../../Shared/ActivityIcons';
 import dynamic from 'next/dynamic';
 
+
 const Slider = dynamic(() => import('./Slider'), {
   ssr:false,
 });
@@ -35,7 +36,9 @@ const Desktop = () => {
   <>
     <Slider/>
     <ActivityIcons/>
-    <PromoSection mobile={false} />
+    <div className='bg-white'>
+      <PromoSection mobile={false} />
+    </div>
     <div className='home-styles'>
       <div id="parallax-world-of-ugg">
         <section>
