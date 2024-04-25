@@ -4,9 +4,10 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
 import { Pagination, Autoplay } from "swiper";
-import { Modal } from "antd";
+import { Modal, ConfigProvider } from "antd";
 import { delay } from "/functions/delay";
 import useWindowSize from '/functions/useWindowSize';
+import { CloseOutlined } from '@ant-design/icons';
 
 const Carasoul = () => {
   
@@ -30,17 +31,29 @@ const Carasoul = () => {
 
   return (
   <div style={{backgroundColor:'white'}}>
-    <Modal title={<div style={{height:20}}></div>}
-      open={open}
-      centered
-      footer={[]}
-      onCancel={()=>setOpen(false)}
-      width={850}
+    <ConfigProvider theme={{
+      components: {
+          Modal: {
+            contentBg:'none',
+            boxShadow:'none'
+          },
+        },
+      }}
     >
-      <a className='cur' href='https://registration.iceni-es.com/atm/reg-contact.aspx?dc=PEA-864699&type=visitor&usertypeid=1' target='_blank'>
-        <img src='/images/ATM.jpg' width={'100%'} />
-      </a>
-    </Modal>
+      <Modal
+        open={open}
+        centered
+        title={''}
+        footer={[]}
+        onCancel={()=>setOpen(false)}
+        width={850}
+        closeIcon={<div className="txt-close-icon"><CloseOutlined style={{fontSize:25}} /></div>}
+      >
+        <a className='cur' href='https://registration.iceni-es.com/atm/reg-contact.aspx?dc=PEA-864699&type=visitor&usertypeid=1' target='_blank'>
+          <img src='/images/ATM.jpg' width={'100%'}  />
+        </a>
+      </Modal>
+    </ConfigProvider>
     <Swiper
       pagination={{
         dynamicBullets: true,

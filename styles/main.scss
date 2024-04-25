@@ -1044,6 +1044,9 @@ div.react-datepicker-wrapper > div > input{
 .bg-green{
   background-color: #b8d233;
 }
+.bg-blue{
+  background-color: #194e9e;
+}
 
 .row-hov:hover{
   cursor: pointer;
@@ -1144,11 +1147,11 @@ div.react-datepicker-wrapper > div > input{
   margin: 10px auto;
 }
 .search-container-mobile{
-  border: 2px solid #b8d233;
+  // border: 2px solid #b8d233;
   width: 90vw;
   margin: auto;
   border-radius: 25px;
-  padding: 5px;
+  // padding: 5px;
   background-color: rgba(53, 106, 144, 0.412);
 }
 // style={{border:'2px solid #b8d233', width:750, margin:'auto', padding:10}}
@@ -1174,9 +1177,18 @@ div.react-datepicker-wrapper > div > input{
   flex-direction: column;
 }
 
+.txt-close-icon{
+  color: white!important;
+  position: relative;
+  right: 15px;
+  top: 10px;
+}
+
 .activity-container{
   display: flex;
-  justify-content: space-around;
+  // justify-content: space-around;
+  gap: 5%;
+  justify-content: center;
   flex-wrap: wrap;
 }
 .activity-icon{
@@ -1235,7 +1247,11 @@ div.react-datepicker-wrapper > div > input{
   border-radius: 10px;
   background-color: rgba(244, 165, 96, 0.219);
   margin: 10px 10px 10px 0px;
-  padding-top: 20px;
+  padding-left: 8px;
+  padding-right: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .orange-btn{
@@ -1268,6 +1284,8 @@ div.react-datepicker-wrapper > div > input{
 
 .package-box-sm{
   display: flex;
+  width: 100%;
+  
   flex-direction: column;
   border-radius: 7px;
   background-color: white;
@@ -1293,11 +1311,10 @@ div.react-datepicker-wrapper > div > input{
 
 .package-include-icon{
   border: 1px solid #1a842a;
-  height: 60px;
-  width: 60px!important;
+  height: 50px;
+  width: 50px!important;
   border-radius: 100px;
   padding: 3px;
-  margin: 0px;
   display: inline-block;
   text-align: center;
   padding-top: 9px;

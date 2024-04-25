@@ -44,16 +44,16 @@ const Book = ({tour, transport, category, setOpen}) => {
       }
     })
     if(notValidAddress){
-          showMessage("Please Select Pick Up Location!");
-          return
+      showMessage("Please Select Pick Up Location!");
+      return
     }
     if(!validateDate(state.booking)){
-          showMessage("Please Select A Valid Date Please!");
-          return
+      showMessage("Please Select A Valid Date Please!");
+      return
     }
     if(!validateName(state.name.length)){
-          showMessage("Enter A Valid Full Name !");
-          return
+      showMessage("Enter A Valid Full Name !");
+      return
     }  
     setLoad(true);
     await delay(500);
@@ -68,8 +68,8 @@ const Book = ({tour, transport, category, setOpen}) => {
       if(x.check){ cartValues.options.push({...x, date:x.date.toString()}) }
     })
     cartValues.options.forEach((x, i)=>{
-          delete cartValues.options[i].dates;
-          delete cartValues.options[i].timeSlots;
+      delete cartValues.options[i].dates;
+      delete cartValues.options[i].timeSlots;
     })
     saveCart(cartValues);
     let temp = [...cart];

@@ -96,18 +96,17 @@ function OffCanvasExample({ name, user, ...props }) {
 
   return (
     <>
-      <div className='fixed'>
-        <>
-          <div className='top-bar fs-13 bg-green text-center'>
-            {changeTag && <div data-aos='slide-down'>
-                Are you a seller? then join our B2B portal <a href="https://b2b.peacelandtravel.com/" target='_blank' className='mx-1'> <b>link</b></a>
-            </div>}
-            {!changeTag && <div data-aos='slide-down'>
-                Are you a seller? then join our B2B portal <a href="https://b2b.peacelandtravel.com/" target='_blank' className='mx-1'> <b>link</b></a>
-            </div>}
-          </div>
-        </>
+    <div className='fixed'>
+      <div className='top-bar fs-13 bg-blue text-center wh-txt'>
+        {changeTag && <div data-aos='slide-down'>
+            Are you a seller? then join our B2B portal <a href="https://b2b.peacelandtravel.com/" target='_blank' className='mx-1 wh-txt'> <b>link</b></a>
+        </div>}
+        {!changeTag && <div data-aos='slide-down'>
+            Are you a seller? then join our B2B portal <a href="https://b2b.peacelandtravel.com/" target='_blank' className='mx-1 wh-txt'> <b>link</b></a>
+        </div>}
       </div>
+    </div>
+    <div className='bg-white'>
     <Container>
       <Row className='py-2'>
         <Col xs={4} className='text-start pt-3'>
@@ -125,38 +124,23 @@ function OffCanvasExample({ name, user, ...props }) {
         </Col>
       </Row>
     </Container>
-
+    </div>
     <Drawer 
       style={{backgroundColor:'#194e9e'}}
       title={<h4 className="wh-txt pt-2">Menu</h4>}
       placement={"left"}
       onClose={()=>setOpen(false)}
       open={open}
-      width={"56%"}
+      width={"65%"}
     >
     <div>
     {!load &&
       <div className='navBar'>
         <div className='mt-3'></div>
         <Link style={navStyles} href='/'>Home</Link><br/>
+        <Link style={navStyles} href='/destinations'>Destination</Link><br/>
         {/* <Link style={navStyles} href={{pathname:'/activities'}} >Activities</Link><br/><br/> */}
         <Accordion defaultActiveKey="3">
-          <Link style={navStyles} href={{pathname:'/destinations'}}>Destination</Link>
-          <ContextAwareToggle eventKey="0">
-            <DownCircleOutlined style={{color:'white', position:'relative', bottom:2, fontSize:20}} />
-          </ContextAwareToggle>
-          <Accordion.Collapse 
-            eventKey="0" 
-          >
-            <div className='wh-txt'>
-              {list?.length>0 && list?.map((x, i)=>{
-                return(
-                  <div key={i} className='mx-2 p-1 fw-500 fs-20' onClick={()=>router.push(x.url)}>- {x.name}</div>
-                )
-              })}
-            </div>
-          </Accordion.Collapse>
-          <br/>
           <Link style={navStyles} href={{pathname:'/activities'}} >Activities</Link>
           <ContextAwareToggle eventKey="1">
             <DownCircleOutlined style={{color:'white', position:'relative', bottom:1, fontSize:20}} />
@@ -165,12 +149,12 @@ function OffCanvasExample({ name, user, ...props }) {
             eventKey="1" 
           >
             <div className='wh-txt'>
-            <div className='mx-2 p-1 fw-500 fs-20' onClick={()=>router.push('/activities?destination=&city=&category=Adventure')}>   - Adventure Tours</div>
-            <div className='mx-2 p-1 fw-500 fs-20' onClick={()=>router.push('/activities?destination=&city=&category=Water+Parks')}> - Water Parks  </div>
-            <div className='mx-2 p-1 fw-500 fs-20' onClick={()=>router.push('/activities?destination=&city=&category=Family+Fun')}>  - Family Fun    </div>
-            <div className='mx-2 p-1 fw-500 fs-20' onClick={()=>router.push('/activities?destination=&city=&category=Theme+Parks')}> - Theme Parks  </div>
-            <div className='mx-2 p-1 fw-500 fs-20' onClick={()=>router.push('/activities?destination=&city=&category=City+Tours')}>  - City Tours    </div>
-            <div className='mx-2 p-1 fw-500 fs-20' onClick={()=>router.push('/activities?destination=&city=&category=Luxury+Tours')}>- Luxury Tours</div>
+            <div className='mx-2 p-1 fs-18' onClick={()=>router.push('/activities?destination=&city=&category=Adventure')}>   - Adventure Tours</div>
+            <div className='mx-2 p-1 fs-18' onClick={()=>router.push('/activities?destination=&city=&category=Water+Parks')}> - Water Parks  </div>
+            <div className='mx-2 p-1 fs-18' onClick={()=>router.push('/activities?destination=&city=&category=Family+Fun')}>  - Family Fun    </div>
+            <div className='mx-2 p-1 fs-18' onClick={()=>router.push('/activities?destination=&city=&category=Theme+Parks')}> - Theme Parks  </div>
+            <div className='mx-2 p-1 fs-18' onClick={()=>router.push('/activities?destination=&city=&category=City+Tours')}>  - City Tours    </div>
+            <div className='mx-2 p-1 fs-18' onClick={()=>router.push('/activities?destination=&city=&category=Luxury+Tours')}>- Luxury Tours</div>
             </div>
           </Accordion.Collapse>
           <br/>
@@ -194,17 +178,17 @@ function OffCanvasExample({ name, user, ...props }) {
           >My Login</span>
           } */}
 
-          {user.loggedIn && <>
+          {user.loggedIn && <div style={{position:'absolute', bottom:10}}>
           <div style={navStyles} onClick={()=>router.push('/myBookings')}>
             My Bookings
           </div>
           {/* <div style={navStyles} onClick={async()=>{ await handleClose(); setShowOffers(true)}}>
             My Offers
           </div> */}
-          <div style={navStyles} onClick={logout}>
+          {/* <div style={navStyles} onClick={logout}>
             Logout
-          </div>
-          </>}
+          </div> */}
+          </div>}
         
       </div>
     }

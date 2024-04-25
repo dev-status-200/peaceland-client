@@ -10,6 +10,7 @@ import 'swiper/css';
 import Link from 'next/link';
 import { delay } from "/functions/delay"
 import { notification } from 'antd';
+import useWindowSize from '/functions/useWindowSize';
 
 const Context = React.createContext({
   name: 'Default',
@@ -22,6 +23,8 @@ const PromoSection = ({mobile}) => {
   const [show, setShow] = useState(false);
   const [api, contextHolder] = notification.useNotification();
 
+  const size = useWindowSize()
+
   const expensiveCalculation = (num) => {
     let result;
     result = Math.floor(Math.random() * num?.length);
@@ -33,23 +36,22 @@ const PromoSection = ({mobile}) => {
     api.info({
       message: `Grab a discount`,
       description:(
-        <Link className='promo' style={{width:340, textDecoration:'none', position:'relative', right:40, color:'black'}} href="#first-section">
-        <div className='promo-left'>
-          <div className='fs-22 fw-700 mb-1'>{promos[calculation]?.name}</div>
-          <div>Get a discount of {promos[calculation]?.amount} {promos[calculation]?.byPercentage=="0"?"AED":"%"}</div>
-          <span style={{color:'silver'}}>Validity: {moment(promos[calculation]?.validity).format("MM/DD/YYYY")}</span>
+        <Link className='promo' style={{width:size.width>390?340:300, textDecoration:'none', color:'black', position:'relative', right:size.width>390?30:55}} href="#first-section">
+        <div className='promo-left' >
+          <div className={`fs-${size.width>390?'22':'20'} fw-700 mb-1 `}>{promos[calculation]?.name}</div>
+          <div className={`fs-${size.width>390?'14':'12'}`}>Get a discount of {promos[calculation]?.amount} {promos[calculation]?.byPercentage=="0"?"AED":"%"}</div>
+          <span className={`fs-${size.width>390?'14':'12'}`}>Validity: {moment(promos[calculation]?.validity).format("MM/DD/YYYY")}</span>
         </div>
         <div className='promo-right text-center'>
-          <span className=''>Flat off</span>
-          <h5 className=' fw-700'>
+          <span className='-txt'>Flat off</span>
+          {size.width>390 &&<h5 className='-txt fw-700'>
             {promos[calculation]?.amount} {promos[calculation]?.byPercentage=="0"?"AED":"%"}
-          </h5>
-          <button className='orange-btn'
-            onClick={()=>{
-              navigator.clipboard.writeText(`i${promos[calculation]?.code}`);
-              message.info(`PROMO Code Copied!`)
-            }}
-          >COPY</button>
+          </h5>}
+          {size.width<=390 &&
+          <h6 className='-txt fw-700'>
+            {promos[calculation]?.amount} {promos[calculation]?.byPercentage=="0"?"AED":"%"}
+          </h6>}
+          <button className='orange-btn'>GET</button>
         </div>
       </Link>
       ),
@@ -66,28 +68,21 @@ const PromoSection = ({mobile}) => {
     }),
     [],
   );
-  let count = 1
+
   useEffect(() => {
     axios.get(process.env.NEXT_PUBLIC_GIT_VISIBLE_PROMOS)
     .then(async(x)=>{
-      if(x.data.status=="success"){
-        setPromos(x?.data?.result);
-      }
+      await delay(2000);
+      setPromos(x?.data?.result);
     })
   }, []);
 
   useEffect(() => {
-    if(promos.length>2 && count==1){
-      showPormo();
-      count = count + 1
+    if(promos?.length>2 && show==false){
+      openNotification('topRight');
+      setShow(true)
     }
   }, [promos]);
-
-  const showPormo = async() => {
-    await delay(5000);
-    openNotification('topRight');
-    setShow(true)
-  }
 
   return (
     <Context.Provider value={contextValue}>
@@ -113,15 +108,15 @@ const PromoSection = ({mobile}) => {
           {promos?.length>0 && promos.slice(0,5).map((x, i)=>{
           return(
             <SwiperSlide key={i}>
-              <div className='promo' style={{width:350}}>
+              <div className='promo' style={{width:size.width>390?350:310}}>
                 <div className='promo-left'>
-                  <div className='fs-20 fw-700 mb-1'>{x.name}</div>
-                  <div>Get a discount of {x.amount} {x.byPercentage=="0"?"AED":"%"}</div>
+                  <div className={` fs-${size.width>390?'20':'15'} fw-700 mb-1 `}>{x.name}</div>
+                  <div className={`fs-${size.width>390?'14':'10'}`}>Get a discount of {x.amount} {x.byPercentage=="0"?"AED":"%"}</div>
                   <span style={{color:'silver'}}>Validity: {moment(x.validity).format("MM/DD/YYYY")}</span>
                 </div>
                 <div className='promo-right text-center'>
-                  <span className=''>Flat off</span>
-                  <h5 className=' fw-700'>
+                  <span className='-txt'>Flat off</span>
+                  <h5 className='-txt fw-700'>
                     {x.amount} {x.byPercentage=="0"?"AED":"%"}
                   </h5>
                   <button className='orange-btn'
@@ -139,7 +134,7 @@ const PromoSection = ({mobile}) => {
         <Row>
           <Col md={5} xs={3}></Col>
           <Col md={2} xs={6} className='text-center'>
-            <div className='custom-btn-sm cur' onClick={()=>setOpen(true)}>Show More</div>
+            <div className='custom-btn-sm-green cur' onClick={()=>setOpen(true)}>Show More</div>
           </Col>
           <Col md={5} xs={3}></Col>
         </Row>
@@ -155,7 +150,7 @@ const PromoSection = ({mobile}) => {
           <Row>
             <h3>Current Offers</h3>
             <hr/>
-            {promos.map((x, i)=>{
+            {promos?.map((x, i)=>{
             return(
               <Col md={4} key={i}>
                 <div className='promo'>
@@ -165,8 +160,8 @@ const PromoSection = ({mobile}) => {
                     <span style={{color:'silver'}}>Validity: {moment(x.validity).format("MM/DD/YYYY")}</span>
                   </div>
                   <div className='promo-right text-center'>
-                    <span className=''>Flat off</span>
-                    <h5 className='fw-700'>
+                    <span className='-txt'>Flat off</span>
+                    <h5 className='-txt fw-700'>
                       {x.amount} {x.byPercentage=="0"?"AED":"%"}
                     </h5>
                     <button className='orange-btn'

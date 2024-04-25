@@ -214,7 +214,7 @@ const Tours = ({records, size, price, search, setSearch, setRecords, duration, F
               <div className='p-3'>
               <img src={x.main_image} width={size.width-60} className='package-img' />
               </div>
-              <div className='package-info-desc px-3'>
+              <div className='package-info-desc px-2' style={{ width:320}}>
                 <div>
                   <h2>{x.title}</h2>
                   <>
@@ -222,7 +222,7 @@ const Tours = ({records, size, price, search, setSearch, setRecords, duration, F
                     <div className='package-include-icon mx-1'>
                       <img 
                         src={'/package-icons/photo-camera-svgrepo-com.svg'} 
-                        height={40} 
+                        height={30} 
                       />
                     </div>
                       :
@@ -232,7 +232,7 @@ const Tours = ({records, size, price, search, setSearch, setRecords, duration, F
                     <div className='package-include-icon mx-1'>
                       <img 
                         src={'/package-icons/travel-bus-svgrepo-com.svg'} 
-                        height={40} 
+                        height={30} 
                       />
                     </div>
                     :
@@ -242,7 +242,7 @@ const Tours = ({records, size, price, search, setSearch, setRecords, duration, F
                     <div className='package-include-icon mx-1'>
                       <img 
                         src={'/package-icons/food-dish-svgrepo-com.svg'} 
-                        height={40}
+                        height={30}
                       />
                     </div>
                       :
@@ -252,7 +252,7 @@ const Tours = ({records, size, price, search, setSearch, setRecords, duration, F
                     <div className='package-include-icon mx-1'>
                       <img 
                         src={'/package-icons/hotel-building-svgrepo-com.svg'} 
-                        height={40}
+                        height={30}
                       />
                     </div>
                       :
@@ -262,7 +262,7 @@ const Tours = ({records, size, price, search, setSearch, setRecords, duration, F
                     <div className='package-include-icon mx-1'>
                       <img 
                         src={'/package-icons/plane-svgrepo-com.svg'} 
-                        height={40} 
+                        height={30} 
                       />
                     </div>
                       :
@@ -270,7 +270,7 @@ const Tours = ({records, size, price, search, setSearch, setRecords, duration, F
                     }
                   </>
                 </div>
-                <div className='grey-txt-2 flex mt-3'>
+                <div className='grey-txt-2 mt-3' style={{ width:320}}>
                   <CiLocationOn size={16} />{" "}
                   <span className='fs-12 mx-1'>Travel <b>{x.packageTravel}</b> Days</span> 
                   <span className='mx-2'>|</span>

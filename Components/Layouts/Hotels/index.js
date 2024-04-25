@@ -238,7 +238,7 @@ const Hotels = () => {
                 style={{width:'100%'}}
                 placeholder="Please select Destination"
                 value={form.destination}
-                onChange={(e)=>setForm((x)=>{return {...x, destination:e}})}
+                onChange={(e)=>setForm((x)=>{return {...x, destination:e, hotel:''}})}
             >
                 <option value={'abudhabi'}> <span className='mx-1'>Abu Dhabi</span> </option>
                 <option value={'ajman'}> <span className='mx-1'>Ajman</span> </option>

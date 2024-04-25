@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { addProduct } from '../../redux/cart/cartSlice';
 import { useSelector, useDispatch } from 'react-redux';
-import { destroyCart, retrieveCart } from '../../functions/cartFunction';
+import { destroyCart, retrieveCart } from '/functions/cartFunction';
 import Router, { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import axios from 'axios';
@@ -37,13 +37,13 @@ const PaySuccess = () => {
     if(id){
       await axios.post(process.env.NEXT_PUBLIC_CREATE_BOOKING,{
         user:values.email, booking_id:id, booking_no:no, site:"peaceland"
-      }).then((x)=>{
+      }).then(async(x)=>{
+        await destroyCart();
+        await dispatch(await addProduct([]));
+        await Cookies.remove("promoDiscount", { path: '' });
+        router.push("/")
       })
     }
-    dispatch(await addProduct([]));
-    await destroyCart();
-    await Cookies.remove("promoDiscount", { path: '' });
-    router.push("/")
   }
 
   const priceCalc = (cartData, disc) => {

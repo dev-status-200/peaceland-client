@@ -7,7 +7,7 @@ import { delay } from "../../../functions/delay"
 const MobileSearch = () => {
 
     const [options, setOptions] = useState([])
-    const [search, setSearch] = useState('');
+    const [search, setSearch] = useState(null);
     const [show, setShow] = useState(false);
 
     const handleSearch = (e) => {
@@ -36,13 +36,13 @@ const MobileSearch = () => {
   return (
     <div className=''>
     {show && 
-    <div className='search-container-mobile my-3'>
+    <div className='search-container-mobile mb-2'>
       <ConfigProvider theme={{token:{ colorPrimary:'green', borderRadius:'30px 0px 0px 30px' }}}>
         <Select style={{width:'65%', height:30, textAlign:'left'}}
           showSearch
           size='small'
           value={search}
-          placeholder={"Search Tours"}
+          placeholder={"Search Tours, Tickets"}
           onSearch={handleSearch}
           onChange={handleChange}
           dropdownStyle={{
