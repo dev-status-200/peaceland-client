@@ -57,7 +57,7 @@ const VisaProducts = () => {
     {id:'6', title:'60 Days Multi Entry', price:'850 AED',  api:"https://api.whatsapp.com/send/?phone=917526458800&text=60 Days Multi Entry - Visa Query"},
   ];
   const cardsThree = [
-    {id:'7', title:'60 Extension A2A', price:'1550 AED', api:"https://api.whatsapp.com/send/?phone=917526458800&text=60 Extension A2A - Visa Query"},
+    {id:'7', title:'60 Days Extension A2A', price:'1550 AED', api:"https://api.whatsapp.com/send/?phone=917526458800&text=60 days Extension A2A - Visa Query"},
   ];
   const options = [
     {value:'1', label:'14 Days Single Entry Application + Insurance'},
@@ -471,7 +471,7 @@ const VisaProducts = () => {
               return(
               <Card key={i} hoverable style={cardStyle} className='pt-3 pb-2'>
                 <Meta 
-                  title={<h3 className='text-center blue-txt fw-700'>{x.title}</h3>}
+                  title={<h4 className='text-center blue-txt fw-800'>{x.title}</h4>}
                   description={
                     <h5 className='text-center grey-txt'>
                       <TagsOutlined /><span className='mx-2'>{x.price}</span>
@@ -496,7 +496,7 @@ const VisaProducts = () => {
               return(
               <Card key={i} hoverable style={cardStyle} className='pt-3'>
                 <Meta 
-                  title={<h3 className='text-center blue-txt fw-700'>{x.title}</h3>}
+                  title={<h4 className='text-center blue-txt fw-800'>{x.title}</h4>}
                   description={
                     <h5 className='text-center grey-txt'>
                       <TagsOutlined /><span className='mx-2'>{x.price}</span>
@@ -519,7 +519,7 @@ const VisaProducts = () => {
               return(
               <Card key={i} hoverable style={cardStyle} className='pt-3'>
                 <Meta 
-                  title={<h3 className='text-center blue-txt fw-700'>{x.title}</h3>}
+                  title={<h4 className='text-center blue-txt fw-800'>{x.title}</h4>}
                   description={
                     <h5 className='text-center grey-txt'>
                       <TagsOutlined /><span className='mx-2'>{x.price}</span>
