@@ -17,11 +17,10 @@ const MoreDetail = ({detail, tour}) => {
         <Row>
           <h3 className='blue-txt'><b>Inclusions</b></h3>
           {tour?.packageIncludes?.potography==1?
-            <Col md={'auto'} xs={12} className='text-center'>
+            <Col md={'auto'} xs={'auto'} className='text-center'>
               <div className="package-include-icon">
               <img 
-                height={40} 
-                className='' 
+                height={30}
                 src={'/package-icons/photo-camera-svgrepo-com.svg'} 
               />
               </div>
@@ -30,11 +29,10 @@ const MoreDetail = ({detail, tour}) => {
             <></>
           }
           {tour?.packageIncludes?.transport==1?
-            <Col md={'auto'} xs={12} className='text-center'>
+            <Col md={'auto'} xs={'auto'} className='text-center'>
               <div className="package-include-icon">
               <img 
-                height={40} 
-                className='' 
+                height={30}
                 src={'/package-icons/travel-bus-svgrepo-com.svg'} 
               />
               </div>
@@ -43,11 +41,10 @@ const MoreDetail = ({detail, tour}) => {
             <></>
           }
           {tour?.packageIncludes?.food==1?
-            <Col md={'auto'} xs={12} className='text-center'>
+            <Col md={'auto'} xs={'auto'} className='text-center'>
               <div className="package-include-icon">
               <img 
-                height={40} 
-                className='' 
+                height={30}
                 src={'/package-icons/food-dish-svgrepo-com.svg'} 
               />
               </div>
@@ -56,11 +53,10 @@ const MoreDetail = ({detail, tour}) => {
             <></>
           }
           {tour?.packageIncludes?.hotel==1?
-            <Col md={'auto'} xs={12} className='text-center'>
+            <Col md={'auto'} xs={'auto'} className='text-center'>
               <div className="package-include-icon">
               <img 
-                height={40} 
-                className='' 
+                height={30}
                 src={'/package-icons/hotel-building-svgrepo-com.svg'} 
               />
               </div>
@@ -69,11 +65,10 @@ const MoreDetail = ({detail, tour}) => {
             <></>
           }
           {tour?.packageIncludes?.plane==1?
-            <Col md={'auto'} xs={12} className='text-center'>
+            <Col md={'auto'} xs={'auto'} className='text-center'>
               <div className="package-include-icon">
               <img 
-                height={40} 
-                className='' 
+                height={30} 
                 src={'/package-icons/plane-svgrepo-com.svg'} 
               />
               </div>
@@ -82,53 +77,74 @@ const MoreDetail = ({detail, tour}) => {
             <></>
           }
         </Row>
-        <hr/>
-        <h3 className='blue-txt mb-4'><b>Itinerary</b></h3>
-        <div className='px-2'>
-          <Timeline items={detail?.travelDetail?.split("//").map((x)=>{
-            return {
-              children: <div className='my-4'>{x}</div>,
-              dot: <><FaRegCalendarCheck size={25} className='blue-txt' /></>
-            }})}
-        />
-        </div>
-        <hr className='mt-0 pt-0' />
-        <div className=''>
-        <h3 className='blue-txt'><b>Detailed Inclusions</b></h3>
-        {detail.inclusions.split("//").map((x, i)=>{
+        {detail?.travelDetail.length>10 && <>
+          <hr/>
+          <h3 className='blue-txt mb-4'><b>Itinerary</b></h3>
+          <div className='px-2'>
+            <Timeline items={detail?.travelDetail?.split("//").map((x)=>{
+              return {
+                children: <div className='my-4'>{x}</div>,
+                dot: <FaRegCalendarCheck size={25} className='blue-txt' />
+              }})}
+            />
+          </div>
+        </>}
+        {detail?.inclusions?.length>10 &&
+        <>
+          <hr className='mt-0 pt-0' />
+          <div className=''>
+          <h3 className='blue-txt'><b>Detailed Inclusions</b></h3>
+          {detail.inclusions.split("//").map((x, i)=>{
+            return(
+              <Row key={i}>
+                <Col style={{minWidth:30, maxWidth:30}}>
+                  <FiCheckSquare 
+                    size={15} 
+                    className='mx-1 mt-2 blue-txt' 
+                    style={{position:'relative', bottom:2}} 
+                  />
+                </Col>
+                <Col className='my-1'>
+                  <div className='fs-13 grey-txt'>
+                    {x}
+                  </div>
+                </Col>
+              </Row>
+            )})}
+          </div>
+        </>
+        }
+        {detail?.why_shoulds?.length>10 &&
+        <>
+          <hr/>
+          <div>
+            <h3 className=' blue-txt'><b>Why Should I go for This?</b></h3>
+            {detail.why_shoulds.split("//").map((x, i)=>{
             return(
             <Row key={i}>
+              <Col style={{minWidth:30, maxWidth:30}}><TbPoint className='mx-1 mt-1 blue-txt' size={20} /></Col>
+              <Col className='my-1'><div className='fs-13 grey-txt'>{x}</div></Col>
+            </Row>
+            )})}
+          </div>
+        </>
+        }
+        {detail?.imp_infos?.length>10 &&
+          <>
+            <hr/>
+            <div>
+              <h3 className='blue-txt'><b>Important Information</b></h3>
+              {detail.imp_infos.split("//").map((x, i)=>{
+              return(
+                <Row key={i}>
                 <Col style={{minWidth:30, maxWidth:30}}>
-                <FiCheckSquare className='mx-1 mt-2 blue-txt' size={15} style={{position:'relative', bottom:2}} />
-                </Col>
+                <TbPoint className='mx-1 mt-1 blue-txt' size={20} /></Col>
                 <Col className='my-1'><div className='fs-13 grey-txt'>{x}</div></Col>
-            </Row>
-            )
-        })}
-        </div>
-        <hr/>
-        <div className=''>
-          <h3 className=' blue-txt'><b>Why Should I go for This?</b></h3>
-          {detail.why_shoulds.split("//").map((x, i)=>{
-          return(
-          <Row key={i}>
-            <Col style={{minWidth:30, maxWidth:30}}><TbPoint className='mx-1 mt-1 blue-txt' size={20} /></Col>
-            <Col className='my-1'><div className='fs-13 grey-txt'>{x}</div></Col>
-          </Row>
-          )})}
-        </div>
-        <hr/>
-        <div className=''>
-        <h3 className='blue-txt'><b>Important Information</b></h3>
-        {detail.imp_infos.split("//").map((x, i)=>{
-          return(
-            <Row key={i}>
-            <Col style={{minWidth:30, maxWidth:30}}>
-            <TbPoint className='mx-1 mt-1 blue-txt' size={20} /></Col>
-            <Col className='my-1'><div className='fs-13 grey-txt'>{x}</div></Col>
-            </Row>
-          )})}
-        </div>
+                </Row>
+              )})}
+            </div>
+          </>
+        }
       </Col>
       <Col className={`${size.width>500?'':'mt-4'}`}>
         <div className='policy-bar px-4'>

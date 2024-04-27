@@ -23,7 +23,7 @@ const Mobile = () => {
             <div className='wh-txt'>
               <b>Address # 1</b><br/>
               <span className='fw-300'>Office # 302, Royal Plaza Bdg Opposite ADCB Bank Al Rigga Road, Deira - 1 B St Dubai-UAE</span>
-              <div><b>Tell:</b> +971 4 255 5356</div>
+              <div><b>Tell:</b> +971 50 337 4890</div>
             </div>
             <div className='wh-txt'>
               <b>Address # 2</b><br/>

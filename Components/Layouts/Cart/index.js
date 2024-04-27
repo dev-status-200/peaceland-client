@@ -174,7 +174,7 @@ const Cart = () => {
                 <Col className={`${size.width>500?"px-4 my-3":"mb-2"}`} >
                 {size.width>500 &&<div style={{float:'right'}}>
                   <span className='fs-18 fw-500 grey-txt'>{conversion.currency} {showIndivPrice(x.options)}</span>
-                  <CloseCircleOutlined className='close-cart-btn' 
+                  <IoTrashBinSharp className='close-cart-btn' 
                     onClick={()=>showConfirm(x)}
                   />
                   <br/>

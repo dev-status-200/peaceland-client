@@ -39,7 +39,7 @@ const PaySuccess = () => {
         user:values.email, booking_id:id, booking_no:no, site:"peaceland"
       }).then(async(x)=>{
         await destroyCart();
-        await dispatch(await addProduct([]));
+        await dispatch(addProduct([]));
         await Cookies.remove("promoDiscount", { path: '' });
         router.push("/")
       })
@@ -66,6 +66,8 @@ const PaySuccess = () => {
     let reserve = {};
     cartData = await retrieveCart();
     let disc = await Cookies.get('promoDiscount');
+    await destroyCart()
+    await dispatch(addProduct([]));
     reserve.promo = disc==undefined?'none':disc;
     reserve.base_price = priceCalc(cartData, disc).base_price;
     reserve.final_price = priceCalc(cartData, disc).final_price;
@@ -79,7 +81,8 @@ const PaySuccess = () => {
       bookedTours:cartData,
       reservation:reserve
     }).then((x)=>{
-      booking_id = x.data.result
+      booking_id = x.data.result;
+      destroyCart()
     })
     setCount(count+1);
     return booking_id;

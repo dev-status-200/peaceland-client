@@ -20,7 +20,8 @@ const retrieveCart = () => {
 }
 
 const destroyCart = async() => {
-    await Cookies.remove("cart", { path: '' })
+    // await Cookies.remove("cart", { path: '' })
+    await Cookies.remove("cart")
 }
 
 const removeFromCart = (id) => {

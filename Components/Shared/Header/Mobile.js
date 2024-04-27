@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Spinner } from 'react-bootstrap';
-import { FaPhoneAlt, FaRegEnvelopeOpen } from "react-icons/fa";
-import { DownCircleOutlined } from '@ant-design/icons';
+import { DownCircleOutlined, LogoutOutlined } from '@ant-design/icons';
 import { CgMenuLeft } from "react-icons/cg";
 import { FaUserCircle } from "react-icons/fa";
 import { HiShoppingCart } from "react-icons/hi";
@@ -10,11 +9,10 @@ import Router, { useRouter } from 'next/router';
 import Cookies from "js-cookie";
 // import { fetchCurrencyData } from '/functions/fetchCurrencyData';
 // import { GrLogout } from "react-icons/gr";
-// import { BsCurrencyExchange } from "react-icons/bs";
 // import { addCurrency, changeCurrency } from '/redux/currency/currencySlice';
 import { Drawer } from "antd";
-import { Dropdown, Popover, Modal } from 'antd';
-import { useSelector, useDispatch } from 'react-redux';
+import { Modal } from 'antd';
+import { useSelector } from 'react-redux';
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import MyOffers from "/Components/Shared/MyOffers";
 
@@ -178,16 +176,24 @@ function OffCanvasExample({ name, user, ...props }) {
           >My Login</span>
           } */}
 
-          {user.loggedIn && <div style={{position:'absolute', bottom:10}}>
-          <div style={navStyles} onClick={()=>router.push('/myBookings')}>
-            My Bookings
+          {user.loggedIn && 
+          <div style={{position:'absolute', bottom:10}}>
+            <span style={{color:'white', fontSize:17}} onClick={()=>router.push('/myBookings')}>
+              My Bookings
+            </span>
+            <span style={{color:'white', fontSize:20}} className='mx-3'> | </span>
+            {/* <div style={navStyles} onClick={async()=>{ await handleClose(); setShowOffers(true)}}>
+              My Offers
+            </div> */}
+            <span style={{color:'white', fontSize:17}} onClick={logout}>
+              Logout<LogoutOutlined className='px-2 fs-15' />
+            </span>
           </div>
-          {/* <div style={navStyles} onClick={async()=>{ await handleClose(); setShowOffers(true)}}>
-            My Offers
-          </div> */}
-          {/* <div style={navStyles} onClick={logout}>
-            Logout
-          </div> */}
+          }
+          {!user.loggedIn && <div style={{position:'absolute', bottom:10}}>
+          <span style={{color:'white', fontSize:17}} onClick={()=>router.push('/auth')}>
+            My Login
+          </span>
           </div>}
         
       </div>

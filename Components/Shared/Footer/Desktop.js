@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { notification } from 'antd';
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-
+import axios from 'axios';
 
 const Desktop = () => {
 
@@ -20,8 +20,12 @@ const Desktop = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    openNotificationWithIcon('success');
-    setEmail("")
+    axios.post(process.env.NEXT_PUBLIC_POST_CREATE_NEWS_LETTER_CUSTOMER,{
+      email:email
+    }).then((x)=>{
+      openNotificationWithIcon('success');
+      setEmail("")
+    })
   }
 
   return (
@@ -39,7 +43,13 @@ const Desktop = () => {
             <form onSubmit={handleSubmit}>
               <div className='wh-txt'>Get the freshest Peaceland Travel News</div>
               <div className='newsletter-container'>
-                <input className='newsletter-input' placeholder='Your E-mail here' type='email' required value={email} onChange={(e)=>setEmail(e.target.value)} />
+                <input className='newsletter-input' 
+                  placeholder='Your E-mail here' 
+                  type='email' 
+                  required 
+                  value={email} 
+                  onChange={(e)=>setEmail(e.target.value)} 
+                />
                 <button className='newsletter-btn'>Subscribe</button>
               </div>
             </form>
@@ -63,7 +73,7 @@ const Desktop = () => {
             <Col md={12} className='mt-3'>
               <div className='wh-txt'>
                 <div><MdEmail/> <span className='mx-1'>info@peacelandtravel.com</span></div>
-                <div><FaPhoneAlt/> <span className='mx-1'>+971 4 255 5356</span></div>
+                <div><FaPhoneAlt/> <span className='mx-1'>+971 50 337 4890</span></div>
               </div>
             </Col>
           </Col>
