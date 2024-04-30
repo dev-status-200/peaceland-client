@@ -114,6 +114,31 @@ const MoreDetail = ({detail, tour}) => {
           </div>
         </>
         }
+        {detail?.exclusions?.length>10 &&
+        <>
+          <hr className='mt-0 pt-0' />
+          <div className=''>
+          <h3 className='blue-txt'><b>Exclusions</b></h3>
+          {detail.exclusions.split("//").map((x, i)=>{
+            return(
+              <Row key={i}>
+                <Col style={{minWidth:30, maxWidth:30}}>
+                  <FiCheckSquare 
+                    size={15} 
+                    className='mx-1 mt-2 blue-txt' 
+                    style={{position:'relative', bottom:2}} 
+                  />
+                </Col>
+                <Col className='my-1'>
+                  <div className='fs-13 grey-txt'>
+                    {x}
+                  </div>
+                </Col>
+              </Row>
+            )})}
+          </div>
+        </>
+        }
         {detail?.why_shoulds?.length>10 &&
         <>
           <hr/>
