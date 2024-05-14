@@ -12,6 +12,8 @@ const nextConfig = {
  
   // Optional: Change the output directory `out` -> `dist`
   // distDir: 'dist',
+
+  staticPageGenerationTimeout: 100000,
 }
  
 module.exports = nextConfig

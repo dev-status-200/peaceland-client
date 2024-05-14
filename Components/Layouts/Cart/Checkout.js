@@ -45,7 +45,9 @@ export default function CheckoutForm({email, name, image}) {
         <Col md={12} className="text-center" >
           { size.width<600 && <hr/>}
           <img src={'/stripe/stripe-logo.png'} height={50}  alt="Stripe"/>
-          <p className="mb-0 pb-0 silver-2-txt">Protected Checkout<CheckCircleOutlined className="mx-2" style={{color:'green', position:'relative', top:1}} /></p>
+          <div className="mb-0 pb-0 silver-2-txt">
+            Protected Checkout<CheckCircleOutlined className="mx-2" style={{color:'green', position:'relative', top:1}} />
+          </div>
         </Col>
       </Row>
       <PaymentElement id="payment-element" className="my-4 mx-3" />

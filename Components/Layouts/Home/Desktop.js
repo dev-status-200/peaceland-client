@@ -6,7 +6,6 @@ import "swiper/css/bundle";
 import ActivityIcons from '../../Shared/ActivityIcons';
 import dynamic from 'next/dynamic';
 
-
 const Slider = dynamic(() => import('./Slider'), {
   ssr:false,
 });

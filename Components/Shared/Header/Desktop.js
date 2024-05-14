@@ -78,10 +78,10 @@ const Desktop = ({user}) => {
     <div className='fixed'>
       <div className='top-bar wh-txt fs-13 fw-300'>
         {changeTag && <div data-aos='slide-down'>
-          Are you a seller? then join our B2B portal by registering at this <a href="https://b2b.peacelandtravel.com/" target='_blank' className='wh-txt'> <b>link</b></a>
+          Are you a seller? then join our B2B portal by registering at this <b> <a href="https://b2b.peacelandtravel.com/" target='_blank' className='wh-txt'> link </a> </b>
         </div>}
         {!changeTag && <div data-aos='slide-down'>
-          Are you a seller? then join our B2B portal by registering at this <a href="https://b2b.peacelandtravel.com/" target='_blank' className='wh-txt'> <b>link</b></a>
+          Are you a seller? then join our B2B portal by registering at this <b> <a href="https://b2b.peacelandtravel.com/" target='_blank' className='wh-txt'> link </a> </b>
         </div>}
       </div>
       <div className='header-container py-2'>

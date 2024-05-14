@@ -91,7 +91,7 @@ const PromoSection = ({mobile}) => {
         <Container className='pt-5 pb-3'>
         <Row id="first-section">
           <Col md={12} className='text-center' xs={12}>
-            <p style={{letterSpacing:7, fontWeight:400}}>CHECKOUT WITH AMAZING DISCOUNT</p>
+            <div style={{letterSpacing:7, fontWeight:400}}>CHECKOUT WITH AMAZING DISCOUNT</div>
             <hr/>
             <h2 style={{letterSpacing:6, fontWeight:800}} className='blue-txt '>PROMO CODES</h2>
           </Col>

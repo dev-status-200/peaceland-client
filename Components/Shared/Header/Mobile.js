@@ -97,10 +97,10 @@ function OffCanvasExample({ name, user, ...props }) {
     <div className='fixed'>
       <div className='top-bar fs-13 bg-blue text-center wh-txt'>
         {changeTag && <div data-aos='slide-down'>
-            Are you a seller? then join our B2B portal <a href="https://b2b.peacelandtravel.com/" target='_blank' className='mx-1 wh-txt'> <b>link</b></a>
+            Are you a seller? then join our B2B portal <b><a href="https://b2b.peacelandtravel.com/" target='_blank' className='mx-1 wh-txt'> link</a></b>
         </div>}
         {!changeTag && <div data-aos='slide-down'>
-            Are you a seller? then join our B2B portal <a href="https://b2b.peacelandtravel.com/" target='_blank' className='mx-1 wh-txt'> <b>link</b></a>
+            Are you a seller? then join our B2B portal <b><a href="https://b2b.peacelandtravel.com/" target='_blank' className='mx-1 wh-txt'> link</a></b>
         </div>}
       </div>
     </div>

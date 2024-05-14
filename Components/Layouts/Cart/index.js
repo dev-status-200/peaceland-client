@@ -116,11 +116,9 @@ const Cart = () => {
         Modal.warning({ title: 'Error', content: "Oops, this code cannot be used anymore!" });
       } else if(x.data.result.stock>0 && minimum){
         Modal.success({ title:'Success', content:(
-          <div>
-            <p>Congratulations! You've recieved a discount of <br/>
+            <div>Congratulations! You've recieved a discount of <br/>
               <strong>{x.data.result.amount} {x.data.result.byPercentage=="1"?"%":"AED"}</strong>!
-            </p>
-          </div>
+            </div>
           ),
           onOk(){
             Cookies.set("promoDiscount", 
