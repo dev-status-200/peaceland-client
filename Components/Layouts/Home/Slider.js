@@ -21,7 +21,7 @@ const Carasoul = () => {
   ]);
 
   useEffect(() => {
-    closeModal()
+    // closeModal()
   }, []);
 
   async function closeModal(){
@@ -40,7 +40,7 @@ const Carasoul = () => {
         },
       }}
     >
-      <Modal
+      {/* <Modal
         open={open}
         centered
         title={''}
@@ -52,7 +52,7 @@ const Carasoul = () => {
         <a className='cur' href='https://registration.iceni-es.com/atm/reg-contact.aspx?dc=PEA-864699&type=visitor&usertypeid=1' target='_blank'>
           <img src='/images/ATM.jpg' width={'100%'}  />
         </a>
-      </Modal>
+      </Modal> */}
     </ConfigProvider>
     <Swiper
       pagination={{
