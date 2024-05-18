@@ -181,8 +181,8 @@ const Tours = ({records, size, price, search, setSearch, setRecords, duration, F
               </div>
               <button 
                 className='package-btn'
-                // onClick={()=>Router.push(`/package/${x.slug}`)}
-                onClick={()=>Router.push(`/package?slug=${x.slug}`)}
+                onClick={()=>Router.push(`/package/${x.slug}`)}
+                // onClick={()=>Router.push(`/package?slug=${x.slug}`)}
               >
                 View Details
               </button>
@@ -302,8 +302,8 @@ const Tours = ({records, size, price, search, setSearch, setRecords, duration, F
               </div>
               <button 
                 className='package-btn'
-                // onClick={()=>Router.push(`/package/${x.slug}`)}
-                onClick={()=>Router.push(`/package?slug=${x.slug}`)}
+                onClick={()=>Router.push(`/package/${x.slug}`)}
+                // onClick={()=>Router.push(`/package?slug=${x.slug}`)}
               >
                 View Details
               </button>
