@@ -35,16 +35,18 @@ const Details = ({tour, detail, BookCompTwo}) => {
       </div>
     </>
     }
-    {size.width>600 && <>
-    <div className='mt-3' >
-      {BookCompTwo}
-    </div>
-    <hr/>
-    </>}
+    {size.width>600 && 
+    <>
+      <div className='mt-3' >
+        {BookCompTwo}
+      </div>
+      <hr/>
+    </>
+    }
     <h6 className='blue-txt mt-4'>Description</h6>
-    <p className='fs-16 grey-txt'>
-      {tour?.tour_detail.slice(0,940)} ...
-    </p>
+      <p className='fs-16 grey-txt'>
+        {tour?.tour_detail}
+      </p>
     </div>
     </>
     }

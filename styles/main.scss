@@ -530,28 +530,25 @@ body > div:nth-child(6) > div > div.ant-modal-wrap > div > div.ant-modal-content
   text-align: center;
   font-weight: 400;
   color: rgb(79, 78, 78);
-}
-
-
+};
 
 .filter{
   -webkit-filter: contrast(10%);
   -webkit-filter: saturate(1.5);
-}
+};
+
 .filter-2{
   -webkit-filter: contrast(99%);
   -webkit-filter: saturate(1.7);
-}
+};
 
-.overlay
-{
+.overlay{
   position: absolute;
   left: 0px;
   bottom: 0px;
 }
 
-.overlay-text
-{
+.overlay-text{
   position: absolute;
   left: 10px;
   bottom: 10px;
@@ -586,8 +583,6 @@ body > div:nth-child(6) > div > div.ant-modal-wrap > div > div.ant-modal-content
   -moz-box-shadow: 10px 10px 13px -5px rgba(0,0,0,0.75);
 }
 
-
-
 // @media screen and (min-width: 1390px) {
 //   .mySwiper{
 //     padding-left: 30px!important;
@@ -602,51 +597,55 @@ body > div:nth-child(6) > div > div.ant-modal-wrap > div > div.ant-modal-content
 .book-home-btn{
   background-color: red;
   color: white;
-}
+};
 
 .hero-txt-1{
   font-size: 80px;
   font-weight: 700;
   text-shadow: 11px 7px 6px rgba(0,0,0,0.6);
-}
+};
 
 .hero-txt-2{
   font-size: 70px;
   font-weight: 600;
   text-shadow: 5px 5px 6px rgba(0,0,0,0.6);
-}
+};
 
 .hero-icons{
   transition-duration: 200ms;
   cursor: pointer;
   height: 40%;
-}
+};
 
 .hero-icons:hover{
   transition-duration: 200ms;
   height: 45%;
   position: relative;
-}
+};
 
 @media screen and (min-width: 1100px) {
   .hero-icons-imgs{
     height: 150px !important;
-  }
-  .top-text{ top:5vh; }
+  };
+  .top-text{
+    top:5vh;
+  };
   .hero-txt-1{
     font-size: 70px;
-  }
-}
+  };
+};
 
 @media screen and (min-width: 1250px) {
   .hero-icons-imgs{
     height: 150px !important;
   }
-  .top-text{ top:5vh; }
+  .top-text{
+    top:5vh;
+  };
   .hero-txt-1{
     font-size: 80px;
-  }
-}
+  };
+};
 
 @media screen and (min-width: 1499px) {
   .top-text{ top:7vh; }
@@ -998,6 +997,7 @@ div.react-datepicker-wrapper > div > input{
 .row-hover:hover{
   background-color: rgb(224, 224, 224);
 }
+
 .row-selected{
   background-color: rgb(224, 224, 224);
 }
@@ -1070,7 +1070,7 @@ div.react-datepicker-wrapper > div > input{
 }
 
 .left-ticket-box {
-  background-color:#599742; 
+  background-color:#194e9e; 
   border-radius:25px;
   height:430px;
   padding-left: 20px;

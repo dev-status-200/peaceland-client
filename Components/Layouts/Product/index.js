@@ -182,32 +182,32 @@ const Product = ({id, tourData}) => {
         <Row className={size.width>600?'info-bar-round':'info-bar'} >
           <Col md={2} className='text-center info-item'>
             <IoCalendarSharp className='info-icon' />
-            <div className='mt-2'>Availability<br/>{tour.availability}</div>
+            <div className='mt-2'>Availability<br/>{tour.availability||'(Any)'}</div>
             <Separator/>
           </Col>
           <Col md={2} className='text-center info-item'>
             <GiSandsOfTime className='info-icon' />
-            <div className='mt-2'>Duration<br/>{tour.duration}</div>
+            <div className='mt-2'>Duration<br/>{tour.duration||'(None)'}</div>
             <Separator/>
           </Col>
             <Col md={2} className='text-center info-item'>
               <IoLanguageOutline className='info-icon' color='white' />
-              <div className='mt-2'>Languages<br/>{tour.lang}</div>
+              <div className='mt-2'>Languages<br/>{tour.lang||'(Any)'}</div>
               <Separator/>
             </Col>
             <Col md={2} className='text-center info-item'>
               <BiLocationPlus className='info-icon' color='white' />
-              <div className='mt-2'>Reporting Point<br/>{tour.reporting}</div>
+              <div className='mt-2'>Reporting Point<br/>{tour.reporting||'(None)'}</div>
               <Separator/>
             </Col>
             <Col md={2} className='text-center info-item'>
               <RiExchangeFundsLine className='info-icon' color='white' />
-              <div className='mt-2'>Refund<br/>{tour.refund}</div>
+              <div className='mt-2'>Refund<br/>{tour.refund||'(None)'}</div>
               <Separator/>
             </Col>
             <Col md={2} className='text-center info-item'>
               <IoFlashSharp className='info-icon' color='white' />
-              <div className='mt-2'>Confirmation<br/>{tour.confirmation}</div>
+              <div className='mt-2'>Confirmation<br/>{tour.confirmation||'(None)'}</div>
             </Col>
         </Row>
         }

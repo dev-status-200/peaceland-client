@@ -22,14 +22,13 @@ const Ticket = ({fetchedTicket, i, transportList}) => {
         <div style={{height:1000, width:700}} className='mx-5 ticket-bg'>
             
             <QRCode style={{position:'relative', left:470, top:80}}
-                value={fetchedTicket.code}
-                scale={0.6} 
-                size={180}
-                level='Q'
-                viewBox={`0 0 200 200`}
+              value={fetchedTicket.code}
+              scale={0.6} 
+              size={180}
+              level='Q'
+              viewBox={`0 0 200 200`}
             />
             <div style={{position:'relative', left:470, top:85, width:180, textAlign:'center', fontSize:12}}><div>{fetchedTicket.code}</div></div>
-
             <div style={{position:'relative', left:60, top:150}}>
                 <Row className='mt-4'>
                     <Col style={{maxWidth:300}}>
